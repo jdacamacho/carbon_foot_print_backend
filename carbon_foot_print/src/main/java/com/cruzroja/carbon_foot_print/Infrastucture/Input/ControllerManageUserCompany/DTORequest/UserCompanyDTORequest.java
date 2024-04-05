@@ -1,6 +1,5 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageUserCompany.DTORequest;
 
-import java.util.Date;
 import java.util.List;
 
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.UserDTO.DTORequest.RoleDTORequest;
