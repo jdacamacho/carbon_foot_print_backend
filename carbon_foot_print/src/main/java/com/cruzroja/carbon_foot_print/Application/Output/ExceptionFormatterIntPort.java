@@ -5,5 +5,6 @@ public interface ExceptionFormatterIntPort {
     public void returnResponseErrorEntityNotFound(String message);
     public void returnResponseBusinessRuleViolated(String message);
     public void returnResponseBadCredentials(String message);
-    public void retunrResponseBadFormat(String message);
+    public void returnResponseBadFormat(String message);
+    public void returNoData(String message);
 }

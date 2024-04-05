@@ -6,6 +6,7 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnE
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.BusinessRuleException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.EntityExistsException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.EntityNotFoundException;
+import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.NoDataException;
 
 public class ExceptionFormatterImplAdapter implements ExceptionFormatterIntPort {
     @Override
@@ -33,8 +34,14 @@ public class ExceptionFormatterImplAdapter implements ExceptionFormatterIntPort 
     }
 
     @Override
-    public void retunrResponseBadFormat(String message) {
+    public void returnResponseBadFormat(String message) {
         BadFormatException objException = new BadFormatException(message);
+        throw objException;
+    }
+
+    @Override
+    public void returNoData(String message) {
+        NoDataException objException = new NoDataException(message);
         throw objException;
     }
 }

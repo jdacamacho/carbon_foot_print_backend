@@ -19,6 +19,7 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnE
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.BusinessRuleException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.EntityExistsException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.EntityNotFoundException;
+import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.NoDataException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.ExceptionStructure.Error;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -44,6 +45,18 @@ public class RestApiException {
         final Error error = ErrorUtils
                         .createError(ErrorCode.ENTITY_EXISTS.getCode(),
                                         String.format("%s, %s", ErrorCode.ENTITY_EXISTS.getMessageKey(),
+                                        ex.getMessage()),
+                                        HttpStatus.NOT_ACCEPTABLE.value())
+                                        .setUrl(req.getRequestURL().toString()).setMethod(req.getMethod());
+        return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @ExceptionHandler(NoDataException.class)
+    public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+                    final NoDataException ex) {
+        final Error error = ErrorUtils
+                        .createError(ErrorCode.NO_DATA.getCode(),
+                                        String.format("%s, %s", ErrorCode.NO_DATA.getMessageKey(),
                                         ex.getMessage()),
                                         HttpStatus.NOT_ACCEPTABLE.value())
                                         .setUrl(req.getRequestURL().toString()).setMethod(req.getMethod());

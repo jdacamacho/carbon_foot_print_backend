@@ -60,7 +60,5 @@ public class ManageUserCompanyGatewayImplAdapter implements ManageUserCompanyGat
     public long existsCompanyByNit(long nitCompany) {
         return this.serviceBD.countByCompanyNit(nitCompany);
     }
-
-    
     
 }
