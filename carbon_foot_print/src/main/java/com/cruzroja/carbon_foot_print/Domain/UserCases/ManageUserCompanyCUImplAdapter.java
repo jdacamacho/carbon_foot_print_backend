@@ -1,5 +1,6 @@
 package com.cruzroja.carbon_foot_print.Domain.UserCases;
 
+import java.util.Date;
 import java.util.List;
 
 import com.cruzroja.carbon_foot_print.Application.Input.ManageUserCompanyCUIntPort;
@@ -32,6 +33,7 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
             this.gateway.existsCompanyByNit(userCompany.getCompanyNit()) != 0){
             this.errorFormatter.returnResponseErrorEntityExists("User already exists in the system");
         }
+        userCompany.setRegistrationDate(new Date());
         userResponse = this.gateway.save(userCompany);
         return userResponse;
     }
@@ -67,5 +69,4 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
         return userResponse;
     }
 
-    
 }
