@@ -1,5 +1,7 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Output.Formatter;
 
+import org.springframework.stereotype.Service;
+
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.BadCredentialsException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.BadFormatException;
@@ -8,6 +10,7 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnE
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.EntityNotFoundException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.NoDataException;
 
+@Service
 public class ExceptionFormatterImplAdapter implements ExceptionFormatterIntPort {
     @Override
     public void returnResponseErrorEntityExists(String message) {
