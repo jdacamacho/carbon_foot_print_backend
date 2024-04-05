@@ -3,6 +3,7 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -26,7 +27,7 @@ public class UserCompanyEntity extends UserEntity {
     @Column(name = "company_phone", nullable = true)
     private String companyPhone;
 
-    @OneToOne(mappedBy = "objUserCompany", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "objUserCompany", fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
     private AddressEntity address;
 
     @Column(name = "registration_date", nullable = false)

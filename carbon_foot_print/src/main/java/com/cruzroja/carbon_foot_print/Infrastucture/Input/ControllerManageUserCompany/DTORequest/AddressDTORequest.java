@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class AddressDTORequest {
-    //private long companyNit;
-    //private UserCompanyDTORequest objUserCompany;
+    private long companyNit;
+    private UserCompanyDTORequest objUserCompany;
     private String street;
     private String number;
     private String floorOrApartment;

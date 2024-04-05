@@ -41,6 +41,8 @@ public class UserDTORequest {
     @Pattern(regexp = "[3][0-9]{9}", message = "Personal phone must begin with 3 and have ten digits") 
     private String personalPhone;
 
+    @NotNull(message = "email can't be null")
+    @NotBlank(message = "email can't be empty")
     @Email(message = "email must be valid")
     private String personalEmail;
 

@@ -5,6 +5,7 @@ import java.util.List;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.UserDTO.DTORequest.RoleDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.UserDTO.DTORequest.UserDTORequest;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -25,8 +26,10 @@ public class UserCompanyDTORequest extends UserDTORequest{
     @NotBlank(message = "companyName can't be empty")
     private String companyName;
     private String companyPhone;
+
+    @Valid
+    @NotNull(message = "Address can't be null")
     private AddressDTORequest address;
-    //private Date registrationDate;
 
     public UserCompanyDTORequest(){
 
