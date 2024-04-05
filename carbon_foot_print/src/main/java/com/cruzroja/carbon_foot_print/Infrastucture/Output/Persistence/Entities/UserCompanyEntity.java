@@ -8,9 +8,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "companies")
+@Getter
+@Setter
 public class UserCompanyEntity extends UserEntity {
     
     @Column(name = "company_nit", nullable = false , unique = true)
