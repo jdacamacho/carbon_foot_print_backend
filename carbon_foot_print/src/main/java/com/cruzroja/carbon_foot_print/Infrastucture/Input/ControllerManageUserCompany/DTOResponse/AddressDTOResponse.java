@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class AddressDTOResponse {
-    private long companyNit;
+    private long documentNumber;
     private UserCompanyDTOResponse objUserCompany;
     private String street;
     private String number;

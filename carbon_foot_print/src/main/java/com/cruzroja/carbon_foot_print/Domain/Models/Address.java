@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Address {
-    private long companyNit;
+    private long documentNumber;
     private UserCompany objUserCompany;
     private String street;
     private String number;

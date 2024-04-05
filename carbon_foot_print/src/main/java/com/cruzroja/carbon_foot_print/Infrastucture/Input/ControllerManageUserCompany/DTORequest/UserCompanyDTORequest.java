@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +26,8 @@ public class UserCompanyDTORequest extends UserDTORequest{
     @NotNull(message = "companyName can't be null")
     @NotBlank(message = "companyName can't be empty")
     private String companyName;
+
+    @Pattern(regexp = "[3][0-9]{9}", message = "Personal phone must begin with 3 and have ten digits") 
     private String companyPhone;
 
     @Valid

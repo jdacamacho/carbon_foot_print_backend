@@ -34,7 +34,9 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
             this.errorFormatter.returnResponseErrorEntityExists("User already exists in the system");
         }
         userCompany.setRegistrationDate(new Date());
+        System.out.println("Aquiii" + userCompany.getRegistrationDate());
         userResponse = this.gateway.save(userCompany);
+        System.out.println("Aquiii" + userResponse.getRegistrationDate());
         return userResponse;
     }
 

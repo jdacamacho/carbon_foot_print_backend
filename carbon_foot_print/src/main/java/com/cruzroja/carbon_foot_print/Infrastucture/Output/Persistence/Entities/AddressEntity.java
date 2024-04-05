@@ -17,12 +17,12 @@ import lombok.Data;
 public class AddressEntity {
 
     @Id
-    @Column(name = "company_nit" , nullable = false , unique = true)
-    private long companyNit;
+    @Column(name = "document_number")
+    private long documentNumber;
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "companyNit")
+    @JoinColumn(name = "document_number")
     private UserCompanyEntity objUserCompany;
 
     @Column(nullable = true)
