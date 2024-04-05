@@ -27,26 +27,44 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
 
     @Override
     public UserCompany saveUserCompany(UserCompany userCompany) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveUserCompany'");
+        UserCompany userResponse = null;
+        if(this.gateway.existsUserCompanyByNumberDocument(userCompany.getDocumentNumber()) != 0 &&
+            this.gateway.existsCompanyByNit(userCompany.getCompanyNit()) != 0){
+            this.errorFormatter.returnResponseErrorEntityExists("User already exists in the system");
+        }
+        userResponse = this.gateway.save(userCompany);
+        return userResponse;
     }
 
     @Override
     public UserCompany updateUserCompany(long numberDocument, UserCompany userCompany) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateUserCompany'");
+        UserCompany userResponse = null;
+        if(this.gateway.existsUserCompanyByNumberDocument(userCompany.getDocumentNumber()) == 0 &&
+            this.gateway.existsCompanyByNit(userCompany.getCompanyNit()) == 0){
+            this.errorFormatter.returnResponseErrorEntityNotFound("User not found in the system");
+        }
+        userResponse = this.gateway.save(userCompany);
+        return userResponse;
     }
 
     @Override
     public UserCompany getUserCompanyByNumberDocument(long numberDocument) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserCompanyByNumberDocument'");
+        UserCompany userResponse = null;
+        if(this.gateway.existsUserCompanyByNumberDocument(numberDocument) == 0){
+            this.errorFormatter.returnResponseErrorEntityNotFound("User not found in the system");
+        }
+        userResponse = this.gateway.findUserCompanyByNumberDocument(numberDocument);
+        return userResponse;
     }
 
     @Override
     public UserCompany getUserCompanyByNit(long nitCompany) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserCompanyByNit'");
+        UserCompany userResponse = null;
+        if(this.gateway.existsCompanyByNit(nitCompany) == 0){
+            this.errorFormatter.returnResponseErrorEntityNotFound("User not found in the system");
+        }
+        userResponse = this.gateway.findCompanyByNit(nitCompany);
+        return userResponse;
     }
 
     
