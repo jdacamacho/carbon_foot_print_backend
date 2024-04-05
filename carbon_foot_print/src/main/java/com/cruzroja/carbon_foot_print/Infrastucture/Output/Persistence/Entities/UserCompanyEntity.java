@@ -33,6 +33,8 @@ public class UserCompanyEntity extends UserEntity {
     @Column(name = "registration_date", nullable = false)
     private Date registrationDate;
 
+
+    //perfiles
     public UserCompanyEntity(){
 
     }

@@ -28,15 +28,16 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
 
     @Override
     public UserCompany saveUserCompany(UserCompany userCompany) {
+        long nitCompany = 0;
         UserCompany userResponse = null;
         if(this.gateway.existsUserCompanyByNumberDocument(userCompany.getDocumentNumber()) != 0 &&
             this.gateway.existsCompanyByNit(userCompany.getCompanyNit()) != 0){
             this.errorFormatter.returnResponseErrorEntityExists("User already exists in the system");
         }
         userCompany.setRegistrationDate(new Date());
-        System.out.println("Aquiii" + userCompany.getRegistrationDate());
+        nitCompany = userCompany.getCompanyNit();
+        userCompany.getAddress().setDocumentNumber(nitCompany);
         userResponse = this.gateway.save(userCompany);
-        System.out.println("Aquiii" + userResponse.getRegistrationDate());
         return userResponse;
     }
 

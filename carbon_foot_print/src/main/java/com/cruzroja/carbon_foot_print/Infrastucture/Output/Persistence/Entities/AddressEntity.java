@@ -2,6 +2,8 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
@@ -17,12 +19,12 @@ import lombok.Data;
 public class AddressEntity {
 
     @Id
-    @Column(name = "document_number")
+    @Column(name = "user_document_number")
     private long documentNumber;
 
     @OneToOne
-    @MapsId
-    @JoinColumn(name = "document_number")
+   // @MapsId
+    @JoinColumn(name = "user_document_number")
     private UserCompanyEntity objUserCompany;
 
     @Column(nullable = true)
