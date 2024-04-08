@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -14,14 +15,12 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class AddressEntity {
-
+    
     @Id
-    @Column(name = "user_document_number")
-    private long documentNumber;
+    private long companyNit;
 
     @OneToOne
-   // @MapsId
-    @JoinColumn(name = "user_document_number")
+    @JoinColumn(name = "documentNumber")
     private UserCompanyEntity objUserCompany;
 
     @Column(nullable = true)
@@ -32,6 +31,9 @@ public class AddressEntity {
 
     @Column(name = "floor/apartment",nullable = true)
     private String floorOrApartment;
+
+    @Column(nullable = true)
+    private String neighborhood;
 
     @Column(nullable = true)
     private String city;

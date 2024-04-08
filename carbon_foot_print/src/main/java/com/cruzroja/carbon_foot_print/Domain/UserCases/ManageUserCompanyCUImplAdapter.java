@@ -35,20 +35,35 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
             this.errorFormatter.returnResponseErrorEntityExists("User already exists in the system");
         }
         userCompany.setRegistrationDate(new Date());
+        userCompany.getAddress().setObjUserCompany(userCompany);
         nitCompany = userCompany.getCompanyNit();
-        userCompany.getAddress().setDocumentNumber(nitCompany);
+        userCompany.getAddress().setCompanyNit(nitCompany);
         userResponse = this.gateway.save(userCompany);
+
         return userResponse;
     }
 
     @Override
-    public UserCompany updateUserCompany(long numberDocument, UserCompany userCompany) {
+    public UserCompany updateUserCompany( UserCompany userCompany) {
         UserCompany userResponse = null;
         if(this.gateway.existsUserCompanyByNumberDocument(userCompany.getDocumentNumber()) == 0 &&
             this.gateway.existsCompanyByNit(userCompany.getCompanyNit()) == 0){
             this.errorFormatter.returnResponseErrorEntityNotFound("User not found in the system");
         }
-        userResponse = this.gateway.save(userCompany);
+        UserCompany userGot = this.gateway.findUserCompanyByNumberDocument(userCompany.getDocumentNumber());
+
+        userGot.setNames(userCompany.getNames());
+        userGot.setLastNames(userCompany.getLastNames());
+        userGot.setPersonalPhone(userCompany.getPersonalPhone());
+        userGot.setPersonalEmail(userCompany.getPersonalEmail());
+        userGot.setRoles(userCompany.getRoles());
+        userGot.setState(userCompany.isState());
+        userGot.setCompanyNit(userCompany.getCompanyNit());
+        userGot.setCompanyName(userCompany.getCompanyName());
+        userGot.setAddress(userCompany.getAddress());
+
+        userResponse = this.gateway.save(userGot);
+
         return userResponse;
     }
 

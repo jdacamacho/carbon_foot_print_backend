@@ -18,23 +18,20 @@ import lombok.Setter;
 @Setter
 public class UserCompanyEntity extends UserEntity {
     
-    @Column(name = "company_nit", nullable = false , unique = true)
     private long companyNit;
 
-    @Column(name = "company_name", nullable = false , unique = true)
+    @Column(nullable = false , unique = true)
     private String companyName;
 
-    @Column(name = "company_phone", nullable = true)
+    @Column(nullable = true)
     private String companyPhone;
 
     @OneToOne(mappedBy = "objUserCompany", fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
     private AddressEntity address;
 
-    @Column(name = "registration_date", nullable = false)
+    @Column(nullable = false)
     private Date registrationDate;
 
-
-    //perfiles
     public UserCompanyEntity(){
 
     }

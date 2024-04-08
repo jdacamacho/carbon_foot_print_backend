@@ -13,9 +13,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class RoleEntity {
     @Id
-    @Column(name = "role_id")
     private long id;
-    @Column(name = "role_name",nullable = false , unique = true , length = 45)
+    @Column(nullable = false , unique = true , length = 45)
     private String typeRole;
 
     public RoleEntity(){

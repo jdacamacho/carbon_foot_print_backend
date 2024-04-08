@@ -25,6 +25,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -68,6 +69,35 @@ public class UserCompanyRestController {
             
         }catch(DataAccessException e){
             response.put("mensaje", "Error when inserting into database");
+			response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<UserCompanyDTOResponse>(objCompany,HttpStatus.OK);
+    }
+
+    @PutMapping("/companies")
+    public ResponseEntity<?> updateCompany(@Valid @RequestBody UserCompanyDTORequest companyRequest, BindingResult result){
+        UserCompany company = this.mapper.mapRequestToModel(companyRequest);
+        Map<String, Object> response = new HashMap<>();
+        UserCompanyDTOResponse objCompany;
+
+        if(result.hasErrors()){
+			List<String> listaErrores= new ArrayList<>();
+
+			for (FieldError error : result.getFieldErrors()) {
+				listaErrores.add("The field '" + error.getField() +"‘ "+ error.getDefaultMessage());
+			}
+
+			response.put("errors", listaErrores);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+
+        try{
+            objCompany = this.mapper.mapModelToResponse(this.userCompanyCU.updateUserCompany(company));
+            
+        }catch(DataAccessException e){
+            response.put("mensaje", "Error when updating into database");
 			response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }

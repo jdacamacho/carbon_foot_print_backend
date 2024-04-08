@@ -6,11 +6,10 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class AddressDTORequest {
-    //private long documentNumber;
-    //private UserCompanyDTORequest objUserCompany;
     private String street;
     private String number;
     private String floorOrApartment;
+    private String neighborhood;
     private String city;
     private String country;
 

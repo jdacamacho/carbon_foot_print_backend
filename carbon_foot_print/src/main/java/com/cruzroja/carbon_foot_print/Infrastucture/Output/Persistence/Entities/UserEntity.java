@@ -23,22 +23,21 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserEntity {
     @Id
-    @Column(name = "user_document_number")
     private long documentNumber;
 
-    @Column(name = "user_document_type" , nullable =  false , length = 45)
+    @Column(nullable =  false , length = 45)
     private String documentType;
 
-    @Column(name = "user_names" , nullable = false , length = 60)
+    @Column(nullable = false , length = 60)
     private String names;
 
-    @Column(name = "user_lastnames" , nullable = false , length = 60)
+    @Column( nullable = false , length = 60)
     private String lastNames;
 
-    @Column(name = "user_personal_phone", nullable = true, length = 12)
+    @Column(nullable = true, length = 12)
     private String personalPhone;
 
-    @Column(name = "user_personal_email", nullable = true , unique = true ,length = 320)
+    @Column(nullable = true , unique = true ,length = 320)
     private String personalEmail;
 
     @Column(nullable = false , unique = true ,length = 40)
@@ -53,7 +52,7 @@ public class UserEntity {
         inverseJoinColumns = @JoinColumn(name = "id_role"))
     private List<RoleEntity> roles;
 
-    @Column(name = "user_state" , nullable = false)
+    @Column(nullable = false)
     private boolean state;
 
     public UserEntity(){
