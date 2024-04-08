@@ -24,6 +24,7 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageUserCo
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -104,6 +105,28 @@ public class UserCompanyRestController {
 
         return new ResponseEntity<UserCompanyDTOResponse>(objCompany,HttpStatus.OK);
     }
+
+    @GetMapping("/companies/nit/{nitCompany}")
+    @Transactional(readOnly = true)
+    public ResponseEntity<UserCompanyDTOResponse> getCompanyByNit(@PathVariable long nitCompany){
+        UserCompany company = this.userCompanyCU.getUserCompanyByNit(nitCompany);
+        ResponseEntity<UserCompanyDTOResponse> objResponse = new ResponseEntity<UserCompanyDTOResponse>(
+            mapper.mapModelToResponse(company),HttpStatus.OK
+        );
+        return objResponse;
+    }
+
+    @GetMapping("/companies/numberDocument/{numberDocument}")
+    @Transactional(readOnly = true)
+    public ResponseEntity<UserCompanyDTOResponse> getCompanyByUserCharge(@PathVariable long numberDocument){
+        UserCompany company = this.userCompanyCU.getUserCompanyByNumberDocument(numberDocument);
+        ResponseEntity<UserCompanyDTOResponse> objResponse = new ResponseEntity<UserCompanyDTOResponse>(
+            mapper.mapModelToResponse(company),HttpStatus.OK
+        );
+        return objResponse;
+    }
+
+
     
 }
 
