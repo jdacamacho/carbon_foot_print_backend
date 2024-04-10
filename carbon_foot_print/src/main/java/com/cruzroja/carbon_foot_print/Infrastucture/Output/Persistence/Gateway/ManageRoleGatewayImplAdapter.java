@@ -7,7 +7,9 @@ import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
 import com.cruzroja.carbon_foot_print.Application.Output.ManageRoleGatewayIntPort;
+import com.cruzroja.carbon_foot_print.Domain.Models.Permission;
 import com.cruzroja.carbon_foot_print.Domain.Models.Role;
+import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.PermissionEntity;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.RoleEntity;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Repositories.RoleRepository;
 
@@ -54,6 +56,18 @@ public class ManageRoleGatewayImplAdapter implements ManageRoleGatewayIntPort{
     public void deleteRole(Role Role) {
         RoleEntity roleToDelete = this.mapper.map(Role, RoleEntity.class);
         this.serviceBD.delete(roleToDelete);
+    }
+
+    @Override
+    public List<Permission> findAllPermissions() {
+        List<PermissionEntity> dataFromBD = this.serviceBD.findAllPermissions();
+        List<Permission> response = this.mapper.map(dataFromBD, new TypeToken<List<Permission>>(){}.getType());
+        return response;
+    }
+
+    @Override
+    public long existRoleByIdOrTypeRole(long idRole, String typeRole) {
+        return this.serviceBD.countByIdRoleOrTypeRole(idRole, typeRole);
     }
     
 }
