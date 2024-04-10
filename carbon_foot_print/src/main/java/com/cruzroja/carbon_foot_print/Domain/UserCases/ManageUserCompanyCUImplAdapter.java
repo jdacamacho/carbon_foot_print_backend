@@ -32,7 +32,7 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
         UserCompany userResponse = null;
         if(this.gateway.existsUserCompanyByNumberDocument(userCompany.getDocumentNumber()) != 0 &&
             this.gateway.existsCompanyByNit(userCompany.getCompanyNit()) != 0){
-            this.errorFormatter.returnResponseErrorEntityExists("User already exists in the system");
+            this.errorFormatter.returnResponseErrorEntityExists("User duplicate");
         }
         userCompany.setRegistrationDate(new Date());
         userCompany.getAddress().setObjUserCompany(userCompany);
