@@ -51,6 +51,5 @@ public class UserCompanyDTORequest extends UserDTORequest{
         this.companyName = companyName;
         this.companyPhone = companyPhone;
         this.address = address;
-        //this.registrationDate = new Date();
     }
 }
