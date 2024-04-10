@@ -10,7 +10,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class RoleDTORequest {
     @Positive(message = "idRole must be positive")
-    private long id;
+    private long idRole;
 
     @NotNull(message = "typeRole can't be null")
     @NotBlank(message = "typeRole can't be empty")

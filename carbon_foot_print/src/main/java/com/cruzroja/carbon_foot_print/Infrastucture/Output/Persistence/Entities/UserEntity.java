@@ -46,7 +46,7 @@ public class UserEntity {
     @Column(nullable = false , length = 300)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
         joinColumns = @JoinColumn(name = "user_document_number"),
         inverseJoinColumns = @JoinColumn(name = "id_role"))
