@@ -5,6 +5,7 @@ import java.util.List;
 import com.cruzroja.carbon_foot_print.Application.Input.ManageRoleCUIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageRoleGatewayIntPort;
+import com.cruzroja.carbon_foot_print.Domain.Models.Permission;
 import com.cruzroja.carbon_foot_print.Domain.Models.Role;
 
 public class ManageRoleCUImplAdapter implements ManageRoleCUIntPort{
@@ -61,7 +62,7 @@ public class ManageRoleCUImplAdapter implements ManageRoleCUIntPort{
             if(role.isValidPermission(this.gateway.findAllPermissions()) == false){
                 this.exceptionFormatter.returnResponseBusinessRuleViolated("Permissiones are not valid");
             }else if(role.hasDuplicatePermissions() == true){
-                this.exceptionFormatter.returnResponseBusinessRuleViolated("role has duplicates");
+                this.exceptionFormatter.returnResponseBusinessRuleViolated("role has permission duplicates");
             }else{
                 Role roleObtained = this.gateway.findByIdRole(role.getIdRole());
                 if(IsValidUpdating(roleObtained, role) > 0){
@@ -87,6 +88,15 @@ public class ManageRoleCUImplAdapter implements ManageRoleCUIntPort{
         return true;
     }
 
+    @Override
+    public List<Permission> listPermissions() {
+        List<Permission> permissions = this.gateway.findAllPermissions();
+        if(permissions.size() == 0){
+            this.exceptionFormatter.returNoData("Not exists permissions in the system");
+        }
+        return permissions;
+    } 
+
     private long IsValidUpdating(Role roleObtained, Role newRole){
 
         long idRole = 0;
@@ -95,5 +105,6 @@ public class ManageRoleCUImplAdapter implements ManageRoleCUIntPort{
         if(roleObtained.getTypeRole().equals(newRole.getTypeRole())  == false) typeRole = newRole.getTypeRole();
 
         return this.gateway.existRoleByIdOrTypeRole(idRole, typeRole);
-    } 
+    }
+
 }
