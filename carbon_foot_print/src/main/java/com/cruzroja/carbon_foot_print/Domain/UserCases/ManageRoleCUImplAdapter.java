@@ -31,26 +31,71 @@ public class ManageRoleCUImplAdapter implements ManageRoleCUIntPort{
 
     @Override
     public Role saveRole(Role role) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveRole'");
+        Role roleResponse = null;
+        if(this.gateway.existRoleByIdOrTypeRole(role.getIdRole(), role.getTypeRole()) != 0){
+            this.exceptionFormatter.returnResponseErrorEntityExists("Role exists in the system");
+        }else if(role.isValidPermission(this.gateway.findAllPermissions()) == false){
+            this.exceptionFormatter.returnResponseBusinessRuleViolated("Permissiones are not valid");
+        }else if(role.hasDuplicatePermissions() == true){
+            this.exceptionFormatter.returnResponseBusinessRuleViolated("role has duplicates");
+        }else{
+            roleResponse = this.gateway.save(role);
+        }
+        return roleResponse;
     }
 
     @Override
     public Role getRole(long idRole) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRole'");
+        Role roleResponse = null;
+        if(this.gateway.existRoleById(idRole) == 0){
+            this.exceptionFormatter.returnResponseErrorEntityNotFound("Role not found");
+        }
+        roleResponse = this.gateway.findByIdRole(idRole);
+        return roleResponse;
     }
 
     @Override
     public Role updateRole(Role role) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateRole'");
+        Role roleResponse = null;
+        if(this.gateway.existRoleById(role.getIdRole()) == 0){
+            this.exceptionFormatter.returnResponseErrorEntityNotFound("Role not exists in the system");
+        }else{
+            if(role.isValidPermission(this.gateway.findAllPermissions()) == false){
+                this.exceptionFormatter.returnResponseBusinessRuleViolated("Permissiones are not valid");
+            }else if(role.hasDuplicatePermissions() == true){
+                this.exceptionFormatter.returnResponseBusinessRuleViolated("role has duplicates");
+            }else{
+                Role roleObtained = this.gateway.findByIdRole(role.getIdRole());
+                if(IsValidUpdating(roleObtained, role) > 0){
+                    this.exceptionFormatter.returnResponseErrorEntityExists("Exist a role with that typeRole");
+                }else{
+                    roleObtained.setTypeRole(role.getTypeRole());
+                    roleObtained.setPermissions(role.getPermissions());
+                    roleResponse = this.gateway.save(roleObtained);
+                }
+            }
+        } 
+        return roleResponse;
     }
 
     @Override
     public boolean deleteRole(long idRole) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteRole'");
+        Role roleToDelete = null;
+        if(this.gateway.existRoleById(idRole) == 0){
+            this.exceptionFormatter.returnResponseErrorEntityNotFound("Role not found");
+        }
+        roleToDelete = this.gateway.findByIdRole(idRole);
+        this.gateway.deleteRole(roleToDelete);
+        return true;
     }
-    
+
+    private long IsValidUpdating(Role roleObtained, Role newRole){
+
+        long idRole = 0;
+        String typeRole = "youWon'tFindThisTypeRole";
+
+        if(roleObtained.getTypeRole().equals(newRole.getTypeRole())  == false) typeRole = newRole.getTypeRole();
+
+        return this.gateway.existRoleByIdOrTypeRole(idRole, typeRole);
+    } 
 }
