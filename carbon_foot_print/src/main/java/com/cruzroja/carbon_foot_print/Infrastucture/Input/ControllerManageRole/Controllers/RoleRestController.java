@@ -57,7 +57,7 @@ public class RoleRestController {
         return objResponse;
     }
 
-    /*
+    
     @GetMapping("/roles/permissions")
     @Transactional(readOnly = true)
     public ResponseEntity<List<PermissionDTOResponse>> listPermissions(){
@@ -65,7 +65,7 @@ public class RoleRestController {
         ResponseEntity<List<PermissionDTOResponse>> objResponse = new ResponseEntity<List<PermissionDTOResponse>>(
             mapper.mapModelsPermissionToResponse(permissions),HttpStatus.OK);
         return objResponse;
-    }*/
+    }
 
     @PostMapping("/roles")
     public ResponseEntity<?> saveRole(@Valid @RequestBody RoleDTORequest roleRequest, BindingResult result){
