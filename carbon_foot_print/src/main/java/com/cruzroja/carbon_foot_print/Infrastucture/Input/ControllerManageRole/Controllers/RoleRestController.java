@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cruzroja.carbon_foot_print.Application.Input.ManageRoleCUIntPort;
+import com.cruzroja.carbon_foot_print.Domain.Models.Permission;
 import com.cruzroja.carbon_foot_print.Domain.Models.Role;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTORequest.RoleDTORequest;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTOResponse.PermissionDTOResponse;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTOResponse.RoleDTOResponse;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.mappers.MapperRoleInfrastuctureDomain;
 
@@ -52,6 +54,15 @@ public class RoleRestController {
         Role role = this.roleCU.getRole(idRole);
         ResponseEntity<RoleDTOResponse> objResponse = new ResponseEntity<RoleDTOResponse>(
             mapper.mapModelToResponse(role),HttpStatus.OK);
+        return objResponse;
+    }
+
+    @GetMapping("/roles/permissions")
+    @Transactional(readOnly = true)
+    public ResponseEntity<List<PermissionDTOResponse>> listPermissions(){
+        List<Permission> permissions = this.roleCU.listPermissions();
+        ResponseEntity<List<PermissionDTOResponse>> objResponse = new ResponseEntity<List<PermissionDTOResponse>>(
+            mapper.mapModelsPermissionToResponse(permissions),HttpStatus.OK);
         return objResponse;
     }
 
