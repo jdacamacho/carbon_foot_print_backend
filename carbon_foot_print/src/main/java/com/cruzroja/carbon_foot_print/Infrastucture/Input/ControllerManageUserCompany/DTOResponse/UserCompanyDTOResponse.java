@@ -3,7 +3,7 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageUserC
 import java.util.Date;
 import java.util.List;
 
-import com.cruzroja.carbon_foot_print.Infrastucture.Input.UserDTO.DTOResponse.RoleDTOResponse;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTOResponse.RoleDTOResponse;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.UserDTO.DTOResponse.UserDTOResponse;
 
 import lombok.Getter;

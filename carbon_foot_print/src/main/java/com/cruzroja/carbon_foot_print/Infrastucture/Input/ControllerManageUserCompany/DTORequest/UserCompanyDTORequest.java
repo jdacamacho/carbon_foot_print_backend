@@ -2,7 +2,7 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageUserC
 
 import java.util.List;
 
-import com.cruzroja.carbon_foot_print.Infrastucture.Input.UserDTO.DTORequest.RoleDTORequest;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTORequest.RoleDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.UserDTO.DTORequest.UserDTORequest;
 
 import jakarta.validation.Valid;
