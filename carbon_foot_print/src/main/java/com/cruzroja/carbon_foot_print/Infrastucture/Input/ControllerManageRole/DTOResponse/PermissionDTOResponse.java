@@ -1,4 +1,4 @@
-package com.cruzroja.carbon_foot_print.Infrastucture.Input.UserDTO.DTOResponse;
+package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTOResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

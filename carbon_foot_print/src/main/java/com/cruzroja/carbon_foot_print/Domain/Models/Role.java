@@ -19,23 +19,24 @@ public class Role {
         this.permissions = new ArrayList<>();
     }
 
-    public boolean isValidListPermissions(List<Permission> validPermissions ){
+    public boolean isValidPermission(List<Permission> validPermissions){
         List<Permission> permissions = this.getPermissions();
         int wasFound = 0;
-        for(Permission permission : permissions){
-            for(Permission validPermission : validPermissions){
-                if(permission.equals(validPermission)) wasFound++;
+        for (Permission permission : permissions) {
+            for (Permission validPermission : validPermissions) {
+                if(permission.equals(validPermission)) wasFound ++;
             }
         }
         if(permissions.size() == wasFound) return true;
         return false;
-    }
+    } 
 
-    public boolean hasDuplicatePermissions() {
-        Set<Permission> permissionSet = new HashSet<>(permissions);
-        if(permissionSet.size() < permissions.size()){
+    public boolean hasDuplicatePermissions(){
+        Set<Permission> permissionSet = new HashSet<>(this.getPermissions());
+        if(permissionSet.size() < this.getPermissions().size()){
             return true;
         }
         return false;
     }
+
 }

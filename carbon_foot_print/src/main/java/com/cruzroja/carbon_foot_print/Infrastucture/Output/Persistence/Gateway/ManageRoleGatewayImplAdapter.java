@@ -60,14 +60,14 @@ public class ManageRoleGatewayImplAdapter implements ManageRoleGatewayIntPort{
 
     @Override
     public List<Permission> findAllPermissions() {
-        List<PermissionEntity> dataFromDB = this.serviceBD.findAllPermissions();
-        List<Permission> response = this.mapper.map(dataFromDB, new TypeToken<List<Permission>>(){}.getType());
+        List<PermissionEntity> dataFromBD = this.serviceBD.findAllPermissions();
+        List<Permission> response = this.mapper.map(dataFromBD, new TypeToken<List<Permission>>(){}.getType());
         return response;
     }
 
     @Override
-    public long existsByTypeRole(String typeRole) {
-        return this.serviceBD.countByRoleName(typeRole);
+    public long existRoleByIdOrTypeRole(long idRole, String typeRole) {
+        return this.serviceBD.countByIdRoleOrTypeRole(idRole, typeRole);
     }
     
 }

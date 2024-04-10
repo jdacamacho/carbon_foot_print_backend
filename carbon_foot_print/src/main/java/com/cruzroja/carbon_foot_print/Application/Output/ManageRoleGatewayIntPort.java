@@ -12,5 +12,5 @@ public interface ManageRoleGatewayIntPort {
     public long existRoleById(long idRole);
     public void deleteRole(Role role);
     public List<Permission> findAllPermissions();
-    public long existsByTypeRole(String typeRole);
+    public long existRoleByIdOrTypeRole(long idRole, String typeRole);
 }

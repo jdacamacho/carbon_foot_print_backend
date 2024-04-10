@@ -12,5 +12,6 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageUserCo
 public interface MapperUserCompanyInfrastuctureDomain {
     UserCompany mapRequestToModel(UserCompanyDTORequest request);
     UserCompanyDTOResponse mapModelToResponse(UserCompany model);
-    List<UserCompanyDTOResponse> mapModelsToResponse(List<UserCompany> models);
+    List<UserCompanyDTOResponse> mapModelsToResponse(List<UserCompany> companies);
+
 }

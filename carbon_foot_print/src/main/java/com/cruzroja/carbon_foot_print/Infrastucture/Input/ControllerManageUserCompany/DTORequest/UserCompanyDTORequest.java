@@ -2,7 +2,7 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageUserC
 
 import java.util.List;
 
-import com.cruzroja.carbon_foot_print.Infrastucture.Input.UserDTO.DTORequest.RoleDTORequest;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTORequest.RoleDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.UserDTO.DTORequest.UserDTORequest;
 
 import jakarta.validation.Valid;
@@ -51,6 +51,5 @@ public class UserCompanyDTORequest extends UserDTORequest{
         this.companyName = companyName;
         this.companyPhone = companyPhone;
         this.address = address;
-        //this.registrationDate = new Date();
     }
 }
