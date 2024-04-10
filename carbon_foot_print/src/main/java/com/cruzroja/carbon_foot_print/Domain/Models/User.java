@@ -24,6 +24,7 @@ public class User {
         this.roles = new ArrayList<>();
     }
 
+    //aun sin utilizar
     public boolean isValidRole(List<Role> validRoles){
         List<Role> roles = this.getRoles();
         int wasFound = 0;
