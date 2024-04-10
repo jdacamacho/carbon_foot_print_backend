@@ -2,8 +2,6 @@ package com.cruzroja.carbon_foot_print.Domain.UserCases;
 
 import java.util.List;
 
-import org.modelmapper.ModelMapper;
-
 import com.cruzroja.carbon_foot_print.Application.Input.ManageRoleCUIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageRoleGatewayIntPort;
