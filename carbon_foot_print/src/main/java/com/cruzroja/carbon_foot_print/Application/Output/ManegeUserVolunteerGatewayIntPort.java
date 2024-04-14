@@ -15,4 +15,6 @@ public interface ManegeUserVolunteerGatewayIntPort {
 
     public List<Role> findRoles();
 
+    public long existUserVolunteerByNumberDocument(long numberDocument);
+
 }

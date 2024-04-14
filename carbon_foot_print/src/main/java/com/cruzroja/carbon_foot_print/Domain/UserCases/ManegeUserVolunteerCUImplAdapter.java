@@ -28,7 +28,7 @@ public class ManegeUserVolunteerCUImplAdapter implements ManegeUserVolunteerCUIn
 
     @Override
     public UserVolunteer saveUserVolunteer(UserVolunteer userVolunteer) {
-        if (this.gateway.findUserVolunteerByNumberDocument(userVolunteer.getDocumentNumber()) != null)
+        if (this.gateway.existUserVolunteerByNumberDocument(userVolunteer.getDocumentNumber()) != 0)
             this.errorFormatter.returnResponseErrorEntityExists(
                     "All ready exist an user with number of document " + userVolunteer.getDocumentNumber() + ".");
         if (!userVolunteer.isValidRole(this.gateway.findRoles()))
@@ -38,10 +38,11 @@ public class ManegeUserVolunteerCUImplAdapter implements ManegeUserVolunteerCUIn
 
     @Override
     public UserVolunteer updateUserVolunteer(UserVolunteer userVolunteer) {
-        UserVolunteer oldVolunteer = this.gateway.findUserVolunteerByNumberDocument(userVolunteer.getDocumentNumber());
-        if (oldVolunteer == null)
+
+        if (this.gateway.existUserVolunteerByNumberDocument(userVolunteer.getDocumentNumber()) == 0)
             this.errorFormatter.returnResponseErrorEntityNotFound(
                     "The volunteer woth document number " + userVolunteer.getDocumentNumber() + " has not been found.");
+        UserVolunteer oldVolunteer = this.gateway.findUserVolunteerByNumberDocument(userVolunteer.getDocumentNumber());
         if (!userVolunteer.isValidRole(this.gateway.findRoles()))
             this.errorFormatter.returnResponseBadFormat("The roles is not avalible.");
         oldVolunteer.update(userVolunteer);

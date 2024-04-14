@@ -59,4 +59,9 @@ public class ManegeUserVolunteerGatewayImplAdapter implements ManegeUserVoluntee
         }.getType());
     }
 
+    @Override
+    public long existUserVolunteerByNumberDocument(long numberDocument) {
+        return this.serviceBD.countByUserCompanyNumberDocument(numberDocument);
+    }
+
 }

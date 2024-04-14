@@ -18,4 +18,19 @@ public class UserVolunteerEntity extends UserEntity {
     @Column(nullable = false, length = 45)
     private String position;
 
+    public UserVolunteerEntity() {
+
+    }
+
+    public UserVolunteerEntity(long documentNumber, String documentType,
+            String names, String lastNames, String personalPhone,
+            String personalEmail, String username, String password,
+            List<RoleEntity> roles, String position) {
+        super(documentNumber, documentType,
+                names, lastNames, personalPhone,
+                personalEmail, username, password,
+                roles, true);
+        this.position = position;
+    }
+
 }
