@@ -20,20 +20,34 @@ public class User {
     private List<Role> roles;
     private boolean state;
 
-    public User(){
+    public User() {
         this.roles = new ArrayList<>();
     }
 
-    //aun sin utilizar
-    public boolean isValidRole(List<Role> validRoles){
+    // aun sin utilizar
+    public boolean isValidRole(List<Role> validRoles) {
         List<Role> roles = this.getRoles();
         int wasFound = 0;
         for (Role role : roles) {
             for (Role roleValid : validRoles) {
-                if(role.equals(roleValid)) wasFound ++;
+                if (role.equals(roleValid))
+                    wasFound++;
             }
         }
-        if(roles.size() == wasFound) return true;
+        if (roles.size() == wasFound)
+            return true;
         return false;
+    }
+
+    protected void update(User user) {
+        this.documentType = user.getDocumentType();
+        this.names = user.getNames();
+        this.lastNames = user.getLastNames();
+        this.personalPhone = user.getPersonalPhone();
+        this.personalEmail = user.getPersonalEmail();
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.roles = user.getRoles();
+        this.state = user.isState();
     }
 }

@@ -9,13 +9,13 @@ import org.springframework.data.repository.query.Param;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.PermissionEntity;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.RoleEntity;
 
-public interface RoleRepository extends CrudRepository<RoleEntity,Long> {
+public interface RoleRepository extends CrudRepository<RoleEntity, Long> {
 
     @Query("SELECT COUNT(r) FROM RoleEntity r WHERE r.idRole = :idRole")
-    long countByRoleId(@Param("idRole") long idRole);  
+    long countByRoleId(@Param("idRole") long idRole);
 
     @Query("SELECT COUNT(r) FROM RoleEntity r WHERE r.idRole = :idRole OR r.typeRole = :typeRole")
-    long countByIdRoleOrTypeRole(@Param("idRole") long idRole,@Param("typeRole") String typeRole);
+    long countByIdRoleOrTypeRole(@Param("idRole") long idRole, @Param("typeRole") String typeRole);
 
     @Query("from PermissionEntity")
     List<PermissionEntity> findAllPermissions();

@@ -22,7 +22,7 @@ public class UserDTOResponse {
     private List<RoleDTOResponse> roles;
     private boolean state;
 
-    public UserDTOResponse(){
+    public UserDTOResponse() {
         this.roles = new ArrayList<>();
     }
 }
