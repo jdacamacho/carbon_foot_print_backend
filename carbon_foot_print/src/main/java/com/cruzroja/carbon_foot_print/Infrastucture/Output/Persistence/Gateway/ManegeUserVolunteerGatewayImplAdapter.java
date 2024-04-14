@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.cruzroja.carbon_foot_print.Application.Output.ManegeUserVolunteerGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Domain.Models.Role;
 import com.cruzroja.carbon_foot_print.Domain.Models.UserVolunteer;
+import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.RoleEntity;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.UserVolunteerEntity;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Repositories.UserVolunteerRepository;
 
@@ -39,20 +40,23 @@ public class ManegeUserVolunteerGatewayImplAdapter implements ManegeUserVoluntee
 
     @Override
     public UserVolunteer findUserVolunteerByNumberDocument(long numberDocument) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findUserVolunteerByNumberDocument'");
+        UserVolunteerEntity dataFromBD = this.serviceBD.findById(numberDocument).get();
+        UserVolunteer response = this.mapper.map(dataFromBD, UserVolunteer.class);
+        return response;
     }
 
     @Override
     public List<UserVolunteer> findUserVolunteerByPosition(String position) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findUserVolunteerByPosition'");
+        Iterable<UserVolunteerEntity> dataFromBD = this.serviceBD.findByPosition(position);
+        return this.mapper.map(dataFromBD, new TypeToken<List<UserVolunteer>>() {
+        }.getType());
     }
 
     @Override
     public List<Role> findRoles() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findRoles'");
+        Iterable<RoleEntity> dataFromBD = this.serviceBD.findAllRoles();
+        return this.mapper.map(dataFromBD, new TypeToken<List<Role>>() {
+        }.getType());
     }
 
 }

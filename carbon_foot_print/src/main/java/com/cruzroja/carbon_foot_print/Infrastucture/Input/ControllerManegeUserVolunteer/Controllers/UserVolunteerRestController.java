@@ -58,7 +58,7 @@ public class UserVolunteerRestController {
         return objResponse;
     }
 
-    @GetMapping
+    @GetMapping("/position")
     @Transactional(readOnly = true)
     public ResponseEntity<List<UserVolunteerDTOResponse>> getVolunteersByPosition(
             @NotEmpty @RequestParam String position) {
@@ -71,7 +71,7 @@ public class UserVolunteerRestController {
     @PostMapping("/")
     public ResponseEntity<?> saveVolunteer(@Valid @RequestBody UserVolunteerDTORequest request, BindingResult result) {
         UserVolunteer voluntario = this.mapper.mapRequestModel(request);
-        Map<String, Object> response = new HashMap();
+        Map<String, Object> response = new HashMap<>();
         UserVolunteerDTOResponse objVolunteer;
         response = this.catchErrors(result);
         if (response.size() != 0)
@@ -108,7 +108,7 @@ public class UserVolunteerRestController {
     }
 
     private Map<String, Object> catchErrors(BindingResult result) {
-        Map<String, Object> response = new HashMap();
+        Map<String, Object> response = new HashMap<>();
         if (result.hasErrors()) {
             List<String> listaErrores = new ArrayList<>();
 

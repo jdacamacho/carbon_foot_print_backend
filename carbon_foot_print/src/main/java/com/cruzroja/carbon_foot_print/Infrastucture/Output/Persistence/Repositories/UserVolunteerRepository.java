@@ -11,5 +11,5 @@ public interface UserVolunteerRepository extends CrudRepository<UserVolunteerEnt
     List<UserVolunteerEntity> findByPosition(String position);
 
     @Query("from RoleEntity")
-    List<RoleEntity> findAllPermissions();
+    List<RoleEntity> findAllRoles();
 }

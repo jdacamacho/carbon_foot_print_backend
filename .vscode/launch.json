@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CarbonFootPrintApplication<carbon_foot_print>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.cruzroja.carbon_foot_print.CarbonFootPrintApplication",
+            "projectName": "carbon_foot_print",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
