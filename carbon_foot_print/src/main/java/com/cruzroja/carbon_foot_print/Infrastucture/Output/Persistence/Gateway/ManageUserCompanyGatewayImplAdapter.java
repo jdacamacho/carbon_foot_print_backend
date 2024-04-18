@@ -75,9 +75,8 @@ public class ManageUserCompanyGatewayImplAdapter implements ManageUserCompanyGat
     @Override
     public boolean existUserByDocumentNumberOrUsernameOrPersonalEmail(long numberDocument, String username,
             String email) {
-        UserEntity objUserEntity = null;
-        objUserEntity = this.serviceBDUser.existByNumberDocumentOrUsernameOrPersonalEmail(numberDocument, username, email);
-        if(objUserEntity == null){
+
+        if(this.serviceBDUser.existByNumberDocumentOrUsernameOrPersonalEmail(numberDocument, username, email) == 0){
             return false;
         }
         return true;
