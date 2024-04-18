@@ -37,7 +37,7 @@ public class UserEntity {
     @Column(nullable = true, length = 12)
     private String personalPhone;
 
-    @Column(nullable = true , unique = true ,length = 320)
+    @Column(nullable = false , unique = true ,length = 320)
     private String personalEmail;
 
     @Column(nullable = false , unique = true ,length = 40)
