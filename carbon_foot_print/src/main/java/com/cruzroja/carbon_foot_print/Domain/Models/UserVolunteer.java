@@ -11,11 +11,6 @@ import java.util.List;
 public class UserVolunteer extends User {
     private String position;
 
-    public void update(UserVolunteer volunteer) {
-        super.update(volunteer);
-        this.position = volunteer.getPosition();
-    }
-
     public UserVolunteer() {
 
     }
@@ -29,5 +24,10 @@ public class UserVolunteer extends User {
                 personalEmail, username, password,
                 roles, true);
         this.position = position;
+    }
+
+    public void update(UserVolunteer volunteer) {
+        super.update(volunteer);
+        this.position = volunteer.getPosition();
     }
 }

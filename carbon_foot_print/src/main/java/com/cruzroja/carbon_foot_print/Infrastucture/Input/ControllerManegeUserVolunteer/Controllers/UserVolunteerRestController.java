@@ -22,6 +22,8 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeUserVo
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,8 +34,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeUserVolunteer.DTORequest.UserVolunteerDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeUserVolunteer.DTOResponse.UserVolunteerDTOResponse;
 
+@CrossOrigin(origins = {"http://localhost:5050"})
 @RestController
-@RequestMapping("/api/user/volunteer")
+@RequestMapping("/api/user/volunteers")
 @Validated
 @RequiredArgsConstructor
 public class UserVolunteerRestController {
