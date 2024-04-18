@@ -8,7 +8,7 @@ public interface ManageUserCompanyGatewayIntPort {
     public List<UserCompany> findAll();
     public UserCompany save(UserCompany userCompany);
     public UserCompany findUserCompanyByNumberDocument(long numberDocument);
-    public long existsUserCompanyByNumberDocument(long numberDocument);
-    public UserCompany findCompanyByNit(long nitCompany);
-    public long existsCompanyByNit(long nitCompany);   
+    public boolean existsUserCompanyByNumberDocument(long numberDocument);
+    public UserCompany findByCompanyNitOrCompanyEmailOrCompanyName(long nitCompany, String companyEmail, String companyName);
+    public boolean existsCompanyByNit(long nitCompany);   
 }

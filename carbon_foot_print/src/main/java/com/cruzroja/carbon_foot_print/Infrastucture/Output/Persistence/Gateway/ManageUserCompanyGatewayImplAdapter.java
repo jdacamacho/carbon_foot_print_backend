@@ -45,20 +45,20 @@ public class ManageUserCompanyGatewayImplAdapter implements ManageUserCompanyGat
     }
 
     @Override
-    public long existsUserCompanyByNumberDocument(long numberDocument) {
-        return this.serviceBD.countByUserCompanyNumberDocument(numberDocument);
+    public boolean existsUserCompanyByNumberDocument(long numberDocument) {
+        return this.serviceBD.existsById(numberDocument);
     }
 
     @Override
-    public UserCompany findCompanyByNit(long nitCompany) {
-        UserCompanyEntity dataFromBD = this.serviceBD.findByCompanyNit(nitCompany);
+    public UserCompany findByCompanyNitOrCompanyEmailOrCompanyName(long nitCompany, String companyEmail, String companyName) {
+        UserCompanyEntity dataFromBD = this.serviceBD.findByCompanyNitOrCompanyEmailOrCompanyName(nitCompany, companyEmail, companyName);
         UserCompany response = this.mapper.map(dataFromBD, UserCompany.class);
         return response;
     }
 
     @Override
-    public long existsCompanyByNit(long nitCompany) {
-        return this.serviceBD.countByCompanyNit(nitCompany);
+    public boolean existsCompanyByNit(long nitCompany) {
+        return this.serviceBD.existsByCompanyNit(nitCompany);
     }
     
 }
