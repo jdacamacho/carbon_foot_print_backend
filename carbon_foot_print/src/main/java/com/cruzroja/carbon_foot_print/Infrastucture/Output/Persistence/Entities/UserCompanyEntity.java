@@ -26,6 +26,9 @@ public class UserCompanyEntity extends UserEntity {
     @Column(nullable = true)
     private String companyPhone;
 
+    @Column(nullable = false , unique = true ,length = 320)
+    private String companyEmail;
+
     @OneToOne(mappedBy = "objUserCompany", fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
     private AddressEntity address;
 

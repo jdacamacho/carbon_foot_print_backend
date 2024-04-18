@@ -11,6 +11,7 @@ public class UserCompany extends User{
     private long companyNit;
     private String companyName;
     private String companyPhone;
+    private String companyEmail;
     private Address address;
     private Date registrationDate;
 

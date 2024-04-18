@@ -1,6 +1,5 @@
 package com.cruzroja.carbon_foot_print.Domain.Models;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
