@@ -11,7 +11,6 @@ import com.cruzroja.carbon_foot_print.Domain.Models.Role;
 import com.cruzroja.carbon_foot_print.Domain.Models.UserCompany;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.RoleEntity;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.UserCompanyEntity;
-import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.UserEntity;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Repositories.UserCompanyRepository;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Repositories.UserRepository;
 
