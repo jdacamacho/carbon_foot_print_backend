@@ -37,7 +37,7 @@ public class ManageRoleCUImplAdapter implements ManageRoleCUIntPort{
             if(role.isValidPermission(this.gateway.findAllPermissions()) == false){
                 this.exceptionFormatter.returnResponseBusinessRuleViolated("Permissiones are not valid");
             }else if(role.hasDuplicatePermissions() == true){
-                this.exceptionFormatter.returnResponseBusinessRuleViolated("role has duplicates");
+                this.exceptionFormatter.returnResponseBusinessRuleViolated("role has permissions duplicates");
             }else{
                 roleResponse = this.gateway.save(role);
             }

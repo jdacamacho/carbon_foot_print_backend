@@ -23,7 +23,7 @@ public class UserCompanyEntity extends UserEntity {
     @Column(nullable = false , unique = true)
     private String companyName;
 
-    @Column(nullable = true)
+    @Column(nullable = false, length = 12)
     private String companyPhone;
 
     @Column(nullable = false , unique = true ,length = 320)

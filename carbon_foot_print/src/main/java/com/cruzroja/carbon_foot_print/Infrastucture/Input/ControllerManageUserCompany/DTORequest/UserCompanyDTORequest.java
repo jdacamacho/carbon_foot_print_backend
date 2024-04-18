@@ -30,7 +30,8 @@ public class UserCompanyDTORequest extends UserDTORequest{
 
     @NotNull(message = "companyPhone can't be null")
     @NotBlank(message = "companyPhone can't be empty")
-    @Pattern(regexp = "[3][0-9]{9}", message = "Personal phone must begin with 3 and have ten digits") 
+    @Pattern(regexp = "[3][0-9]{9}", message = "companyPhone must begin with 3 and have ten digits") 
+    @Pattern(regexp = "[1-9][0-9]{8}", message = "companyPhone is not valid to be a landline phone, must begin with {1-9} and have eight digits") 
     private String companyPhone;
 
     @NotNull(message = "companyEmail can't be null")

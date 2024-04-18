@@ -34,4 +34,11 @@ public class UserCompany extends User{
         this.address = address;
         this.registrationDate = registrationDate;
     }
+
+    public void setInformation(){
+        this.setRegistrationDate(new Date());
+        this.getAddress().setObjUserCompany(this);
+        this.getAddress().setCompanyNit(companyNit);
+    } 
+
 }

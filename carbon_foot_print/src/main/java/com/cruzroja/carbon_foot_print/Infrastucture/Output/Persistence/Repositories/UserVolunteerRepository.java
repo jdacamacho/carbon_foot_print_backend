@@ -9,6 +9,7 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.
 import java.util.List;
 
 public interface UserVolunteerRepository extends CrudRepository<UserVolunteerEntity, Long> {
+    
     List<UserVolunteerEntity> findByPosition(String position);
 
     @Query("from RoleEntity")

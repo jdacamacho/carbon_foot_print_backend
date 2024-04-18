@@ -1,6 +1,5 @@
 package com.cruzroja.carbon_foot_print.Domain.UserCases;
 
-import java.util.Date;
 import java.util.List;
 
 import com.cruzroja.carbon_foot_print.Application.Input.ManageUserCompanyCUIntPort;
@@ -28,25 +27,30 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
 
     @Override
     public UserCompany saveUserCompany(UserCompany userCompany) {
-        long nitCompany = 0;
         UserCompany userResponse = null;
-        if(this.gateway.existsUserCompanyByNumberDocument(userCompany.getDocumentNumber()) != 0 &&
-            this.gateway.existsCompanyByNit(userCompany.getCompanyNit()) != 0){
-            this.errorFormatter.returnResponseErrorEntityExists("User duplicate");
-        }
-        userCompany.setRegistrationDate(new Date());
-        userCompany.getAddress().setObjUserCompany(userCompany);
-        nitCompany = userCompany.getCompanyNit();
-        userCompany.getAddress().setCompanyNit(nitCompany);
-        userResponse = this.gateway.save(userCompany);
 
+        if(this.gateway.existUserByDocumentNumberOrUsernameOrPersonalEmail(userCompany.getDocumentNumber(), userCompany.getUsername(), userCompany.getPersonalEmail())){
+            this.errorFormatter.returnResponseErrorEntityExists("User duplicate");
+        }else if(this.gateway.existsByCompanyNitOrCompanyEmailOrCompanyName(userCompany.getCompanyNit(), userCompany.getCompanyEmail(), userCompany.getCompanyName())){
+            this.errorFormatter.returnResponseErrorEntityExists("Company duplicate");
+        }else{
+            if(!userCompany.isValidRoles(this.gateway.findAllRoles())){
+                this.errorFormatter.returnResponseBusinessRuleViolated("Roles are not valid");
+            }else if(userCompany.hasDuplicateRoles()){
+                this.errorFormatter.returnResponseBusinessRuleViolated("Company has roles duplicates");
+            }else{
+                userCompany.setInformation();
+                userResponse = this.gateway.save(userCompany);
+            }
+        }
+       
         return userResponse;
     }
 
     @Override
     public UserCompany updateUserCompany( UserCompany userCompany) {
         UserCompany userResponse = null;
-        if(this.gateway.existsUserCompanyByNumberDocument(userCompany.getDocumentNumber()) == 0 &&
+        /*if(this.gateway.existsUserCompanyByNumberDocument(userCompany.getDocumentNumber()) == 0 &&
             this.gateway.existsCompanyByNit(userCompany.getCompanyNit()) == 0){
             this.errorFormatter.returnResponseErrorEntityNotFound("User not found in the system");
         }
@@ -62,7 +66,7 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
         userGot.setCompanyName(userCompany.getCompanyName());
         userGot.setAddress(userCompany.getAddress());
 
-        userResponse = this.gateway.save(userGot);
+        userResponse = this.gateway.save(userGot);*/
 
         return userResponse;
     }
@@ -70,8 +74,8 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
     @Override
     public UserCompany getUserCompanyByNumberDocument(long numberDocument) {
         UserCompany userResponse = null;
-        if(this.gateway.existsUserCompanyByNumberDocument(numberDocument) == 0){
-            this.errorFormatter.returnResponseErrorEntityNotFound("User not found in the system");
+        if(!this.gateway.existsUserCompanyByNumberDocument(numberDocument)){
+            this.errorFormatter.returnResponseErrorEntityNotFound("Company not found in the system");
         }
         userResponse = this.gateway.findUserCompanyByNumberDocument(numberDocument);
         return userResponse;
@@ -80,10 +84,10 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
     @Override
     public UserCompany getUserCompanyByNit(long nitCompany) {
         UserCompany userResponse = null;
-        if(this.gateway.existsCompanyByNit(nitCompany) == 0){
-            this.errorFormatter.returnResponseErrorEntityNotFound("User not found in the system");
+        if(!this.gateway.existsCompanyByNit(nitCompany)){
+            this.errorFormatter.returnResponseErrorEntityNotFound("Company not found in the system");
         }
-        userResponse = this.gateway.findCompanyByNit(nitCompany);
+        userResponse = this.gateway.findByCompanyNit(nitCompany);
         return userResponse;
     }
 
