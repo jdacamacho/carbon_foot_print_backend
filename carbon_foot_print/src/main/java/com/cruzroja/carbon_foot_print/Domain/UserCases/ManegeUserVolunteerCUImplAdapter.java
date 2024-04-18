@@ -31,9 +31,10 @@ public class ManegeUserVolunteerCUImplAdapter implements ManegeUserVolunteerCUIn
         if (this.gateway.existById(userVolunteer.getDocumentNumber()))
             this.errorFormatter.returnResponseErrorEntityExists(
                     "All ready exist an user with number of document " + userVolunteer.getDocumentNumber() + ".");
-        if (this.gateway.existsByUsername(userVolunteer.getUsername()))
-            this.errorFormatter.returnResponseErrorEntityExists(
-                    "All ready exist an user with username " + userVolunteer.getUsername() + ".");
+        if (!userVolunteer.isValidRoles(this.gateway.findRoles()))
+            if (this.gateway.existsByUsername(userVolunteer.getUsername()))
+                this.errorFormatter.returnResponseErrorEntityExists(
+                        "All ready exist an user with username " + userVolunteer.getUsername() + ".");
         if (this.gateway.existsByPersonalEmail(userVolunteer.getPersonalEmail()))
             this.errorFormatter.returnResponseErrorEntityExists(
                     "All ready exist an user with personal email " + userVolunteer.getPersonalEmail() + ".");
@@ -50,7 +51,7 @@ public class ManegeUserVolunteerCUImplAdapter implements ManegeUserVolunteerCUIn
             this.errorFormatter.returnResponseErrorEntityNotFound(
                     "The volunteer woth document number " + userVolunteer.getDocumentNumber() + " has not been found.");
         UserVolunteer oldVolunteer = this.gateway.findUserVolunteerByNumberDocument(userVolunteer.getDocumentNumber());
-        if (!userVolunteer.isValidRole(this.gateway.findRoles()))
+        if (!userVolunteer.isValidRoles(this.gateway.findRoles()))
             this.errorFormatter.returnResponseBadFormat("The roles is not avalible.");
         oldVolunteer.update(userVolunteer);
         return this.gateway.save(oldVolunteer);

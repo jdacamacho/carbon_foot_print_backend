@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,15 +33,16 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.m
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+@CrossOrigin(origins = {"http://localhost:5050"})
 @RestController
-@RequestMapping("/apiRole")
+@RequestMapping("/api/roles")
 @Validated
 @RequiredArgsConstructor
 public class RoleRestController {
     private final ManageRoleCUIntPort roleCU;
     private final MapperRoleInfrastuctureDomain mapper;
 
-    @GetMapping("/roles")
+    @GetMapping("/")
     @Transactional(readOnly = true)
     public ResponseEntity<List<RoleDTOResponse>> listRoles(){
         List<Role> roles = this.roleCU.listRoles();
@@ -49,7 +51,7 @@ public class RoleRestController {
         return objResponse;
     }
 
-    @GetMapping("/roles/idRole/{idRole}")
+    @GetMapping("/idRole/{idRole}")
     @Transactional(readOnly = true)
     public ResponseEntity<RoleDTOResponse> getRole(@PathVariable long idRole){
         Role role = this.roleCU.getRole(idRole);
@@ -59,7 +61,7 @@ public class RoleRestController {
     }
 
     
-    @GetMapping("/roles/permissions")
+    @GetMapping("/permissions")
     @Transactional(readOnly = true)
     public ResponseEntity<List<PermissionDTOResponse>> listPermissions(){
         List<Permission> permissions = this.roleCU.listPermissions();
@@ -68,7 +70,7 @@ public class RoleRestController {
         return objResponse;
     }
 
-    @PostMapping("/roles")
+    @PostMapping("/")
     public ResponseEntity<?> saveRole(@Valid @RequestBody RoleDTORequest roleRequest, BindingResult result){
         Role role = this.mapper.mapRequestRoModel(roleRequest);
         Map<String, Object> response = new HashMap<>();
@@ -96,7 +98,7 @@ public class RoleRestController {
         return new ResponseEntity<RoleDTOResponse>(objRole, HttpStatus.OK);
     }
 
-    @PutMapping("/roles")
+    @PutMapping("/")
     public ResponseEntity<?> updateRole(@Valid @RequestBody RoleDTORequest roleRequest, BindingResult result){
         Role role = this.mapper.mapRequestRoModel(roleRequest);
         Map<String, Object> response = new HashMap<>();
@@ -124,7 +126,7 @@ public class RoleRestController {
         return new ResponseEntity<RoleDTOResponse>(objRole, HttpStatus.OK);
     }
 
-    @DeleteMapping("/roles/{idRole}")
+    @DeleteMapping("/{idRole}")
     public ResponseEntity<?> deleteRole(@PathVariable long idRole){
         boolean flagResponse = this.roleCU.deleteRole(idRole);
         return ResponseEntity.ok(flagResponse);

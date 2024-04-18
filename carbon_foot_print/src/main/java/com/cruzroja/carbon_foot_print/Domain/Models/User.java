@@ -1,7 +1,9 @@
 package com.cruzroja.carbon_foot_print.Domain.Models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,8 +26,7 @@ public class User {
         this.roles = new ArrayList<>();
     }
 
-    // aun sin utilizar
-    public boolean isValidRole(List<Role> validRoles) {
+    public boolean isValidRoles(List<Role> validRoles) {
         List<Role> roles = this.getRoles();
         int wasFound = 0;
         for (Role role : roles) {
@@ -39,6 +40,14 @@ public class User {
         return false;
     }
 
+    public boolean hasDuplicateRoles(){
+        Set<Role> roleSet = new HashSet<>(this.getRoles());
+        if(roleSet.size() < this.getRoles().size()){
+            return true;
+        }
+        return false;
+    }
+
     protected void update(User user) {
         this.documentType = user.getDocumentType();
         this.names = user.getNames();
@@ -46,7 +55,6 @@ public class User {
         this.personalPhone = user.getPersonalPhone();
         this.personalEmail = user.getPersonalEmail();
         this.username = user.getUsername();
-        this.password = user.getPassword();
         this.roles = user.getRoles();
         this.state = user.isState();
     }

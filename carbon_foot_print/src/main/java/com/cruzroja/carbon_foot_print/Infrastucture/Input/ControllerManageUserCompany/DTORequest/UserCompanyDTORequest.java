@@ -6,6 +6,7 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.D
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.UserDTO.DTORequest.UserDTORequest;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -27,8 +28,15 @@ public class UserCompanyDTORequest extends UserDTORequest{
     @NotBlank(message = "companyName can't be empty")
     private String companyName;
 
-    @Pattern(regexp = "[3][0-9]{9}", message = "Personal phone must begin with 3 and have ten digits") 
+    @NotNull(message = "companyPhone can't be null")
+    @NotBlank(message = "companyPhone can't be empty")
+    @Pattern(regexp = "(?:3[0-9]{9})|(?:[1-9][0-9]{8})", message = "companyPhone must begin with 3 and have ten digits or begin with {1-9} and have eight digits")
     private String companyPhone;
+
+    @NotNull(message = "companyEmail can't be null")
+    @NotBlank(message = "companyEmail can't be empty")
+    @Email(message = "companyEmail must be valid")
+    private String companyEmail;
 
     @Valid
     @NotNull(message = "Address can't be null")

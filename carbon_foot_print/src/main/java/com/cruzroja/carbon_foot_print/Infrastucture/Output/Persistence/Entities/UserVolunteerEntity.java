@@ -1,18 +1,17 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities;
 
 import java.util.List;
-
-import com.cruzroja.carbon_foot_print.Domain.Models.User;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "Volunteers")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 public class UserVolunteerEntity extends UserEntity {
     @Column(nullable = false, length = 45)

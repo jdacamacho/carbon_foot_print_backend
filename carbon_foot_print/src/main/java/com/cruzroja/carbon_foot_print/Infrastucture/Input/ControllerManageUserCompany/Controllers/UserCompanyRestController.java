@@ -23,6 +23,8 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageUserCo
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,15 +32,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
+@CrossOrigin(origins = {"http://localhost:5050"})
 @RestController
-@RequestMapping("/apiUserCompany")
+@RequestMapping("/api/user/companies")
 @Validated
 @RequiredArgsConstructor
 public class UserCompanyRestController {
     private final ManageUserCompanyCUIntPort userCompanyCU;
     private final MapperUserCompanyInfrastuctureDomain mapper;
 
-    @GetMapping("/companies")
+    @GetMapping("/")
     @Transactional(readOnly = true)
     public ResponseEntity<List<UserCompanyDTOResponse>> listCompanies(){
         List<UserCompany> companies = this.userCompanyCU.listUserCompany();
@@ -48,7 +51,7 @@ public class UserCompanyRestController {
         return objResponse;
     }
 
-    @PostMapping("/companies")
+    @PostMapping("/")
     public ResponseEntity<?> saveCompany(@Valid @RequestBody UserCompanyDTORequest companyRequest, BindingResult result){
         UserCompany company = this.mapper.mapRequestToModel(companyRequest);
         Map<String, Object> response = new HashMap<>();
@@ -77,7 +80,7 @@ public class UserCompanyRestController {
         return new ResponseEntity<UserCompanyDTOResponse>(objCompany,HttpStatus.OK);
     }
 
-    @PutMapping("/companies")
+    @PutMapping("/")
     public ResponseEntity<?> updateCompany(@Valid @RequestBody UserCompanyDTORequest companyRequest, BindingResult result){
         UserCompany company = this.mapper.mapRequestToModel(companyRequest);
         Map<String, Object> response = new HashMap<>();
@@ -106,7 +109,7 @@ public class UserCompanyRestController {
         return new ResponseEntity<UserCompanyDTOResponse>(objCompany,HttpStatus.OK);
     }
 
-    @GetMapping("/companies/nit/{nitCompany}")
+    @GetMapping("/nit/{nitCompany}")
     @Transactional(readOnly = true)
     public ResponseEntity<UserCompanyDTOResponse> getCompanyByNit(@PathVariable long nitCompany){
         UserCompany company = this.userCompanyCU.getUserCompanyByNit(nitCompany);
@@ -116,7 +119,7 @@ public class UserCompanyRestController {
         return objResponse;
     }
 
-    @GetMapping("/companies/numberDocument/{numberDocument}")
+    @GetMapping("/numberDocument/{numberDocument}")
     @Transactional(readOnly = true)
     public ResponseEntity<UserCompanyDTOResponse> getCompanyByUserCharge(@PathVariable long numberDocument){
         UserCompany company = this.userCompanyCU.getUserCompanyByNumberDocument(numberDocument);

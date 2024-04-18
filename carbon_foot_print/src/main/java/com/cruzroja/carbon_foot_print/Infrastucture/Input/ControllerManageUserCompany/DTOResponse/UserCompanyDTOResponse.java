@@ -15,6 +15,7 @@ public class UserCompanyDTOResponse extends UserDTOResponse{
     private long companyNit;
     private String companyName;
     private String companyPhone;
+    private String companyEmail;
     private AddressDTOResponse address;
     private Date registrationDate;
 

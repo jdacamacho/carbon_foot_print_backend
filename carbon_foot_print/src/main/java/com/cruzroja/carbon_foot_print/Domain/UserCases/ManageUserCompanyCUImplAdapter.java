@@ -1,6 +1,5 @@
 package com.cruzroja.carbon_foot_print.Domain.UserCases;
 
-import java.util.Date;
 import java.util.List;
 
 import com.cruzroja.carbon_foot_print.Application.Input.ManageUserCompanyCUIntPort;
@@ -28,50 +27,56 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
 
     @Override
     public UserCompany saveUserCompany(UserCompany userCompany) {
-        long nitCompany = 0;
         UserCompany userResponse = null;
-        if(this.gateway.existsUserCompanyByNumberDocument(userCompany.getDocumentNumber()) != 0 &&
-            this.gateway.existsCompanyByNit(userCompany.getCompanyNit()) != 0){
-            this.errorFormatter.returnResponseErrorEntityExists("User duplicate");
-        }
-        userCompany.setRegistrationDate(new Date());
-        userCompany.getAddress().setObjUserCompany(userCompany);
-        nitCompany = userCompany.getCompanyNit();
-        userCompany.getAddress().setCompanyNit(nitCompany);
-        userResponse = this.gateway.save(userCompany);
 
+        if(this.gateway.existUserByDocumentNumberOrUsernameOrPersonalEmail(userCompany.getDocumentNumber(), userCompany.getUsername(), userCompany.getPersonalEmail())){
+            this.errorFormatter.returnResponseErrorEntityExists("User duplicate");
+        }else if(this.gateway.existsByCompanyNitOrCompanyEmailOrCompanyName(userCompany.getCompanyNit(), userCompany.getCompanyEmail(), userCompany.getCompanyName())){
+            this.errorFormatter.returnResponseErrorEntityExists("Company duplicate");
+        }else{
+            if(!userCompany.isValidRoles(this.gateway.findAllRoles())){
+                this.errorFormatter.returnResponseBusinessRuleViolated("Roles are not valid");
+            }else if(userCompany.hasDuplicateRoles()){
+                this.errorFormatter.returnResponseBusinessRuleViolated("Company has roles duplicates");
+            }else{
+                userCompany.setInformation();
+                userResponse = this.gateway.save(userCompany);
+            }
+        }
+       
         return userResponse;
     }
 
     @Override
     public UserCompany updateUserCompany( UserCompany userCompany) {
         UserCompany userResponse = null;
-        if(this.gateway.existsUserCompanyByNumberDocument(userCompany.getDocumentNumber()) == 0 &&
-            this.gateway.existsCompanyByNit(userCompany.getCompanyNit()) == 0){
-            this.errorFormatter.returnResponseErrorEntityNotFound("User not found in the system");
+
+        if(!this.gateway.existsUserCompanyByNumberDocument(userCompany.getDocumentNumber())){
+            this.errorFormatter.returnResponseErrorEntityNotFound("Company not found");
+        }else{
+            if(!userCompany.isValidRoles(this.gateway.findAllRoles())){
+                this.errorFormatter.returnResponseBusinessRuleViolated("Roles are not valid");
+            }else if(userCompany.hasDuplicateRoles()){
+                this.errorFormatter.returnResponseBusinessRuleViolated("User has duplicates");
+            }else{
+                UserCompany userGot = this.gateway.findUserCompanyByNumberDocument(userCompany.getDocumentNumber());
+                if(!IsValidUpdatingInformationUser(userGot, userCompany) ||  !IsValidUpdatingInformationCompany(userGot, userCompany)){
+                    this.errorFormatter.returnResponseErrorEntityExists("User Company exists");
+                }else{
+                    userGot.update(userCompany);
+                    userResponse = this.gateway.save(userGot);
+                }
+            }
         }
-        UserCompany userGot = this.gateway.findUserCompanyByNumberDocument(userCompany.getDocumentNumber());
-
-        userGot.setNames(userCompany.getNames());
-        userGot.setLastNames(userCompany.getLastNames());
-        userGot.setPersonalPhone(userCompany.getPersonalPhone());
-        userGot.setPersonalEmail(userCompany.getPersonalEmail());
-        userGot.setRoles(userCompany.getRoles());
-        userGot.setState(userCompany.isState());
-        userGot.setCompanyNit(userCompany.getCompanyNit());
-        userGot.setCompanyName(userCompany.getCompanyName());
-        userGot.setAddress(userCompany.getAddress());
-
-        userResponse = this.gateway.save(userGot);
-
+        
         return userResponse;
     }
 
     @Override
     public UserCompany getUserCompanyByNumberDocument(long numberDocument) {
         UserCompany userResponse = null;
-        if(this.gateway.existsUserCompanyByNumberDocument(numberDocument) == 0){
-            this.errorFormatter.returnResponseErrorEntityNotFound("User not found in the system");
+        if(!this.gateway.existsUserCompanyByNumberDocument(numberDocument)){
+            this.errorFormatter.returnResponseErrorEntityNotFound("Company not found in the system");
         }
         userResponse = this.gateway.findUserCompanyByNumberDocument(numberDocument);
         return userResponse;
@@ -80,11 +85,47 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
     @Override
     public UserCompany getUserCompanyByNit(long nitCompany) {
         UserCompany userResponse = null;
-        if(this.gateway.existsCompanyByNit(nitCompany) == 0){
-            this.errorFormatter.returnResponseErrorEntityNotFound("User not found in the system");
+        if(!this.gateway.existsCompanyByNit(nitCompany)){
+            this.errorFormatter.returnResponseErrorEntityNotFound("Company not found in the system");
         }
-        userResponse = this.gateway.findCompanyByNit(nitCompany);
+        userResponse = this.gateway.findByCompanyNit(nitCompany);
         return userResponse;
+    }
+
+    private boolean IsValidUpdatingInformationUser(UserCompany userObtained, UserCompany newUserCompany){
+        boolean flagUser = false;
+        String username = "";
+        String personalEmail = "";
+
+        if(userObtained.getUsername().equals(newUserCompany.getUsername()) == false){ username = newUserCompany.getUsername();};
+        if(userObtained.getPersonalEmail().equals(newUserCompany.getPersonalEmail()) == false ){ personalEmail = newUserCompany.getPersonalEmail();};
+
+        flagUser = this.gateway.existUserByDocumentNumberOrUsernameOrPersonalEmail(0, username, personalEmail);
+
+        if(flagUser){
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean IsValidUpdatingInformationCompany(UserCompany userObtained, UserCompany newUserCompany){
+        boolean flagCompany = false;
+        long companyNit = 0;
+        String companyEmail = "";
+        String companyName = "";
+
+        if(userObtained.getCompanyNit() != newUserCompany.getCompanyNit()){ companyNit = newUserCompany.getCompanyNit();};
+        if(userObtained.getCompanyEmail().equals(newUserCompany.getCompanyEmail()) == false ){ companyEmail = newUserCompany.getCompanyEmail();};
+        if(userObtained.getCompanyName().equals(newUserCompany.getCompanyName()) == false ){ companyName = newUserCompany.getCompanyName();};
+
+        flagCompany = this.gateway.existsByCompanyNitOrCompanyEmailOrCompanyName(companyNit, companyEmail, companyName);
+        
+        if(flagCompany){
+            return false;
+        }
+
+        return true;
     }
 
 }

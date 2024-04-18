@@ -11,6 +11,7 @@ public class UserCompany extends User{
     private long companyNit;
     private String companyName;
     private String companyPhone;
+    private String companyEmail;
     private Address address;
     private Date registrationDate;
 
@@ -22,7 +23,7 @@ public class UserCompany extends User{
                             String names, String lastNames,String personalPhone,
                             String personalEmail,String username,String password,
                             List<Role> roles,long companyNit,String companyName,
-                            String companyPhone,Address address, Date registrationDate){
+                            String companyPhone,String companyEmail,Address address, Date registrationDate){
         super(documentNumber,documentType,
                 names,lastNames,personalPhone,
                 personalEmail,username,password,
@@ -30,7 +31,24 @@ public class UserCompany extends User{
         this.companyNit = companyNit;
         this.companyName = companyName;
         this.companyPhone = companyPhone;
+        this.companyEmail = companyEmail;
         this.address = address;
         this.registrationDate = registrationDate;
     }
+
+    public void update(UserCompany company) {
+        super.update(company);
+        this.companyNit = company.getCompanyNit();
+        this.companyName = company.getCompanyName();
+        this.companyPhone = company.getCompanyPhone();
+        this.companyEmail = company.getCompanyEmail();
+        this.address = company.getAddress();
+    }
+
+    public void setInformation(){
+        this.setRegistrationDate(new Date());
+        this.getAddress().setObjUserCompany(this);
+        this.getAddress().setCompanyNit(companyNit);
+    } 
+
 }
