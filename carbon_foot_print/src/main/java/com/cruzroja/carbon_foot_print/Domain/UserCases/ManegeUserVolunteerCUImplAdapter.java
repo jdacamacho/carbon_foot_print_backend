@@ -28,18 +28,25 @@ public class ManegeUserVolunteerCUImplAdapter implements ManegeUserVolunteerCUIn
 
     @Override
     public UserVolunteer saveUserVolunteer(UserVolunteer userVolunteer) {
-        if (this.gateway.existUserVolunteerByNumberDocument(userVolunteer.getDocumentNumber()) != 0)
+        if (this.gateway.existById(userVolunteer.getDocumentNumber()))
             this.errorFormatter.returnResponseErrorEntityExists(
                     "All ready exist an user with number of document " + userVolunteer.getDocumentNumber() + ".");
+        if (this.gateway.existsByUsername(userVolunteer.getUsername()))
+            this.errorFormatter.returnResponseErrorEntityExists(
+                    "All ready exist an user with username " + userVolunteer.getUsername() + ".");
+        if (this.gateway.existsByPersonalEmail(userVolunteer.getPersonalEmail()))
+            this.errorFormatter.returnResponseErrorEntityExists(
+                    "All ready exist an user with personal email " + userVolunteer.getPersonalEmail() + ".");
         if (!userVolunteer.isValidRole(this.gateway.findRoles()))
             this.errorFormatter.returnResponseBadFormat("The roles is not avalible.");
+        // TODO: Encriptar contraseña
         return this.gateway.save(userVolunteer);
     }
 
     @Override
     public UserVolunteer updateUserVolunteer(UserVolunteer userVolunteer) {
 
-        if (this.gateway.existUserVolunteerByNumberDocument(userVolunteer.getDocumentNumber()) == 0)
+        if (this.gateway.existById(userVolunteer.getDocumentNumber()))
             this.errorFormatter.returnResponseErrorEntityNotFound(
                     "The volunteer woth document number " + userVolunteer.getDocumentNumber() + " has not been found.");
         UserVolunteer oldVolunteer = this.gateway.findUserVolunteerByNumberDocument(userVolunteer.getDocumentNumber());

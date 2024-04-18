@@ -60,8 +60,18 @@ public class ManegeUserVolunteerGatewayImplAdapter implements ManegeUserVoluntee
     }
 
     @Override
-    public long existUserVolunteerByNumberDocument(long numberDocument) {
-        return this.serviceBD.countByUserCompanyNumberDocument(numberDocument);
+    public boolean existById(long id) {
+        return this.serviceBD.existsById(id);
+    }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return this.serviceBD.existsByUsername(username);
+    }
+
+    @Override
+    public boolean existsByPersonalEmail(String personalEmail) {
+        return this.existsByPersonalEmail(personalEmail);
     }
 
 }

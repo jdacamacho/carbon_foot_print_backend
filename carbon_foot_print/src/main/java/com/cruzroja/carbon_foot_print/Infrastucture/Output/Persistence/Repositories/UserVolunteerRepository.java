@@ -14,7 +14,23 @@ public interface UserVolunteerRepository extends CrudRepository<UserVolunteerEnt
     @Query("from RoleEntity")
     List<RoleEntity> findAllRoles();
 
-    @Query("SELECT COUNT(u) FROM UserVolunteerEntity u WHERE u.documentNumber = :documentNumber")
-    long countByUserCompanyNumberDocument(@Param("documentNumber") long documentNumber);
+    /**
+     * Determina si existe o no un usuario registrado con el email ingresado.
+     * (Spring Query Keywords)
+     * 
+     * @param personalEmail a String that represent the value of the email.
+     * @return a boolean true if the user exist and false if don't exist.
+     */
+    boolean existsByPersonalEmail(String personalEmail);
+
+    /**
+     * Determina si existe o no un usuario registrado con el username ingresado
+     * (utiliza Spring Query
+     * Keywords).
+     * 
+     * @param username a String that represents the username value.
+     * @return a bolean true if exist and false if don't exist.
+     */
+    boolean existsByUsername(String username);
 
 }
