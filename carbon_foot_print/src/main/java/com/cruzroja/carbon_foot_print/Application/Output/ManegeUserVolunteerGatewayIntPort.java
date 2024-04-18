@@ -61,7 +61,7 @@ public interface ManegeUserVolunteerGatewayIntPort {
     /**
      * Determina si existe un usuario a partir del nombre de usuario.
      * 
-     * @param username {Strig} nombre de usuario.
+     * @param username {String} nombre de usuario.
      * @return {boolean} [True] si el usuario fue encontrado [False] en caso
      *         contrario.
      */
