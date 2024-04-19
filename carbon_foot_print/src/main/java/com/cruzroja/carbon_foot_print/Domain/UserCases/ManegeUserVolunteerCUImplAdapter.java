@@ -28,7 +28,7 @@ public class ManegeUserVolunteerCUImplAdapter implements ManegeUserVolunteerCUIn
 
     @Override
     public UserVolunteer saveUserVolunteer(UserVolunteer userVolunteer) {
-        if (this.gateway.existsByIdParent(userVolunteer.getDocumentNumber()))
+        if (this.gateway.existById(userVolunteer.getDocumentNumber()))
             this.errorFormatter.returnResponseErrorEntityExists(
                     "All ready exist an user with number of document " + userVolunteer.getDocumentNumber() + ".");
         if (this.gateway.existsByUsername(userVolunteer.getUsername()))

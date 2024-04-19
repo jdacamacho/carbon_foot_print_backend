@@ -76,6 +76,4 @@ public interface ManegeUserVolunteerGatewayIntPort {
      */
     public boolean existsByPersonalEmail(String personalEmail);
 
-    boolean existsByIdParent(long Id);
-
 }

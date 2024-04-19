@@ -2,7 +2,6 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Reposito
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.RoleEntity;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.UserVolunteerEntity;
@@ -33,6 +32,4 @@ public interface UserVolunteerRepository extends CrudRepository<UserVolunteerEnt
      * @return a bolean true if exist and false if don't exist.
      */
     boolean existsByUsername(String username);
-
-    boolean existsByIdParent(long Id);
 }
