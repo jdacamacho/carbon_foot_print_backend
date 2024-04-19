@@ -29,4 +29,12 @@ public class UserVolunteer extends User {
         super.update(volunteer);
         this.position = volunteer.getPosition();
     }
+
+    public boolean verifyUsername(String username) {
+        return this.getUsername() == username;
+    }
+
+    public boolean verifyEmail(String email) {
+        return this.getPersonalEmail() == email;
+    }
 }

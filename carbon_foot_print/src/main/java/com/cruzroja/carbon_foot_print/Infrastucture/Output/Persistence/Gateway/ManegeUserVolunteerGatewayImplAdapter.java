@@ -71,7 +71,12 @@ public class ManegeUserVolunteerGatewayImplAdapter implements ManegeUserVoluntee
 
     @Override
     public boolean existsByPersonalEmail(String personalEmail) {
-        return this.existsByPersonalEmail(personalEmail);
+        return this.serviceBD.existsByPersonalEmail(personalEmail);
+    }
+
+    @Override
+    public boolean existsByIdParent(long Id) {
+        return this.serviceBD.existsByIdParent(Id);
     }
 
 }
