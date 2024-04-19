@@ -42,7 +42,7 @@ public class RoleRestController {
     private final ManageRoleCUIntPort roleCU;
     private final MapperRoleInfrastuctureDomain mapper;
 
-    @GetMapping("/")
+    @GetMapping("")
     @Transactional(readOnly = true)
     public ResponseEntity<List<RoleDTOResponse>> listRoles(){
         List<Role> roles = this.roleCU.listRoles();
@@ -70,7 +70,7 @@ public class RoleRestController {
         return objResponse;
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<?> saveRole(@Valid @RequestBody RoleDTORequest roleRequest, BindingResult result){
         Role role = this.mapper.mapRequestRoModel(roleRequest);
         Map<String, Object> response = new HashMap<>();
@@ -98,7 +98,7 @@ public class RoleRestController {
         return new ResponseEntity<RoleDTOResponse>(objRole, HttpStatus.OK);
     }
 
-    @PutMapping("/")
+    @PutMapping("")
     public ResponseEntity<?> updateRole(@Valid @RequestBody RoleDTORequest roleRequest, BindingResult result){
         Role role = this.mapper.mapRequestRoModel(roleRequest);
         Map<String, Object> response = new HashMap<>();
