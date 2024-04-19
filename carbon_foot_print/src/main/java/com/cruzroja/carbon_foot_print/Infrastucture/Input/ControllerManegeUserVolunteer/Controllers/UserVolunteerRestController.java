@@ -43,7 +43,7 @@ public class UserVolunteerRestController {
     private final ManegeUserVolunteerCUIntPort volunteerCU;
     private final MapperUserVolunteerInfraestructureDomain mapper;
 
-    @GetMapping("/")
+    @GetMapping("")
     @Transactional(readOnly = true)
     public ResponseEntity<List<UserVolunteerDTOResponse>> listVolunteers() {
         List<UserVolunteer> volunteers = this.volunteerCU.listUserVolunteers();
@@ -71,7 +71,7 @@ public class UserVolunteerRestController {
         return objResponse;
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<?> saveVolunteer(@Valid @RequestBody UserVolunteerDTORequest request, BindingResult result) {
         UserVolunteer voluntario = this.mapper.mapRequestModel(request);
         Map<String, Object> response = new HashMap<>();
@@ -89,7 +89,7 @@ public class UserVolunteerRestController {
         return new ResponseEntity<UserVolunteerDTOResponse>(objVolunteer, HttpStatus.OK);
     }
 
-    @PutMapping("/")
+    @PutMapping("")
     public ResponseEntity<?> updateUserVolunteer(@Valid @RequestBody UserVolunteerDTORequest request,
             BindingResult result) {
         UserVolunteer volunteer = this.mapper.mapRequestModel(request);

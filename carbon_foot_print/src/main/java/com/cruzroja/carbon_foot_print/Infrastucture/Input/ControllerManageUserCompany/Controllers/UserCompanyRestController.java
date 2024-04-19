@@ -41,7 +41,7 @@ public class UserCompanyRestController {
     private final ManageUserCompanyCUIntPort userCompanyCU;
     private final MapperUserCompanyInfrastuctureDomain mapper;
 
-    @GetMapping("/")
+    @GetMapping("")
     @Transactional(readOnly = true)
     public ResponseEntity<List<UserCompanyDTOResponse>> listCompanies(){
         List<UserCompany> companies = this.userCompanyCU.listUserCompany();
@@ -51,7 +51,7 @@ public class UserCompanyRestController {
         return objResponse;
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<?> saveCompany(@Valid @RequestBody UserCompanyDTORequest companyRequest, BindingResult result){
         UserCompany company = this.mapper.mapRequestToModel(companyRequest);
         Map<String, Object> response = new HashMap<>();
@@ -80,7 +80,7 @@ public class UserCompanyRestController {
         return new ResponseEntity<UserCompanyDTOResponse>(objCompany,HttpStatus.OK);
     }
 
-    @PutMapping("/")
+    @PutMapping("")
     public ResponseEntity<?> updateCompany(@Valid @RequestBody UserCompanyDTORequest companyRequest, BindingResult result){
         UserCompany company = this.mapper.mapRequestToModel(companyRequest);
         Map<String, Object> response = new HashMap<>();
