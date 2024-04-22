@@ -2,6 +2,7 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageRoleGatewayIntPort;
@@ -30,9 +31,9 @@ public class BeanConfigurations {
 
     @Bean
     ManegeUserVolunteerCUImplAdapter createUserVolunteerCompanyCU(ManegeUserVolunteerGatewayIntPort gateway,
-            ExceptionFormatterIntPort exceptionFormatter) {
+            ExceptionFormatterIntPort exceptionFormatter, PasswordEncoder passwordEncoder) {
         ManegeUserVolunteerCUImplAdapter userVolunterCU = new ManegeUserVolunteerCUImplAdapter(gateway,
-                exceptionFormatter);
+                exceptionFormatter,passwordEncoder);
         return userVolunterCU;
     }
 }

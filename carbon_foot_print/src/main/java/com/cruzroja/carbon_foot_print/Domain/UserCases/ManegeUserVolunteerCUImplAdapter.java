@@ -2,6 +2,8 @@ package com.cruzroja.carbon_foot_print.Domain.UserCases;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import com.cruzroja.carbon_foot_print.Application.Input.ManegeUserVolunteerCUIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManegeUserVolunteerGatewayIntPort;
@@ -11,11 +13,14 @@ public class ManegeUserVolunteerCUImplAdapter implements ManegeUserVolunteerCUIn
 
     private final ManegeUserVolunteerGatewayIntPort gateway;
     private final ExceptionFormatterIntPort errorFormatter;
+    private final PasswordEncoder passwordEncoder;
 
     public ManegeUserVolunteerCUImplAdapter(ManegeUserVolunteerGatewayIntPort gateway,
-            ExceptionFormatterIntPort errorFormatter) {
+            ExceptionFormatterIntPort errorFormatter,
+            PasswordEncoder passwordEncoder) {
         this.gateway = gateway;
         this.errorFormatter = errorFormatter;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -39,7 +44,9 @@ public class ManegeUserVolunteerCUImplAdapter implements ManegeUserVolunteerCUIn
                     "All ready exist an user with personal email " + userVolunteer.getPersonalEmail() + ".");
         if (!userVolunteer.isValidRoles(this.gateway.findRoles()))
             this.errorFormatter.returnResponseBadFormat("The roles is not avalible.");
-        // TODO: Encriptar contraseña
+        
+        String newPassword = this.passwordEncoder.encode(userVolunteer.getPassword());
+        userVolunteer.setPassword(newPassword);
         return this.gateway.save(userVolunteer);
     }
 
