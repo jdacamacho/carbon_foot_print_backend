@@ -1,7 +1,12 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +26,7 @@ import lombok.Data;
 @Inheritance(strategy  = InheritanceType.JOINED)
 @Data
 @AllArgsConstructor
-public class UserEntity {
+public class UserEntity implements UserDetails{
     @Id
     private long documentNumber;
 
@@ -57,5 +62,37 @@ public class UserEntity {
 
     public UserEntity(){
         this.roles = new ArrayList<>();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for(RoleEntity role : this.roles){
+            List<PermissionEntity> permissions = role.getPermissions();
+            for(PermissionEntity permission : permissions){
+                authorities.add(new SimpleGrantedAuthority(permission.getName()));
+            }
+        }
+        return authorities;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
