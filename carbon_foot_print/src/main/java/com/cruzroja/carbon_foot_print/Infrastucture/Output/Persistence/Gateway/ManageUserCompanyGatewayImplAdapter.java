@@ -75,7 +75,7 @@ public class ManageUserCompanyGatewayImplAdapter implements ManageUserCompanyGat
     public boolean existUserByDocumentNumberOrUsernameOrPersonalEmail(long numberDocument, String username,
             String email) {
 
-        if(this.serviceBDUser.existByNumberDocumentOrUsernameOrPersonalEmail(numberDocument, username, email) == 0){
+        if(this.serviceBDUser.countByNumberDocumentOrUsernameOrPersonalEmail(numberDocument, username, email) == 0){
             return false;
         }
         return true;
