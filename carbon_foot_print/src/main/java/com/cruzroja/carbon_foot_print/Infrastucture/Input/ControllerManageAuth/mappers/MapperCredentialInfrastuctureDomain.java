@@ -1,4 +1,4 @@
-package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageAuth.mapper;
+package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageAuth.mappers;
 
 
 import org.mapstruct.Mapper;

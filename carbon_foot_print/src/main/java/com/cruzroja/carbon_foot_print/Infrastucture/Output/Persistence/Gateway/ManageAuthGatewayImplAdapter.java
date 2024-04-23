@@ -30,6 +30,4 @@ public class ManageAuthGatewayImplAdapter implements ManageAuthGatewayIntPort {
         return true;
     }
 
-    
-    
 }
