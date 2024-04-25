@@ -56,7 +56,7 @@ public interface ManegeUserVolunteerGatewayIntPort {
      * @return {boolean} [True] si el usuario fue encontrado [False] en caso
      *         contrario.
      */
-    public boolean existById(long id);
+    public boolean existsById(long id);
 
     /**
      * Determina si existe un usuario a partir del nombre de usuario.
