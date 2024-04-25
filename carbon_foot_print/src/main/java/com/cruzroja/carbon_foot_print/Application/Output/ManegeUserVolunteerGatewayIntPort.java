@@ -38,7 +38,7 @@ public interface ManegeUserVolunteerGatewayIntPort {
      * 
      * @param position {String} posición del usuario.
      * @return {List<UserVolunteer>} Lista de usuarios encontrados en el servicio de
-     *         persistecia.
+     *         persistecia o null en caso de que no encuentre ningun voluntario
      */
     public List<UserVolunteer> findUserVolunteerByPosition(String position);
 
