@@ -72,24 +72,12 @@ public interface ManageUserCompanyGatewayIntPort {
      */
     public UserCompany findByCompanyNit(long nitCompany);
 
-     /**
-      * Verifica si existe un usuario con el número de documento, 
-        nombre de usuario o correo electrónico personal especificados.
-      * 
-      * @param numberDocument El número de documento del usuario.
-      * @param username       El nombre de usuario del usuario.
-      * @param email          El correo electrónico personal del usuario.
-      * @return {boolean} [True] si existe un usuario con el número de documento,
-       nombre de usuario o correo electrónico personal especificados, 
-       [False] de lo contrario.
-     */
-    public boolean existUserByDocumentNumberOrUsernameOrPersonalEmail(long numberDocument, String username,
-        String email);
-        
-     /**
-      * Recupera los roles que están guardados en el servicio de persistencia.
-      * 
-      * @return {List<Role>} Lista de roles recuperada.
-     */
+    public boolean existByUsername(String username);
+    public boolean existsByPersonalEmail(String personalEmail);
+    public boolean existsByNit(long nit);
+    public boolean existsByCompanyEmail(String companyEmail);
+    public boolean existsByCompanyName(String companyEmail);
+
+
     public List<Role> findAllRoles();
 }

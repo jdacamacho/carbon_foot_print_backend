@@ -21,8 +21,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserDTORequest {
     @Positive(message = "Document number must be positive")
-    @Min(value = 1000000000L, message = "Document number must have at least ten digits" )
-    @Max(value = 9999999999L, message = "Document number can't have more than ten digits" )
     private long documentNumber;
 
     @NotNull(message = "Document type can't be null")

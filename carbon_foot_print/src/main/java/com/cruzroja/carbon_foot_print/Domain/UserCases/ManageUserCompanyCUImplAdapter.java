@@ -35,21 +35,31 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
     public UserCompany saveUserCompany(UserCompany userCompany) {
         UserCompany userResponse = null;
 
-        if(this.gateway.existUserByDocumentNumberOrUsernameOrPersonalEmail(userCompany.getDocumentNumber(), userCompany.getUsername(), userCompany.getPersonalEmail())){
-            this.errorFormatter.returnResponseErrorEntityExists("User duplicate");
-        }else if(this.gateway.existsByCompanyNitOrCompanyEmailOrCompanyName(userCompany.getCompanyNit(), userCompany.getCompanyEmail(), userCompany.getCompanyName())){
-            this.errorFormatter.returnResponseErrorEntityExists("Company duplicate");
+        if(this.gateway.existsUserCompanyByNumberDocument(userCompany.getDocumentNumber()) ){
+            this.errorFormatter.returnResponseErrorEntityExists("User duplicate already exists with that number document");
+        }else if(this.gateway.existByUsername(userCompany.getUsername())){
+            this.errorFormatter.returnResponseErrorEntityExists("User duplicate already exists with that username");
+        }else if(this.gateway.existsByPersonalEmail(userCompany.getPersonalEmail())){
+            this.errorFormatter.returnResponseErrorEntityExists("User duplicate already exists with that personal email");
         }else{
-            if(!userCompany.isValidRoles(this.gateway.findAllRoles())){
-                this.errorFormatter.returnResponseBusinessRuleViolated("Roles are not valid");
-            }else if(userCompany.hasDuplicateRoles()){
-                this.errorFormatter.returnResponseBusinessRuleViolated("Company has roles duplicates");
+            if(this.gateway.existsCompanyByNit(userCompany.getCompanyNit())){
+                this.errorFormatter.returnResponseErrorEntityExists("Company duplicate already exists with that company nit");
+            }else if(this.gateway.existsByCompanyName(userCompany.getCompanyName())){
+                this.errorFormatter.returnResponseErrorEntityExists("Company duplicate already exists with that company name");
+            }else if(this.gateway.existsByCompanyEmail(userCompany.getCompanyEmail())){
+                this.errorFormatter.returnResponseErrorEntityExists("Company duplicate already exists with that company email");
             }else{
-                String newPassword = this.passwordEncoder.encode(userCompany.getPassword());
-                userCompany.setPassword(newPassword);
-                userCompany.setInformation();
-                userResponse = this.gateway.save(userCompany);
-            }
+                if(!userCompany.isValidRoles(this.gateway.findAllRoles())){
+                    this.errorFormatter.returnResponseBusinessRuleViolated("Roles are not valid");
+                }else if(userCompany.hasDuplicateRoles()){
+                    this.errorFormatter.returnResponseBusinessRuleViolated("Company has roles duplicates");
+                }else{
+                    String newPassword = this.passwordEncoder.encode(userCompany.getPassword());
+                    userCompany.setPassword(newPassword);
+                    userCompany.setInformation();
+                    userResponse = this.gateway.save(userCompany);
+                }
+            }   
         }
        
         return userResponse;
@@ -59,7 +69,7 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
     public UserCompany updateUserCompany( UserCompany userCompany) {
         UserCompany userResponse = null;
 
-        if(!this.gateway.existsUserCompanyByNumberDocument(userCompany.getDocumentNumber())){
+        /*if(!this.gateway.existsUserCompanyByNumberDocument(userCompany.getDocumentNumber())){
             this.errorFormatter.returnResponseErrorEntityNotFound("Company not found");
         }else{
             if(!userCompany.isValidRoles(this.gateway.findAllRoles())){
@@ -75,7 +85,7 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
                     userResponse = this.gateway.save(userGot);
                 }
             }
-        }
+        }*/
         
         return userResponse;
     }
@@ -98,42 +108,6 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
         }
         userResponse = this.gateway.findByCompanyNit(nitCompany);
         return userResponse;
-    }
-
-    private boolean IsValidUpdatingInformationUser(UserCompany userObtained, UserCompany newUserCompany){
-        boolean flagUser = false;
-        String username = "";
-        String personalEmail = "";
-
-        if(userObtained.getUsername().equals(newUserCompany.getUsername()) == false){ username = newUserCompany.getUsername();};
-        if(userObtained.getPersonalEmail().equals(newUserCompany.getPersonalEmail()) == false ){ personalEmail = newUserCompany.getPersonalEmail();};
-
-        flagUser = this.gateway.existUserByDocumentNumberOrUsernameOrPersonalEmail(0, username, personalEmail);
-
-        if(flagUser){
-            return false;
-        }
-
-        return true;
-    }
-
-    private boolean IsValidUpdatingInformationCompany(UserCompany userObtained, UserCompany newUserCompany){
-        boolean flagCompany = false;
-        long companyNit = 0;
-        String companyEmail = "";
-        String companyName = "";
-
-        if(userObtained.getCompanyNit() != newUserCompany.getCompanyNit()){ companyNit = newUserCompany.getCompanyNit();};
-        if(userObtained.getCompanyEmail().equals(newUserCompany.getCompanyEmail()) == false ){ companyEmail = newUserCompany.getCompanyEmail();};
-        if(userObtained.getCompanyName().equals(newUserCompany.getCompanyName()) == false ){ companyName = newUserCompany.getCompanyName();};
-
-        flagCompany = this.gateway.existsByCompanyNitOrCompanyEmailOrCompanyName(companyNit, companyEmail, companyName);
-        
-        if(flagCompany){
-            return false;
-        }
-
-        return true;
     }
 
 }
