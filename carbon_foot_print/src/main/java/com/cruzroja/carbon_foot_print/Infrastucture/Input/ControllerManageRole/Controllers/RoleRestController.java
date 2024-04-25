@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -44,6 +45,7 @@ public class RoleRestController {
 
     @GetMapping("")
     @Transactional(readOnly = true)
+    @PreAuthorize("hasRole('Listar_Roles')")
     public ResponseEntity<List<RoleDTOResponse>> listRoles(){
         List<Role> roles = this.roleCU.listRoles();
         ResponseEntity<List<RoleDTOResponse>> objResponse = new ResponseEntity<List<RoleDTOResponse>>(
@@ -98,8 +100,8 @@ public class RoleRestController {
         return new ResponseEntity<RoleDTOResponse>(objRole, HttpStatus.OK);
     }
 
-    @PutMapping("")
-    public ResponseEntity<?> updateRole(@Valid @RequestBody RoleDTORequest roleRequest, BindingResult result){
+    @PutMapping("/{idRole}")
+    public ResponseEntity<?> updateRole(@PathVariable long idRole, @Valid @RequestBody RoleDTORequest roleRequest, BindingResult result){
         Role role = this.mapper.mapRequestRoModel(roleRequest);
         Map<String, Object> response = new HashMap<>();
         RoleDTOResponse objRole;
@@ -116,7 +118,7 @@ public class RoleRestController {
 		}
 
         try {
-            objRole = this.mapper.mapModelToResponse(this.roleCU.updateRole(role));
+            objRole = this.mapper.mapModelToResponse(this.roleCU.updateRole(idRole,role));
         } catch (DataAccessException e) {
             response.put("mensaje", "Error when updating into database");
 			response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
