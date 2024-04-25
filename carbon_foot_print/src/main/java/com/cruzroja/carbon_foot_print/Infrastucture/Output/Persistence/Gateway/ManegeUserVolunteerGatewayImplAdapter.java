@@ -60,7 +60,7 @@ public class ManegeUserVolunteerGatewayImplAdapter implements ManegeUserVoluntee
     }
 
     @Override
-    public boolean existById(long id) {
+    public boolean existsById(long id) {
         return this.serviceBD.existsById(id);
     }
 

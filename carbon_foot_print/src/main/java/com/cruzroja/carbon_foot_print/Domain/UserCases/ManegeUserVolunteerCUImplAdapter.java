@@ -28,7 +28,7 @@ public class ManegeUserVolunteerCUImplAdapter implements ManegeUserVolunteerCUIn
 
     @Override
     public UserVolunteer saveUserVolunteer(UserVolunteer userVolunteer) {
-        if (this.gateway.existById(userVolunteer.getDocumentNumber()))
+        if (this.gateway.existsById(userVolunteer.getDocumentNumber()))
             this.errorFormatter.returnResponseErrorEntityExists(
                     "All ready exist an user with number of document " + userVolunteer.getDocumentNumber() + ".");
         if (this.gateway.existsByUsername(userVolunteer.getUsername()))
@@ -46,7 +46,7 @@ public class ManegeUserVolunteerCUImplAdapter implements ManegeUserVolunteerCUIn
     @Override
     public UserVolunteer updateUserVolunteer(UserVolunteer userVolunteer) {
 
-        if (this.gateway.existById(userVolunteer.getDocumentNumber()))
+        if (!this.gateway.existsById(userVolunteer.getDocumentNumber()))
             this.errorFormatter.returnResponseErrorEntityNotFound(
                     "The volunteer woth document number " + userVolunteer.getDocumentNumber() + " has not been found.");
         UserVolunteer oldVolunteer = this.gateway.findUserVolunteerByNumberDocument(userVolunteer.getDocumentNumber());

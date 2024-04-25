@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeUserVolunteer.DTORequest.UserVolunteerDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeUserVolunteer.DTOResponse.UserVolunteerDTOResponse;
 
-@CrossOrigin(origins = {"http://localhost:5050"})
+@CrossOrigin(origins = { "http://localhost:5050" })
 @RestController
 @RequestMapping("/api/user/volunteers")
 @Validated
@@ -86,7 +86,7 @@ public class UserVolunteerRestController {
             response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<UserVolunteerDTOResponse>(objVolunteer, HttpStatus.OK);
+        return new ResponseEntity<UserVolunteerDTOResponse>(objVolunteer, HttpStatus.CREATED);
     }
 
     @PutMapping("")
