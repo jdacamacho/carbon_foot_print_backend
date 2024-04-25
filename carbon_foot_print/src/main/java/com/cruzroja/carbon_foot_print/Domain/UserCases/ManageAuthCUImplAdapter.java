@@ -12,6 +12,7 @@ import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPo
 import com.cruzroja.carbon_foot_print.Application.Output.ManageAuthGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Domain.Models.Credential;
 import com.cruzroja.carbon_foot_print.Infrastucture.JWT.JwtService;
+import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.BadCredentialsException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.UserEntity;
 
 public class ManageAuthCUImplAdapter implements ManageAuthCUIntPort {
@@ -33,19 +34,24 @@ public class ManageAuthCUImplAdapter implements ManageAuthCUIntPort {
 
     @Override
     public Credential login(String username, String password) {
-        Authentication authentication = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        Credential credential = null;
-        
-        if(!authentication.isAuthenticated()){
-            this.exceptionFormatter.returnResponseBadCredentials("User is not authenticate");
-        }else{
-            Optional<UserEntity> userBD = this.gateway.findByUsername(username);
-            UserDetails user = userBD.orElseThrow();
-            String token = this.jwtService.getToken(user);
-            credential.setDocumentNumber(userBD.get().getDocumentNumber());
-            credential.setUsername(userBD.get().getUsername());
-            credential.setToken(token);
+        Credential credential = new Credential();
+        try{
+            Authentication authentication = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            if(authentication.isAuthenticated()){
+                Optional<UserEntity> userBD = this.gateway.findByUsername(username);
+                UserDetails user = userBD.orElseThrow();
+                String token = this.jwtService.getToken(user);
+                credential.setDocumentNumber(userBD.get().getDocumentNumber());
+                credential.setUsername(userBD.get().getUsername());
+                credential.setToken(token);  
+                System.out.println("*+****************");
+                System.out.println(userBD.get().getAuthorities());
+                System.out.println("*+****************");
+            }
+        }catch(BadCredentialsException ex){
+            throw new BadCredentialsException("checkout your username or password");
         }
+    
         return credential;
     }
     

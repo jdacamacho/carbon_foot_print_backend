@@ -29,7 +29,7 @@ public class SecurityConfigurations {
                 .disable())
             .authorizeHttpRequests(authRequest ->
               authRequest
-                .requestMatchers("/api/***").permitAll()
+                .anyRequest().permitAll()
                 )
             .sessionManagement(sessionManager->
                 sessionManager 
