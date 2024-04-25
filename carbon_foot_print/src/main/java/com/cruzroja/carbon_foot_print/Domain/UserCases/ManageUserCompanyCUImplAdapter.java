@@ -69,23 +69,46 @@ public class ManageUserCompanyCUImplAdapter implements ManageUserCompanyCUIntPor
     public UserCompany updateUserCompany( UserCompany userCompany) {
         UserCompany userResponse = null;
 
-        /*if(!this.gateway.existsUserCompanyByNumberDocument(userCompany.getDocumentNumber())){
-            this.errorFormatter.returnResponseErrorEntityNotFound("Company not found");
+        if(!this.gateway.existsUserCompanyByNumberDocument(userCompany.getDocumentNumber())){
+            this.errorFormatter.returnResponseErrorEntityNotFound("Company not found with that document number");
         }else{
             if(!userCompany.isValidRoles(this.gateway.findAllRoles())){
                 this.errorFormatter.returnResponseBusinessRuleViolated("Roles are not valid");
             }else if(userCompany.hasDuplicateRoles()){
-                this.errorFormatter.returnResponseBusinessRuleViolated("User has duplicates");
+                this.errorFormatter.returnResponseBusinessRuleViolated("User has roles duplicates");
             }else{
-                UserCompany userGot = this.gateway.findUserCompanyByNumberDocument(userCompany.getDocumentNumber());
-                if(!IsValidUpdatingInformationUser(userGot, userCompany) ||  !IsValidUpdatingInformationCompany(userGot, userCompany)){
-                    this.errorFormatter.returnResponseErrorEntityExists("User Company exists");
-                }else{
-                    userGot.update(userCompany);
-                    userResponse = this.gateway.save(userGot);
+                UserCompany userObtained = this.gateway.findUserCompanyByNumberDocument(userCompany.getDocumentNumber());
+                
+                if(this.gateway.existByUsername(userCompany.getUsername())){
+                    if(!userObtained.verifyUsername(userCompany.getUsername())){
+                        this.errorFormatter.returnResponseErrorEntityExists("Error already exists a user with this Username");
+                    }
                 }
+                if(this.gateway.existsByPersonalEmail(userCompany.getPersonalEmail())){
+                    if(!userObtained.verifyPersonalEmail(userCompany.getPersonalEmail())){
+                        this.errorFormatter.returnResponseErrorEntityExists("Error already exists a user with this personal email");
+                    }
+                }
+                if(this.gateway.existsCompanyByNit(userCompany.getCompanyNit())){
+                    if(!userObtained.verifyNit(userCompany.getCompanyNit())){
+                        this.errorFormatter.returnResponseErrorEntityExists("Error already exists a company with this Nit");
+                    }
+                }
+                if(this.gateway.existsByCompanyName(userCompany.getCompanyName())){
+                    if(!userObtained.verifyCompanyName(userCompany.getCompanyName())){
+                        this.errorFormatter.returnResponseErrorEntityExists("Error already exists a company with this name");
+                    }
+                }
+                if(this.gateway.existsByCompanyEmail(userCompany.getCompanyEmail())){
+                    if(!userObtained.verifyCompanyEmail(userCompany.getCompanyEmail())){
+                        this.errorFormatter.returnResponseErrorEntityExists("Error already exists a company with this email");
+                    }
+                }
+
+                userObtained.update(userCompany);
+                userResponse = this.gateway.save(userObtained);
             }
-        }*/
+        }
         
         return userResponse;
     }

@@ -51,4 +51,16 @@ public class UserCompany extends User{
         this.getAddress().setCompanyNit(companyNit);
     } 
 
+    public boolean verifyNit(long companyNit){
+        return this.companyNit == companyNit;
+    }
+
+    public boolean verifyCompanyName(String companyName){
+        return this.companyName.equals(companyName);
+    }
+
+    public boolean verifyCompanyEmail(String companyEmail){
+        return this.companyEmail.equals(companyEmail);
+    }
+
 }
