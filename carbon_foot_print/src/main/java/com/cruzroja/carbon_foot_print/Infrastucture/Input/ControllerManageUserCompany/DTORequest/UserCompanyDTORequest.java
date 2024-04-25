@@ -2,7 +2,7 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageUserC
 
 import java.util.List;
 
-import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTORequest.RoleDTORequest;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTORequest.RoleWithIdDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.UserDTO.DTORequest.UserDTORequest;
 
 import jakarta.validation.Valid;
@@ -49,7 +49,7 @@ public class UserCompanyDTORequest extends UserDTORequest{
     public UserCompanyDTORequest(long documentNumber,String documentType,
                             String names, String lastNames,String personalPhone,
                             String personalEmail,String username,String password,
-                            List<RoleDTORequest> roles,long companyNit,String companyName,
+                            List<RoleWithIdDTORequest> roles,long companyNit,String companyName,
                             String companyPhone,AddressDTORequest address){
         super(documentNumber,documentType,
                 names,lastNames,personalPhone,

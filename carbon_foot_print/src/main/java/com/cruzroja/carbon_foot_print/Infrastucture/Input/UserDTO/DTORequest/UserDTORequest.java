@@ -3,7 +3,7 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Input.UserDTO.DTORequest;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTORequest.RoleDTORequest;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTORequest.RoleWithIdDTORequest;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -58,7 +58,7 @@ public class UserDTORequest {
 
     @Size(min = 1, message = "User must have at least one role")
     @Valid
-    private List<RoleDTORequest> roles;
+    private List<RoleWithIdDTORequest> roles;
 
     @NotNull(message = "User must have a state in the system")
     private boolean state;

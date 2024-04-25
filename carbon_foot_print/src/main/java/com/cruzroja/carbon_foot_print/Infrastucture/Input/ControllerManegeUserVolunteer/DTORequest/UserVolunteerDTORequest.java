@@ -1,7 +1,7 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeUserVolunteer.DTORequest;
 
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.UserDTO.DTORequest.UserDTORequest;
-import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTORequest.RoleDTORequest;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTORequest.RoleWithIdDTORequest;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -21,7 +21,7 @@ public class UserVolunteerDTORequest extends UserDTORequest {
     public UserVolunteerDTORequest(long documentNumber, String documentType,
             String names, String lastNames, String personalPhone,
             String personalEmail, String username, String password,
-            List<RoleDTORequest> roles, String position) {
+            List<RoleWithIdDTORequest> roles, String position) {
         super(documentNumber, documentType,
                 names, lastNames, personalPhone,
                 personalEmail, username, password,
