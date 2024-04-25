@@ -19,6 +19,11 @@ public class Role {
         this.permissions = new ArrayList<>();
     }
 
+    public void update(String typeRole, List<Permission> permissions){
+        this.typeRole = typeRole;
+        this.permissions = permissions;
+    }
+
     public boolean isValidPermission(List<Permission> validPermissions){
         List<Permission> permissions = this.getPermissions();
         int wasFound = 0;
@@ -37,6 +42,10 @@ public class Role {
             return true;
         }
         return false;
+    }
+
+    public boolean verifyTypeRole(String typeRole){
+        return this.typeRole.equals(typeRole);
     }
 
 }

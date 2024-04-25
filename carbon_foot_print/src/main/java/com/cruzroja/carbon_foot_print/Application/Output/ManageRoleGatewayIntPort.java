@@ -29,13 +29,6 @@ public interface ManageRoleGatewayIntPort {
      * @return El rol encontrado o {@code null} si no se encuentra {@code Role}.
      */
     public Role findByIdRole(long idRole);
-    /**
-     * Verifica si un rol existe por su ID.
-     * 
-     * @param idRole El ID del rol a verificar.
-     * @return El ID del rol si existe, de lo contrario {@code 0} {@code long}.
-     */
-    public long existRoleById(long idRole);
      /**
      * Elimina un rol del sistema.
      * 
@@ -55,5 +48,11 @@ public interface ManageRoleGatewayIntPort {
      * @param typeRole El tipo de rol a verificar.
      * @return El ID del rol si existe por ID o tipo de rol, de lo contrario {@code 0} {@code long}.
      */
+
+
+    public boolean existsByTypeRole(String typeRole);
+    public boolean existsById(long idRole);
+
+
     public long existRoleByIdOrTypeRole(long idRole, String typeRole);
 }
