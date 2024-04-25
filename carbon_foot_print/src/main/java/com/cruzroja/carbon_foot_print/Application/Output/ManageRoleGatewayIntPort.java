@@ -53,6 +53,4 @@ public interface ManageRoleGatewayIntPort {
     public boolean existsByTypeRole(String typeRole);
     public boolean existsById(long idRole);
 
-
-    public long existRoleByIdOrTypeRole(long idRole, String typeRole);
 }

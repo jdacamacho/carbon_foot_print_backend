@@ -61,16 +61,8 @@ public class ManageRoleGatewayImplAdapter implements ManageRoleGatewayIntPort{
     }
 
     @Override
-    public long existRoleByIdOrTypeRole(long idRole, String typeRole) {
-        return this.serviceBD.countByIdRoleOrTypeRole(idRole, typeRole);
-    }
-
-    @Override
     public boolean existsByTypeRole(String typeRole) {
-        if(this.serviceBD.countByTypeRole(typeRole) == 0){
-            return false;
-        }
-        return true;
+        return this.serviceBD.existsByTypeRole(typeRole);
     }
 
     @Override

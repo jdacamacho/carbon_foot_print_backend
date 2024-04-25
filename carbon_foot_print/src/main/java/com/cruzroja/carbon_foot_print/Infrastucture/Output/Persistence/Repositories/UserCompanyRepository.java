@@ -16,6 +16,10 @@ public interface UserCompanyRepository extends CrudRepository<UserCompanyEntity,
     UserCompanyEntity findByCompanyNit(long companyNit);
    
     boolean existsByCompanyNit(long companyNit);
+
+    boolean existsByCompanyEmail(String companyEmail);
+
+    boolean existsByCompanyName(String companyName);
     
     boolean existsByCompanyNitOrCompanyEmailOrCompanyName(long nit, String companyEmail, String companyName);
 
