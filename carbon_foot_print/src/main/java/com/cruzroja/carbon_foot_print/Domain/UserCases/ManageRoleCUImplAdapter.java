@@ -56,10 +56,10 @@ public class ManageRoleCUImplAdapter implements ManageRoleCUIntPort{
     }
 
     @Override
-    public Role updateRole(long idRole, Role role) {
+    public Role updateRole(Role role) {
         Role response = null;
 
-        if(this.gateway.existRoleById(idRole) == 0 ){
+        if(this.gateway.existRoleById(role.getIdRole()) == 0 ){
             this.exceptionFormatter.returnResponseErrorEntityNotFound("Role not found");
         }else{
             if(role.isValidPermission(this.gateway.findAllPermissions()) == false){
@@ -67,7 +67,7 @@ public class ManageRoleCUImplAdapter implements ManageRoleCUIntPort{
             }else if(role.hasDuplicatePermissions() == true){
                 this.exceptionFormatter.returnResponseBusinessRuleViolated("role has duplicates");
             }else{
-                Role roleObtained = this.gateway.findByIdRole(idRole);
+                Role roleObtained = this.gateway.findByIdRole(role.getIdRole());
                 if(IsValidUpdating(roleObtained, role) > 0){
                     this.exceptionFormatter.returnResponseErrorEntityExists("Exist a role with that typeRole");
                 }else{

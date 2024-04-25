@@ -27,6 +27,7 @@ import com.cruzroja.carbon_foot_print.Application.Input.ManageRoleCUIntPort;
 import com.cruzroja.carbon_foot_print.Domain.Models.Permission;
 import com.cruzroja.carbon_foot_print.Domain.Models.Role;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTORequest.RoleDTORequest;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTORequest.RoleWithIdDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTOResponse.PermissionDTOResponse;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTOResponse.RoleDTOResponse;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.mappers.MapperRoleInfrastuctureDomain;
@@ -100,9 +101,9 @@ public class RoleRestController {
         return new ResponseEntity<RoleDTOResponse>(objRole, HttpStatus.OK);
     }
 
-    @PutMapping("/{idRole}")
-    public ResponseEntity<?> updateRole(@PathVariable long idRole, @Valid @RequestBody RoleDTORequest roleRequest, BindingResult result){
-        Role role = this.mapper.mapRequestRoModel(roleRequest);
+    @PutMapping("")
+    public ResponseEntity<?> updateRole(@Valid @RequestBody RoleWithIdDTORequest roleRequest, BindingResult result){
+        Role role = this.mapper.mapRequestWithIdToModel(roleRequest);
         Map<String, Object> response = new HashMap<>();
         RoleDTOResponse objRole;
 
@@ -118,7 +119,7 @@ public class RoleRestController {
 		}
 
         try {
-            objRole = this.mapper.mapModelToResponse(this.roleCU.updateRole(idRole,role));
+            objRole = this.mapper.mapModelToResponse(this.roleCU.updateRole(role));
         } catch (DataAccessException e) {
             response.put("mensaje", "Error when updating into database");
 			response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
