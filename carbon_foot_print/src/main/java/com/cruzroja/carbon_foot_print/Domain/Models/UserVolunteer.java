@@ -30,11 +30,4 @@ public class UserVolunteer extends User {
         this.position = volunteer.getPosition();
     }
 
-    public boolean verifyUsername(String username) {
-        return this.getUsername() == username;
-    }
-
-    public boolean verifyEmail(String email) {
-        return this.getPersonalEmail() == email;
-    }
 }

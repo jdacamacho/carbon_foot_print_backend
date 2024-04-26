@@ -72,20 +72,35 @@ public class ManageUserCompanyGatewayImplAdapter implements ManageUserCompanyGat
     }
 
     @Override
-    public boolean existUserByDocumentNumberOrUsernameOrPersonalEmail(long numberDocument, String username,
-            String email) {
-
-        if(this.serviceBDUser.countByNumberDocumentOrUsernameOrPersonalEmail(numberDocument, username, email) == 0){
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public List<Role> findAllRoles() {
         Iterable<RoleEntity> dataFromBD = this.serviceBDCompany.findAllRoles();
         List<Role> response = this.mapper.map(dataFromBD, new TypeToken<List<Role>>(){}.getType());
         return response;
+    }
+
+    @Override
+    public boolean existByUsername(String username) {
+        return this.serviceBDUser.existsByUsername(username);
+    }
+
+    @Override
+    public boolean existsByPersonalEmail(String personalEmail) {
+        return this.serviceBDUser.existsByPersonalEmail(personalEmail);
+    }
+
+    @Override
+    public boolean existsByNit(long nit) {
+        return this.serviceBDCompany.existsByCompanyNit(nit);
+    }
+
+    @Override
+    public boolean existsByCompanyEmail(String companyEmail) {
+        return this.serviceBDCompany.existsByCompanyEmail(companyEmail);
+    }
+
+    @Override
+    public boolean existsByCompanyName(String companyEmail) {
+        return this.serviceBDCompany.existsByCompanyName(companyEmail);
     }
     
 }

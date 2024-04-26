@@ -3,12 +3,10 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Input.UserDTO.DTORequest;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTORequest.RoleDTORequest;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageRole.DTORequest.RoleWithIdDTORequest;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -21,8 +19,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserDTORequest {
     @Positive(message = "Document number must be positive")
-    @Min(value = 1000000000L, message = "Document number must have at least ten digits" )
-    @Max(value = 9999999999L, message = "Document number can't have more than ten digits" )
     private long documentNumber;
 
     @NotNull(message = "Document type can't be null")
@@ -58,7 +54,7 @@ public class UserDTORequest {
 
     @Size(min = 1, message = "User must have at least one role")
     @Valid
-    private List<RoleDTORequest> roles;
+    private List<RoleWithIdDTORequest> roles;
 
     @NotNull(message = "User must have a state in the system")
     private boolean state;

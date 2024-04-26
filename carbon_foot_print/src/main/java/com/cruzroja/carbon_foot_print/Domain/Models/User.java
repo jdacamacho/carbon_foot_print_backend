@@ -58,4 +58,12 @@ public class User {
         this.roles = user.getRoles();
         this.state = user.isState();
     }
+
+    public boolean verifyUsername(String username) {
+        return this.getUsername().equals(username);
+    }
+
+    public boolean verifyPersonalEmail(String email) {
+        return this.getPersonalEmail().equals(email);
+    }
 }

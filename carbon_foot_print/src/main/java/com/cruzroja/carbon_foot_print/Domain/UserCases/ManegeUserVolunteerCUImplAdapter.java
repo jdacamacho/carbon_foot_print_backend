@@ -61,7 +61,7 @@ public class ManegeUserVolunteerCUImplAdapter implements ManegeUserVolunteerCUIn
             if (this.gateway.existsByUsername(userVolunteer.getUsername()))
                 this.errorFormatter.returnResponseErrorEntityExists(
                         "All ready exist an user with username " + userVolunteer.getUsername() + ".");
-        if (!oldVolunteer.verifyEmail(userVolunteer.getPersonalEmail()))
+        if (!oldVolunteer.verifyPersonalEmail(userVolunteer.getPersonalEmail()))
             if (this.gateway.existsByPersonalEmail(userVolunteer.getPersonalEmail()))
                 this.errorFormatter.returnResponseErrorEntityExists(
                         "All ready exist an user with personal email " + userVolunteer.getPersonalEmail() + ".");

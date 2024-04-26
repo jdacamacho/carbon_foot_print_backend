@@ -21,8 +21,9 @@ public class BeanConfigurations {
 
     @Bean
     public ManageUserCompanyCUImplAdapter createUserCompanyCU(ManageUserCompanyGatewayIntPort gateway,
-            ExceptionFormatterIntPort exceptionFormatter) {
-        ManageUserCompanyCUImplAdapter userCompanyCU = new ManageUserCompanyCUImplAdapter(gateway, exceptionFormatter);
+            ExceptionFormatterIntPort exceptionFormatter,
+            PasswordEncoder passwordEncoder) {
+        ManageUserCompanyCUImplAdapter userCompanyCU = new ManageUserCompanyCUImplAdapter(gateway, exceptionFormatter,passwordEncoder);
         return userCompanyCU;
     }
 

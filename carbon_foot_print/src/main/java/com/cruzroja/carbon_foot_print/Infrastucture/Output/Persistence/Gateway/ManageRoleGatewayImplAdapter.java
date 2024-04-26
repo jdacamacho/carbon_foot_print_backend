@@ -48,11 +48,6 @@ public class ManageRoleGatewayImplAdapter implements ManageRoleGatewayIntPort{
     }
 
     @Override
-    public long existRoleById(long idRole) {
-        return this.serviceBD.countByRoleId(idRole);
-    }
-
-    @Override
     public void deleteRole(Role Role) {
         RoleEntity roleToDelete = this.mapper.map(Role, RoleEntity.class);
         this.serviceBD.delete(roleToDelete);
@@ -66,8 +61,13 @@ public class ManageRoleGatewayImplAdapter implements ManageRoleGatewayIntPort{
     }
 
     @Override
-    public long existRoleByIdOrTypeRole(long idRole, String typeRole) {
-        return this.serviceBD.countByIdRoleOrTypeRole(idRole, typeRole);
+    public boolean existsByTypeRole(String typeRole) {
+        return this.serviceBD.existsByTypeRole(typeRole);
+    }
+
+    @Override
+    public boolean existsById(long idRole) {
+        return this.serviceBD.existsById(idRole);
     }
     
 }
