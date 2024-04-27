@@ -3,7 +3,7 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Output.Formatter;
 import org.springframework.stereotype.Service;
 
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
-import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.BadCredentialsException;
+import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.BadCredentialException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.BadFormatException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.BusinessRuleException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.EntityExistsException;
@@ -32,7 +32,7 @@ public class ExceptionFormatterImplAdapter implements ExceptionFormatterIntPort 
 
     @Override
     public void returnResponseBadCredentials(String message) {
-        BadCredentialsException objException = new BadCredentialsException(message);
+        BadCredentialException objException = new BadCredentialException(message);
         throw objException;
     }
 

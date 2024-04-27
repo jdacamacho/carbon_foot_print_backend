@@ -70,29 +70,18 @@ public class ManageRoleCUImplAdapter implements ManageRoleCUIntPort{
                 Role roleObtained = this.gateway.findByIdRole(role.getIdRole());
                 if(this.gateway.existsByTypeRole(role.getTypeRole())){
                     if(roleObtained.verifyTypeRole(role.getTypeRole())){
-                        roleObtained.update(role.getTypeRole(), role.getPermissions());
+                        roleObtained.update(role.getTypeRole(),role.isState(),role.getPermissions());
                         response = this.gateway.save(roleObtained);
                     }else{
                         this.exceptionFormatter.returnResponseErrorEntityExists("Exist a role with that typeRole");
                     } 
                 }else{
-                    roleObtained.update(role.getTypeRole(), role.getPermissions());
+                    roleObtained.update(role.getTypeRole(),role.isState(),role.getPermissions());
                     response = this.gateway.save(roleObtained);
                 }
             }
         }
         return response;
-    }
-
-    @Override
-    public boolean deleteRole(long idRole) {
-        Role roleToDelete = null;
-        if(!this.gateway.existsById(idRole) ){
-            this.exceptionFormatter.returnResponseErrorEntityNotFound("Role not found");
-        }
-        roleToDelete = this.gateway.findByIdRole(idRole);
-        this.gateway.deleteRole(roleToDelete);
-        return true;
     }
 
     @Override

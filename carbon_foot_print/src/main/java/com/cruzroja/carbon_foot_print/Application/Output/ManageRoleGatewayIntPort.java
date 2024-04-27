@@ -30,12 +30,6 @@ public interface ManageRoleGatewayIntPort {
      */
     public Role findByIdRole(long idRole);
      /**
-     * Elimina un rol del sistema.
-     * 
-     * @param role El rol a eliminar.
-     */
-    public void deleteRole(Role role);
-     /**
      * Recupera una lista de todos los permisos almacenados en el sistema.
      * 
      * @return Lista de permisos {@code List<Permission>}.

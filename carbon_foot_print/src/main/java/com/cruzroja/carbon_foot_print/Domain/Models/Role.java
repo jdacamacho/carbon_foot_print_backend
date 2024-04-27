@@ -13,15 +13,17 @@ import lombok.Data;
 public class Role {
     private long idRole;
     private String typeRole;
+    private boolean state;
     private List<Permission> permissions;
 
     public Role(){
         this.permissions = new ArrayList<>();
     }
 
-    public void update(String typeRole, List<Permission> permissions){
+    public void update(String typeRole, boolean state ,List<Permission> permissions){
         this.typeRole = typeRole;
         this.permissions = permissions;
+        this.state = state;
     }
 
     public boolean isValidPermission(List<Permission> validPermissions){

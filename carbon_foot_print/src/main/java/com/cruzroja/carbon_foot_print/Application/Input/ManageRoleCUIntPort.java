@@ -10,6 +10,5 @@ public interface ManageRoleCUIntPort {
     public Role saveRole(Role role);
     public Role getRole(long idRole);
     public Role updateRole(Role role);
-    public boolean deleteRole(long idRole);
     public List<Permission> listPermissions();
 }

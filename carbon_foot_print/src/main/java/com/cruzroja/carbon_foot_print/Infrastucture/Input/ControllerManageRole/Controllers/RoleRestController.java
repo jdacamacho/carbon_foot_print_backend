@@ -8,13 +8,11 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,7 +44,6 @@ public class RoleRestController {
 
     @GetMapping("")
     @Transactional(readOnly = true)
-    @PreAuthorize("hasRole('Listar_Roles')")
     public ResponseEntity<List<RoleDTOResponse>> listRoles(){
         List<Role> roles = this.roleCU.listRoles();
         ResponseEntity<List<RoleDTOResponse>> objResponse = new ResponseEntity<List<RoleDTOResponse>>(
@@ -127,12 +124,6 @@ public class RoleRestController {
         }
 
         return new ResponseEntity<RoleDTOResponse>(objRole, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{idRole}")
-    public ResponseEntity<?> deleteRole(@PathVariable long idRole){
-        boolean flagResponse = this.roleCU.deleteRole(idRole);
-        return ResponseEntity.ok(flagResponse);
     }
     
 }

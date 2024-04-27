@@ -17,6 +17,9 @@ public class RoleDTORequest {
     @NotBlank(message = "typeRole can't be empty")
     private String typeRole;
 
+    @NotNull(message = "Role must have a state in the system")
+    private boolean state;
+
     @Size(min = 1, message = "User must have at least one role")
     @Valid
     List<PermissionDTORequest> permissions;

@@ -11,6 +11,7 @@ import lombok.Data;
 public class RoleDTOResponse {
     private long idRole;
     private String typeRole;
+    private boolean state;
     List<PermissionDTOResponse> permissions;
 
     public RoleDTOResponse(){

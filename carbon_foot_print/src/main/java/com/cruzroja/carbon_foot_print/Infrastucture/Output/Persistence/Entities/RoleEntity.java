@@ -28,6 +28,9 @@ public class RoleEntity {
     @Column(nullable = false , unique = true , length = 45)
     private String typeRole;
 
+    @Column(nullable =  false)
+    private boolean state;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "role_permissions",
         joinColumns = @JoinColumn(name = "idRole"),
