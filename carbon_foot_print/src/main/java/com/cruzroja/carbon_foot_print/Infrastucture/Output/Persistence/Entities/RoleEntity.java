@@ -16,27 +16,38 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * Clase de entidad que representa un rol en la capa de persistencia.
+ */
 @Entity
 @Table(name = "roles")
 @Data
 @AllArgsConstructor
 public class RoleEntity {
+    
+    /** Identificador único del rol. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idRole;
 
-    @Column(nullable = false , unique = true , length = 45)
+    /** Tipo de rol. */
+    @Column(nullable = false, unique = true, length = 45)
     private String typeRole;
 
-    @Column(nullable =  false)
+    /** Estado del rol. */
+    @Column(nullable = false)
     private boolean state;
 
+    /** Lista de permisos asociados al rol. */
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "role_permissions",
         joinColumns = @JoinColumn(name = "idRole"),
         inverseJoinColumns = @JoinColumn(name = "idPermission"))
     private List<PermissionEntity> permissions;
 
+    /**
+     * Constructor de la clase RoleEntity. Inicializa la lista de permisos.
+     */
     public RoleEntity(){
         this.permissions = new ArrayList<>();
     }

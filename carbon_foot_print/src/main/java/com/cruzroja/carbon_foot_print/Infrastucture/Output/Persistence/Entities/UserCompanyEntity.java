@@ -12,42 +12,67 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Clase de entidad que representa un usuario de empresa en la capa de persistencia.
+ */
 @Entity
 @Table(name = "companies")
 @Getter
 @Setter
 public class UserCompanyEntity extends UserEntity {
     
+    /** NIT de la empresa. */
     private long companyNit;
 
-    @Column(nullable = false , unique = true)
+    /** Nombre de la empresa. */
+    @Column(nullable = false, unique = true)
     private String companyName;
 
+    /** Teléfono de la empresa. */
     @Column(nullable = false, length = 12)
     private String companyPhone;
 
-    @Column(nullable = false , unique = true ,length = 320)
+    /** Correo electrónico de la empresa. */
+    @Column(nullable = false, unique = true, length = 320)
     private String companyEmail;
 
-    @OneToOne(mappedBy = "objUserCompany", fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
+    /** Dirección de la empresa. */
+    @OneToOne(mappedBy = "objUserCompany", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private AddressEntity address;
 
+    /** Fecha de registro de la empresa. */
     @Column(nullable = false)
     private Date registrationDate;
 
+    /**
+     * Constructor de la clase UserCompanyEntity.
+     */
     public UserCompanyEntity(){
 
     }
 
-    public UserCompanyEntity(long documentNumber,String documentType,
-                            String names, String lastNames,String personalPhone,
-                            String personalEmail,String username,String password,
-                            List<RoleEntity> roles,long companyNit,String companyName,
-                            String companyPhone,AddressEntity address, Date registrationDate){
-        super(documentNumber,documentType,
-                names,lastNames,personalPhone,
-                personalEmail,username,password,
-                roles,true);
+    /**
+     * Constructor de la clase UserCompanyEntity con todos los atributos.
+     * 
+     * @param documentNumber    Número de documento del usuario.
+     * @param documentType      Tipo de documento del usuario.
+     * @param names             Nombres del usuario.
+     * @param lastNames         Apellidos del usuario.
+     * @param personalPhone     Teléfono personal del usuario.
+     * @param personalEmail     Correo electrónico personal del usuario.
+     * @param username          Nombre de usuario del usuario.
+     * @param password          Contraseña del usuario.
+     * @param roles             Lista de roles asociados al usuario.
+     * @param companyNit        NIT de la empresa.
+     * @param companyName       Nombre de la empresa.
+     * @param companyPhone      Teléfono de la empresa.
+     * @param address           Dirección de la empresa.
+     * @param registrationDate  Fecha de registro de la empresa.
+     */
+    public UserCompanyEntity(long documentNumber, String documentType, String names, String lastNames, String personalPhone,
+                             String personalEmail, String username, String password, List<RoleEntity> roles, long companyNit,
+                             String companyName, String companyPhone, AddressEntity address, Date registrationDate){
+        super(documentNumber, documentType, names, lastNames, personalPhone, personalEmail, username, password, roles, true);
         this.companyNit = companyNit;
         this.companyName = companyName;
         this.companyPhone = companyPhone;
