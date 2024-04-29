@@ -90,6 +90,19 @@ public class RestApiException {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(BadCredentialException.class)
+    public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+                    final BadCredentialException ex, final Locale locale) {
+        final Error error = ErrorUtils
+                        .createError(ErrorCode.BAD_CREDENTIALS.getCode(),
+                                        String.format("%s, %s",
+                                        ErrorCode.BAD_CREDENTIALS.getMessageKey(),
+                                        ex.getMessage()),
+                                        HttpStatus.NOT_FOUND .value())
+                                        .setUrl(req.getRequestURL().toString()).setMethod(req.getMethod());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(BadFormatException.class)
     public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
                     final BadFormatException ex, final Locale locale) {

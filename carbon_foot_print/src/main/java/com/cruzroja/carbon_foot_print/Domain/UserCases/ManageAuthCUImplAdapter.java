@@ -36,8 +36,8 @@ public class ManageAuthCUImplAdapter implements ManageAuthCUIntPort {
     @Override
     public Credential login(String username, String password) {
         Credential credential = new Credential();
-        Authentication authentication = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         try{
+            Authentication authentication = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             if(authentication.isAuthenticated()){
                 Optional<UserEntity> userBD = this.gateway.findByUsername(username);
                 UserDetails user = userBD.orElseThrow();
@@ -49,7 +49,9 @@ public class ManageAuthCUImplAdapter implements ManageAuthCUIntPort {
                     
             }
         }catch(BadCredentialsException ex){
-            throw new BadCredentialException("Checkout your username or password");
+            this.exceptionFormatter.returnResponseBadCredentials("Checkout your username or password");
+        }catch (Exception ex) {
+            this.exceptionFormatter.returnResponseBadCredentials("An error occurred during authentication" + ex);
         }
         
         return credential;
