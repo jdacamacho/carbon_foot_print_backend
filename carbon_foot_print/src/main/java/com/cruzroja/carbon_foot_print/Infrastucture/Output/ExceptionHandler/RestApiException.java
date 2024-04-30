@@ -20,6 +20,7 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnE
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.BusinessRuleException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.EntityExistsException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.EntityNotFoundException;
+import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.NoAccessException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.NoDataException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.ExceptionStructure.Error;
 
@@ -101,6 +102,19 @@ public class RestApiException {
                                         HttpStatus.NOT_FOUND .value())
                                         .setUrl(req.getRequestURL().toString()).setMethod(req.getMethod());
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(NoAccessException.class)
+    public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+                    final NoAccessException ex, final Locale locale) {
+        final Error error = ErrorUtils
+                        .createError(ErrorCode.NO_ACCESS.getCode(),
+                                        String.format("%s, %s",
+                                        ErrorCode.NO_ACCESS.getMessageKey(),
+                                        ex.getMessage()),
+                                        HttpStatus.NOT_ACCEPTABLE .value())
+                                        .setUrl(req.getRequestURL().toString()).setMethod(req.getMethod());
+        return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
     }
 
     @ExceptionHandler(BadFormatException.class)

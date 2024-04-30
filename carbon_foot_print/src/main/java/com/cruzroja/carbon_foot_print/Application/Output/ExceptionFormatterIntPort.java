@@ -7,4 +7,5 @@ public interface ExceptionFormatterIntPort {
     public void returnResponseBadCredentials(String message);
     public void returnResponseBadFormat(String message);
     public void returNoData(String message);
+    public void returNoAccess(String message);
 }

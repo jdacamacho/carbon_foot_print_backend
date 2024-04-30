@@ -13,7 +13,8 @@ public enum ErrorCode {
     BUSINESS_RULE_VIOLATION("GC-0004", "ERROR, BUSINESS RULE HAS BEEN VIOLATED"),
     BAD_CREDENTIALS("GC-0005", "ERROR, BAD CREDENTIALS"),
     BAD_FORMAT("GC-0006", "ERROR, BAD FORMAT"),
-    NO_DATA("GC-0007", "ERROR, NO DATA");
+    NO_DATA("GC-0007", "ERROR, NO DATA"),
+    NO_ACCESS("GC-0008", "ERROR, NO ACCESS");
 
     private final String code;
     private final String messageKey;
