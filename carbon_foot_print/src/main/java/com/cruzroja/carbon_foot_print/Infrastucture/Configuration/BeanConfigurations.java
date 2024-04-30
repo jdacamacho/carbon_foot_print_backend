@@ -9,10 +9,12 @@ import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPo
 import com.cruzroja.carbon_foot_print.Application.Output.ManageAuthGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageRoleGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageUserCompanyGatewayIntPort;
+import com.cruzroja.carbon_foot_print.Application.Output.ManegeCategoryGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManegeUserVolunteerGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageAuthCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageRoleCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageUserCompanyCUImplAdapter;
+import com.cruzroja.carbon_foot_print.Domain.UserCases.ManegeCategoryCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManegeUserVolunteerCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Infrastucture.JWT.JwtService;
 
@@ -23,7 +25,8 @@ public class BeanConfigurations {
     public ManageUserCompanyCUImplAdapter createUserCompanyCU(ManageUserCompanyGatewayIntPort gateway,
             ExceptionFormatterIntPort exceptionFormatter,
             PasswordEncoder passwordEncoder) {
-        ManageUserCompanyCUImplAdapter userCompanyCU = new ManageUserCompanyCUImplAdapter(gateway, exceptionFormatter,passwordEncoder);
+        ManageUserCompanyCUImplAdapter userCompanyCU = new ManageUserCompanyCUImplAdapter(gateway, exceptionFormatter,
+                passwordEncoder);
         return userCompanyCU;
     }
 
@@ -38,16 +41,23 @@ public class BeanConfigurations {
     ManegeUserVolunteerCUImplAdapter createUserVolunteerCompanyCU(ManegeUserVolunteerGatewayIntPort gateway,
             ExceptionFormatterIntPort exceptionFormatter, PasswordEncoder passwordEncoder) {
         ManegeUserVolunteerCUImplAdapter userVolunterCU = new ManegeUserVolunteerCUImplAdapter(gateway,
-                exceptionFormatter,passwordEncoder);
+                exceptionFormatter, passwordEncoder);
         return userVolunterCU;
     }
 
     @Bean
     ManageAuthCUImplAdapter createAuthCU(ManageAuthGatewayIntPort gateway,
-                                    JwtService jwtService,
-                                    AuthenticationManager authenticationManager,
-                                    ExceptionFormatterIntPort exceptionFormatter){
-        ManageAuthCUImplAdapter authCU = new ManageAuthCUImplAdapter(gateway, jwtService, authenticationManager, exceptionFormatter);
+            JwtService jwtService,
+            AuthenticationManager authenticationManager,
+            ExceptionFormatterIntPort exceptionFormatter) {
+        ManageAuthCUImplAdapter authCU = new ManageAuthCUImplAdapter(gateway, jwtService, authenticationManager,
+                exceptionFormatter);
         return authCU;
+    }
+
+    @Bean
+    ManegeCategoryCUImplAdapter createCategoryCU(ManegeCategoryGatewayIntPort gateway,
+            ExceptionFormatterIntPort exceptionFormatter) {
+        return new ManegeCategoryCUImplAdapter(gateway, exceptionFormatter);
     }
 }
