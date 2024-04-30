@@ -31,12 +31,24 @@ public class SecurityConfigurations {
             .authorizeHttpRequests(authRequest ->
               authRequest
                 .requestMatchers("/api/auth").permitAll()
+                //Roles
                 .requestMatchers("/api/roles").hasRole("Listar_Roles")
                 .requestMatchers("/api/roles/idRole/{idRole}").hasRole("Consultar_Rol")
                 .requestMatchers("/api/roles/permissions").hasRole("Listar_permisos")
                 .requestMatchers(HttpMethod.POST, "/api/roles").hasRole("Crear_Roles")
                 .requestMatchers(HttpMethod.PUT, "/api/roles").hasRole("Actualizar_Roles")
-                
+                //Empresas
+                .requestMatchers("/api/user/companies").hasRole("Listar_Empresas")
+                .requestMatchers("/api/user/companies/nit/{nitCompany}").hasRole("Consultar_Empresa_NIT")
+                .requestMatchers("/api/user/companies/numberDocument/{numberDocument}").hasRole("Consultar_Empresa_Documento")
+                .requestMatchers(HttpMethod.POST, "/api/user/companies").hasRole("Crear_Empresas")
+                .requestMatchers(HttpMethod.PUT, "/api/user/companies").hasRole("Actualizar_Empresas")
+                //Voluntarios
+                .requestMatchers("/api/user/volunteers").hasRole("Listar_Voluntarios")
+                .requestMatchers("/api/user/volunteers/{documentNumber}").hasRole("Consultar_Voluntario")
+                .requestMatchers("/api/user/volunteers/position").hasRole("Consultar_Voluntario_Posicion")
+                .requestMatchers(HttpMethod.POST, "/api/user/volunteers").hasRole("Crear_Voluntarios")
+                .requestMatchers(HttpMethod.PUT, "/api/user/volunteers").hasRole("Actualizar_Voluntarios")
                 )
             .sessionManagement(sessionManager->
                 sessionManager 
