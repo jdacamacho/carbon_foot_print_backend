@@ -8,8 +8,8 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.
 
 public interface CategoryRepository extends CrudRepository<CategoryEntity, Long> {
 
-    boolean existsByCategoryName(String categoryName);
+    boolean existsByCategoryNameLike(String categoryName);
 
-    List<CategoryEntity> findByCategoryName(String categoryName);
+    List<CategoryEntity> findByCategoryNameLike(String categoryName);
 
 }
