@@ -20,7 +20,7 @@ public class Category {
         this.categoryScope = newCategory.categoryScope;
     }
 
-    public boolean verifyScope(String newScope) {
+    public boolean isValidScope(String newScope) {
         List<String> scopes = new ArrayList<String>();
         scopes.add("Alcance 1");
         scopes.add("Alcance 2");
@@ -33,5 +33,9 @@ public class Category {
                 break;
         }
         return flag;
+    }
+
+    public boolean isUpdateName(String name) {
+        return this.categoryName.equals(name);
     }
 }

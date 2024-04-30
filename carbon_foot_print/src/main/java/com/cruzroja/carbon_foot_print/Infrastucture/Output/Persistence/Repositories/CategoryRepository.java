@@ -11,4 +11,5 @@ public interface CategoryRepository extends CrudRepository<CategoryEntity, Long>
     boolean existsByCategoryName(String categoryName);
 
     List<CategoryEntity> findByCategoryName(String categoryName);
+
 }
