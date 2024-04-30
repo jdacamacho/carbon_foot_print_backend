@@ -61,7 +61,7 @@ public class CategoryRestController {
                 this.mapper.mapModelToResponse(category), HttpStatus.OK);
     }
 
-    @GetMapping("")
+    @GetMapping("/name")
     @Transactional(readOnly = true)
     public ResponseEntity<List<CategoryDTOResponse>> getCategoryBy(
             @RequestParam(required = true) @NotBlank(message = "The category name is required to find the categories.") String name) {
@@ -70,7 +70,7 @@ public class CategoryRestController {
                 this.mapper.mapModelsToResponse(categories), HttpStatus.OK);
     }
 
-    @PostMapping("/name")
+    @PostMapping("")
     public ResponseEntity<?> saveCategory(@RequestBody CategoryDTORequest request, BindingResult result) {
         Category category = this.mapper.mapRequestModel(request);
         Map<String, Object> response = new HashMap<>();
@@ -106,12 +106,11 @@ public class CategoryRestController {
 
     }
 
-    /**
-     * @PatchMapping("")
-     * public ResponseEntity<?> switchStatus(){
-     * 
-     * }
-     */
+    // @PatchMapping("")
+    // public ResponseEntity<?> switchStatus(){
+
+    // }
+
     private Map<String, Object> catchErrors(BindingResult result) {
         Map<String, Object> response = new HashMap<>();
         if (result.hasErrors()) {
