@@ -27,4 +27,6 @@ public class CategoryEntity {
     @Column(nullable = false)
     private String categoryScope;
 
+    public CategoryEntity() {
+    }
 }

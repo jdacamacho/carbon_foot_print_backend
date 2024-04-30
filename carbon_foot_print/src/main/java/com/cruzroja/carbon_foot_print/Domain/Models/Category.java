@@ -36,6 +36,9 @@ public class Category {
     }
 
     public boolean isUpdateName(String name) {
-        return this.categoryName.equals(name);
+        return !this.categoryName.equals(name);
+    }
+
+    public Category() {
     }
 }

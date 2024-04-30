@@ -19,7 +19,7 @@ public class ManegeCategoryCUImplAdapter implements ManegeCategoryCUIntPort {
 
     @Override
     public Category create(Category category) {
-        if (category.isValidScope(category.getCategoryScope()))
+        if (!category.isValidScope(category.getCategoryScope()))
             this.errorFormatter.returnResponseBusinessRuleViolated(
                     "The value of scope can only be \"Alcance 1\", \"Alcance 2\" o \"Alcance 3\"");
         if (this.gateway.existsByName(category.getCategoryName()))
@@ -30,7 +30,7 @@ public class ManegeCategoryCUImplAdapter implements ManegeCategoryCUIntPort {
 
     @Override
     public Category update(Category category) {
-        if (category.isValidScope(category.getCategoryScope()))
+        if (!category.isValidScope(category.getCategoryScope()))
             this.errorFormatter.returnResponseBusinessRuleViolated(
                     "The value of scope can only be \"Alcance 1\", \"Alcance 2\" o \"Alcance 3\"");
         Category old = this.gateway.findById(category.getCategoryId());

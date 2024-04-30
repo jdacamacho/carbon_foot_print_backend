@@ -52,7 +52,7 @@ public class ManegeCategoryGatewayImplAdapter implements ManegeCategoryGatewayIn
 
     @Override
     public List<Category> findByName(String name) {
-        Iterable<CategoryEntity> dataFromBD = this.serviceBD.findByCategoryName(name);
+        Iterable<CategoryEntity> dataFromBD = this.serviceBD.findByCategoryNameLike("%" + name + "%");
         return this.mapper.map(dataFromBD, new TypeToken<List<Category>>() {
         }.getType());
     }
@@ -64,7 +64,7 @@ public class ManegeCategoryGatewayImplAdapter implements ManegeCategoryGatewayIn
 
     @Override
     public boolean existsByName(String name) {
-        return this.serviceBD.existsByCategoryName(name);
+        return this.serviceBD.existsByCategoryNameLike("%" + name + "%");
     }
 
 }
