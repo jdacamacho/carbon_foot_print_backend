@@ -82,8 +82,8 @@ public class UserCompanyRestController {
     }
 
     @PutMapping("")
-    public ResponseEntity<?> updateCompany(@Valid @RequestBody UserCompanyUpdateDTORequest companyRequest, BindingResult result){
-        UserCompany company = this.mapper.mapRequestUpdateToModel(companyRequest);
+    public ResponseEntity<?> updateCompany(@Valid @RequestBody UserCompanyDTORequest companyRequest, BindingResult result){
+        UserCompany company = this.mapper.mapRequestToModel(companyRequest);
         Map<String, Object> response = new HashMap<>();
         UserCompanyDTOResponse objCompany;
 

@@ -91,9 +91,9 @@ public class UserVolunteerRestController {
     }
 
     @PutMapping("")
-    public ResponseEntity<?> updateUserVolunteer(@Valid @RequestBody UserVolunteerUpdateDTORequest request,
+    public ResponseEntity<?> updateUserVolunteer(@Valid @RequestBody UserVolunteerDTORequest request,
             BindingResult result) {
-        UserVolunteer volunteer = this.mapper.mapRequestUpdateToModel(request);
+        UserVolunteer volunteer = this.mapper.mapRequestModel(request);
         Map<String, Object> response = new HashMap<>();
         UserVolunteerDTOResponse objVolunteer;
 
