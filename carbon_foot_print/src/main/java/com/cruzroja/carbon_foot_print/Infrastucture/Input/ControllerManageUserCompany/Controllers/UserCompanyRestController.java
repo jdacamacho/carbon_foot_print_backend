@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cruzroja.carbon_foot_print.Application.Input.ManageUserCompanyCUIntPort;
 import com.cruzroja.carbon_foot_print.Domain.Models.UserCompany;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageUserCompany.DTORequest.UserCompanyDTORequest;
-import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageUserCompany.DTORequest.UserCompanyUpdateDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageUserCompany.DTOResponse.UserCompanyDTOResponse;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageUserCompany.mappers.MapperUserCompanyInfrastuctureDomain;
 
