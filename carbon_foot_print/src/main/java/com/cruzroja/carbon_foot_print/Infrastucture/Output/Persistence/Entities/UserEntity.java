@@ -63,12 +63,7 @@ public class UserEntity implements UserDetails {
     @Column(nullable = false, length = 300)
     private String password;
 
-<<<<<<< HEAD
     @ManyToMany(fetch = FetchType.EAGER)
-=======
-    /** Lista de roles asociados al usuario. */
-    @ManyToMany(fetch = FetchType.LAZY)
->>>>>>> 7d9b440e76d9e710e97a5f75c24483fbeb224f9a
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_document_number"),
             inverseJoinColumns = @JoinColumn(name = "id_role"))
