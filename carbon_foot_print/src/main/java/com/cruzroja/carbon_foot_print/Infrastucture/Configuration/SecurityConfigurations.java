@@ -30,7 +30,7 @@ public class SecurityConfigurations {
             .authorizeHttpRequests(authRequest ->
               authRequest
                 .requestMatchers("/api/auth").permitAll()
-                .requestMatchers("/api/roles").hasRole("Listar_Roles")
+                //.requestMatchers("/api/roles").hasRole("Listar_Roles")
                 // En esta linea en vez de permiteAll() debe ser .Authenticated()
                 .anyRequest().permitAll()
                 )
