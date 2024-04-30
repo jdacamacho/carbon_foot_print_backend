@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeUserVolunteer.DTORequest.UserVolunteerDTORequest;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeUserVolunteer.DTORequest.UserVolunteerUpdateDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeUserVolunteer.DTOResponse.UserVolunteerDTOResponse;
 
 @CrossOrigin(origins = { "http://localhost:5050" })
@@ -90,9 +91,9 @@ public class UserVolunteerRestController {
     }
 
     @PutMapping("")
-    public ResponseEntity<?> updateUserVolunteer(@Valid @RequestBody UserVolunteerDTORequest request,
+    public ResponseEntity<?> updateUserVolunteer(@Valid @RequestBody UserVolunteerUpdateDTORequest request,
             BindingResult result) {
-        UserVolunteer volunteer = this.mapper.mapRequestModel(request);
+        UserVolunteer volunteer = this.mapper.mapRequestUpdateToModel(request);
         Map<String, Object> response = new HashMap<>();
         UserVolunteerDTOResponse objVolunteer;
 
