@@ -121,7 +121,7 @@ public class UserCompanyRestController {
 
     @GetMapping("/numberDocument/{numberDocument}")
     @Transactional(readOnly = true)
-    public ResponseEntity<UserCompanyDTOResponse> getCompanyByUserCharge(@PathVariable long numberDocument){
+    public ResponseEntity<UserCompanyDTOResponse> getCompanyByNumberDocument(@PathVariable long numberDocument){
         UserCompany company = this.userCompanyCU.getUserCompanyByNumberDocument(numberDocument);
         ResponseEntity<UserCompanyDTOResponse> objResponse = new ResponseEntity<UserCompanyDTOResponse>(
             mapper.mapModelToResponse(company),HttpStatus.OK
