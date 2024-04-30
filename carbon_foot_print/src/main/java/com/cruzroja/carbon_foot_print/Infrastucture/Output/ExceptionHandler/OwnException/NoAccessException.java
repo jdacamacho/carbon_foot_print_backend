@@ -17,7 +17,7 @@ public class NoAccessException extends RuntimeException{
 
     public NoAccessException(final String message){
         super(message);
-        this.mesageKey = ErrorCode.BAD_FORMAT.getMessageKey();
-        this.code = ErrorCode.BAD_FORMAT.getCode();
+        this.mesageKey = ErrorCode.NO_ACCESS.getMessageKey();
+        this.code = ErrorCode.NO_ACCESS.getCode();
     }
 }

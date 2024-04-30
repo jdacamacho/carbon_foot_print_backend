@@ -55,6 +55,7 @@ public class RoleRestController {
 
     @GetMapping("/idRole/{idRole}")
     @Transactional(readOnly = true)
+    @PreAuthorize("hasRole('Consultar_Rol')")
     public ResponseEntity<RoleDTOResponse> getRole(@PathVariable long idRole){
         Role role = this.roleCU.getRole(idRole);
         ResponseEntity<RoleDTOResponse> objResponse = new ResponseEntity<RoleDTOResponse>(
@@ -65,6 +66,7 @@ public class RoleRestController {
     
     @GetMapping("/permissions")
     @Transactional(readOnly = true)
+    @PreAuthorize("hasRole('Listar_permisos')")
     public ResponseEntity<List<PermissionDTOResponse>> listPermissions(){
         List<Permission> permissions = this.roleCU.listPermissions();
         ResponseEntity<List<PermissionDTOResponse>> objResponse = new ResponseEntity<List<PermissionDTOResponse>>(
@@ -73,6 +75,7 @@ public class RoleRestController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('Crear_Roles')")
     public ResponseEntity<?> saveRole(@Valid @RequestBody RoleDTORequest roleRequest, BindingResult result){
         Role role = this.mapper.mapRequestRoModel(roleRequest);
         Map<String, Object> response = new HashMap<>();
@@ -101,6 +104,7 @@ public class RoleRestController {
     }
 
     @PutMapping("")
+    @PreAuthorize("hasRole('Actualizar_Roles')")
     public ResponseEntity<?> updateRole(@Valid @RequestBody RoleWithIdDTORequest roleRequest, BindingResult result){
         Role role = this.mapper.mapRequestWithIdToModel(roleRequest);
         Map<String, Object> response = new HashMap<>();

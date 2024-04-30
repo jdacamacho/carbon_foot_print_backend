@@ -17,7 +17,7 @@ public class NoDataException extends RuntimeException{
 
     public NoDataException(final String message){
         super(message);
-        this.mesageKey = ErrorCode.BAD_FORMAT.getMessageKey();
-        this.code = ErrorCode.BAD_FORMAT.getCode();
+        this.mesageKey = ErrorCode.NO_DATA.getMessageKey();
+        this.code = ErrorCode.NO_DATA.getCode();
     }
 }

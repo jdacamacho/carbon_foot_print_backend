@@ -1,5 +1,6 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler;
 
+import java.nio.file.AccessDeniedException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -22,6 +23,7 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnE
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.EntityNotFoundException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.NoAccessException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.NoDataException;
+
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.ExceptionStructure.Error;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,6 +43,18 @@ public class RestApiException {
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<Error> handleAccessDeniedException(final HttpServletRequest req,
+                        final AccessDeniedException ex, final Locale locale) {
+        final Error error = ErrorUtils
+                            .createError(ErrorCode.NO_ACCESS.getCode(),
+                                            ErrorCode.NO_ACCESS.getMessageKey(),
+                                            HttpStatus.FORBIDDEN.value())
+                                            .setUrl(req.getRequestURL().toString()).setMethod(req.getMethod());
+        return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
+    }
+
+
     @ExceptionHandler(EntityExistsException.class)
     public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
                     final EntityExistsException ex) {
@@ -54,7 +68,7 @@ public class RestApiException {
     }
 
     @ExceptionHandler(NoDataException.class)
-    public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+    public ResponseEntity<Error> handleNoDataException(final HttpServletRequest req,
                     final NoDataException ex) {
         final Error error = ErrorUtils
                         .createError(ErrorCode.NO_DATA.getCode(),
@@ -66,7 +80,7 @@ public class RestApiException {
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+    public ResponseEntity<Error> handleNotFoundException(final HttpServletRequest req,
                     final EntityNotFoundException ex, final Locale locale) {
         final Error error = ErrorUtils
                         .createError(ErrorCode.ENTITY_NOT_FOUND.getCode(),
@@ -79,7 +93,7 @@ public class RestApiException {
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+    public ResponseEntity<Error> handleBadCredentialsException(final HttpServletRequest req,
                     final BadCredentialsException ex, final Locale locale) {
         final Error error = ErrorUtils
                         .createError(ErrorCode.BAD_CREDENTIALS.getCode(),
@@ -92,7 +106,7 @@ public class RestApiException {
     }
 
     @ExceptionHandler(BadCredentialException.class)
-    public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+    public ResponseEntity<Error> handleBadCredentialException(final HttpServletRequest req,
                     final BadCredentialException ex, final Locale locale) {
         final Error error = ErrorUtils
                         .createError(ErrorCode.BAD_CREDENTIALS.getCode(),
@@ -105,7 +119,7 @@ public class RestApiException {
     }
 
     @ExceptionHandler(NoAccessException.class)
-    public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+    public ResponseEntity<Error> handleNoAccessException(final HttpServletRequest req,
                     final NoAccessException ex, final Locale locale) {
         final Error error = ErrorUtils
                         .createError(ErrorCode.NO_ACCESS.getCode(),
@@ -118,7 +132,7 @@ public class RestApiException {
     }
 
     @ExceptionHandler(BadFormatException.class)
-    public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+    public ResponseEntity<Error> handleBadFormatException(final HttpServletRequest req,
                     final BadFormatException ex, final Locale locale) {
         final Error error = ErrorUtils
                         .createError(ErrorCode.BAD_FORMAT.getCode(),
@@ -131,7 +145,7 @@ public class RestApiException {
     }
 
     @ExceptionHandler(BusinessRuleException.class)
-    public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+    public ResponseEntity<Error> handleBusinessRuleException(final HttpServletRequest req,
                     final BusinessRuleException ex, final Locale locale) {
         final Error error = ErrorUtils
                         .createError(ErrorCode.BUSINESS_RULE_VIOLATION.getCode(), ex.formatException(),
