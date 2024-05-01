@@ -1,3 +1,17 @@
+#ROL ADMINISTRADOR
+INSERT INTO ROLES(idRole,typeRole,state) VALUES(1,"Administrador",1);
+INSERT INTO ROLE_PERMISSIONS(idPermission,idRole) VALUES(100,1);
+INSERT INTO ROLE_PERMISSIONS(idPermission,idRole) VALUES(102,1);
+INSERT INTO ROLE_PERMISSIONS(idPermission,idRole) VALUES(103,1);
+INSERT INTO ROLE_PERMISSIONS(idPermission,idRole) VALUES(104,1);
+INSERT INTO ROLE_PERMISSIONS(idPermission,idRole) VALUES(105,1);
+
+#USUARIO ADMINISTRADOR
+#CONTRASEÑA = AdminHuellaCarbonoJDCE1002
+INSERT INTO USERS(documentNumber,documentType,names,lastNames,personalPhone,state,personalEmail,username,password) VALUES(1000000000,"cedula","ADMIN","ADMIN",3147242572,1,"admin@gmail.com","ADMIN","$2a$10$JmBzt5AQPL2YuO3aI6WaqO4Tp0wBeinBlzQgF3FA8tGM7wd1Dzhku");
+INSERT INTO VOLUNTEERS(documentNumber,position) VALUES (1000000000,"Admin del sistema");
+INSERT INTO USER_ROLES(id_role,user_document_number) VALUES(1,1000000000);
+
 #PERMISOS PARA ROLES
 INSERT INTO permissions(idPermission, name, description) VALUES (100, "ROLE_Listar_Roles","Permiso para consultar todos los roles en el sistema");
 INSERT INTO permissions(idPermission, name, description) VALUES (101, "ROLE_Crear_Roles","Permiso para crear roles en el sistema");
