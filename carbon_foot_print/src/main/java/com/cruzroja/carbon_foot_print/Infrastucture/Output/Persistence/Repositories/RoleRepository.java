@@ -20,7 +20,7 @@ public interface RoleRepository extends CrudRepository<RoleEntity, Long> {
 
     @Query("from PermissionEntity")
     /**
-     * Obtiene una lista de todos los permisos disponibles 
+     * Obtiene una lista de todos los permisos disponibsles 
      * @return la lista de los permisos {List<PermissionEntity>}
      */
     List<PermissionEntity> findAllPermissions();
