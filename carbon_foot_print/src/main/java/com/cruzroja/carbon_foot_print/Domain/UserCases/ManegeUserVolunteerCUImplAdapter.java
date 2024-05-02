@@ -55,7 +55,7 @@ public class ManegeUserVolunteerCUImplAdapter implements ManegeUserVolunteerCUIn
 
         if (!this.gateway.existsById(userVolunteer.getDocumentNumber()))
             this.errorFormatter.returnResponseErrorEntityNotFound(
-                    "The volunteer woth document number " + userVolunteer.getDocumentNumber() + " has not been found.");
+                    "The volunteer with document number " + userVolunteer.getDocumentNumber() + " has not been found.");
         UserVolunteer oldVolunteer = this.gateway.findUserVolunteerByNumberDocument(userVolunteer.getDocumentNumber());
         if (!oldVolunteer.verifyUsername(userVolunteer.getUsername()))
             if (this.gateway.existsByUsername(userVolunteer.getUsername()))
@@ -76,7 +76,7 @@ public class ManegeUserVolunteerCUImplAdapter implements ManegeUserVolunteerCUIn
         UserVolunteer volunteer = this.gateway.findUserVolunteerByNumberDocument(numberDocument);
         if (volunteer == null)
             this.errorFormatter.returnResponseErrorEntityNotFound(
-                    "The volunteer woth document number " + numberDocument + " has not been found.");
+                    "The volunteer with document number " + numberDocument + " has not been found.");
         return volunteer;
     }
 
