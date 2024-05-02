@@ -9,44 +9,46 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
- * Clase que representa un usuario en el sistema
+ * Clase que representa un usuario en el sistema.
+ * Los usuarios son entidades con información personal y roles asociados que determinan sus permisos en el sistema.
  */
 @Data
 @AllArgsConstructor
 public class User {
     
-    /** Número de documento del usuario */
+    /** Número de documento del usuario. */
     private long documentNumber;
     
-    /** Tipo de documento del usuario */
+    /** Tipo de documento del usuario. */
     private String documentType;
     
-    /** Nombres del usuario */
+    /** Nombres del usuario. */
     private String names;
     
-    /** Apellidos del usuario */
+    /** Apellidos del usuario. */
     private String lastNames;
     
-    /** Teléfono personal del usuario */
+    /** Teléfono personal del usuario. */
     private String personalPhone;
     
-    /** Correo electrónico personal del usuario */
+    /** Correo electrónico personal del usuario. */
     private String personalEmail;
     
-    /** Nombre de usuario del usuario */
+    /** Nombre de usuario del usuario. */
     private String username;
     
-    /** Contraseña del usuario */
+    /** Contraseña del usuario. */
     private String password;
     
-    /** Lista de roles asociados al usuario */
+    /** Lista de roles asociados al usuario. */
     private List<Role> roles;
     
-    /** Estado del usuario */
+    /** Estado del usuario. */
     private boolean state;
 
     /**
      * Constructor de la clase User. Inicializa la lista de roles.
+     * Crea un nuevo usuario sin roles asignados.
      */
     public User() {
         this.roles = new ArrayList<>();

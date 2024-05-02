@@ -23,6 +23,19 @@ import lombok.Data;
 
 /**
  * Clase de entidad que representa un usuario en la capa de persistencia.
+ * Esta entidad mapea la tabla "users" en la base de datos, que almacena información sobre los usuarios del sistema.
+ * 
+ * Contiene los siguientes atributos:
+ * - documentNumber: Número de documento del usuario.
+ * - documentType: Tipo de documento del usuario.
+ * - names: Nombres del usuario.
+ * - lastNames: Apellidos del usuario.
+ * - personalPhone: Teléfono personal del usuario.
+ * - personalEmail: Correo electrónico personal del usuario.
+ * - username: Nombre de usuario del usuario.
+ * - password: Contraseña del usuario.
+ * - roles: Lista de roles asociados al usuario.
+ * - state: Estado del usuario.
  */
 @Entity
 @Table(name = "users")
@@ -79,7 +92,8 @@ public class UserEntity implements UserDetails {
     public UserEntity() {
         this.roles = new ArrayList<>();
     }
-     /**
+
+    /**
      * Retorna una colección de objetos GrantedAuthority que representan los roles y permisos del usuario.
      * 
      * @return Colección de objetos GrantedAuthority que representan los roles y permisos del usuario.
@@ -95,6 +109,7 @@ public class UserEntity implements UserDetails {
         }
         return authorities;
     }
+
     /**
      * Indica si la cuenta del usuario no ha expirado.
      * 

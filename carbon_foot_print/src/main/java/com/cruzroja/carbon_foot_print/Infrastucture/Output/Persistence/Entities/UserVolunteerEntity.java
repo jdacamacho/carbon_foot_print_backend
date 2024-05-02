@@ -1,23 +1,34 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities;
 
-import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 /**
  * Clase de entidad que representa un voluntario en la capa de persistencia.
+ * Esta entidad mapea la tabla "Volunteers" en la base de datos, que almacena información sobre los voluntarios del sistema.
+ * 
+ * Contiene los siguientes atributos:
+ * - documentNumber: Número de documento del voluntario.
+ * - documentType: Tipo de documento del voluntario.
+ * - names: Nombres del voluntario.
+ * - lastNames: Apellidos del voluntario.
+ * - personalPhone: Teléfono personal del voluntario.
+ * - personalEmail: Correo electrónico personal del voluntario.
+ * - username: Nombre de usuario del voluntario.
+ * - password: Contraseña del voluntario.
+ * - roles: Lista de roles asociados al voluntario.
+ * - state: Estado del voluntario.
+ * - position: Posición del voluntario.
  */
 @Entity
 @Table(name = "Volunteers")
 @Getter
 @Setter
-@AllArgsConstructor
 public class UserVolunteerEntity extends UserEntity {
     
     /** Posición del voluntario. */
@@ -32,7 +43,7 @@ public class UserVolunteerEntity extends UserEntity {
     }
 
     /**
-     * Constructor de la clase UserVolunteerEntity con parametros.
+     * Constructor de la clase UserVolunteerEntity con parámetros.
      * 
      * @param documentNumber Número de documento del voluntario.
      * @param documentType Tipo de documento del voluntario.

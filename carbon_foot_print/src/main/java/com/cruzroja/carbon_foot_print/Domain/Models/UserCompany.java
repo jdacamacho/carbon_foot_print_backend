@@ -8,10 +8,11 @@ import lombok.Setter;
 
 /**
  * Clase que representa un usuario de empresa en el sistema.
+ * Los usuarios de empresa son entidades que representan a individuos asociados a una empresa, con información personal y de la empresa.
  */
 @Getter
 @Setter
-public class UserCompany extends User{
+public class UserCompany extends User {
     
     /** NIT de la empresa. */
     private long companyNit;
@@ -34,9 +35,7 @@ public class UserCompany extends User{
     /**
      * Constructor de la clase UserCompany.
      */
-    public UserCompany(){
-
-    }
+    public UserCompany() {}
 
     /**
      * Constructor de la clase UserCompany con todos los atributos.

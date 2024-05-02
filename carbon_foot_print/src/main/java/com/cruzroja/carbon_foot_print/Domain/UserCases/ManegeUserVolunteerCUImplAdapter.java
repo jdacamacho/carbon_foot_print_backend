@@ -88,4 +88,16 @@ public class ManegeUserVolunteerCUImplAdapter implements ManegeUserVolunteerCUIn
         return volunteers;
     }
 
+    @Override
+    public double detectCarbonFootprint(UserVolunteer userVolunteer) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'detectCarbonFootprint'");
+    }
+
+    @Override
+    public boolean updateCarbonCompensationProgress(UserVolunteer userVolunteer, double progress) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateCarbonCompensationProgress'");
+    }
+
 }
