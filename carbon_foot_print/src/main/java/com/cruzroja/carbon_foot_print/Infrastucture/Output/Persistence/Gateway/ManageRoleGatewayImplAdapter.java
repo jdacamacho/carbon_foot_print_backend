@@ -48,12 +48,6 @@ public class ManageRoleGatewayImplAdapter implements ManageRoleGatewayIntPort{
     }
 
     @Override
-    public void deleteRole(Role Role) {
-        RoleEntity roleToDelete = this.mapper.map(Role, RoleEntity.class);
-        this.serviceBD.delete(roleToDelete);
-    }
-
-    @Override
     public List<Permission> findAllPermissions() {
         List<PermissionEntity> dataFromBD = this.serviceBD.findAllPermissions();
         List<Permission> response = this.mapper.map(dataFromBD, new TypeToken<List<Permission>>(){}.getType());

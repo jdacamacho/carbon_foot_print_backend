@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -44,6 +45,7 @@ public class UserVolunteerRestController {
     private final MapperUserVolunteerInfraestructureDomain mapper;
 
     @GetMapping("")
+    @PreAuthorize("hasRole('Listar_Voluntarios')")
     @Transactional(readOnly = true)
     public ResponseEntity<List<UserVolunteerDTOResponse>> listVolunteers() {
         List<UserVolunteer> volunteers = this.volunteerCU.listUserVolunteers();
@@ -53,6 +55,7 @@ public class UserVolunteerRestController {
     }
 
     @GetMapping("/{documentNumber}")
+    @PreAuthorize("hasRole('Consultar_Voluntario')")
     @Transactional(readOnly = true)
     public ResponseEntity<UserVolunteerDTOResponse> getVolunteer(@PathVariable long documentNumber) {
         UserVolunteer volunteer = this.volunteerCU.getUserVolunteerByNumberDocument(documentNumber);
@@ -62,6 +65,7 @@ public class UserVolunteerRestController {
     }
 
     @GetMapping("/position")
+    @PreAuthorize("hasRole('Consultar_Voluntario_Posicion')")
     @Transactional(readOnly = true)
     public ResponseEntity<List<UserVolunteerDTOResponse>> getVolunteersByPosition(
             @NotEmpty @RequestParam String position) {
@@ -72,6 +76,7 @@ public class UserVolunteerRestController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('Crear_Voluntarios')")
     public ResponseEntity<?> saveVolunteer(@Valid @RequestBody UserVolunteerDTORequest request, BindingResult result) {
         UserVolunteer voluntario = this.mapper.mapRequestModel(request);
         Map<String, Object> response = new HashMap<>();
@@ -90,6 +95,7 @@ public class UserVolunteerRestController {
     }
 
     @PutMapping("")
+    @PreAuthorize("hasRole('Actualizar_Voluntarios')")
     public ResponseEntity<?> updateUserVolunteer(@Valid @RequestBody UserVolunteerDTORequest request,
             BindingResult result) {
         UserVolunteer volunteer = this.mapper.mapRequestModel(request);

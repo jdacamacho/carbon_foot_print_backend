@@ -11,8 +11,6 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeUserVo
 @Mapper(componentModel = "spring")
 public interface MapperUserVolunteerInfraestructureDomain {
     UserVolunteer mapRequestModel(UserVolunteerDTORequest request);
-
     UserVolunteerDTOResponse mapModelToResponse(UserVolunteer model);
-
     List<UserVolunteerDTOResponse> mapModelsToResponse(List<UserVolunteer> volunteers);
 }

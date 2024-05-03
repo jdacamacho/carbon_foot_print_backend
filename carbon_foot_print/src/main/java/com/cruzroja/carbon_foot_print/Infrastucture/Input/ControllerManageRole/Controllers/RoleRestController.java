@@ -14,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,6 +55,7 @@ public class RoleRestController {
 
     @GetMapping("/idRole/{idRole}")
     @Transactional(readOnly = true)
+    @PreAuthorize("hasRole('Consultar_Rol')")
     public ResponseEntity<RoleDTOResponse> getRole(@PathVariable long idRole){
         Role role = this.roleCU.getRole(idRole);
         ResponseEntity<RoleDTOResponse> objResponse = new ResponseEntity<RoleDTOResponse>(
@@ -66,6 +66,7 @@ public class RoleRestController {
     
     @GetMapping("/permissions")
     @Transactional(readOnly = true)
+    @PreAuthorize("hasRole('Listar_permisos')")
     public ResponseEntity<List<PermissionDTOResponse>> listPermissions(){
         List<Permission> permissions = this.roleCU.listPermissions();
         ResponseEntity<List<PermissionDTOResponse>> objResponse = new ResponseEntity<List<PermissionDTOResponse>>(
@@ -74,6 +75,7 @@ public class RoleRestController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('Crear_Roles')")
     public ResponseEntity<?> saveRole(@Valid @RequestBody RoleDTORequest roleRequest, BindingResult result){
         Role role = this.mapper.mapRequestRoModel(roleRequest);
         Map<String, Object> response = new HashMap<>();
@@ -102,6 +104,7 @@ public class RoleRestController {
     }
 
     @PutMapping("")
+    @PreAuthorize("hasRole('Actualizar_Roles')")
     public ResponseEntity<?> updateRole(@Valid @RequestBody RoleWithIdDTORequest roleRequest, BindingResult result){
         Role role = this.mapper.mapRequestWithIdToModel(roleRequest);
         Map<String, Object> response = new HashMap<>();
@@ -127,12 +130,6 @@ public class RoleRestController {
         }
 
         return new ResponseEntity<RoleDTOResponse>(objRole, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{idRole}")
-    public ResponseEntity<?> deleteRole(@PathVariable long idRole){
-        boolean flagResponse = this.roleCU.deleteRole(idRole);
-        return ResponseEntity.ok(flagResponse);
     }
     
 }

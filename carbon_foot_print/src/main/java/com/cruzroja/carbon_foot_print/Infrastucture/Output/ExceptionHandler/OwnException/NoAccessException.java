@@ -5,19 +5,19 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.Exce
 import lombok.Getter;
 
 @Getter
-public class NoDataException extends RuntimeException{
+public class NoAccessException extends RuntimeException{
     private final String mesageKey;
     private final String code;
 
-    public NoDataException(ErrorCode code){
+    public NoAccessException(ErrorCode code){
         super(code.getCode());
         this.mesageKey = code.getMessageKey();
         this.code = code.getCode();
     }
 
-    public NoDataException(final String message){
+    public NoAccessException(final String message){
         super(message);
-        this.mesageKey = ErrorCode.NO_DATA.getMessageKey();
-        this.code = ErrorCode.NO_DATA.getCode();
+        this.mesageKey = ErrorCode.NO_ACCESS.getMessageKey();
+        this.code = ErrorCode.NO_ACCESS.getCode();
     }
 }

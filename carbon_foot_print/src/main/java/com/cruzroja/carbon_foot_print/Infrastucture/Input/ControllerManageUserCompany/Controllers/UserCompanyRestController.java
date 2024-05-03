@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -42,6 +43,7 @@ public class UserCompanyRestController {
     private final MapperUserCompanyInfrastuctureDomain mapper;
 
     @GetMapping("")
+    @PreAuthorize("hasRole('Listar_Empresas')")
     @Transactional(readOnly = true)
     public ResponseEntity<List<UserCompanyDTOResponse>> listCompanies(){
         List<UserCompany> companies = this.userCompanyCU.listUserCompany();
@@ -52,6 +54,7 @@ public class UserCompanyRestController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('Crear_Empresas')")
     public ResponseEntity<?> saveCompany(@Valid @RequestBody UserCompanyDTORequest companyRequest, BindingResult result){
         UserCompany company = this.mapper.mapRequestToModel(companyRequest);
         Map<String, Object> response = new HashMap<>();
@@ -81,6 +84,7 @@ public class UserCompanyRestController {
     }
 
     @PutMapping("")
+    @PreAuthorize("hasRole('Actualizar_Empresas')")
     public ResponseEntity<?> updateCompany(@Valid @RequestBody UserCompanyDTORequest companyRequest, BindingResult result){
         UserCompany company = this.mapper.mapRequestToModel(companyRequest);
         Map<String, Object> response = new HashMap<>();
@@ -110,6 +114,7 @@ public class UserCompanyRestController {
     }
 
     @GetMapping("/nit/{nitCompany}")
+    @PreAuthorize("hasRole('Consultar_Empresa_NIT')")
     @Transactional(readOnly = true)
     public ResponseEntity<UserCompanyDTOResponse> getCompanyByNit(@PathVariable long nitCompany){
         UserCompany company = this.userCompanyCU.getUserCompanyByNit(nitCompany);
@@ -120,8 +125,9 @@ public class UserCompanyRestController {
     }
 
     @GetMapping("/numberDocument/{numberDocument}")
+    @PreAuthorize("hasRole('Consultar_Empresa_Documento')")
     @Transactional(readOnly = true)
-    public ResponseEntity<UserCompanyDTOResponse> getCompanyByUserCharge(@PathVariable long numberDocument){
+    public ResponseEntity<UserCompanyDTOResponse> getCompanyByNumberDocument(@PathVariable long numberDocument){
         UserCompany company = this.userCompanyCU.getUserCompanyByNumberDocument(numberDocument);
         ResponseEntity<UserCompanyDTOResponse> objResponse = new ResponseEntity<UserCompanyDTOResponse>(
             mapper.mapModelToResponse(company),HttpStatus.OK
@@ -130,6 +136,5 @@ public class UserCompanyRestController {
     }
 
 
-    
 }
 

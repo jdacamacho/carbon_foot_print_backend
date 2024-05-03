@@ -25,12 +25,12 @@ public class UserCompanyDTOResponse extends UserDTOResponse{
 
     public UserCompanyDTOResponse(long documentNumber,String documentType,
                             String names, String lastNames,String personalPhone,
-                            String personalEmail,String username,String password,
+                            String personalEmail,String username,
                             List<RoleDTOResponse> roles,long companyNit,String companyName,
                             String companyPhone,AddressDTOResponse address, Date registrationDate){
         super(documentNumber,documentType,
                 names,lastNames,personalPhone,
-                personalEmail,username,password,
+                personalEmail,username,
                 roles,true);
         this.companyNit = companyNit;
         this.companyName = companyName;
