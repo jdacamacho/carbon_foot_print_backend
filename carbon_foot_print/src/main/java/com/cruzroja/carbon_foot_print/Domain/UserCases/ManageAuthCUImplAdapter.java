@@ -38,25 +38,29 @@ public class ManageAuthCUImplAdapter implements ManageAuthCUIntPort {
     public Credential login(String username, String password) {
         Credential credential = new Credential();
         Optional<UserEntity> userBD = this.gateway.findByUsername(username);
-        if(!userBD.get().isState()){
-            this.exceptionFormatter.returNoAccess("User doesn't have permission to Log In");
+        if(!userBD.isPresent()){
+            this.exceptionFormatter.returnResponseBadCredentials("Username not found");
         }else{
-            try{
-                Authentication authentication = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-                if(authentication.isAuthenticated()){
-                    ModelMapper mapper = new ModelMapper();
-                    UserDetails user = userBD.orElseThrow();
-                    String token = this.jwtService.getToken(user);
-                    credential.setUser(mapper.map(userBD.get(),User.class));
-                    credential.setToken(token);  
+            
+            if(!userBD.get().isState()){
+                this.exceptionFormatter.returNoAccess("User doesn't have permission to Log In");
+            }else{
+                try{
+                    Authentication authentication = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+                    if(authentication.isAuthenticated()){
+                        ModelMapper mapper = new ModelMapper();
+                        UserDetails user = userBD.orElseThrow();
+                        String token = this.jwtService.getToken(user);
+                        credential.setUser(mapper.map(userBD.get(),User.class));
+                        credential.setToken(token);  
+                    }
+                }catch(BadCredentialsException ex){
+                    this.exceptionFormatter.returnResponseBadCredentials("Checkout your username or password");
+                }catch (Exception ex) {
+                    this.exceptionFormatter.returnResponseBadCredentials("An error occurred during authentication" + ex);
                 }
-            }catch(BadCredentialsException ex){
-                this.exceptionFormatter.returnResponseBadCredentials("Checkout your username or password");
-            }catch (Exception ex) {
-                this.exceptionFormatter.returnResponseBadCredentials("An error occurred during authentication" + ex);
             }
         }
-       
         
         return credential;
     }
