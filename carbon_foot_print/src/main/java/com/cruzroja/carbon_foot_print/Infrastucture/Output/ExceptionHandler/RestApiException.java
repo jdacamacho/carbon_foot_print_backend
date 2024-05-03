@@ -44,6 +44,7 @@ public class RestApiException {
                                         .setUrl(req.getRequestURL().toString()).setMethod(req.getMethod());
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    
 
     @ExceptionHandler(ExpiredJwtException.class)
     public ResponseEntity<Error> handleExpiredJwtException(final HttpServletRequest req,
