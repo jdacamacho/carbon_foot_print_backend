@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@CrossOrigin(origins = { "http_//localhost:5050" })
+@CrossOrigin(origins = { "http://localhost:5050" })
 @RestController
 @RequestMapping("/api/categories")
 @Validated
