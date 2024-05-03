@@ -2,6 +2,7 @@ package com.cruzroja.carbon_foot_print.Domain.UserCases;
 
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,6 +13,7 @@ import com.cruzroja.carbon_foot_print.Application.Input.ManageAuthCUIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageAuthGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Domain.Models.Credential;
+import com.cruzroja.carbon_foot_print.Domain.Models.User;
 import com.cruzroja.carbon_foot_print.Infrastucture.JWT.JwtService;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.UserEntity;
 
@@ -42,11 +44,10 @@ public class ManageAuthCUImplAdapter implements ManageAuthCUIntPort {
             try{
                 Authentication authentication = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
                 if(authentication.isAuthenticated()){
-                    
+                    ModelMapper mapper = new ModelMapper();
                     UserDetails user = userBD.orElseThrow();
                     String token = this.jwtService.getToken(user);
-                    credential.setDocumentNumber(userBD.get().getDocumentNumber());
-                    credential.setUsername(userBD.get().getUsername());
+                    credential.setUser(mapper.map(userBD.get(),User.class));
                     credential.setToken(token);  
                 }
             }catch(BadCredentialsException ex){
