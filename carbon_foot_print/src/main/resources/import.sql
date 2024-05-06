@@ -38,3 +38,9 @@ INSERT INTO permissions(idPermission, name, description) VALUES (301, "ROLE_Crea
 INSERT INTO permissions(idPermission, name, description) VALUES (302, "ROLE_Actualizar_Empresas","Permiso para actualizar las empresas en el sistema");
 INSERT INTO permissions(idPermission, name, description) VALUES (303, "ROLE_Consultar_Empresa_NIT","Permiso para consultar una empresa por NIT");
 INSERT INTO permissions(idPermission, name, description) VALUES (304, "ROLE_Consultar_Empresa_Documento","Permiso para consultar una empresa por numero de documento");
+
+#PERMISOS PARA CATEGORIAS
+INSERT INTO permissions(idPermission, name, description) VALUES (400, "ROLE_Listar_Categorias","Permiso para consultar todos las categorías en el sistema");
+INSERT INTO permissions(idPermission, name, description) VALUES (401, "ROLE_Crear_Categoria","Permiso para crear categorías en el sistema");
+INSERT INTO permissions(idPermission, name, description) VALUES (402, "ROLE_Actualizar_Categoria","Permiso para actualizar las categorías en el sistema");
+INSERT INTO permissions(idPermission, name, description) VALUES (403, "ROLE_Consultar_Categoria_ID","Permiso para consultar una categoría por ID");
