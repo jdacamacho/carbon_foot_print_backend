@@ -11,14 +11,10 @@ import lombok.Data;
 @AllArgsConstructor
 public class Credential {
     
-    /** Número de documento asociado a las credenciales. */
-    private long documentNumber;
-    
-    /** Nombre de usuario asociado a las credenciales. */
-    private String username;
-    
     /** Token de autenticación asociado a las credenciales. */
     private String token;
+
+    private User user;
 
     /**
      * Constructor de la clase Credential.

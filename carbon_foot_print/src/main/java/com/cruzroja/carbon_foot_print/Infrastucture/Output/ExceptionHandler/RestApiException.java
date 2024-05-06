@@ -24,6 +24,8 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnE
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.NoAccessException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.NoDataException;
 
+import io.jsonwebtoken.ExpiredJwtException;
+
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.ExceptionStructure.Error;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,6 +43,18 @@ public class RestApiException {
                                         HttpStatus.INTERNAL_SERVER_ERROR.value())
                                         .setUrl(req.getRequestURL().toString()).setMethod(req.getMethod());
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    
+
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<Error> handleExpiredJwtException(final HttpServletRequest req,
+                                                           final ExpiredJwtException ex, final Locale locale) {
+        final Error error = ErrorUtils
+                .createError(ErrorCode.TOKEN_EXPIRED.getCode(),
+                            ErrorCode.TOKEN_EXPIRED.getMessageKey(),
+                            HttpStatus.UNAUTHORIZED.value())
+                .setUrl(req.getRequestURL().toString()).setMethod(req.getMethod());
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(AccessDeniedException.class)

@@ -11,7 +11,9 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.security.access.AccessDeniedException;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,20 +31,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         
-            final String token = getTokenFromRequest(request);
-            final String username;
+        final String token = getTokenFromRequest(request);
+        final String username;
 
-            if(token == null){
-                filterChain.doFilter(request, response);
-                return;
-            }
+        if (token == null) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
+        try {
             username = jwtService.getUsernameFromToken(token);
 
-            if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
+            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-            
-                if(jwtService.isTokenValid(token,userDetails)){
+
+                if (jwtService.isTokenValid(token, userDetails)) {
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,
@@ -51,12 +54,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     
                     SecurityContextHolder.getContext().setAuthentication(authToken);
-                }
+                } 
             }
-            
+        } catch (ExpiredJwtException e) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Token has expired");
+            return;
+        } catch(AccessDeniedException e){
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.getWriter().write("User not has access to this endPoint");
+            return;
+        }
 
-
-            filterChain.doFilter(request, response);
+        filterChain.doFilter(request, response);
     }
 
     private String getTokenFromRequest(HttpServletRequest request) {
