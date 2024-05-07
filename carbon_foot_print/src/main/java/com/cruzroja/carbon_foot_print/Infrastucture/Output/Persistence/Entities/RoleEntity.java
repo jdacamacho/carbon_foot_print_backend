@@ -18,6 +18,13 @@ import lombok.Data;
 
 /**
  * Clase de entidad que representa un rol en la capa de persistencia.
+ * Esta entidad mapea la tabla "roles" en la base de datos, que almacena información sobre los roles del sistema.
+ * 
+ * Contiene los siguientes atributos:
+ * - idRole: Identificador único del rol.
+ * - typeRole: Tipo de rol.
+ * - state: Estado del rol.
+ * - permissions: Lista de permisos asociados al rol.
  */
 @Entity
 @Table(name = "roles")
@@ -46,7 +53,8 @@ public class RoleEntity {
     private List<PermissionEntity> permissions;
 
     /**
-     * Constructor de la clase RoleEntity. Inicializa la lista de permisos.
+     * Constructor de la clase RoleEntity.
+     * Este constructor inicializa la lista de permisos.
      */
     public RoleEntity(){
         this.permissions = new ArrayList<>();

@@ -14,6 +14,15 @@ import lombok.Setter;
 
 /**
  * Clase de entidad que representa un usuario de empresa en la capa de persistencia.
+ * Esta entidad mapea la tabla "companies" en la base de datos, que almacena información sobre los usuarios de empresa.
+ * 
+ * Contiene los siguientes atributos:
+ * - companyNit: NIT de la empresa.
+ * - companyName: Nombre de la empresa.
+ * - companyPhone: Teléfono de la empresa.
+ * - companyEmail: Correo electrónico de la empresa.
+ * - address: Dirección de la empresa.
+ * - registrationDate: Fecha de registro de la empresa.
  */
 @Entity
 @Table(name = "companies")

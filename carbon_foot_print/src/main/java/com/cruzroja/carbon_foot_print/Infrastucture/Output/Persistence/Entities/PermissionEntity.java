@@ -9,6 +9,12 @@ import lombok.Data;
 
 /**
  * Clase de entidad que representa un permiso en la capa de persistencia.
+ * Esta entidad mapea la tabla "permissions" en la base de datos, que almacena información sobre los permisos del sistema.
+ * 
+ * Contiene los siguientes atributos:
+ * - idPermission: Identificador único del permiso.
+ * - name: Nombre del permiso.
+ * - description: Descripción del permiso.
  */
 @Entity
 @Table(name = "permissions")
@@ -30,6 +36,7 @@ public class PermissionEntity {
 
     /**
      * Constructor de la clase PermissionEntity.
+     * Este constructor crea una instancia de PermissionEntity sin ningún argumento.
      */
     public PermissionEntity(){
 

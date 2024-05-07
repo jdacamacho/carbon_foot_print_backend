@@ -4,7 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
- * Clase que representa una dirección.
+ * Clase que representa una dirección postal asociada a una empresa.
+ * Esta clase almacena información detallada sobre la dirección de una empresa,
+ * incluyendo la calle, el número, el piso o apartamento, el barrio, la ciudad
+ * y el país.
  */
 @Data
 @AllArgsConstructor
@@ -36,6 +39,7 @@ public class Address {
 
     /**
      * Constructor de la clase Address.
+     * Crea una nueva instancia de la clase Address.
      */
     public Address(){
         

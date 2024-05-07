@@ -7,20 +7,19 @@ import java.util.List;
 
 /**
  * Clase que representa un usuario voluntario en el sistema.
+ * Los usuarios voluntarios son individuos que ofrecen su tiempo y esfuerzo de forma no remunerada para contribuir a la huella de carbono.
  */
 @Getter
 @Setter
 public class UserVolunteer extends User {
     
-    /** Posición del voluntario. */
+    /** Posición del voluntario en la organización o proyecto. */
     private String position;
 
     /**
      * Constructor de la clase UserVolunteer.
      */
-    public UserVolunteer() {
-
-    }
+    public UserVolunteer() {}
 
     /**
      * Constructor de la clase UserVolunteer con todos los atributos.
@@ -34,7 +33,7 @@ public class UserVolunteer extends User {
      * @param username       Nombre de usuario del voluntario.
      * @param password       Contraseña del voluntario.
      * @param roles          Lista de roles asociados al voluntario.
-     * @param position       Posición del voluntario.
+     * @param position       Posición del voluntario en la organización o proyecto.
      */
     public UserVolunteer(long documentNumber, String documentType, String names, String lastNames, String personalPhone,
                          String personalEmail, String username, String password, List<Role> roles, String position) {

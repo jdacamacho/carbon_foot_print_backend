@@ -5,42 +5,46 @@ import java.util.List;
 import com.cruzroja.carbon_foot_print.Domain.Models.Permission;
 import com.cruzroja.carbon_foot_print.Domain.Models.Role;
 
+/**
+ * Interfaz que define las operaciones para la gestión de roles en el sistema.
+ */
 public interface ManageRoleCUIntPort {
 
     /**
-     * Reglas de negocio para listar todos los roles del sistema.
+     * Obtiene una lista de todos los roles del sistema.
      *
-     * @return Lista de roles {List<Role>} o {Error} en caso de fallo.
+     * @return Lista de roles si la operación se realiza con éxito, o un objeto Error si ocurre un fallo.
      */
     public List<Role> listRoles();
 
     /**
-     *  Reglas de negocio para guardar un nuevo rol.
-     * @param role {Role} que representa el rol a guardar.
-     * @return {Role} información del rol guardado o {Error} en caso de fallo.
+     * Guarda un nuevo rol en el sistema.
+     *
+     * @param role El rol a guardar.
+     * @return La información del rol guardado si la operación se realiza con éxito, o un objeto Error si ocurre un fallo.
      */
     public Role saveRole(Role role);
 
     /**
-     * Reglas de negocio para consultar un rol específico por su identificador.
+     * Obtiene un rol específico por su identificador.
      *
-     * @param roleId Identificador del rol {long}
-     * @return Rol encontrado {Role} o  {Error} en caso de fallo.
+     * @param roleId El identificador del rol.
+     * @return El rol encontrado, o un objeto Error si ocurre un fallo.
      */
     public Role getRole(long idRole);
 
     /**
-     * Reglas de negocio para actualizar la información de un rol.
+     * Actualiza la información de un rol en el sistema.
      *
-     * @param role  {Role} que representa el rol actualizado.
-     * @return Rol actualizado {Role} o  {Error} en caso de fallo.
+     * @param role El rol con la información actualizada.
+     * @return El rol actualizado si la operación se realiza con éxito, o un objeto Error si ocurre un fallo.
      */
     public Role updateRole(Role role);
 
     /**
-     * Reglas de negocio para obtener una lista de todos los permisos disponibles.
+     * Obtiene una lista de todos los permisos disponibles en el sistema.
      *
-     * @return Lista de permisos {List<Permission>} o un objeto {Error} en caso de fallo.
+     * @return Lista de permisos si la operación se realiza con éxito, o un objeto Error si ocurre un fallo.
      */
     public List<Permission> listPermissions();
 }

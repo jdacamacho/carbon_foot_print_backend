@@ -11,6 +11,7 @@ import lombok.Data;
 
 /**
  * Clase de entidad que representa una dirección en la capa de persistencia.
+ * Esta entidad mapea la tabla "addresses" en la base de datos, que almacena información sobre las direcciones asociadas a empresas.
  */
 @Entity
 @Table(name = "addresses")
@@ -53,6 +54,7 @@ public class AddressEntity {
 
     /**
      * Constructor de la clase AddressEntity.
+     * Se utiliza para crear instancias de la entidad AddressEntity.
      */
     public AddressEntity(){
 

@@ -10,6 +10,7 @@ import lombok.Data;
 
 /**
  * Clase que representa un rol en el sistema.
+ * Los roles definen conjuntos de permisos que determinan las acciones que un usuario puede realizar en el sistema.
  */
 @Data
 @AllArgsConstructor
@@ -29,6 +30,7 @@ public class Role {
 
     /**
      * Constructor de la clase Role. Inicializa la lista de permisos.
+     * Crea un nuevo rol con una lista de permisos vacía.
      */
     public Role(){
         this.permissions = new ArrayList<>();
@@ -79,8 +81,8 @@ public class Role {
      * 
      * @param typeRole Tipo de rol a verificar.
      * @return true si el tipo de rol coincide, false de lo contrario
-    */
-public boolean verifyTypeRole(String typeRole){
-    return this.typeRole.equals(typeRole);
+     */
+    public boolean verifyTypeRole(String typeRole){
+        return this.typeRole.equals(typeRole);
     }
 }

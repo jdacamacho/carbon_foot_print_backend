@@ -5,75 +5,69 @@ import com.cruzroja.carbon_foot_print.Domain.Models.UserVolunteer;
 import java.util.List;
 
 /**
- * Conexión con el servicio de persistencia
+ * Interfaz para gestionar la conexión con el servicio de persistencia de usuarios voluntarios.
  */
 public interface ManegeUserVolunteerGatewayIntPort {
+
     /**
-     * Listar usuarios almacenados en el servicio de persistencia.
+     * Lista todos los usuarios voluntarios almacenados en el servicio de persistencia.
      * 
-     * @return {List<UserVolunteer>} Lista de usuarios voluntarios.
+     * @return Lista de usuarios voluntarios.
      */
     public List<UserVolunteer> findAll();
 
     /**
-     * Guarda un usuario en el servicio de persistencia.
+     * Guarda un usuario voluntario en el servicio de persistencia.
      * 
-     * @param userVolunteer {UserVolunteer} Información a guardar en el servicio de
-     *                      persistencia.
-     * @return {UserVolunteer} Usuario guardado en el servicio de persistencia.
+     * @param userVolunteer Información del usuario voluntario a guardar.
+     * @return Usuario voluntario guardado en el servicio de persistencia.
      */
     public UserVolunteer save(UserVolunteer userVolunteer);
 
     /**
-     * Recupera un usuario por el número de documento
+     * Recupera un usuario voluntario por su número de documento.
      * 
-     * @param numberDocument {long} número de documento del usuario.
-     * @return {UserVolunteer} usuario recuperado del servicio de persistencia.
+     * @param numberDocument Número de documento del usuario voluntario.
+     * @return Usuario voluntario recuperado del servicio de persistencia, o null si no se encuentra.
      */
     public UserVolunteer findUserVolunteerByNumberDocument(long numberDocument);
 
     /**
-     * Recupera los usuarios voluntarios a partir de la posición que tienen
-     * asignada.
+     * Recupera los usuarios voluntarios que tienen asignada una posición específica.
      * 
-     * @param position {String} posición del usuario.
-     * @return {List<UserVolunteer>} Lista de usuarios encontrados en el servicio de
-     *         persistecia o null en caso de que no encuentre ningun voluntario
+     * @param position Posición del usuario voluntario.
+     * @return Lista de usuarios voluntarios encontrados en el servicio de persistencia, o null si no se encuentra ninguno.
      */
     public List<UserVolunteer> findUserVolunteerByPosition(String position);
 
     /**
-     * Recupera los roles que están guardados en el servicio de persistencia.
+     * Recupera los roles disponibles en el servicio de persistencia.
      * 
-     * @return {List<Role>} Lista de roles recuperada.
+     * @return Lista de roles recuperados del servicio de persistencia.
      */
     public List<Role> findRoles();
 
     /**
-     * Determina si existe un usuario por el número de documento.
+     * Determina si existe un usuario voluntario con el número de documento especificado.
      * 
-     * @param id {long} número de documento del usuario.
-     * @return {boolean} [True] si el usuario fue encontrado [False] en caso
-     *         contrario.
+     * @param id Número de documento del usuario voluntario.
+     * @return true si el usuario voluntario existe en el servicio de persistencia, false de lo contrario.
      */
     public boolean existsById(long id);
 
     /**
-     * Determina si existe un usuario a partir del nombre de usuario.
+     * Determina si existe un usuario voluntario con el nombre de usuario especificado.
      * 
-     * @param username {String} nombre de usuario.
-     * @return {boolean} [True] si el usuario fue encontrado [False] en caso
-     *         contrario.
+     * @param username Nombre de usuario del usuario voluntario.
+     * @return true si el usuario voluntario existe en el servicio de persistencia, false de lo contrario.
      */
     public boolean existsByUsername(String username);
 
     /**
-     * Determina si existe un usuario a partir del correo personal.
+     * Determina si existe un usuario voluntario con el correo electrónico personal especificado.
      * 
-     * @param personalEmail {String} correo personal.
-     * @return {boolean} [True] si el usuario fue encontrado [False] en caso
-     *         contrario.
+     * @param personalEmail Correo electrónico personal del usuario voluntario.
+     * @return true si el usuario voluntario existe en el servicio de persistencia, false de lo contrario.
      */
     public boolean existsByPersonalEmail(String personalEmail);
-
 }
