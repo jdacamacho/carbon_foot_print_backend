@@ -51,7 +51,6 @@ public class SecurityConfigurations {
                 .requestMatchers(HttpMethod.PUT, "/api/user/volunteers").hasRole("Actualizar_Voluntarios")
                 .anyRequest().permitAll()
                 //Para que puedan usar los demas endopints cambiar authenticated() por permiteAll()
-                .anyRequest().authenticated()
                 )
             .sessionManagement(sessionManager->
                 sessionManager 

@@ -62,6 +62,7 @@ public class BeanConfigurations {
     ManegeCategoryCUImplAdapter createCategoryCU(ManegeCategoryGatewayIntPort gateway,
             ExceptionFormatterIntPort exceptionFormatter) {
         return new ManegeCategoryCUImplAdapter(gateway, exceptionFormatter);
+    }    
     @Bean
     public ManagePollutionTypeCUImplAdapter createPollutionTypeCU(ManagePollutionTypeGatewayIntPort gateway,
             ExceptionFormatterIntPort exceptionFormatter) {
