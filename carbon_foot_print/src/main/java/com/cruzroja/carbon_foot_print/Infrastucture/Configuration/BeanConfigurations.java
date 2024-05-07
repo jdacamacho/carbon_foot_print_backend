@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageAuthGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManagePollutionTypeGatewayIntPort;
+import com.cruzroja.carbon_foot_print.Application.Output.ManagePollutionTypeGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageRoleGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageUserCompanyGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManegeCategoryGatewayIntPort;
