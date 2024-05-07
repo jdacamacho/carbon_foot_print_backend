@@ -9,7 +9,7 @@ import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPo
 import com.cruzroja.carbon_foot_print.Application.Output.ManageAuthGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageRoleGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageUserCompanyGatewayIntPort;
-import com.cruzroja.carbon_foot_print.Application.Output.ManegeCategoryGatewayIntPort;
+import com.cruzroja.carbon_foot_print.Application.Output.ManageCategoryGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManegeUserVolunteerGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageAuthCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageRoleCUImplAdapter;
@@ -56,7 +56,7 @@ public class BeanConfigurations {
     }
 
     @Bean
-    ManegeCategoryCUImplAdapter createCategoryCU(ManegeCategoryGatewayIntPort gateway,
+    ManegeCategoryCUImplAdapter createCategoryCU(ManageCategoryGatewayIntPort gateway,
             ExceptionFormatterIntPort exceptionFormatter) {
         return new ManegeCategoryCUImplAdapter(gateway, exceptionFormatter);
     }

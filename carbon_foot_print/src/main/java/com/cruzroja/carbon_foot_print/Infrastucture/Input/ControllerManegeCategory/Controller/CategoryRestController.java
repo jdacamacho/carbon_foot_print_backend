@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cruzroja.carbon_foot_print.Application.Input.ManegeCategoryCUIntPort;
+import com.cruzroja.carbon_foot_print.Application.Input.ManageCategoryCUIntPort;
 import com.cruzroja.carbon_foot_print.Domain.Models.Category;
 
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCategory.DTORequest.CategoryDTORequest;
@@ -42,7 +42,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 @Validated
 @RequiredArgsConstructor
 public class CategoryRestController {
-    private final ManegeCategoryCUIntPort categoryCU;
+    private final ManageCategoryCUIntPort categoryCU;
     private final MapperCategoryInfraestructureDomainImpl mapper;
 
     @GetMapping("")

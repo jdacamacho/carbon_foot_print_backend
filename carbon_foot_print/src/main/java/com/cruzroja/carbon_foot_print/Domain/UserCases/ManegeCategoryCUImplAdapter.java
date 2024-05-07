@@ -2,17 +2,17 @@ package com.cruzroja.carbon_foot_print.Domain.UserCases;
 
 import java.util.List;
 
-import com.cruzroja.carbon_foot_print.Application.Input.ManegeCategoryCUIntPort;
+import com.cruzroja.carbon_foot_print.Application.Input.ManageCategoryCUIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
-import com.cruzroja.carbon_foot_print.Application.Output.ManegeCategoryGatewayIntPort;
+import com.cruzroja.carbon_foot_print.Application.Output.ManageCategoryGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Domain.Models.Category;
 
-public class ManegeCategoryCUImplAdapter implements ManegeCategoryCUIntPort {
+public class ManegeCategoryCUImplAdapter implements ManageCategoryCUIntPort {
 
-    private final ManegeCategoryGatewayIntPort gateway;
+    private final ManageCategoryGatewayIntPort gateway;
     private final ExceptionFormatterIntPort errorFormatter;
 
-    public ManegeCategoryCUImplAdapter(ManegeCategoryGatewayIntPort gateway, ExceptionFormatterIntPort errorFormatter) {
+    public ManegeCategoryCUImplAdapter(ManageCategoryGatewayIntPort gateway, ExceptionFormatterIntPort errorFormatter) {
         this.gateway = gateway;
         this.errorFormatter = errorFormatter;
     }

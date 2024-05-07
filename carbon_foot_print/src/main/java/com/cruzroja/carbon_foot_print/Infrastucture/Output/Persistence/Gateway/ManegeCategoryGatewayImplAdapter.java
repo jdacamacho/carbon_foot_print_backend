@@ -6,13 +6,13 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
-import com.cruzroja.carbon_foot_print.Application.Output.ManegeCategoryGatewayIntPort;
+import com.cruzroja.carbon_foot_print.Application.Output.ManageCategoryGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Domain.Models.Category;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.CategoryEntity;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Repositories.CategoryRepository;
 
 @Service
-public class ManegeCategoryGatewayImplAdapter implements ManegeCategoryGatewayIntPort {
+public class ManegeCategoryGatewayImplAdapter implements ManageCategoryGatewayIntPort {
 
     private final CategoryRepository serviceBD;
     private final ModelMapper mapper;
