@@ -30,7 +30,12 @@ public class ManagePollutionTypeCUImplAdapter implements ManagePollutionTypeCUIn
 
     @Override
     public PollutionType savePollutionType(PollutionType pollutionType) {
-        if (gateway.existsByName(pollutionType.getName())) {
+        Long id = pollutionType.getId();
+        if (id != null && gateway.existsById(pollutionType.getId())) {
+            errorFormatter.returnResponseErrorEntityExists("Pollution type with the same ID already exists");
+            // Lanzar una excepción adecuada en lugar de devolver null
+            throw new RuntimeException("Pollution type with the same ID already exists");
+        } else if (gateway.existsByName(pollutionType.getName())) {
             errorFormatter.returnResponseErrorEntityExists("Pollution type with the same name already exists");
             // Lanzar una excepción adecuada en lugar de devolver null
             throw new RuntimeException("Pollution type with the same name already exists");
@@ -45,16 +50,19 @@ public class ManagePollutionTypeCUImplAdapter implements ManagePollutionTypeCUIn
             errorFormatter.returnResponseErrorEntityNotFound("Pollution type not found");
             // Lanzar una excepción adecuada en lugar de devolver null
             throw new RuntimeException("Pollution type not found");
+        } else if (!isValidPollutionType(pollutionType)) {
+            errorFormatter.returnResponseBusinessRuleViolated("Invalid pollution type data");
+            // Lanzar una excepción adecuada en lugar de devolver null
+            throw new RuntimeException("Invalid pollution type data");
+        } else if (gateway.existsByName(pollutionType.getName())) {
+            errorFormatter.returnResponseErrorEntityExists("Pollution type with the same name already exists");
+            // Lanzar una excepción adecuada en lugar de devolver null
+            throw new RuntimeException("Pollution type with the same name already exists");
         } else {
-            if (!isValidPollutionType(pollutionType)) {
-                errorFormatter.returnResponseBusinessRuleViolated("Invalid pollution type data");
-                // Lanzar una excepción adecuada en lugar de devolver null
-                throw new RuntimeException("Invalid pollution type data");
-            } else {
-                return gateway.updatePollutionType(pollutionType);
-            }
+            return gateway.updatePollutionType(pollutionType);
         }
     }
+    
 
 
     private boolean isValidPollutionType(PollutionType pollutionType) {
@@ -79,7 +87,7 @@ public class ManagePollutionTypeCUImplAdapter implements ManagePollutionTypeCUIn
         return gateway.getPollutionTypeByName(name);
     }
 
-    @Override
+    
     public boolean existsByName(String name) {
         return gateway.existsByName(name);
     }
