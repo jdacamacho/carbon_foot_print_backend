@@ -5,6 +5,7 @@ import com.cruzroja.carbon_foot_print.Domain.Models.PollutionType;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManagePollutionType.DTOResponse.PollutionTypeDTOResponse;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManagePollutionType.mappers.MapperPollutionTypeInfraestructureDomain;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,7 @@ public class PollutionTypeRestController {
     }
 
     @PostMapping
-    public ResponseEntity<PollutionTypeDTOResponse> savePollutionType(@RequestBody PollutionType pollutionType) {
+    public ResponseEntity<PollutionTypeDTOResponse> savePollutionType( @Valid @RequestBody PollutionType pollutionType) {
         PollutionType savedPollutionType = managePollutionTypeCU.savePollutionType(pollutionType);
         PollutionTypeDTOResponse response = mapper.toPollutionTypeDTOResponse(savedPollutionType);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -40,7 +41,7 @@ public class PollutionTypeRestController {
 
     @PutMapping("/{pollutionTypeId}")
     public ResponseEntity<PollutionTypeDTOResponse> updatePollutionType(@PathVariable long pollutionTypeId,
-                                                                        @RequestBody PollutionType pollutionType) {
+                                                                         @Valid @RequestBody PollutionType pollutionType) {
         pollutionType.setId(pollutionTypeId);
         PollutionType updatedPollutionType = managePollutionTypeCU.updatePollutionType(pollutionType);
         PollutionTypeDTOResponse response = mapper.toPollutionTypeDTOResponse(updatedPollutionType);
