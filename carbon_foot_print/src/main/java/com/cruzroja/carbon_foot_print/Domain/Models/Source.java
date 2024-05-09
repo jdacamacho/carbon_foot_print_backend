@@ -13,4 +13,8 @@ public class Source {
 
     }
 
+    public boolean verifySourceName(String sourceName){
+        return this.sourceName.equals(sourceName);
+    }
+
 }
