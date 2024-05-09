@@ -6,13 +6,13 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class PollutionTypeDTOResponse {
-    private long id;
-    private String name;
-    private String description;
-    private double emissionFactor;
-    private String units;
+    private long pollutionTypeId;
+    private String pollutionTypeName;
+    private String pollutionTypeDescription;
+    private double pollutionTypeEmissionFactor;
+    private String pollutionTypeUnits;
 
-    public PollutionTypeDTOResponse(){
-        
+    public PollutionTypeDTOResponse() {
+
     }
 }

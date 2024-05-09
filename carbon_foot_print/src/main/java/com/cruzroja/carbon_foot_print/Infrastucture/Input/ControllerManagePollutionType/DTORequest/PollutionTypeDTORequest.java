@@ -11,20 +11,20 @@ public class PollutionTypeDTORequest {
 
     @NotNull(message = "name can't be null")
     @NotBlank(message = "name can't be empty")
-    private String name;
+    private String pollutionTypeName;
 
     @NotNull(message = "description can't be null")
     @NotBlank(message = "description can't be empty")
-    private String description;
+    private String pollutionTypeDescription;
 
     @NotNull(message = "emissionFactor can't be null")
-    private double emissionFactor;
+    private double pollutionTypeEmissionFactor;
 
     @NotNull(message = "units can't be null")
     @NotBlank(message = "units can't be empty")
-    private String units;
+    private String pollutionTypeUnits;
 
-    public PollutionTypeDTORequest(){
+    public PollutionTypeDTORequest() {
 
     }
 }

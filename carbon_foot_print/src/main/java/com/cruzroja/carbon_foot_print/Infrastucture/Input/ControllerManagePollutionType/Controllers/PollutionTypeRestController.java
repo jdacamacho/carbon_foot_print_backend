@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = {"http://localhost:5050"})
+@CrossOrigin(origins = { "http://localhost:5050" })
 @RestController
-@RequestMapping("/api/pollution-types")
+@RequestMapping("/api/pollutions/types")
 @Validated
 @RequiredArgsConstructor
 public class PollutionTypeRestController {
@@ -33,7 +33,7 @@ public class PollutionTypeRestController {
     }
 
     @PostMapping
-    public ResponseEntity<PollutionTypeDTOResponse> savePollutionType( @Valid @RequestBody PollutionType pollutionType) {
+    public ResponseEntity<PollutionTypeDTOResponse> savePollutionType(@Valid @RequestBody PollutionType pollutionType) {
         PollutionType savedPollutionType = managePollutionTypeCU.savePollutionType(pollutionType);
         PollutionTypeDTOResponse response = mapper.toPollutionTypeDTOResponse(savedPollutionType);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -41,13 +41,12 @@ public class PollutionTypeRestController {
 
     @PutMapping("/{pollutionTypeId}")
     public ResponseEntity<PollutionTypeDTOResponse> updatePollutionType(@PathVariable long pollutionTypeId,
-                                                                         @Valid @RequestBody PollutionType pollutionType) {
-        pollutionType.setId(pollutionTypeId);
+            @Valid @RequestBody PollutionType pollutionType) {
+        // pollutionType.setId(pollutionTypeId);
         PollutionType updatedPollutionType = managePollutionTypeCU.updatePollutionType(pollutionType);
         PollutionTypeDTOResponse response = mapper.toPollutionTypeDTOResponse(updatedPollutionType);
         return ResponseEntity.ok(response);
     }
-
 
     @GetMapping("/{pollutionTypeId}")
     public ResponseEntity<PollutionTypeDTOResponse> findPollutionTypeById(@PathVariable long pollutionTypeId) {
