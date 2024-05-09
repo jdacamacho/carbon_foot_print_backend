@@ -12,19 +12,20 @@ public class PollutionTypeWithIdDTORequest {
     @Positive(message = "pollutionTypeId must be positive")
     @NotNull(message = "pollutionTypeId can't be null")
     private long pollutionTypeId;
-    @NotNull(message = "name can't be null")
-    @NotBlank(message = "name can't be empty")
+    @NotNull(message = "pollutionTypeName can't be null")
+    @NotBlank(message = "pollutionTypeName can't be empty")
     private String pollutionTypeName;
 
-    @NotNull(message = "description can't be null")
-    @NotBlank(message = "description can't be empty")
+    @NotNull(message = "pollutionTypeDescription can't be null")
+    @NotBlank(message = "pollutionTypeDescription can't be empty")
     private String pollutionTypeDescription;
 
-    @NotNull(message = "emissionFactor can't be null")
+    @NotNull(message = "pollutionTypeEmissionFactor can't be null")
+    @Positive(message = "pollutionTypeEmissionFactor must be positive")
     private double pollutionTypeEmissionFactor;
 
-    @NotNull(message = "units can't be null")
-    @NotBlank(message = "units can't be empty")
+    @NotNull(message = "pollutionTypeUnits can't be null")
+    @NotBlank(message = "pollutionTypeUnits can't be empty")
     private String pollutionTypeUnits;
 
     public PollutionTypeWithIdDTORequest() {
