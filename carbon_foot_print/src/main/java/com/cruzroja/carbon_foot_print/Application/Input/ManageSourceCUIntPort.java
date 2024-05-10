@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.cruzroja.carbon_foot_print.Domain.Models.Source;
 
-public interface ManageSourceIntPort {
+public interface ManageSourceCUIntPort {
     public List<Source> listSources();
     public Source saveSource(Source source);
     public Source updateSource(Source source);

@@ -17,8 +17,6 @@ public interface MapperRoleInfrastuctureDomain {
     Role mapRequestWithIdToModel(RoleWithIdDTORequest request);
     RoleDTOResponse mapModelToResponse(Role model);
     List<RoleDTOResponse> mapModelsToResponse(List<Role> roles); 
-
     PermissionDTOResponse mapPermissionToResponse(Permission permission);
-
     List<PermissionDTOResponse> mapModelsPermissionToResponse(List<Permission> permissions);
 }

@@ -44,12 +44,13 @@ public class ManageSourceCUImplAdapter implements ManageSourceCUIntPort{
             this.exceptionFormatter.returnResponseErrorEntityNotFound("Source not found in the System with that ID");
         }else{
             Source sourceObtained = this.gateway.findById(source.getIdSource());
-            if(!sourceObtained.verifySourceName(source.getSourceName())){
-                if(this.gateway.existsByName(source.getSourceName())){
+            if(this.gateway.existsByName(source.getSourceName())){
+                if(!sourceObtained.verifySourceName(source.getSourceName())){
                     this.exceptionFormatter.returnResponseErrorEntityExists("Source found in the System with that name");
                 }
             }
-            objResponse = this.saveSource(source);
+            sourceObtained.setSourceName(source.getSourceName());
+            objResponse = this.gateway.save(sourceObtained);
         }
         return objResponse;
     }
