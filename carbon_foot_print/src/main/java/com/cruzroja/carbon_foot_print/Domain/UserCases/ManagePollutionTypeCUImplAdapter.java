@@ -13,7 +13,7 @@ public class ManagePollutionTypeCUImplAdapter implements ManagePollutionTypeCUIn
     private final ExceptionFormatterIntPort errorFormatter;
 
     public ManagePollutionTypeCUImplAdapter(ManagePollutionTypeGatewayIntPort gateway,
-                                            ExceptionFormatterIntPort errorFormatter) {
+            ExceptionFormatterIntPort errorFormatter) {
         this.gateway = gateway;
         this.errorFormatter = errorFormatter;
     }
@@ -21,65 +21,31 @@ public class ManagePollutionTypeCUImplAdapter implements ManagePollutionTypeCUIn
     @Override
     public List<PollutionType> listPollutionTypes() {
         List<PollutionType> pollutionTypes = gateway.listPollutionTypes();
-        if (pollutionTypes.isEmpty()) {
+        if (pollutionTypes.isEmpty())
             errorFormatter.returNoData("No pollution types found in the system");
-            throw new RuntimeException("No pollution types found in the system");
-        }
         return pollutionTypes;
     }
 
     @Override
     public PollutionType savePollutionType(PollutionType pollutionType) {
-        Long id = pollutionType.getId();
-        if (id != null && gateway.existsById(pollutionType.getId())) {
-            errorFormatter.returnResponseErrorEntityExists("Pollution type with the same ID already exists");
-            // Lanzar una excepción adecuada en lugar de devolver null
-            throw new RuntimeException("Pollution type with the same ID already exists");
-        } else if (gateway.existsByName(pollutionType.getName())) {
+        if (gateway.existsByName(pollutionType.getPollutionTypeName()))
             errorFormatter.returnResponseErrorEntityExists("Pollution type with the same name already exists");
-            // Lanzar una excepción adecuada en lugar de devolver null
-            throw new RuntimeException("Pollution type with the same name already exists");
-        } else {
-            return gateway.savePollutionType(pollutionType);
-        }
+        return gateway.savePollutionType(pollutionType);
     }
 
     @Override
     public PollutionType updatePollutionType(PollutionType pollutionType) {
-        if (!gateway.existsById(pollutionType.getId())) {
+        if (!gateway.existsById(pollutionType.getPollutionTypeId()))
             errorFormatter.returnResponseErrorEntityNotFound("Pollution type not found");
-            // Lanzar una excepción adecuada en lugar de devolver null
-            throw new RuntimeException("Pollution type not found");
-        } else if (!isValidPollutionType(pollutionType)) {
-            errorFormatter.returnResponseBusinessRuleViolated("Invalid pollution type data");
-            // Lanzar una excepción adecuada en lugar de devolver null
-            throw new RuntimeException("Invalid pollution type data");
-        } else if (gateway.existsByName(pollutionType.getName())) {
-            errorFormatter.returnResponseErrorEntityExists("Pollution type with the same name already exists");
-            // Lanzar una excepción adecuada en lugar de devolver null
-            throw new RuntimeException("Pollution type with the same name already exists");
-        } else {
-            return gateway.updatePollutionType(pollutionType);
-        }
-    }
-    
-
-
-    private boolean isValidPollutionType(PollutionType pollutionType) {
-        if (pollutionType.getName() == null || pollutionType.getName().isEmpty()
-            || pollutionType.getDescription() == null || pollutionType.getDescription().isEmpty()) {
-            // Lanzar una excepción adecuada en lugar de devolver false
-            throw new IllegalArgumentException("Name and description must not be null or empty");
-        }
-        if (pollutionType.getEmissionFactor() <= 0) {
-            // Lanzar una excepción adecuada en lugar de devolver false
-            throw new IllegalArgumentException("Emission factor must be greater than 0");
-        }
-        if (pollutionType.getUnits() == null || pollutionType.getUnits().isEmpty()) {
-            // Lanzar una excepción adecuada en lugar de devolver false
-            throw new IllegalArgumentException("Units must not be null or empty");
-        }
-        return true;
+        PollutionType old = this.gateway.getPollutionTypeById(pollutionType.getPollutionTypeId());
+        if (old.isNameUpdate(pollutionType.getPollutionTypeName()))
+            if (gateway.existsByName(pollutionType.getPollutionTypeName()))
+                errorFormatter.returnResponseErrorEntityExists("Pollution type with the same name already exists");
+        if (!pollutionType.isValidUnits())
+            errorFormatter.returnResponseBusinessRuleViolated(
+                    "The value of units must be in [\"Galón\", \"Kilogramo\", \"Metro Cúbico\"]");
+        old.update(pollutionType);
+        return gateway.updatePollutionType(old);
     }
 
     @Override
@@ -87,7 +53,6 @@ public class ManagePollutionTypeCUImplAdapter implements ManagePollutionTypeCUIn
         return gateway.getPollutionTypeByName(name);
     }
 
-    
     public boolean existsByName(String name) {
         return gateway.existsByName(name);
     }
