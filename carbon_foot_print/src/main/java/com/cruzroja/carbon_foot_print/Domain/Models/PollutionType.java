@@ -15,16 +15,18 @@ public class PollutionType {
     private String pollutionTypeDescription;
     private double pollutionTypeEmissionFactor;
     private String pollutionTypeUnits;
+    private List<Source> pollutionSources;
 
     public PollutionType() {
 
     }
 
     public void update(PollutionType newValues) {
-        this.pollutionTypeName = newValues.pollutionTypeName;
-        this.pollutionTypeDescription = newValues.pollutionTypeDescription;
-        this.pollutionTypeEmissionFactor = newValues.pollutionTypeEmissionFactor;
+        this.pollutionTypeName = newValues.getPollutionTypeName();
+        this.pollutionTypeDescription = newValues.getPollutionTypeDescription();
+        this.pollutionTypeEmissionFactor = newValues.getPollutionTypeEmissionFactor();
         this.pollutionTypeUnits = newValues.getPollutionTypeUnits();
+        this.pollutionSources = newValues.getPollutionSources();
     }
 
     /**
@@ -53,6 +55,18 @@ public class PollutionType {
         units.add("Kilogramo");
 
         return units.contains(this.pollutionTypeUnits);
+    }
+
+    /**
+     * Valida si los pollution source son validos.
+     * 
+     * @param valids {@code List<Source>} lista de fuentes validas.
+     * @return {@code true} en caso de que todos los sources del objeto estén en la
+     *         lista se validos y {@code false} en caso contrario
+     */
+    public boolean isValidSources(List<Source> valids) {
+        return valids.containsAll(this.pollutionSources);
+
     }
 
 }

@@ -2,6 +2,8 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities
 
 import java.util.List;
 
+import java.util.ArrayList;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -52,5 +54,6 @@ public class CategoryEntity {
      * Constructor de la clase CategoryEntity.
      */
     public CategoryEntity() {
+        this.pollutions = new ArrayList<PollutionTypeEntity>();
     }
 }

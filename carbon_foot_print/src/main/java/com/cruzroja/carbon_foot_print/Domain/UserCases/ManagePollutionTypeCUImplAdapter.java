@@ -30,6 +30,8 @@ public class ManagePollutionTypeCUImplAdapter implements ManagePollutionTypeCUIn
     public PollutionType savePollutionType(PollutionType pollutionType) {
         if (gateway.existsByName(pollutionType.getPollutionTypeName()))
             errorFormatter.returnResponseErrorEntityExists("Pollution type with the same name already exists");
+        if (!pollutionType.isValidSources(gateway.getSources()))
+            errorFormatter.returnResponseErrorEntityNotFound("The sources entered are not found in the system");
         return gateway.savePollutionType(pollutionType);
     }
 
@@ -38,6 +40,8 @@ public class ManagePollutionTypeCUImplAdapter implements ManagePollutionTypeCUIn
         if (!gateway.existsById(pollutionType.getPollutionTypeId()))
             errorFormatter.returnResponseErrorEntityNotFound("Pollution type not found");
         PollutionType old = this.gateway.getPollutionTypeById(pollutionType.getPollutionTypeId());
+        if (!pollutionType.isValidSources(gateway.getSources()))
+            errorFormatter.returnResponseErrorEntityNotFound("The sources entered are not found in the system");
         if (old.isNameUpdate(pollutionType.getPollutionTypeName()))
             if (gateway.existsByName(pollutionType.getPollutionTypeName()))
                 errorFormatter.returnResponseErrorEntityExists("Pollution type with the same name already exists");
