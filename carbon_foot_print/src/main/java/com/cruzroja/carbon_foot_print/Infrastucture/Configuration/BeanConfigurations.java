@@ -8,14 +8,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageAuthGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManagePollutionTypeGatewayIntPort;
-import com.cruzroja.carbon_foot_print.Application.Output.ManagePollutionTypeGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageRoleGatewayIntPort;
+import com.cruzroja.carbon_foot_print.Application.Output.ManageSourceGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageUserCompanyGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManegeCategoryGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManegeUserVolunteerGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageAuthCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManagePollutionTypeCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageRoleCUImplAdapter;
+import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageSourceCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageUserCompanyCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManegeCategoryCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManegeUserVolunteerCUImplAdapter;
@@ -67,5 +68,12 @@ public class BeanConfigurations {
     public ManagePollutionTypeCUImplAdapter createPollutionTypeCU(ManagePollutionTypeGatewayIntPort gateway,
             ExceptionFormatterIntPort exceptionFormatter) {
         return new ManagePollutionTypeCUImplAdapter(gateway, exceptionFormatter);
+    }
+
+    @Bean
+    public ManageSourceCUImplAdapter createSourceCU(ManageSourceGatewayIntPort gateway,
+        ExceptionFormatterIntPort exceptionFormatter){
+        ManageSourceCUImplAdapter sourceCU = new ManageSourceCUImplAdapter(gateway, exceptionFormatter);
+        return sourceCU;
     }
 }

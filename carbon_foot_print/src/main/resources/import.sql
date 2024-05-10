@@ -21,9 +21,8 @@ INSERT INTO USER_ROLES(id_role,user_document_number) VALUES(1,1000000000);
 INSERT INTO permissions(idPermission, name, description) VALUES (100, "ROLE_Listar_Roles","Permiso para consultar todos los roles en el sistema");
 INSERT INTO permissions(idPermission, name, description) VALUES (101, "ROLE_Crear_Roles","Permiso para crear roles en el sistema");
 INSERT INTO permissions(idPermission, name, description) VALUES (102, "ROLE_Actualizar_Roles","Permiso para actualizar los roles en el sistema");
-INSERT INTO permissions(idPermission, name, description) VALUES (103, "ROLE_Eliminar_Roles","Permiso para eliminar los roles en el sistema");
-INSERT INTO permissions(idPermission, name, description) VALUES (104, "ROLE_Consultar_Rol","Permiso para consultar un rol en el sistema");
-INSERT INTO permissions(idPermission, name, description) VALUES (105, "ROLE_Listar_permisos","Permiso para listar permisos");
+INSERT INTO permissions(idPermission, name, description) VALUES (103, "ROLE_Consultar_Rol","Permiso para consultar un rol en el sistema");
+INSERT INTO permissions(idPermission, name, description) VALUES (104, "ROLE_Listar_permisos","Permiso para listar permisos");
 
 #PERMISOS PARA VOLUNTARIOS
 INSERT INTO permissions(idPermission, name, description) VALUES (200, "ROLE_Listar_Voluntarios","Permiso para consultar todos los voluntarios en el sistema");
@@ -44,3 +43,10 @@ INSERT INTO permissions(idPermission, name, description) VALUES (400, "ROLE_List
 INSERT INTO permissions(idPermission, name, description) VALUES (401, "ROLE_Crear_Categoria","Permiso para crear categorías en el sistema");
 INSERT INTO permissions(idPermission, name, description) VALUES (402, "ROLE_Actualizar_Categoria","Permiso para actualizar las categorías en el sistema");
 INSERT INTO permissions(idPermission, name, description) VALUES (403, "ROLE_Consultar_Categoria_ID","Permiso para consultar una categoría por ID");
+
+#PERMISOS PARA FUENTES
+INSERT INTO permissions(idPermission, name, description) VALUES (500, "ROLE_Listar_Fuentes","Permiso para consultar todos las fuente en el sistema");
+INSERT INTO permissions(idPermission, name, description) VALUES (501, "ROLE_Crear_Fuente","Permiso para crear fuentes en el sistema");
+INSERT INTO permissions(idPermission, name, description) VALUES (502, "ROLE_Actualizar_Fuente","Permiso para actualizar las fuentes en el sistema");
+INSERT INTO permissions(idPermission, name, description) VALUES (503, "ROLE_Consultar_Fuente_ID","Permiso para consultar una fuente por ID");
+INSERT INTO permissions(idPermission, name, description) VALUES (504, "ROLE_Consultar_Fuente_name","Permiso para consultar una fuente por nombre");
