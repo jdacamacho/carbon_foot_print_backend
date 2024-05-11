@@ -84,6 +84,14 @@ public class Category {
     }
 
     /**
+     * Establece el status de la categoría, no puede habilitarse una categoría sin
+     * contaminantes asociados.
+     */
+    public void determineStatus() {
+        this.categoryStatus = !this.categoryPollution.isEmpty();
+    }
+
+    /**
      * Crea una nueva instancia de Category.
      */
     public Category() {

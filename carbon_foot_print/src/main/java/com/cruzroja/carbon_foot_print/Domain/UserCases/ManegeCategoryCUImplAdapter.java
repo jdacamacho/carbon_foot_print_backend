@@ -22,9 +22,13 @@ public class ManegeCategoryCUImplAdapter implements ManegeCategoryCUIntPort {
         if (!category.isValidScope(category.getCategoryScope()))
             this.errorFormatter.returnResponseBusinessRuleViolated(
                     "The value of scope can only be \"Alcance 1\", \"Alcance 2\" o \"Alcance 3\"");
+        if (!category.isValidPollution(this.gateway.findAllPollutionTypes()))
+            this.errorFormatter.returnResponseBusinessRuleViolated(
+                    "The contamination types entered have not been recorded in the system.");
         if (this.gateway.existsByName(category.getCategoryName()))
             this.errorFormatter.returnResponseErrorEntityExists(
                     "All ready exists a category with Category Name: " + category.getCategoryName() + ".");
+        category.determineStatus();
         return this.gateway.create(category);
     }
 
@@ -34,6 +38,9 @@ public class ManegeCategoryCUImplAdapter implements ManegeCategoryCUIntPort {
             this.errorFormatter.returnResponseBusinessRuleViolated(
                     "The value of scope can only be \"Alcance 1\", \"Alcance 2\" o \"Alcance 3\"");
         Category old = this.gateway.findById(category.getCategoryId());
+        if (!category.isValidPollution(this.gateway.findAllPollutionTypes()))
+            this.errorFormatter.returnResponseBusinessRuleViolated(
+                    "The contamination types entered have not been recorded in the system.");
         if (old.isUpdateName(category.getCategoryName()))
             if (this.gateway.existsByName(category.getCategoryName()))
                 this.errorFormatter.returnResponseErrorEntityExists(
