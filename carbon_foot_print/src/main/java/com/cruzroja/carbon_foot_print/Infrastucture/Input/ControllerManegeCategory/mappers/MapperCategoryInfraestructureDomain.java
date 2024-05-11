@@ -8,6 +8,7 @@ import com.cruzroja.carbon_foot_print.Domain.Models.Category;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCategory.DTORequest.CategoryDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCategory.DTORequest.CategoryWithIdDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCategory.DTOResponse.CategoryDTOResponse;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCategory.DTOResponse.CategoryWithRelationDTOResponse;
 
 @Mapper(componentModel = "spring")
 public interface MapperCategoryInfraestructureDomain {
@@ -17,5 +18,9 @@ public interface MapperCategoryInfraestructureDomain {
 
     CategoryDTOResponse mapModelToResponse(Category model);
 
-    List<CategoryDTOResponse> mapModelsToResponse(List<Category> cotegories);
+    CategoryWithRelationDTOResponse mapModelToFullResponse(Category model);
+
+    List<CategoryDTOResponse> mapModelsToResponse(List<Category> models);
+
+    List<CategoryWithRelationDTOResponse> mapModelsToFullResponse(List<Category> models);
 }

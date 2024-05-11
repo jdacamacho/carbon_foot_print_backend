@@ -7,23 +7,32 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
- * Representa una categoría en el sistema, utilizada para clasificar elementos según su propósito.
+ * Representa una categoría en el sistema, utilizada para clasificar elementos
+ * según su propósito.
  */
 @Data
 @AllArgsConstructor
 public class Category {
-    
+
     /** Identificador único de la categoría. */
     private long categoryId;
-    
+
     /** Nombre descriptivo de la categoría. */
     private String categoryName;
-    
+
     /** Descripción detallada de la categoría. */
     private String categoryDescription;
-    
+
     /** Ámbito o alcance de la categoría. */
     private String categoryScope;
+    /**
+     * Estado de la categoría [habilitado {@code true} deshabilitado {@code false}]
+     */
+    private boolean categoryStatus;
+    /**
+     * Lista de contaminantes asociados a la categoría.
+     */
+    private List<PollutionType> categoryPollution;
 
     /**
      * Actualiza los datos de la categoría con los valores de otra categoría.
@@ -31,9 +40,11 @@ public class Category {
      * @param newCategory La nueva categoría con los datos actualizados.
      */
     public void update(Category newCategory) {
-        this.categoryName = newCategory.categoryName;
-        this.categoryDescription = newCategory.categoryDescription;
-        this.categoryScope = newCategory.categoryScope;
+        this.categoryName = newCategory.getCategoryName();
+        this.categoryDescription = newCategory.getCategoryDescription();
+        this.categoryScope = newCategory.getCategoryScope();
+        this.categoryStatus = (!this.categoryPollution.isEmpty() && newCategory.isCategoryStatus());
+        this.categoryPollution = newCategory.getCategoryPollution();
     }
 
     /**
@@ -59,6 +70,17 @@ public class Category {
      */
     public boolean isUpdateName(String name) {
         return !this.categoryName.equals(name);
+    }
+
+    /**
+     * Verifica si los tipos de contaminantes son validos.
+     * 
+     * @param valids {@code List<PollutionType>} lista de contaminantes válidos
+     * @return {@code true} en caso de que todos sean válidos y {@code false} en
+     *         caso de que almenos 1 sea invalido.
+     */
+    public boolean isValidPollution(List<PollutionType> valids) {
+        return valids.containsAll(this.categoryPollution);
     }
 
     /**

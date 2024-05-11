@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import java.util.List;
 
-import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageSource.DTORequest.SourceDTORequest;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageSource.DTORequest.SourceWithIdDTORequest;
 
 @Data
 @AllArgsConstructor
@@ -30,7 +30,7 @@ public class PollutionTypeDTORequest {
     @NotBlank(message = "pollutionTypeUnits can't be empty")
     private String pollutionTypeUnits;
     @NotEmpty(message = "the pollutionSources can't be empty")
-    private List<SourceDTORequest> pollutionSources;
+    private List<SourceWithIdDTORequest> pollutionSources;
 
     public PollutionTypeDTORequest() {
 

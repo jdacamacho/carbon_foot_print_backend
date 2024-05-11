@@ -1,5 +1,10 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCategory.DTORequest;
 
+import java.util.List;
+
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManagePollutionType.DTORequest.PollutionTypeDTORequest;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManagePollutionType.DTORequest.PollutionTypeWithIdDTORequest;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -22,4 +27,7 @@ public class CategoryWithIdDTORequest {
     @NotNull(message = "categoryScope can't be null")
     @NotBlank(message = "categoryScope can't be empty")
     private String categoryScope;
+    @NotNull(message = "catgoryStatus can't be null")
+    private boolean categoryStatus;
+    private List<PollutionTypeWithIdDTORequest> categoryPollution;
 }
