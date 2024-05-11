@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.cruzroja.carbon_foot_print.Application.Output.ManegeCategoryGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Domain.Models.Category;
+import com.cruzroja.carbon_foot_print.Domain.Models.PollutionType;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.CategoryEntity;
+import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.PollutionTypeEntity;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Repositories.CategoryRepository;
 
 @Service
@@ -54,6 +56,13 @@ public class ManegeCategoryGatewayImplAdapter implements ManegeCategoryGatewayIn
     public List<Category> findByName(String name) {
         Iterable<CategoryEntity> dataFromBD = this.serviceBD.findByCategoryNameLike("%" + name + "%");
         return this.mapper.map(dataFromBD, new TypeToken<List<Category>>() {
+        }.getType());
+    }
+
+    @Override
+    public List<PollutionType> findAllPollutionTypes() {
+        Iterable<PollutionTypeEntity> dataFromBD = this.serviceBD.findAllPollutionTypes();
+        return this.mapper.map(dataFromBD, new TypeToken<List<PollutionType>>() {
         }.getType());
     }
 

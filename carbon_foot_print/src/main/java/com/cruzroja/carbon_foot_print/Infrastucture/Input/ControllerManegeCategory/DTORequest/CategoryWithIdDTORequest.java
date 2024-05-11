@@ -2,7 +2,6 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCateg
 
 import java.util.List;
 
-import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManagePollutionType.DTORequest.PollutionTypeDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManagePollutionType.DTORequest.PollutionTypeWithIdDTORequest;
 
 import jakarta.validation.constraints.NotBlank;
