@@ -15,4 +15,10 @@ public interface ManegeCategoryCUIntPort {
 
     List<Category> findByName(String name);
 
+    List<Category> getAllEnable();
+
+    List<Category> getMoreById(List<Long> ids);
+
+    List<Category> getMoreEnableById(List<Long> ids);
+
 }

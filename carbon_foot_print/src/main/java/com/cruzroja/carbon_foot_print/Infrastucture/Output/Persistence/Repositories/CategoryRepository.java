@@ -33,6 +33,31 @@ public interface CategoryRepository extends CrudRepository<CategoryEntity, Long>
     List<CategoryEntity> findByCategoryNameLike(String categoryName);
 
     /**
+     * Busca y devuelve una lista de todas las categorias
+     * que se encuentren activas.
+     * 
+     * @return {@code List<CategoryEntity>}
+     */
+    List<CategoryEntity> findByCategoryStateIsTrue();
+
+    /**
+     * Busca a partir de una lista de ids y devuelve las categorías asociadas.
+     * 
+     * @param ids {@code List<Long>} lista de ids a buscar
+     * @return {@code List<CategoryEntity>} lista de categorías que cumplen.
+     */
+    List<CategoryEntity> findByCategoryIdIn(List<Long> ids);
+
+    /**
+     * Busca a partir de una lista de ids y devuelve las categorías que estan
+     * habilitadas dentro de los ids ingresados.
+     * 
+     * @param ids {@code List<Long>} lista de ids a buscar
+     * @return {@code List<CategoryEntity>} lista de categorías que cumplen.
+     */
+    List<CategoryEntity> findByCategoryStateIsTrueAndCategoryIdIn(List<Long> ids);
+
+    /**
      * Busca y devuelve todos los pollution types registrados en el sistema
      * 
      * @return {@code List<PollutionTypeEntity>} lista de pollution types

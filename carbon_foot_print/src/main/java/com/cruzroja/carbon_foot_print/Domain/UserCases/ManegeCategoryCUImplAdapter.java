@@ -73,4 +73,28 @@ public class ManegeCategoryCUImplAdapter implements ManegeCategoryCUIntPort {
         return categories;
     }
 
+    @Override
+    public List<Category> getAllEnable() {
+        List<Category> categories = this.gateway.getAllEnable();
+        if (categories.isEmpty())
+            this.errorFormatter.returNoData("No categories enables in the sistem.");
+        return categories;
+    }
+
+    @Override
+    public List<Category> getMoreById(List<Long> ids) {
+        List<Category> categories = this.gateway.getMoreById(ids);
+        if (categories.isEmpty())
+            this.errorFormatter.returNoData("No categories with entered ids have been registered");
+        return categories;
+    }
+
+    @Override
+    public List<Category> getMoreEnableById(List<Long> ids) {
+        List<Category> categories = this.gateway.getMoreEnableById(ids);
+        if (categories.isEmpty())
+            this.errorFormatter.returNoData("No categories enables with the entered ids in the sistem.");
+        return categories;
+    }
+
 }

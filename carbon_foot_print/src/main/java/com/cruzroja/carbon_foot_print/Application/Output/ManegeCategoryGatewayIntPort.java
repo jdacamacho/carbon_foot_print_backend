@@ -16,6 +16,12 @@ public interface ManegeCategoryGatewayIntPort {
 
     List<Category> findByName(String name);
 
+    List<Category> getAllEnable();
+
+    List<Category> getMoreById(List<Long> ids);
+
+    List<Category> getMoreEnableById(List<Long> ids);
+
     List<PollutionType> findAllPollutionTypes();
 
     boolean existsById(long id);

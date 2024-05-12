@@ -8,7 +8,7 @@ import com.cruzroja.carbon_foot_print.Domain.Models.Category;
  * Interfaz para el puerto de salida de gestión de categorías.
  */
 public interface ManageCategoryGatewayIntPort {
-    
+
     /**
      * Crea una nueva categoría.
      * 
@@ -48,11 +48,18 @@ public interface ManageCategoryGatewayIntPort {
      */
     List<Category> findByName(String name);
 
+    List<Category> findMoreById(List<Long> ids);
+
+    List<Category> findAllEnabled();
+
+    List<Category> findMoreEnabledById(List<Long> ids);
+
     /**
      * Verifica si existe una categoría con el identificador único especificado.
      * 
      * @param id El identificador único de la categoría a verificar.
-     * @return true si existe una categoría con el identificador especificado, false de lo contrario.
+     * @return true si existe una categoría con el identificador especificado, false
+     *         de lo contrario.
      */
     boolean existsById(long id);
 
@@ -60,7 +67,8 @@ public interface ManageCategoryGatewayIntPort {
      * Verifica si existe una categoría con el nombre especificado.
      * 
      * @param name El nombre de la categoría a verificar.
-     * @return true si existe una categoría con el nombre especificado, false de lo contrario.
+     * @return true si existe una categoría con el nombre especificado, false de lo
+     *         contrario.
      */
     boolean existsByName(String name);
 }

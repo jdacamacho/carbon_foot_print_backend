@@ -76,4 +76,25 @@ public class ManegeCategoryGatewayImplAdapter implements ManegeCategoryGatewayIn
         return this.serviceBD.existsByCategoryNameLike("%" + name + "%");
     }
 
+    @Override
+    public List<Category> getAllEnable() {
+        Iterable<CategoryEntity> dataFromBD = this.serviceBD.findByCategoryStateIsTrue();
+        return this.mapper.map(dataFromBD, new TypeToken<List<Category>>() {
+        }.getType());
+    }
+
+    @Override
+    public List<Category> getMoreById(List<Long> ids) {
+        Iterable<CategoryEntity> dataFromBD = this.serviceBD.findByCategoryIdIn(ids);
+        return this.mapper.map(dataFromBD, new TypeToken<List<Category>>() {
+        }.getType());
+    }
+
+    @Override
+    public List<Category> getMoreEnableById(List<Long> ids) {
+        Iterable<CategoryEntity> dataFromBD = this.serviceBD.findByCategoryStateIsTrueAndCategoryIdIn(ids);
+        return this.mapper.map(dataFromBD, new TypeToken<List<Category>>() {
+        }.getType());
+    }
+
 }
