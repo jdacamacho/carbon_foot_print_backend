@@ -56,14 +56,14 @@ public class ManagePollutionTypeGatewayImplAdapter implements ManagePollutionTyp
 
     @Override
     public List<PollutionType> getPollutionTypeByName(String name) {
-        List<PollutionTypeEntity> pollutionTypeEntities = serviceDB.findByName(name);
+        List<PollutionTypeEntity> pollutionTypeEntities = serviceDB.findByPollutionTypeName(name);
         return pollutionTypeEntities.stream().map(entity -> mapper.map(entity, PollutionType.class))
                 .collect(Collectors.toList());
     }
 
     @Override
     public boolean existsByName(String name) {
-        return serviceDB.existsByName(name);
+        return serviceDB.existsByPollutionTypeName(name);
     }
 
     @Override

@@ -9,9 +9,9 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.
 
 public interface PollutionTypeRepository extends CrudRepository<PollutionTypeEntity, Long> {
 
-    boolean existsByName(String name);
+    boolean existsByPollutionTypeName(String name);
 
-    List<PollutionTypeEntity> findByName(String name);
+    List<PollutionTypeEntity> findByPollutionTypeName(String name);
 
     @Query("from SourceEntity")
     List<SourceEntity> findAllSources();

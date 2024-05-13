@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageSource.DTORequest.SourceWithIdDTORequest;
@@ -33,6 +35,6 @@ public class PollutionTypeDTORequest {
     private List<SourceWithIdDTORequest> pollutionSources;
 
     public PollutionTypeDTORequest() {
-
+        this.pollutionSources = new ArrayList<SourceWithIdDTORequest>();
     }
 }

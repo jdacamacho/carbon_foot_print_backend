@@ -1,8 +1,9 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManagePollutionType.DTORequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageSource.DTORequest.SourceDTORequest;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageSource.DTORequest.SourceWithIdDTORequest;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -33,9 +34,9 @@ public class PollutionTypeWithIdDTORequest {
     @NotBlank(message = "pollutionTypeUnits can't be empty")
     private String pollutionTypeUnits;
     @NotEmpty(message = "the pollutionSources can't be empty")
-    private List<SourceDTORequest> pollutionSources;
+    private List<SourceWithIdDTORequest> pollutionSources;
 
     public PollutionTypeWithIdDTORequest() {
-
+        this.pollutionSources = new ArrayList<SourceWithIdDTORequest>();
     }
 }

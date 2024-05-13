@@ -34,6 +34,10 @@ public class Category {
      */
     private List<PollutionType> categoryPollution;
 
+    public Category() {
+        this.categoryPollution = new ArrayList<PollutionType>();
+    }
+
     /**
      * Actualiza los datos de la categoría con los valores de otra categoría.
      * 
@@ -91,9 +95,4 @@ public class Category {
         this.categoryStatus = !this.categoryPollution.isEmpty();
     }
 
-    /**
-     * Crea una nueva instancia de Category.
-     */
-    public Category() {
-    }
 }

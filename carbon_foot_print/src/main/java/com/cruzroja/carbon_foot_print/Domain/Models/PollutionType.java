@@ -18,7 +18,7 @@ public class PollutionType {
     private List<Source> pollutionSources;
 
     public PollutionType() {
-
+        this.pollutionSources = new ArrayList<Source>();
     }
 
     public void update(PollutionType newValues) {
