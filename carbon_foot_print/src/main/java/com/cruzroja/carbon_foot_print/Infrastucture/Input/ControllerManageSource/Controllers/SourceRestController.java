@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -43,6 +44,7 @@ public class SourceRestController {
 
     @GetMapping("")
     @Transactional(readOnly = true)
+    @PreAuthorize("hasRole('Listar_Fuentes')")
     public ResponseEntity<List<SourceDTOResponse>> listSources(){
         List<Source> sources = this.sourceCU.listSources();
         ResponseEntity<List<SourceDTOResponse>> objResponse = new ResponseEntity<List<SourceDTOResponse>>(
@@ -52,6 +54,7 @@ public class SourceRestController {
 
     @GetMapping("/{idSource}")
     @Transactional(readOnly = true)
+    @PreAuthorize("hasRole('Consultar_Fuente_ID')")
     public ResponseEntity<SourceDTOResponse> findSourceById(@PathVariable long idSource){
         Source source = this.sourceCU.findByIdSource(idSource);
         ResponseEntity<SourceDTOResponse> objResponse = new ResponseEntity<SourceDTOResponse>(
@@ -61,6 +64,7 @@ public class SourceRestController {
 
     @GetMapping("/sourceName")
     @Transactional(readOnly = true)
+    @PreAuthorize("hasRole('Consultar_Fuente_name')")
     public ResponseEntity<SourceDTOResponse> findSourceByName(@RequestParam String sourceName){
         Source source = this.sourceCU.findBySourceName(sourceName);
         ResponseEntity<SourceDTOResponse> objResponse = new ResponseEntity<SourceDTOResponse>(
@@ -69,6 +73,7 @@ public class SourceRestController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('Crear_Fuente')")
     public ResponseEntity<?> saveSource(@Valid @RequestBody SourceDTORequest request, BindingResult result){
         Source source = this.mapper.mapRequestToModel(request);
         Map<String, Object> response = new HashMap<>();
@@ -98,6 +103,7 @@ public class SourceRestController {
     }
 
     @PutMapping("")
+    @PreAuthorize("hasRole('Actualizar_Fuente')")
     public ResponseEntity<?> updateSource(@Valid @RequestBody SourceWithIdDTORequest request, BindingResult result){
         Source source = this.mapper.mapRequestWithIdToModel(request);
         Map<String, Object> response = new HashMap<>();
@@ -126,4 +132,3 @@ public class SourceRestController {
         return new ResponseEntity<SourceDTOResponse>(objResource,HttpStatus.OK);
     }
 }
-
