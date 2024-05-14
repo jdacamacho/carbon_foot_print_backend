@@ -33,10 +33,10 @@
     <img src="readme/assets/icono-calculadora.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">Cruz Roja Carbon FootPrint</h3>
 
   <p align="center">
-    project_description
+    Desarrollo API-Rest, con arquitetura hexagonal el cual proveerán servicios de administración, calculo de huella de carbono, gestión de planes de compensación, estadísticas propias para empresas y cruz roja y generación de informes en ciertas áreas.
     <br />
     <a href="https://github.com/jdacamacho/carbon_foot_print_backend"><strong>Explore the docs »</strong></a>
     <br />
@@ -79,11 +79,51 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+---
 
-`Repository name:` carbon_foot_print_backend
-`Project title:` Cruz Roja Carbon Foot Print
-`Descrition`: Desarrollo API-Rest, con arquitetura hexagonal el cual proveerán servicios de administración, calculo de huella de carbono, gestión de planes de compensación, estadísticas propias para empresas y cruz roja y generación de informes en ciertas áreas.
+src\
+├main\
+├─java\com\cruzroja\carbon_foot_print\
+├──Application
+├───Input
+├───Output
+├──Domain
+├───Models
+├───UserCases
+├──Infraestructure
+├───Configuration
+├───Input
+├───JWT
+├───Output
+├─resources
+
+---
+
+La arquitectura empleada para este proyecto es la hexagonal, debido a la adaptabilidad que esta presenta ante cambios de tecnologías, dependiendo exclusivamente de las interfaces definidas como puertos (port) o puertas de salida (gateway).
+El sistema busca abordar una oportunidad de negocio o servicio que puede llegar a prestar la cruz roja cauca. Ya que debido al avace que se esta haciendo actualmente en conciencia ecológica en el país es importante, se espera que en un futuro cercano las empresas deban empezar a compensar la huella de carbono que emitn por sus procesos.
+Se tiene como objetivo desarrollar un mvp bajo el modelo API-Restfull de forma que se provean diferentes servicios administrativos con el fin de establecer:
+a. Compañías, Usuarios administrativos, Voluntarios.
+b. Configuración de calculadora: Fuentes Contaminantes, tipos de contaminantes, categorías de contaminantes y perfiles de empresa.
+c. Configuración de planes de acción: Actividades individuales, paquetes de actividades de 1 solo tipo, conjunto de actividades (diferentes actividades).
+d. Gestión de planes de acción contratados: Historial de actividades realizadas, programación de actividades, informes.
+e. Estadísticas: Generación de huella de carbono en el tiempo, progreso de compensación, tipos de contaminantes que más huella de carbono han generado, etc.
+
+> [!NOTE]
+> Information the user should notice even if skimming.
+
+> [!TIP]
+> Optional information to help a user be more successful.
+
+> [!IMPORTANT]
+> Essential information required for user success.
+
+> [!CAUTION]
+> Negative potential consequences of an action.
+
+> [!WARNING]
+> Dangerous certain consequences of an action.
+> [ADVERTENCIA]
+> Como aclaración se tiene hacer que el proyecto va enfocado a la producción de gases de efecto invernadero por lo que puede que muchos tipos de contaminación no se tengan encuenta, la información de huella de carbono se obtiene de diferentes estudios encontrados en el internet, se le sugiere buscar estudios de fuentes confiables que provean la información con la cuál se va a "alimentar" el sistema.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
