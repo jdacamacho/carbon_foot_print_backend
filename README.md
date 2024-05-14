@@ -83,19 +83,19 @@
 
 src\
 ├main\
- ├java\com\cruzroja\carbon_foot_print\
-  ├Application
-   ├Input
-   └Output
-  ├──Domain
-   ├Models
-   └UserCases
-  ├Infraestructure
-   ├Configuration
-   ├Input
-   ├JWT
-   └Output
- ├resources
+│├java\com\cruzroja\carbon_foot_print\
+││├Application
+││ ├Input
+││ └Output
+││├Domain
+││ ├Models
+││ └UserCases
+││├Infraestructure
+││ ├Configuration
+││ ├Input
+││ ├JWT
+││ └Output
+│├resources
 
 ```
 
