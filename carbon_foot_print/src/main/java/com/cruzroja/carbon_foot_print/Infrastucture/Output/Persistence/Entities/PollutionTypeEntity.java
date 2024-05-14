@@ -1,4 +1,9 @@
-package com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities;
+/**
+ * @file PollutionTypeEntity.java
+ * @brief Este archivo contiene la definición de la entidad PollutionTypeEntity para la persistencia de tipos de contaminación en la base de datos.
+ */
+
+ package com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities;
 
 import java.util.List;
 import java.util.ArrayList;

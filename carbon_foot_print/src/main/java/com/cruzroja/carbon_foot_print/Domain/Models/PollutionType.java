@@ -6,21 +6,43 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * Representa un tipo de contaminación en la aplicación de huella de carbono.
+ */
 @Data
 @AllArgsConstructor
 public class PollutionType {
 
+    /** Identificador único del tipo de contaminación. */
     private long pollutionTypeId;
+    
+    /** Nombre del tipo de contaminación. */
     private String pollutionTypeName;
+    
+    /** Descripción del tipo de contaminación. */
     private String pollutionTypeDescription;
+    
+    /** Factor de emisión del tipo de contaminación. */
     private double pollutionTypeEmissionFactor;
+    
+    /** Unidades del factor de emisión del tipo de contaminación. */
     private String pollutionTypeUnits;
     private List<Source> pollutionSources;
 
+    /**
+     * Constructor de la clase PollutionType.
+     */
     public PollutionType() {
         this.pollutionSources = new ArrayList<Source>();
     }
 
+    /**
+     * Actualiza los atributos del tipo de contaminación con los valores proporcionados.
+     * @param name Nombre del tipo de contaminación.
+     * @param description Descripción del tipo de contaminación.
+     * @param emissionFactor Factor de emisión del tipo de contaminación.
+     * @param units Unidades del factor de emisión del tipo de contaminación.
+     */
     public void update(PollutionType newValues) {
         this.pollutionTypeName = newValues.getPollutionTypeName();
         this.pollutionTypeDescription = newValues.getPollutionTypeDescription();

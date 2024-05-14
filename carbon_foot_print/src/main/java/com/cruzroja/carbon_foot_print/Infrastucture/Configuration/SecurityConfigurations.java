@@ -49,7 +49,13 @@ public class SecurityConfigurations {
                 .requestMatchers("/api/user/volunteers/position").hasRole("Consultar_Voluntario_Posicion")
                 .requestMatchers(HttpMethod.POST, "/api/user/volunteers").hasRole("Crear_Voluntarios")
                 .requestMatchers(HttpMethod.PUT, "/api/user/volunteers").hasRole("Actualizar_Voluntarios")
-                .anyRequest().permitAll()
+                // Fuentes
+                .requestMatchers("/api/sources").hasRole("Listar_Fuentes")
+                .requestMatchers("/api/sources/{idSource}").hasRole("Consultar_Fuente_ID")
+                .requestMatchers("/api/sources/sourceName").hasRole("Consultar_Fuente_name")
+                .requestMatchers(HttpMethod.POST, "/api/sources").hasRole("Crear_Fuente")
+                .requestMatchers(HttpMethod.PUT, "/api/sources").hasRole("Actualizar_Fuente")
+                .anyRequest().authenticated()
                 //Para que puedan usar los demas endopints cambiar authenticated() por permiteAll()
                 )
             .sessionManagement(sessionManager->

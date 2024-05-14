@@ -50,3 +50,9 @@ INSERT INTO permissions(idPermission, name, description) VALUES (501, "ROLE_Crea
 INSERT INTO permissions(idPermission, name, description) VALUES (502, "ROLE_Actualizar_Fuente","Permiso para actualizar las fuentes en el sistema");
 INSERT INTO permissions(idPermission, name, description) VALUES (503, "ROLE_Consultar_Fuente_ID","Permiso para consultar una fuente por ID");
 INSERT INTO permissions(idPermission, name, description) VALUES (504, "ROLE_Consultar_Fuente_name","Permiso para consultar una fuente por nombre");
+
+
+#PROBAR USUARIO PARA roles
+INSERT INTO USERS(documentNumber, documentType, names, lastNames, personalPhone, state, personalEmail, username, password) 
+VALUES(1000000001, "cedula", "UsuarioFuentes", "Prueba", 3140000001, 1, "userfuentes@gmail.com", "UserFuentes", "$2a$10$JmBzt5AQPL2YuO3aI6WaqO4Tp0wBeinBlzQgF3FA8tGM7wd1Dzhku");
+INSERT INTO USER_ROLES(id_role, user_document_number) VALUES(2, 1000000001);
