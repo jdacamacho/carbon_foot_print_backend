@@ -131,29 +131,41 @@ A continuación se realizará un instructivo de cómo se deberá realizar la ins
 ### Prerequisites
 
 1. Instalar java jDK 17 [![Java][Java-shield]][Java-link]
-2. Instalar un gestor de bases de datos MySQL, en nuestro caso usamos workbench
-   This is an example of how to list things you need to use the software and how to install them.
-
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
+2. Instalar un gestor de bases de datos MySQL, en nuestro caso usamos workbench [![MySQL][MySQL-shield]][MySQL-link]
+3. Asegurese de tener las herramientas necesatias en su editor de código.
+   > [!INFO]
+   > El proyecto se desarrollo en el editor de código VS Code dónde se utilizaron las siguientes extenciones
+   >
+   > 1. Language Support for Java(TM) by Red Hat
+   > 2. Project Manager for Java
+   > 3. Red Hat Dependency Analytics
+   > 4. Spring Boot Extension Pack
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone el repositorio.
    ```sh
    git clone https://github.com/jdacamacho/carbon_foot_print_backend.git
    ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = "ENTER YOUR API";
-   ```
+2. Cree la base de datos
+
+```sh
+   mysql -u root -p
+        create schema dbcruzroja
+```
+
+> [!INFO]
+> La información del schema, usuario y contraseña deben ir en el application.properties o crear un archivo de variables de entorno. 3. Abrá el apartado de spring boot en vs code
+
+<div align="left">
+    <img src="readme/assets/apartado-spring.png" alt="Logo" width="80" height="80">
+</div>
+4. Ejecute el proyecto desde vs code
+<div align="left">
+    <img src="readme/assets/Run.png" alt="Logo" width="80" height="80">
+</div>
+5. Finalmente abra su gestor de peticiones (postman, thunder, etc).
+6. La información de inicio de sesión para la generación del token se encuentra en resources/import.sql
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -161,9 +173,7 @@ A continuación se realizará un instructivo de cómo se deberá realizar la ins
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+La información de los endpoints se obtiene en la ruta (http://localhost:5000/swagger-ui/index.html) una vez lanzado el proyecto.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -171,10 +181,10 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-  - [ ] Nested Feature
+- [Administración] Feature 1
+- [Calculadora] Feature 2
+- [Gestion de planes de compensación] Feature 3
+- [Estadísticas] Feature 4
 
 See the [open issues](https://github.com/jdacamacho/carbon_foot_print_backend/issues) for a full list of proposed features (and known issues).
 
@@ -209,19 +219,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
 Project Link: [https://github.com/jdacamacho/carbon_foot_print_backend](https://github.com/jdacamacho/carbon_foot_print_backend)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
-- []()
-- []()
-- []()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -260,6 +258,6 @@ Project Link: [https://github.com/jdacamacho/carbon_foot_print_backend](https://
 [SpringBoot-shield]: https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=Spring&logoColor=white
 [SpringBoot-link]: https://spring.io/projects/spring-boot
 [MySQL-shield]: https://shields.io/badge/MySQL-lightgrey?logo=mysql&style=plastic&logoColor=white&labelColor=blue
-[MySQL-link]: https://www.mysql.com
+[MySQL-link]: https://www.mysql.com/products/workbench/
 [Java-shield]: https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white
 [Java-link]: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
