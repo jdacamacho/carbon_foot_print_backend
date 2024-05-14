@@ -133,13 +133,14 @@ A continuación se realizará un instructivo de cómo se deberá realizar la ins
 1. Instalar java jDK 17 [![Java][Java-shield]][Java-link]
 2. Instalar un gestor de bases de datos MySQL, en nuestro caso usamos workbench [![MySQL][MySQL-shield]][MySQL-link]
 3. Asegurese de tener las herramientas necesatias en su editor de código.
-   > [!NOTE]
-   > El proyecto se desarrollo en el editor de código VS Code dónde se utilizaron las siguientes extenciones
-   >
-   > 1. Language Support for Java(TM) by Red Hat
-   > 2. Project Manager for Java
-   > 3. Red Hat Dependency Analytics
-   > 4. Spring Boot Extension Pack
+
+> [!NOTE]
+> El proyecto se desarrollo en el editor de código VS Code dónde se utilizaron las siguientes extenciones
+>
+> 1. Language Support for Java(TM) by Red Hat
+> 2. Project Manager for Java
+> 3. Red Hat Dependency Analytics
+> 4. Spring Boot Extension Pack
 
 ### Installation
 
@@ -158,11 +159,11 @@ A continuación se realizará un instructivo de cómo se deberá realizar la ins
 > La información del schema, usuario y contraseña deben ir en el application.properties o crear un archivo de variables de entorno. 3. Abrá el apartado de spring boot en vs code
 
 <div align="left">
-    <img src="readme/assets/apartado-spring.png" alt="Logo" width="550" height="550">
+    <img src="readme/assets/apartado-spring.png" alt="Spring-vsCode" >
 </div>
 4. Ejecute el proyecto desde vs code
 <div align="left">
-    <img src="readme/assets/Run.png" alt="Logo" width="550" height="550">
+    <img src="readme/assets/Run.png" alt="Run" >
 </div>
 5. Finalmente abra su gestor de peticiones (postman, thunder, etc).
 6. La información de inicio de sesión para la generación del token se encuentra en resources/import.sql
