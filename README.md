@@ -133,7 +133,7 @@ A continuación se realizará un instructivo de cómo se deberá realizar la ins
 1. Instalar java jDK 17 [![Java][Java-shield]][Java-link]
 2. Instalar un gestor de bases de datos MySQL, en nuestro caso usamos workbench [![MySQL][MySQL-shield]][MySQL-link]
 3. Asegurese de tener las herramientas necesatias en su editor de código.
-   > [!INFO]
+   > [!NOTE]
    > El proyecto se desarrollo en el editor de código VS Code dónde se utilizaron las siguientes extenciones
    >
    > 1. Language Support for Java(TM) by Red Hat
@@ -149,20 +149,20 @@ A continuación se realizará un instructivo de cómo se deberá realizar la ins
    ```
 2. Cree la base de datos
 
-```sh
+   ```sh
    mysql -u root -p
-        create schema dbcruzroja
-```
+       create schema dbcruzroja
+   ```
 
-> [!INFO]
+> [!NOTE]
 > La información del schema, usuario y contraseña deben ir en el application.properties o crear un archivo de variables de entorno. 3. Abrá el apartado de spring boot en vs code
 
 <div align="left">
-    <img src="readme/assets/apartado-spring.png" alt="Logo" width="80" height="80">
+    <img src="readme/assets/apartado-spring.png" alt="Logo" width="550" height="550">
 </div>
 4. Ejecute el proyecto desde vs code
 <div align="left">
-    <img src="readme/assets/Run.png" alt="Logo" width="80" height="80">
+    <img src="readme/assets/Run.png" alt="Logo" width="550" height="550">
 </div>
 5. Finalmente abra su gestor de peticiones (postman, thunder, etc).
 6. La información de inicio de sesión para la generación del token se encuentra en resources/import.sql
