@@ -96,7 +96,7 @@ src\
  │ ├─JWT\
  │ └─Output\
  │
- ├─resources\
+ └─resources\
 
 ```
 

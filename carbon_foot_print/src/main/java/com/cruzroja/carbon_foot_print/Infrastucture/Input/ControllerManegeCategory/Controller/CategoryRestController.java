@@ -20,11 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cruzroja.carbon_foot_print.Application.Input.ManegeCategoryCUIntPort;
 import com.cruzroja.carbon_foot_print.Domain.Models.Category;
-
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCategory.DTORequest.CategoryByIds;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCategory.DTORequest.CategoryDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCategory.DTORequest.CategoryWithIdDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCategory.DTOResponse.CategoryDTOResponse;
-import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCategory.mappers.MapperCategoryInfraestructureDomainImpl;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCategory.DTOResponse.CategoryWithRelationDTOResponse;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCategory.mappers.MapperCategoryInfraestructureDomain;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -42,8 +43,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequiredArgsConstructor
 public class CategoryRestController {
     private final ManegeCategoryCUIntPort categoryCU;
-    private final MapperCategoryInfraestructureDomainImpl mapper;
+    private final MapperCategoryInfraestructureDomain mapper;
 
+    /**
+     * Endpoint que se encarga de recuperar todas las categorías con la información
+     * básica registradas en el sistema.
+     * 
+     * @return {@code ResponseEntity<List<CategoryDTOResponse>>} en caso de éxito
+     *         {@code ResponseEntity<Error>} en caso contrario.
+     */
     @GetMapping("")
     @Transactional(readOnly = true)
     public ResponseEntity<List<CategoryDTOResponse>> listAll() {
@@ -77,13 +85,57 @@ public class CategoryRestController {
         if (response.size() != 0)
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         try {
-            CategoryDTOResponse objCategory = this.mapper.mapModelToResponse(this.categoryCU.create(category));
-            return new ResponseEntity<CategoryDTOResponse>(objCategory, HttpStatus.CREATED);
+            CategoryWithRelationDTOResponse objCategory = this.mapper
+                    .mapModelToFullResponse(this.categoryCU.create(category));
+            return new ResponseEntity<CategoryWithRelationDTOResponse>(objCategory, HttpStatus.CREATED);
         } catch (DataAccessException e) {
             response.put("mensaje", "Error when inserting into database");
             response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PostMapping("/ids")
+    public ResponseEntity<?> getFullCategories(@RequestBody CategoryByIds request, BindingResult result) {
+        Map<String, Object> response = new HashMap<>();
+        response = this.catchErrors(result);
+        if (response.isEmpty())
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+        try {
+            List<CategoryWithRelationDTOResponse> objCategories = this.mapper
+                    .mapModelsToFullResponse(this.categoryCU.getMoreById(request.getIds()));
+            return new ResponseEntity<List<CategoryWithRelationDTOResponse>>(objCategories, HttpStatus.OK);
+        } catch (DataAccessException e) {
+            response.put("mensaje", "Error when searching into database");
+            response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @GetMapping("/enabled")
+    public ResponseEntity<List<CategoryDTOResponse>> getCategoriesEnabled() {
+        List<Category> categories = this.categoryCU.getAllEnable();
+        return new ResponseEntity<>(
+                this.mapper.mapModelsToResponse(categories), HttpStatus.OK);
+    }
+
+    @PostMapping("/enabled")
+    public ResponseEntity<?> getFullEnabledCategories(@RequestBody CategoryByIds request, BindingResult result) {
+        Map<String, Object> response = new HashMap<>();
+        response = this.catchErrors(result);
+        if (response.isEmpty())
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+        try {
+            List<CategoryWithRelationDTOResponse> objCategories = this.mapper
+                    .mapModelsToFullResponse(this.categoryCU.getMoreEnableById(request.getIds()));
+            return new ResponseEntity<List<CategoryWithRelationDTOResponse>>(objCategories, HttpStatus.OK);
+        } catch (DataAccessException e) {
+            response.put("mensaje", "Error when searching into database");
+            response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @PutMapping("")

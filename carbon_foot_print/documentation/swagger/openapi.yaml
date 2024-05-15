@@ -1,0 +1,1268 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:5000
+    description: Generated server url
+paths:
+  /api/user/volunteers:
+    get:
+      tags:
+        - user-volunteer-rest-controller
+      operationId: listVolunteers
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserVolunteerDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - user-volunteer-rest-controller
+      operationId: updateUserVolunteer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserVolunteerDTORequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - user-volunteer-rest-controller
+      operationId: saveVolunteer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserVolunteerDTORequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/user/companies:
+    get:
+      tags:
+        - user-company-rest-controller
+      operationId: listCompanies
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserCompanyDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - user-company-rest-controller
+      operationId: updateCompany
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCompanyDTORequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - user-company-rest-controller
+      operationId: saveCompany
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCompanyDTORequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/sources:
+    get:
+      tags:
+        - source-rest-controller
+      operationId: listSources
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SourceDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - source-rest-controller
+      operationId: updateSource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceWithIdDTORequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - source-rest-controller
+      operationId: saveSource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceDTORequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/roles:
+    get:
+      tags:
+        - role-rest-controller
+      operationId: listRoles
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RoleDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - role-rest-controller
+      operationId: updateRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleWithIdDTORequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - role-rest-controller
+      operationId: saveRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleDTORequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/pollutions/types/:
+    put:
+      tags:
+        - pollution-type-rest-controller
+      operationId: updatePollutionType
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PollutionTypeWithIdDTORequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/categories:
+    get:
+      tags:
+        - category-rest-controller
+      operationId: listAll
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategoryDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - category-rest-controller
+      operationId: updateUserVolunteer_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryWithIdDTORequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - category-rest-controller
+      operationId: saveCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryDTORequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/pollutions/types:
+    get:
+      tags:
+        - pollution-type-rest-controller
+      operationId: listPollutionTypes
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PollutionTypeDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - pollution-type-rest-controller
+      operationId: savePollutionType
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PollutionTypeDTORequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/categories/ids:
+    post:
+      tags:
+        - category-rest-controller
+      operationId: getFullCategories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryByIds'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/categories/enabled:
+    get:
+      tags:
+        - category-rest-controller
+      operationId: getCategoriesEnabled
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategoryDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - category-rest-controller
+      operationId: getFullEnabledCategories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryByIds'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/auth:
+    post:
+      tags:
+        - auth-rest-controller
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginDTORequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/user/volunteers/{documentNumber}:
+    get:
+      tags:
+        - user-volunteer-rest-controller
+      operationId: getVolunteer
+      parameters:
+        - name: documentNumber
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserVolunteerDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/user/volunteers/position:
+    get:
+      tags:
+        - user-volunteer-rest-controller
+      operationId: getVolunteersByPosition
+      parameters:
+        - name: position
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserVolunteerDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/user/companies/numberDocument/{numberDocument}:
+    get:
+      tags:
+        - user-company-rest-controller
+      operationId: getCompanyByNumberDocument
+      parameters:
+        - name: numberDocument
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserCompanyDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/user/companies/nit/{nitCompany}:
+    get:
+      tags:
+        - user-company-rest-controller
+      operationId: getCompanyByNit
+      parameters:
+        - name: nitCompany
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserCompanyDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/sources/{idSource}:
+    get:
+      tags:
+        - source-rest-controller
+      operationId: findSourceById
+      parameters:
+        - name: idSource
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SourceDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/sources/sourceName:
+    get:
+      tags:
+        - source-rest-controller
+      operationId: findSourceByName
+      parameters:
+        - name: sourceName
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SourceDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/roles/permissions:
+    get:
+      tags:
+        - role-rest-controller
+      operationId: listPermissions
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PermissionDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/roles/idRole/{idRole}:
+    get:
+      tags:
+        - role-rest-controller
+      operationId: getRole
+      parameters:
+        - name: idRole
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RoleDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/pollutions/types/{pollutionTypeId}:
+    get:
+      tags:
+        - pollution-type-rest-controller
+      operationId: findPollutionTypeById
+      parameters:
+        - name: pollutionTypeId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PollutionTypeDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/pollutions/types/name:
+    get:
+      tags:
+        - pollution-type-rest-controller
+      operationId: findPollutionTypeByName
+      parameters:
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PollutionTypeDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/categories/{categoryId}:
+    get:
+      tags:
+        - category-rest-controller
+      operationId: getCategory
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CategoryDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/categories/name:
+    get:
+      tags:
+        - category-rest-controller
+      operationId: getCategoryBy
+      parameters:
+        - name: name
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategoryDTOResponse'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+          
+components:
+  schemas:
+    PermissionDTORequest:
+      required:
+        - description
+        - name
+      type: object
+      properties:
+        idPermission:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+    RoleWithIdDTORequest:
+      required:
+        - state
+        - typeRole
+      type: object
+      properties:
+        idRole:
+          type: integer
+          format: int64
+        typeRole:
+          type: string
+        state:
+          type: boolean
+        permissions:
+          maxItems: 2147483647
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionDTORequest'
+    UserVolunteerDTORequest:
+      required:
+        - documentType
+        - lastNames
+        - names
+        - password
+        - personalEmail
+        - position
+        - state
+        - username
+      type: object
+      properties:
+        documentNumber:
+          type: integer
+          format: int64
+        documentType:
+          maxLength: 45
+          minLength: 6
+          type: string
+        names:
+          maxLength: 60
+          minLength: 2
+          type: string
+        lastNames:
+          maxLength: 60
+          minLength: 2
+          type: string
+        personalPhone:
+          pattern: '[3][0-9]{9}'
+          type: string
+        personalEmail:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        roles:
+          maxItems: 2147483647
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleWithIdDTORequest'
+        state:
+          type: boolean
+        position:
+          type: string
+    AddressDTORequest:
+      required:
+        - city
+        - country
+        - floorOrApartment
+        - neighborhood
+        - number
+        - street
+      type: object
+      properties:
+        street:
+          type: string
+        number:
+          type: string
+        floorOrApartment:
+          type: string
+        neighborhood:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+    UserCompanyDTORequest:
+      required:
+        - address
+        - companyEmail
+        - companyName
+        - companyPhone
+        - documentType
+        - lastNames
+        - names
+        - password
+        - personalEmail
+        - state
+        - username
+      type: object
+      properties:
+        documentNumber:
+          type: integer
+          format: int64
+        documentType:
+          maxLength: 45
+          minLength: 6
+          type: string
+        names:
+          maxLength: 60
+          minLength: 2
+          type: string
+        lastNames:
+          maxLength: 60
+          minLength: 2
+          type: string
+        personalPhone:
+          pattern: '[3][0-9]{9}'
+          type: string
+        personalEmail:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        roles:
+          maxItems: 2147483647
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleWithIdDTORequest'
+        state:
+          type: boolean
+        companyNit:
+          maximum: 999999999
+          minimum: 100000000
+          type: integer
+          format: int64
+        companyName:
+          type: string
+        companyPhone:
+          pattern: (?:3[0-9]{9})|(?:[1-9][0-9]{8})
+          type: string
+        companyEmail:
+          type: string
+        address:
+          $ref: '#/components/schemas/AddressDTORequest'
+    SourceWithIdDTORequest:
+      required:
+        - sourceName
+      type: object
+      properties:
+        idSource:
+          type: integer
+          format: int64
+        sourceName:
+          type: string
+    PollutionTypeWithIdDTORequest:
+      required:
+        - pollutionSources
+        - pollutionTypeDescription
+        - pollutionTypeEmissionFactor
+        - pollutionTypeId
+        - pollutionTypeName
+        - pollutionTypeUnits
+      type: object
+      properties:
+        pollutionTypeId:
+          type: integer
+          format: int64
+        pollutionTypeName:
+          type: string
+        pollutionTypeDescription:
+          type: string
+        pollutionTypeEmissionFactor:
+          type: number
+          format: double
+        pollutionTypeUnits:
+          type: string
+        pollutionSources:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceWithIdDTORequest'
+    CategoryWithIdDTORequest:
+      required:
+        - categoryDescription
+        - categoryName
+        - categoryScope
+        - categoryStatus
+      type: object
+      properties:
+        categoryId:
+          type: integer
+          format: int64
+        categoryName:
+          maxLength: 50
+          minLength: 2
+          type: string
+        categoryDescription:
+          type: string
+        categoryScope:
+          type: string
+        categoryStatus:
+          type: boolean
+        categoryPollution:
+          type: array
+          items:
+            $ref: '#/components/schemas/PollutionTypeWithIdDTORequest'
+    SourceDTORequest:
+      required:
+        - sourceName
+      type: object
+      properties:
+        sourceName:
+          type: string
+    RoleDTORequest:
+      required:
+        - state
+        - typeRole
+      type: object
+      properties:
+        typeRole:
+          type: string
+        state:
+          type: boolean
+        permissions:
+          maxItems: 2147483647
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionDTORequest'
+    PollutionTypeDTORequest:
+      required:
+        - pollutionSources
+        - pollutionTypeDescription
+        - pollutionTypeEmissionFactor
+        - pollutionTypeName
+        - pollutionTypeUnits
+      type: object
+      properties:
+        pollutionTypeName:
+          type: string
+        pollutionTypeDescription:
+          type: string
+        pollutionTypeEmissionFactor:
+          type: number
+          format: double
+        pollutionTypeUnits:
+          type: string
+        pollutionSources:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceWithIdDTORequest'
+    CategoryDTORequest:
+      required:
+        - categoryDescription
+        - categoryName
+        - categoryScope
+        - categoryStatus
+      type: object
+      properties:
+        categoryName:
+          maxLength: 50
+          minLength: 2
+          type: string
+        categoryDescription:
+          type: string
+        categoryScope:
+          type: string
+        categoryStatus:
+          type: boolean
+        categoryPollution:
+          type: array
+          items:
+            $ref: '#/components/schemas/PollutionTypeWithIdDTORequest'
+    CategoryByIds:
+      required:
+        - ids
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: integer
+            format: int64
+    LoginDTORequest:
+      required:
+        - password
+        - username
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    PermissionDTOResponse:
+      type: object
+      properties:
+        idPermission:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+    RoleDTOResponse:
+      type: object
+      properties:
+        idRole:
+          type: integer
+          format: int64
+        typeRole:
+          type: string
+        state:
+          type: boolean
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PermissionDTOResponse'
+    UserVolunteerDTOResponse:
+      type: object
+      properties:
+        documentNumber:
+          type: integer
+          format: int64
+        documentType:
+          type: string
+        names:
+          type: string
+        lastNames:
+          type: string
+        personalPhone:
+          type: string
+        personalEmail:
+          type: string
+        username:
+          type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleDTOResponse'
+        state:
+          type: boolean
+        position:
+          type: string
+    AddressDTOResponse:
+      type: object
+      properties:
+        companyNit:
+          type: integer
+          format: int64
+        objUserCompany:
+          $ref: '#/components/schemas/UserCompanyDTOResponse'
+        street:
+          type: string
+        number:
+          type: string
+        floorOrApartment:
+          type: string
+        neighborhood:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+    UserCompanyDTOResponse:
+      type: object
+      properties:
+        documentNumber:
+          type: integer
+          format: int64
+        documentType:
+          type: string
+        names:
+          type: string
+        lastNames:
+          type: string
+        personalPhone:
+          type: string
+        personalEmail:
+          type: string
+        username:
+          type: string
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoleDTOResponse'
+        state:
+          type: boolean
+        companyNit:
+          type: integer
+          format: int64
+        companyName:
+          type: string
+        companyPhone:
+          type: string
+        companyEmail:
+          type: string
+        address:
+          $ref: '#/components/schemas/AddressDTOResponse'
+        registrationDate:
+          type: string
+          format: date-time
+    SourceDTOResponse:
+      type: object
+      properties:
+        idSource:
+          type: integer
+          format: int64
+        sourceName:
+          type: string
+    PollutionTypeDTOResponse:
+      type: object
+      properties:
+        pollutionTypeId:
+          type: integer
+          format: int64
+        pollutionTypeName:
+          type: string
+        pollutionTypeDescription:
+          type: string
+        pollutionTypeEmissionFactor:
+          type: number
+          format: double
+        pollutionTypeUnits:
+          type: string
+        pollutionSources:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceDTOResponse'
+    CategoryDTOResponse:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+          format: int64
+        categoryName:
+          type: string
+        categoryDescription:
+          type: string
+        categoryScope:
+          type: string
+        categoryStatus:
+          type: boolean
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        httpCode:
+          type: integer
+          format: int64
+        url:
+          type: string
+        method:
+          type: string
