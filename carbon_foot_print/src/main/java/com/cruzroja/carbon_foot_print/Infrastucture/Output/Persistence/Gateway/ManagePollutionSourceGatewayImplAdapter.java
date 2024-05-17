@@ -4,24 +4,22 @@ import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
 import com.cruzroja.carbon_foot_print.Application.Output.ManagePollutionSourceGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Domain.Models.PollutionSource;
-import com.cruzroja.carbon_foot_print.Domain.Models.PollutionType;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.PollutionSourceEntity;
-import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.PollutionTypeEntity;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Repositories.PollutionSourceRepository;
+import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Serealizables.PollutionSourceId;
 
 @Service
-public class ManagePollutionGatewaySourceImplAdapter implements ManagePollutionSourceGatewayIntPort{
+public class ManagePollutionSourceGatewayImplAdapter implements ManagePollutionSourceGatewayIntPort{
 
     private final PollutionSourceRepository serviceBD;
     private final ModelMapper mapper;
 
-    public ManagePollutionGatewaySourceImplAdapter(PollutionSourceRepository serviceBD,
+    public ManagePollutionSourceGatewayImplAdapter(PollutionSourceRepository serviceBD,
                                             ModelMapper mapper){
         this.serviceBD = serviceBD;
         this.mapper = mapper;
@@ -29,8 +27,12 @@ public class ManagePollutionGatewaySourceImplAdapter implements ManagePollutionS
 
     @Override
     public PollutionSource findById(long idPollution, long idSource) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        Optional<PollutionSourceEntity> dataFromBD = this.serviceBD.findById(new PollutionSourceId(idPollution,idSource));
+        if(dataFromBD.isPresent()){
+            PollutionSource response = this.mapper.map(dataFromBD.get(), PollutionSource.class);
+            return response;
+        }
+        return null;
     }
 
     @Override

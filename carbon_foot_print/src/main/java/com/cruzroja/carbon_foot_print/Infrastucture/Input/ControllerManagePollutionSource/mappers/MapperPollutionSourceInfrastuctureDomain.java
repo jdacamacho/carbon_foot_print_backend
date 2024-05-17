@@ -10,4 +10,5 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface MapperPollutionSourceInfrastuctureDomain {
     List<PollutionSourceDTOResponse> mapModelToResponse(List<PollutionSource> models);
+    PollutionSourceDTOResponse mapModelToResponse(PollutionSource model);
 }

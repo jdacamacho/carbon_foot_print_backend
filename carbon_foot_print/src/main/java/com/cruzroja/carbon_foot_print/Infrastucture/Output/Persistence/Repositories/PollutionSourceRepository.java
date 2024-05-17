@@ -13,6 +13,6 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Serealiza
 public interface PollutionSourceRepository extends CrudRepository<PollutionSourceEntity, PollutionSourceId> {
     Optional<PollutionSourceEntity> findById(PollutionSourceId id);
     
-    @Query("SELECT p FROM PollutionSourceEntity p WHERE (p.pollution.id, p.source.id) IN :ids")
-    List<PollutionSourceEntity> findByIdIn(@Param("ids") List<PollutionSourceId> ids);
+    /*@Query("SELECT p FROM PollutionSourceEntity p WHERE (p.pollution.id, p.source.id) IN :ids")
+    List<PollutionSourceEntity> findByIdIn(@Param("ids") List<PollutionSourceId> ids);*/
 }

@@ -26,5 +26,14 @@ public class ManagePollutionSourceCUImplAdapter implements ManagePollutionSource
         }
         return objResponse;
     }
+
+    @Override
+    public PollutionSource findById(long idPollution, long idSource) {
+        PollutionSource response = this.gateway.findById(idPollution, idSource);
+        if(response == null){
+            this.exceptionFormatter.returnResponseErrorEntityNotFound("Entity not found");
+        }
+        return response;
+    }
     
 }
