@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageAuthGatewayIntPort;
+import com.cruzroja.carbon_foot_print.Application.Output.ManagePollutionSourceGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManagePollutionTypeGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageRoleGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageSourceGatewayIntPort;
@@ -14,6 +15,7 @@ import com.cruzroja.carbon_foot_print.Application.Output.ManageUserCompanyGatewa
 import com.cruzroja.carbon_foot_print.Application.Output.ManegeCategoryGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManegeUserVolunteerGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageAuthCUImplAdapter;
+import com.cruzroja.carbon_foot_print.Domain.UserCases.ManagePollutionSourceCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManagePollutionTypeCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageRoleCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageSourceCUImplAdapter;
@@ -76,4 +78,11 @@ public class BeanConfigurations {
         ManageSourceCUImplAdapter sourceCU = new ManageSourceCUImplAdapter(gateway, exceptionFormatter);
         return sourceCU;
     }
+
+    @Bean
+    public ManagePollutionSourceCUImplAdapter createPollutionSourceCU(ManagePollutionSourceGatewayIntPort gateway,
+                                    ExceptionFormatterIntPort exceptionFormatter){
+        return new ManagePollutionSourceCUImplAdapter(gateway, exceptionFormatter);
+    }
+
 }
