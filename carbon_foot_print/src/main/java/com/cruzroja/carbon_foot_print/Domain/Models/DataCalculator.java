@@ -3,7 +3,7 @@ package com.cruzroja.carbon_foot_print.Domain.Models;
 import lombok.Getter;
 
 @Getter
-public class Calculator {
+public class DataCalculator {
     private PollutionSource pollutionSource;
     private int month;
     private int year;
@@ -14,10 +14,11 @@ public class Calculator {
     private double coverge;
     private double footPrint;
 
-    public Calculator() {
+    public DataCalculator() {
     }
 
-    public Calculator(PollutionSource pollutionSource, int month, int year, double consume, double cost, int sources,
+    public DataCalculator(PollutionSource pollutionSource, int month, int year, double consume, double cost,
+            int sources,
             int informedSources) {
         this.pollutionSource = pollutionSource;
         this.month = month;
@@ -29,7 +30,7 @@ public class Calculator {
         calcule();
     }
 
-    public void update(Calculator calculator) {
+    public void update(DataCalculator calculator) {
         this.consume = calculator.consume;
         this.cost = calculator.cost;
         this.sources = calculator.sources;
