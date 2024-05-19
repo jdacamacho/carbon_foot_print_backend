@@ -9,8 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,8 +24,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "pollution_types")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 public class PollutionTypeEntity {
 

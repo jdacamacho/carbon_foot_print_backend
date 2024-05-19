@@ -28,14 +28,14 @@ public class Category {
     /**
      * Estado de la categoría [habilitado {@code true} deshabilitado {@code false}]
      */
-    private boolean categoryStatus;
+    private boolean categoryState;
     /**
      * Lista de contaminantes asociados a la categoría.
      */
-    private List<PollutionType> categoryPollution;
+    private List<PollutionType> pollutions;
 
     public Category() {
-        this.categoryPollution = new ArrayList<PollutionType>();
+        this.pollutions = new ArrayList<PollutionType>();
     }
 
     /**
@@ -47,8 +47,8 @@ public class Category {
         this.categoryName = newCategory.getCategoryName();
         this.categoryDescription = newCategory.getCategoryDescription();
         this.categoryScope = newCategory.getCategoryScope();
-        this.categoryStatus = (!this.categoryPollution.isEmpty() && newCategory.isCategoryStatus());
-        this.categoryPollution = newCategory.getCategoryPollution();
+        this.categoryState = (!this.pollutions.isEmpty() && newCategory.isCategoryState());
+        this.pollutions = newCategory.getPollutions();
     }
 
     /**
@@ -84,7 +84,7 @@ public class Category {
      *         caso de que almenos 1 sea invalido.
      */
     public boolean isValidPollution(List<PollutionType> valids) {
-        return valids.containsAll(this.categoryPollution);
+        return valids.containsAll(this.pollutions);
     }
 
     /**
@@ -92,7 +92,7 @@ public class Category {
      * contaminantes asociados.
      */
     public void determineStatus() {
-        this.categoryStatus = !this.categoryPollution.isEmpty();
+        this.categoryState = !this.pollutions.isEmpty();
     }
 
 }

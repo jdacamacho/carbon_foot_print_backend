@@ -23,7 +23,7 @@ public class CategoryDTORequest {
     @NotNull(message = "categoryScope can't be null")
     @NotBlank(message = "categoryScope can't be empty")
     private String categoryScope;
-    @NotNull(message = "catgoryStatus can't be null")
-    private boolean categoryStatus;
-    private List<PollutionTypeWithIdDTORequest> categoryPollution;
+    @NotNull(message = "catgoryState can't be null")
+    private boolean categoryState;
+    private List<PollutionTypeWithIdDTORequest> pollutions;
 }
