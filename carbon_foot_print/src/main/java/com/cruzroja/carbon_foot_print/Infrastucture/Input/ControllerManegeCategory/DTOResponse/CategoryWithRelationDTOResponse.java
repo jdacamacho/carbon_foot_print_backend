@@ -14,6 +14,6 @@ public class CategoryWithRelationDTOResponse {
     private String categoryName;
     private String categoryDescription;
     private String categoryScope;
-    private boolean categoryStatus;
-    private List<PollutionTypeDTOResponse> categoryPollution;
+    private boolean categoryState;
+    private List<PollutionTypeDTOResponse> pollutions;
 }

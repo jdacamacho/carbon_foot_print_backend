@@ -10,5 +10,5 @@ public class CategoryDTOResponse {
     private String categoryName;
     private String categoryDescription;
     private String categoryScope;
-    private boolean categoryStatus;
+    private boolean categoryState;
 }
