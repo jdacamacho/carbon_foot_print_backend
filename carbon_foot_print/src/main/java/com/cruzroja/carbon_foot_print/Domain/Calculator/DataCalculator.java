@@ -13,8 +13,8 @@ public class DataCalculator {
     private int year;
     private double consume;
     private double cost;
-    private int sources;
-    private int informedSources;
+    private int totalSource;
+    private int informedSource;
     private double coverge;
     private double footPrint;
 
@@ -43,13 +43,13 @@ public class DataCalculator {
         this.cost = cost;
     }
 
-    public void setSources(int sources) {
-        this.sources = sources;
+    public void setSources(int totalSource) {
+        this.totalSource = totalSource;
         this.coverge = calculeCoverge();
     }
 
-    public void setInformedSources(int informedSources) {
-        this.informedSources = informedSources;
+    public void setInformedSources(int informedSource) {
+        this.informedSource = informedSource;
         this.coverge = calculeCoverge();
     }
 
@@ -62,8 +62,8 @@ public class DataCalculator {
     }
 
     public double calculeCoverge() {
-        if (this.sources > 0)
-            return (this.informedSources / this.sources) * 100;
+        if (this.totalSource > 0)
+            return (this.informedSource / this.totalSource) * 100;
         return 0;
     }
 

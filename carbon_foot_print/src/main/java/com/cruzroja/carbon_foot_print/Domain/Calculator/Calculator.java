@@ -1,10 +1,7 @@
-package com.cruzroja.carbon_foot_print.Domain.Models;
+package com.cruzroja.carbon_foot_print.Domain.Calculator;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.cruzroja.carbon_foot_print.Domain.Calculator.CalculatorResponse;
-import com.cruzroja.carbon_foot_print.Domain.Calculator.DataCalculator;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
