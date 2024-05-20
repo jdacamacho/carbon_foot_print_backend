@@ -99,7 +99,7 @@ public class CategoryRestController {
     public ResponseEntity<?> getFullCategories(@RequestBody CategoryByIds request, BindingResult result) {
         Map<String, Object> response = new HashMap<>();
         response = this.catchErrors(result);
-        if (response.isEmpty())
+        if (!response.isEmpty())
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         try {
             List<CategoryWithRelationDTOResponse> objCategories = this.mapper
@@ -124,7 +124,7 @@ public class CategoryRestController {
     public ResponseEntity<?> getFullEnabledCategories(@RequestBody CategoryByIds request, BindingResult result) {
         Map<String, Object> response = new HashMap<>();
         response = this.catchErrors(result);
-        if (response.isEmpty())
+        if (!response.isEmpty())
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         try {
             List<CategoryWithRelationDTOResponse> objCategories = this.mapper
