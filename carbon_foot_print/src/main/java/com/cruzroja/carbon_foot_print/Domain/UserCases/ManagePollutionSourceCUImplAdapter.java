@@ -6,6 +6,7 @@ import com.cruzroja.carbon_foot_print.Application.Input.ManagePollutionSourceInt
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManagePollutionSourceGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Domain.Models.PollutionSource;
+import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Serealizables.PollutionSourceId;
 
 public class ManagePollutionSourceCUImplAdapter implements ManagePollutionSourceIntPort {
 
@@ -34,6 +35,15 @@ public class ManagePollutionSourceCUImplAdapter implements ManagePollutionSource
             this.exceptionFormatter.returnResponseErrorEntityNotFound("Entity not found");
         }
         return response;
+    }
+
+    @Override
+    public List<PollutionSource> findAllById(List<PollutionSourceId> idPollutionsSources) {
+        List<PollutionSource> objResponse = this.gateway.findAllByIds(idPollutionsSources);
+        if(objResponse.size() == 0){
+            this.exceptionFormatter.returNoData("No data was found");
+        }
+        return objResponse;
     }
     
 }

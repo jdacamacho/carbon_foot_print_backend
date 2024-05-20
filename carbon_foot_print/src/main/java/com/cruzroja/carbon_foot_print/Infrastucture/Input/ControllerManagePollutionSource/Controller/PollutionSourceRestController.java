@@ -1,5 +1,6 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManagePollutionSource.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import com.cruzroja.carbon_foot_print.Domain.Models.PollutionSource;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManagePollutionSource.DTORequest.PollutionSourceIdDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManagePollutionSource.DTOResponse.PollutionSourceDTOResponse;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManagePollutionSource.mappers.MapperPollutionSourceInfrastuctureDomain;
+import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Serealizables.PollutionSourceId;
 
 import lombok.RequiredArgsConstructor;
 
@@ -46,4 +48,15 @@ public class PollutionSourceRestController {
             mapper.mapModelToResponse(source) ,HttpStatus.OK);
         return objResponse;
     } 
+
+    @GetMapping("/ids")
+    @Transactional(readOnly = true)
+    public ResponseEntity<List<PollutionSourceDTOResponse>> listPollutionSourcesById(@RequestBody List<PollutionSourceId> request){
+        List<PollutionSource> pollutionSources = this.pollutionSourceCU.findAllById(request);
+
+        ResponseEntity<List<PollutionSourceDTOResponse>> objResponse = new ResponseEntity<List<PollutionSourceDTOResponse>>(
+            mapper.mapModelToResponse(pollutionSources) ,HttpStatus.OK);
+        return objResponse;
+    } 
+
 }

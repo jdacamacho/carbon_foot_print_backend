@@ -1,5 +1,6 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Gateway;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,8 +39,20 @@ public class ManagePollutionSourceGatewayImplAdapter implements ManagePollutionS
     @Override
     public List<PollutionSource> findAll() {
         Iterable<PollutionSourceEntity> dataFromBD = this.serviceBD.findAll();
-        
         List<PollutionSource> response = this.mapper.map(dataFromBD, new TypeToken<List<PollutionSource>>(){}.getType());
+        return response;
+    }
+
+    @Override
+    public List<PollutionSource> findAllByIds(List<PollutionSourceId> idPollutionSources) {
+        List<PollutionSource> data = new ArrayList<>();
+        for(int i = 0 ; i < idPollutionSources.size() ; i++){
+            PollutionSource p = this.findById(idPollutionSources.get(i).getPollution(),idPollutionSources.get(i).getSource() );
+            if(p != null){
+                data.add(p);
+            }
+        }
+        List<PollutionSource> response = this.mapper.map(data, new TypeToken<List<PollutionSource>>(){}.getType());
         return response;
     }
     
