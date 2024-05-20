@@ -11,12 +11,16 @@ import lombok.Data;
 public class SourceWithIdDTORequest {
     @Positive(message = "idSource must be positive or not null")
     private long idSource;
-    
+
     @NotNull(message = "sourceName can't be null")
     @NotBlank(message = "sourceName can't be empty")
     private String sourceName;
 
-    public SourceWithIdDTORequest(){
+    @NotNull(message = "sourceName can't be null")
+    @NotBlank(message = "sourceDescription can't be empty")
+    private String sourceDescription;
+
+    public SourceWithIdDTORequest() {
 
     }
 }

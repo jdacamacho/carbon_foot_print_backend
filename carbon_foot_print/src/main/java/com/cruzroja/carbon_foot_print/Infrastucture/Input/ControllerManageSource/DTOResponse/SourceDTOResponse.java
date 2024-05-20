@@ -8,8 +8,9 @@ import lombok.Data;
 public class SourceDTOResponse {
     private long idSource;
     private String sourceName;
+    private String sourceDescription;
 
-    public SourceDTOResponse(){
-        
+    public SourceDTOResponse() {
+
     }
 }

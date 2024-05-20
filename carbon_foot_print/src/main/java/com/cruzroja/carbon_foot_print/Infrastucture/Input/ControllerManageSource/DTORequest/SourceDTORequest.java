@@ -11,8 +11,11 @@ public class SourceDTORequest {
     @NotNull(message = "sourceName can't be null")
     @NotBlank(message = "sourceName can't be empty")
     private String sourceName;
+    @NotNull(message = "sourceName can't be null")
+    @NotBlank(message = "sourceDescription can't be empty")
+    private String sourceDescription;
 
-    public SourceDTORequest(){
+    public SourceDTORequest() {
 
     }
 }
