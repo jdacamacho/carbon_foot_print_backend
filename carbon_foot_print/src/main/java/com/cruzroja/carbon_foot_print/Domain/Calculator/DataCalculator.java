@@ -9,6 +9,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public class DataCalculator {
     private PollutionSource pollutionSource;
+    private long pollutionId;
+    private long sourceId;
     private int month;
     private int year;
     private double consume;
@@ -63,7 +65,7 @@ public class DataCalculator {
 
     public double calculeCoverge() {
         if (this.totalSource > 0)
-            return (this.informedSource / this.totalSource) * 100;
+            return ((this.informedSource / this.totalSource) * 100);
         return 0;
     }
 
