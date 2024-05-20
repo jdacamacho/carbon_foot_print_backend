@@ -1,4 +1,4 @@
-package com.cruzroja.carbon_foot_print.Domain.Calculator.utils;
+package com.cruzroja.carbon_foot_print.Domain.Calculator;
 
 import java.util.ArrayList;
 import java.util.List;

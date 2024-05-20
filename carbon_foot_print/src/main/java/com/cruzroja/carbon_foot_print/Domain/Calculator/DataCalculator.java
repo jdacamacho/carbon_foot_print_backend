@@ -1,4 +1,4 @@
-package com.cruzroja.carbon_foot_print.Domain.Calculator.utils;
+package com.cruzroja.carbon_foot_print.Domain.Calculator;
 
 import com.cruzroja.carbon_foot_print.Domain.Models.PollutionSource;
 
