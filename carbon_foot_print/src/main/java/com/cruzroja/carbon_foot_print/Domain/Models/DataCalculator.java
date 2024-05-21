@@ -1,70 +1,77 @@
 package com.cruzroja.carbon_foot_print.Domain.Models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class DataCalculator {
     private PollutionSource pollutionSource;
+    private long pollutionId;
+    private long sourceId;
     private int month;
     private int year;
     private double consume;
     private double cost;
-    private int sources;
-    private int informedSources;
+    private int totalSource;
+    private int informedSource;
     private double coverge;
     private double footPrint;
 
     public DataCalculator() {
     }
 
-    public DataCalculator(PollutionSource pollutionSource, int month, int year, double consume, double cost,
-            int sources,
-            int informedSources) {
+    public void setPollutionSource(PollutionSource pollutionSource) {
         this.pollutionSource = pollutionSource;
+        this.footPrint = calculeFootPrint();
+    }
+
+    public void setMonth(int month) {
         this.month = month;
+    }
+
+    public void setYear(int year) {
         this.year = year;
+    }
+
+    public void setConsume(double consume) {
         this.consume = consume;
+        this.footPrint = calculeFootPrint();
+    }
+
+    public void setCost(double cost) {
         this.cost = cost;
-        this.sources = sources;
-        this.informedSources = informedSources;
-        calcule();
     }
 
-    public void update(DataCalculator calculator) {
-        this.consume = calculator.consume;
-        this.cost = calculator.cost;
-        this.sources = calculator.sources;
-        this.informedSources = calculator.informedSources;
-        calcule();
+    public void setSources(int totalSource) {
+        this.totalSource = totalSource;
+        this.coverge = calculeCoverge();
     }
 
-    /**
-     * Calcula a cobertura del dato, tiendo en cuenta el número de fuentes totales y
-     * las fuentes informadas bajo una formula simple de cálculo de porcentaje
-     * {@code (informadas/totales)* 100}. En caso de que el número de totales sea
-     * {@code 0} se protege el sistema asignando {@code -1} a la covertura.
-     */
-    private void calculeCoverge() {
-        if (this.sources > 0)
-            this.coverge = (this.informedSources / this.sources) * 100;
-        else
-            this.coverge = 0;
+    public void setInformedSources(int informedSource) {
+        this.informedSource = informedSource;
+        this.coverge = calculeCoverge();
     }
 
-    /**
-     * Calcula la huella de carbono del registro tomando la información de factor de
-     * emisión del pollution type y el consumo registrado por la empresa.
-     */
-    private void calculeFootPrint() {
-        this.footPrint = this.pollutionSource.getPollution().getPollutionTypeEmissionFactor() * this.consume;
+    public void setCoverge(double coverge) {
+        this.coverge = calculeCoverge();
     }
 
-    /**
-     * Realiza el cálculo de los atributos no ingresados por el constructor.
-     */
-    public void calcule() {
-        calculeCoverge();
-        calculeFootPrint();
+    public void setFootPrint(double footPrint) {
+        this.footPrint = calculeFootPrint();
     }
 
+    public double calculeCoverge() {
+        if (this.totalSource > 0)
+            return ((this.informedSource / this.totalSource) * 100);
+        return 0;
+    }
+
+    public double calculeFootPrint() {
+        return this.consume * this.pollutionSource.getPollution().getPollutionTypeEmissionFactor();
+    }
+
+    public boolean isValidCoverge() {
+        return this.informedSource <= this.totalSource;
+    }
 }
