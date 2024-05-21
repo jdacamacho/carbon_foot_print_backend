@@ -91,7 +91,7 @@ public class Calculator {
     public void calculateBySource() {
         Map<Long, List<DataCalculator>> dataSource = this.groupBySource();
         dataSource.forEach((k, v) -> {
-            SourceResult result = new SourceResult(v.getFirst().getPollutionSource().getSource().getSourceName(),
+            SourceResult result = new SourceResult(v.get(0).getPollutionSource().getSource().getSourceName(),
                     this.calculateInList(v));
             this.results.addSource(result);
         });
