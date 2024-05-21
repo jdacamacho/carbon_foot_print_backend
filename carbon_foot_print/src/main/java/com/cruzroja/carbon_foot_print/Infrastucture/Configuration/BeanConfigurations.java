@@ -20,6 +20,7 @@ import com.cruzroja.carbon_foot_print.Domain.UserCases.ManagePollutionTypeCUImpl
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageRoleCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageSourceCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageUserCompanyCUImplAdapter;
+import com.cruzroja.carbon_foot_print.Domain.UserCases.ManegeCalculatorCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManegeCategoryCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManegeUserVolunteerCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Infrastucture.JWT.JwtService;
@@ -65,7 +66,8 @@ public class BeanConfigurations {
     ManegeCategoryCUImplAdapter createCategoryCU(ManegeCategoryGatewayIntPort gateway,
             ExceptionFormatterIntPort exceptionFormatter) {
         return new ManegeCategoryCUImplAdapter(gateway, exceptionFormatter);
-    }    
+    }
+
     @Bean
     public ManagePollutionTypeCUImplAdapter createPollutionTypeCU(ManagePollutionTypeGatewayIntPort gateway,
             ExceptionFormatterIntPort exceptionFormatter) {
@@ -74,15 +76,21 @@ public class BeanConfigurations {
 
     @Bean
     public ManageSourceCUImplAdapter createSourceCU(ManageSourceGatewayIntPort gateway,
-        ExceptionFormatterIntPort exceptionFormatter){
+            ExceptionFormatterIntPort exceptionFormatter) {
         ManageSourceCUImplAdapter sourceCU = new ManageSourceCUImplAdapter(gateway, exceptionFormatter);
         return sourceCU;
     }
 
     @Bean
     public ManagePollutionSourceCUImplAdapter createPollutionSourceCU(ManagePollutionSourceGatewayIntPort gateway,
-                                    ExceptionFormatterIntPort exceptionFormatter){
+            ExceptionFormatterIntPort exceptionFormatter) {
         return new ManagePollutionSourceCUImplAdapter(gateway, exceptionFormatter);
+    }
+
+    @Bean
+    public ManegeCalculatorCUImplAdapter createCalculatorCU(ManagePollutionSourceGatewayIntPort gateway,
+            ExceptionFormatterIntPort exceptionFormatter) {
+        return new ManegeCalculatorCUImplAdapter(gateway, exceptionFormatter);
     }
 
 }
