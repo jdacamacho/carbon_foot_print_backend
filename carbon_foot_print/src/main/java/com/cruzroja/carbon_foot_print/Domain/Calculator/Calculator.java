@@ -14,9 +14,18 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
+/**
+ * Clase del dominio (core de la aplicación): Su función es recibir los datos en
+ * una lista ({@code DataCalculator}) y procesarlos con el fin de retornar la
+ * medición total de huella de carbono y datos adicionales defiidos en
+ * {@code CalculatorResponse}
+ */
 public class Calculator {
+    /** Total de huella de carbono */
     private double footPrint;
+    /** Datos para realizar el cálculo */
     private List<DataCalculator> data;
+    /** Respuesta calculada */
     private CalculatorResponse results;
 
     public Calculator() {
@@ -31,6 +40,15 @@ public class Calculator {
         this.results = new CalculatorResponse();
     }
 
+    /**
+     * Determina si un dato se encuentra repetivo a través del uso de una PK, UUID o
+     * patrón IDO compuesto por el {@code year}, {@code month} y
+     * ({@code pollutionId}, ({@code sourceId})) correspondientes al
+     * ({@code PollutionSource}).
+     * 
+     * @return {@code true} en caso de que hayan 2 elementos con mismo UUID y
+     *         {@code false} en caso contrario.
+     */
     public boolean isDuplicate() {
         Set<String> uniqueCombinationSet = new HashSet<>();
 
@@ -45,6 +63,12 @@ public class Calculator {
         return false;
     }
 
+    // TODO: aqui voy
+    /**
+     * Agrupa los datos tomando como criterio el atributo {@code year}.
+     * 
+     * @return {@code }
+     */
     private Map<Integer, List<DataCalculator>> groupByYear() {
         return this.data.stream()
                 .collect(Collectors.groupingBy(DataCalculator::getYear));
