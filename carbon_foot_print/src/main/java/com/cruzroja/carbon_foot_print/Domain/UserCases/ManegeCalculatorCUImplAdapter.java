@@ -22,6 +22,8 @@ public class ManegeCalculatorCUImplAdapter implements ManegeCalculatorCUIntPort 
 
     @Override
     public CalculatorResponse calculeFootPrint(List<DataCalculator> data) {
+        if (data.isEmpty())
+            this.errorFormatter.returnResponseBadFormat("La lista de datos no puede ser vacía");
         for (DataCalculator item : data) {
             PollutionSource pollutionSource = this.gateway.findById(item.getPollutionId(), item.getSourceId());
             if (pollutionSource == null)

@@ -45,7 +45,7 @@ public class PollutionTypeEntity {
     private String pollutionTypeUnits;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "pollution_source", joinColumns = @JoinColumn(name = "source_id"), inverseJoinColumns = @JoinColumn(name = "pollution_id"))
+    @JoinTable(name = "pollution_source", joinColumns = @JoinColumn(name = "pollution_id"), inverseJoinColumns = @JoinColumn(name = "source_id"))
     private List<SourceEntity> pollutionSources;
 
     public PollutionTypeEntity() {

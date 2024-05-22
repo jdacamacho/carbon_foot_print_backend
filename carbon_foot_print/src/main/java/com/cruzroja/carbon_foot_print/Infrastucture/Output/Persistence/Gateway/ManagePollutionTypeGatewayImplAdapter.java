@@ -35,6 +35,8 @@ public class ManagePollutionTypeGatewayImplAdapter implements ManagePollutionTyp
     @Override
     public PollutionType savePollutionType(PollutionType pollutionType) {
         PollutionTypeEntity pollutionTypeEntity = mapper.map(pollutionType, PollutionTypeEntity.class);
+        // TODO: Eliminar
+        System.out.println(pollutionTypeEntity);
         PollutionTypeEntity savedEntity = serviceDB.save(pollutionTypeEntity);
         return mapper.map(savedEntity, PollutionType.class);
     }

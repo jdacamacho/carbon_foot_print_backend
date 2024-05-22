@@ -33,7 +33,7 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageSource
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(origins = {"http://localhost:5050"})
+@CrossOrigin(origins = { "http://localhost:5050" })
 @RestController
 @RequestMapping("/api/sources")
 @Validated
@@ -45,90 +45,90 @@ public class SourceRestController {
     @GetMapping("")
     @Transactional(readOnly = true)
     @PreAuthorize("hasRole('Listar_Fuentes')")
-    public ResponseEntity<List<SourceDTOResponse>> listSources(){
+    public ResponseEntity<List<SourceDTOResponse>> listSources() {
         List<Source> sources = this.sourceCU.listSources();
         ResponseEntity<List<SourceDTOResponse>> objResponse = new ResponseEntity<List<SourceDTOResponse>>(
-            mapper.mapModelsToResponse(sources), HttpStatus.OK);
-        return objResponse;        
+                mapper.mapModelsToResponse(sources), HttpStatus.OK);
+        return objResponse;
     }
 
     @GetMapping("/{idSource}")
     @Transactional(readOnly = true)
     @PreAuthorize("hasRole('Consultar_Fuente_ID')")
-    public ResponseEntity<SourceDTOResponse> findSourceById(@PathVariable long idSource){
+    public ResponseEntity<SourceDTOResponse> findSourceById(@PathVariable long idSource) {
         Source source = this.sourceCU.findByIdSource(idSource);
         ResponseEntity<SourceDTOResponse> objResponse = new ResponseEntity<SourceDTOResponse>(
-            mapper.mapModelToTesponse(source) ,HttpStatus.OK);
-        return objResponse;        
+                mapper.mapModelToTesponse(source), HttpStatus.OK);
+        return objResponse;
     }
 
     @GetMapping("/sourceName")
     @Transactional(readOnly = true)
     @PreAuthorize("hasRole('Consultar_Fuente_name')")
-    public ResponseEntity<SourceDTOResponse> findSourceByName(@RequestParam String sourceName){
+    public ResponseEntity<SourceDTOResponse> findSourceByName(@RequestParam String sourceName) {
         Source source = this.sourceCU.findBySourceName(sourceName);
         ResponseEntity<SourceDTOResponse> objResponse = new ResponseEntity<SourceDTOResponse>(
-            mapper.mapModelToTesponse(source) ,HttpStatus.OK);
-        return objResponse;        
+                mapper.mapModelToTesponse(source), HttpStatus.OK);
+        return objResponse;
     }
 
     @PostMapping("")
     @PreAuthorize("hasRole('Crear_Fuente')")
-    public ResponseEntity<?> saveSource(@Valid @RequestBody SourceDTORequest request, BindingResult result){
+    public ResponseEntity<?> saveSource(@Valid @RequestBody SourceDTORequest request, BindingResult result) {
         Source source = this.mapper.mapRequestToModel(request);
         Map<String, Object> response = new HashMap<>();
         SourceDTOResponse objResource;
 
-        if(result.hasErrors()){
-			List<String> listaErrores= new ArrayList<>();
+        if (result.hasErrors()) {
+            List<String> listaErrores = new ArrayList<>();
 
-			for (FieldError error : result.getFieldErrors()) {
-				listaErrores.add("The field '" + error.getField() +"‘ "+ error.getDefaultMessage());
-			}
+            for (FieldError error : result.getFieldErrors()) {
+                listaErrores.add("The field '" + error.getField() + "‘ " + error.getDefaultMessage());
+            }
 
-			response.put("errors", listaErrores);
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
-		}
-
-        try{
-            objResource = this.mapper.mapModelToTesponse(this.sourceCU.saveSource(source));
-            
-        }catch(DataAccessException e){
-            response.put("mensaje", "Error when inserting into database");
-			response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            response.put("errors", listaErrores);
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<SourceDTOResponse>(objResource,HttpStatus.OK);
+        try {
+            objResource = this.mapper.mapModelToTesponse(this.sourceCU.saveSource(source));
+
+        } catch (DataAccessException e) {
+            response.put("mensaje", "Error when inserting into database");
+            response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<SourceDTOResponse>(objResource, HttpStatus.CREATED);
     }
 
     @PutMapping("")
     @PreAuthorize("hasRole('Actualizar_Fuente')")
-    public ResponseEntity<?> updateSource(@Valid @RequestBody SourceWithIdDTORequest request, BindingResult result){
+    public ResponseEntity<?> updateSource(@Valid @RequestBody SourceWithIdDTORequest request, BindingResult result) {
         Source source = this.mapper.mapRequestWithIdToModel(request);
         Map<String, Object> response = new HashMap<>();
         SourceDTOResponse objResource;
 
-        if(result.hasErrors()){
-			List<String> listaErrores= new ArrayList<>();
+        if (result.hasErrors()) {
+            List<String> listaErrores = new ArrayList<>();
 
-			for (FieldError error : result.getFieldErrors()) {
-				listaErrores.add("The field '" + error.getField() +"‘ "+ error.getDefaultMessage());
-			}
+            for (FieldError error : result.getFieldErrors()) {
+                listaErrores.add("The field '" + error.getField() + "‘ " + error.getDefaultMessage());
+            }
 
-			response.put("errors", listaErrores);
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
-		}
-
-        try{
-            objResource = this.mapper.mapModelToTesponse(this.sourceCU.updateSource(source));
-            
-        }catch(DataAccessException e){
-            response.put("mensaje", "Error when updating into database");
-			response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            response.put("errors", listaErrores);
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<SourceDTOResponse>(objResource,HttpStatus.OK);
+        try {
+            objResource = this.mapper.mapModelToTesponse(this.sourceCU.updateSource(source));
+
+        } catch (DataAccessException e) {
+            response.put("mensaje", "Error when updating into database");
+            response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<SourceDTOResponse>(objResource, HttpStatus.OK);
     }
 }

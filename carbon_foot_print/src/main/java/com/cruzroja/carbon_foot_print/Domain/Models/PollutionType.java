@@ -15,16 +15,16 @@ public class PollutionType {
 
     /** Identificador único del tipo de contaminación. */
     private long pollutionTypeId;
-    
+
     /** Nombre del tipo de contaminación. */
     private String pollutionTypeName;
-    
+
     /** Descripción del tipo de contaminación. */
     private String pollutionTypeDescription;
-    
+
     /** Factor de emisión del tipo de contaminación. */
     private double pollutionTypeEmissionFactor;
-    
+
     /** Unidades del factor de emisión del tipo de contaminación. */
     private String pollutionTypeUnits;
     private List<Source> pollutionSources;
@@ -37,11 +37,14 @@ public class PollutionType {
     }
 
     /**
-     * Actualiza los atributos del tipo de contaminación con los valores proporcionados.
-     * @param name Nombre del tipo de contaminación.
-     * @param description Descripción del tipo de contaminación.
+     * Actualiza los atributos del tipo de contaminación con los valores
+     * proporcionados.
+     * 
+     * @param name           Nombre del tipo de contaminación.
+     * @param description    Descripción del tipo de contaminación.
      * @param emissionFactor Factor de emisión del tipo de contaminación.
-     * @param units Unidades del factor de emisión del tipo de contaminación.
+     * @param units          Unidades del factor de emisión del tipo de
+     *                       contaminación.
      */
     public void update(PollutionType newValues) {
         this.pollutionTypeName = newValues.getPollutionTypeName();

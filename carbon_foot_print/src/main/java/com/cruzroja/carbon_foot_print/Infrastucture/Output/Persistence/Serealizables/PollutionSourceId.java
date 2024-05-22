@@ -3,7 +3,6 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Serealiz
 import java.io.Serializable;
 import java.util.Objects;
 
-
 public class PollutionSourceId implements Serializable {
     private Long pollution;
     private Long source;
@@ -24,7 +23,6 @@ public class PollutionSourceId implements Serializable {
     public Long getSource() {
         return this.source;
     }
-
 
     @Override
     public boolean equals(Object o) {

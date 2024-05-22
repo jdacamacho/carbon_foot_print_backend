@@ -17,15 +17,15 @@ import lombok.Data;
 @AllArgsConstructor
 @IdClass(PollutionSourceId.class)
 public class PollutionSourceEntity {
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "pollution_id", nullable = false)
-    private PollutionTypeEntity pollution;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "source_id", nullable = false)
     private SourceEntity source;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "pollution_id", nullable = false)
+    private PollutionTypeEntity pollution;
 
     public PollutionSourceEntity() {
 
