@@ -64,6 +64,11 @@ INSERT INTO permissions(idPermission, name, description) VALUES (602, "ROLE_Actu
 INSERT INTO permissions(idPermission, name, description) VALUES (603, "ROLE_Consultar_Contaminante_ID","Permiso para consultar un contaminante por ID.");
 INSERT INTO permissions(idPermission, name, description) VALUES (604, "ROLE_Consultar_Contaminante_Name","Permiso para consultar contaminantes por patrón de nombre.");
 
+#PERMISOS PARA FUENTES CONTAMINANTES
+INSERT INTO permissions(idPermission, name, description) VALUES (700, "ROLE_Listar_Fuente_Contaminante","Permiso para listar todas las fuentes contaminantes.");
+INSERT INTO permissions(idPermission, name, description) VALUES (701, "ROLE_Consultar_Fuente_Contaminante_ID","Permiso para consultar una fuente contaminante por id.");
+INSERT INTO permissions(idPermission, name, description) VALUES (702, "ROLE_Consultar_Fuentes_Contaminantes_IDs","Permiso para consultar varias fuentes contaminantes por lista de ids.");
+
 
 
 #PROBAR USUARIO PARA roles
