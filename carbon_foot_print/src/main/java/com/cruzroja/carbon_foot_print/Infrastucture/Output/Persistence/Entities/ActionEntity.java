@@ -27,9 +27,6 @@ public class ActionEntity {
     @Column(nullable = false)
     private double actionUnitaryPrice;
 
-    @Column(nullable = false, length = 300)
-    private String actionSource;
-
     public ActionEntity(){
 
     }
