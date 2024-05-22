@@ -57,6 +57,15 @@ INSERT INTO permissions(idPermission, name, description) VALUES (502, "ROLE_Actu
 INSERT INTO permissions(idPermission, name, description) VALUES (503, "ROLE_Consultar_Fuente_ID","Permiso para consultar una fuente por ID");
 INSERT INTO permissions(idPermission, name, description) VALUES (504, "ROLE_Consultar_Fuente_name","Permiso para consultar una fuente por nombre");
 
+#PERMISOS PARA CONTAMINANTES
+INSERT INTO permissions(idPermission, name, description) VALUES (600, "ROLE_Listar_Contaminantes","Permiso para listar los contaminantes.");
+INSERT INTO permissions(idPermission, name, description) VALUES (601, "ROLE_Crear_Contaminantes","Permiso para crear un contaminante.");
+INSERT INTO permissions(idPermission, name, description) VALUES (602, "ROLE_Actualizar_Contaminantes","Permiso para crear un contaminante.");
+INSERT INTO permissions(idPermission, name, description) VALUES (603, "ROLE_Consultar_Contaminante_ID","Permiso para consultar un contaminante por ID.");
+INSERT INTO permissions(idPermission, name, description) VALUES (604, "ROLE_Consultar_Contaminante_Name","Permiso para consultar contaminantes por patrón de nombre.");
+
+
+
 #PROBAR USUARIO PARA roles
 INSERT INTO USERS(documentNumber, documentType, names, lastNames, personalPhone, state, personalEmail, username, password) 
 VALUES(1000000001, "cedula", "UsuarioFuentes", "Prueba", 3140000001, 1, "userfuentes@gmail.com", "UserFuentes", "$2a$10$JmBzt5AQPL2YuO3aI6WaqO4Tp0wBeinBlzQgF3FA8tGM7wd1Dzhku");

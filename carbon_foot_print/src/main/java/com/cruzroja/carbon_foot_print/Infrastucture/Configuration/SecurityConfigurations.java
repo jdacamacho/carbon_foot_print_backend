@@ -82,7 +82,18 @@ public class SecurityConfigurations {
                                                 .hasRole("Consultar_Categorias_IDs")
                                                 .requestMatchers(HttpMethod.PUT, "/api/categories")
                                                 .hasRole("Actualizar_Categoria")
-
+                                                // Contaminantes
+                                                .requestMatchers(HttpMethod.GET, "/api/pollutions/types")
+                                                .hasRole("Listar_Contaminantes")
+                                                .requestMatchers(HttpMethod.POST, "/api/pollutions/types")
+                                                .hasRole("Crear_Contaminantes")
+                                                .requestMatchers(HttpMethod.PUT, "/api/pollutions/types")
+                                                .hasRole("Actualizar_Contaminantes")
+                                                .requestMatchers(HttpMethod.GET,
+                                                                "/api/pollutions/types/{pollutionTypeId}")
+                                                .hasRole("Consultar_Contaminante_ID")
+                                                .requestMatchers(HttpMethod.GET, "/api/pollutions/types/name")
+                                                .hasRole("Consultar_Contaminante_Name")
                                                 .anyRequest().permitAll()
                                 // Para que puedan usar los demas endopints cambiar authenticated() por
                                 // permiteAll()
