@@ -1,6 +1,5 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageAction.DTORequest;
 
-import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,9 +17,7 @@ public class ActionDTORequest {
     @NotBlank(message = "action's description can't be empty")
     private String actionDescription;
 
-    @NotNull(message = "action's unitary price can't be null")
     @Min(value = 0, message = "action's unitary price can't be negative")
-    @Digits(integer = 10, fraction = 2, message = "action's unitary price format is invalid")
     private double actionUnitaryPrice;
 
     public ActionDTORequest(){

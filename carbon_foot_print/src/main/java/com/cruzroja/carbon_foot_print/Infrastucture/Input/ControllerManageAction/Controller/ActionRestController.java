@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,7 +71,7 @@ public class ActionRestController {
         return objResponse;
     }
 
-    @PostMapping
+    @PostMapping("")
     public ResponseEntity<?> saveAction(@Valid @RequestBody ActionDTORequest request , BindingResult result){
         Action action = this.mapper.mapRequestToModel(request);
         Map<String, Object> response = new HashMap<>();
@@ -98,7 +99,7 @@ public class ActionRestController {
         return new ResponseEntity<ActionDTOResponse>(objAction, HttpStatus.CREATED);
     }
 
-    @PostMapping
+    @PutMapping("")
     public ResponseEntity<?> updateAction(@Valid @RequestBody ActionWithIdDTORequest request , BindingResult result){
         Action action = this.mapper.mapRequestToModel(request);
         Map<String, Object> response = new HashMap<>();
