@@ -12,4 +12,7 @@ public class CalculatorResponseDTOResponse {
     private List<SourceResultDTOResponse> totalBySources;
     private List<MonthResultDTOResponse> totalByMonth;
     private List<SourceResultDTOResponse> percentage;
+
+    public CalculatorResponseDTOResponse() {
+    }
 }

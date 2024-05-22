@@ -11,4 +11,7 @@ public class MonthResultDTOResponse {
     private int year;
     private List<Double> month;
     private double total;
+
+    public MonthResultDTOResponse() {
+    }
 }

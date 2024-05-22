@@ -34,6 +34,7 @@ public class ManegeCalculatorCUImplAdapter implements ManegeCalculatorCUIntPort 
                 this.errorFormatter
                         .returnResponseBusinessRuleViolated("El informedSource debe ser menor o igual al totalSource");
             item.setPollutionSource(pollutionSource);
+            item.calculeData();
         }
         Calculator calculator = new Calculator(data);
         if (calculator.isDuplicate())

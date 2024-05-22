@@ -1,9 +1,9 @@
 package com.cruzroja.carbon_foot_print.Domain.Models;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 @AllArgsConstructor
 public class DataCalculator {
     private PollutionSource pollutionSource;
@@ -13,8 +13,8 @@ public class DataCalculator {
     private int year;
     private double consume;
     private double cost;
-    private int totalSource;
-    private int informedSource;
+    private int sources;
+    private int informedSources;
     private double coverge;
     private double footPrint;
 
@@ -26,44 +26,9 @@ public class DataCalculator {
         this.footPrint = calculeFootPrint();
     }
 
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public void setConsume(double consume) {
-        this.consume = consume;
-        this.footPrint = calculeFootPrint();
-    }
-
-    public void setCost(double cost) {
-        this.cost = cost;
-    }
-
-    public void setSources(int totalSource) {
-        this.totalSource = totalSource;
-        this.coverge = calculeCoverge();
-    }
-
-    public void setInformedSources(int informedSource) {
-        this.informedSource = informedSource;
-        this.coverge = calculeCoverge();
-    }
-
-    public void setCoverge(double coverge) {
-        this.coverge = calculeCoverge();
-    }
-
-    public void setFootPrint(double footPrint) {
-        this.footPrint = calculeFootPrint();
-    }
-
     public double calculeCoverge() {
-        if (this.totalSource > 0)
-            return ((this.informedSource / this.totalSource) * 100);
+        if (this.sources > 0)
+            return ((this.informedSources / this.sources) * 100);
         return 0;
     }
 
@@ -72,6 +37,11 @@ public class DataCalculator {
     }
 
     public boolean isValidCoverge() {
-        return this.informedSource <= this.totalSource;
+        return this.informedSources <= this.sources;
+    }
+
+    public void calculeData() {
+        this.footPrint = calculeFootPrint();
+        this.coverge = calculeCoverge();
     }
 }

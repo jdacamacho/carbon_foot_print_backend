@@ -13,17 +13,19 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cruzroja.carbon_foot_print.Domain.Models.DataCalculator;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManegeCalculatorCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCalculator.DTORequest.DataCalculatorDTORequest;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCalculator.DTORequest.DataCalculatorListDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCalculator.DTOResponse.CalculatorResponseDTOResponse;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCalculator.mappers.MapperCalculatorResponseInfraestructureDomain;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCalculator.mappers.MapperDataCalculatorInfraestructureDomain;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @CrossOrigin(origins = { "http://localhost:5050" })

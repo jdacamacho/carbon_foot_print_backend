@@ -11,5 +11,5 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeCalcul
 public interface MapperDataCalculatorInfraestructureDomain {
     DataCalculator requestToModel(DataCalculatorDTORequest request);
 
-    List<DataCalculator> requestsToModels(List<DataCalculatorDTORequest> requests);
+    List<DataCalculator> requestsToModels(Iterable<DataCalculatorDTORequest> request);
 }
