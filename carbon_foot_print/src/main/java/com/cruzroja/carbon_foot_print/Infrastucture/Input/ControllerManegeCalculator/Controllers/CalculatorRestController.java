@@ -49,7 +49,7 @@ public class CalculatorRestController {
         try {
             CalculatorResponseDTOResponse response = this.mapperResponse
                     .modelToResponse(this.calculatorCU.calculeFootPrint(data));
-            return new ResponseEntity<CalculatorResponseDTOResponse>(response, HttpStatus.ACCEPTED);
+            return new ResponseEntity<CalculatorResponseDTOResponse>(response, HttpStatus.OK);
         } catch (DataAccessException e) {
             errorResponse.put("mensaje", "Error when inserting into database");
             errorResponse.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());

@@ -32,8 +32,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-@CrossOrigin(origins = {"http://localhost:5050"})
+@CrossOrigin(origins = { "http://localhost:5050" })
 @RestController
 @RequestMapping("/api/user/companies")
 @Validated
@@ -45,96 +44,93 @@ public class UserCompanyRestController {
     @GetMapping("")
     @PreAuthorize("hasRole('Listar_Empresas')")
     @Transactional(readOnly = true)
-    public ResponseEntity<List<UserCompanyDTOResponse>> listCompanies(){
+    public ResponseEntity<List<UserCompanyDTOResponse>> listCompanies() {
         List<UserCompany> companies = this.userCompanyCU.listUserCompany();
         ResponseEntity<List<UserCompanyDTOResponse>> objResponse = new ResponseEntity<List<UserCompanyDTOResponse>>(
-            mapper.mapModelsToResponse(companies),HttpStatus.OK
-        );
+                mapper.mapModelsToResponse(companies), HttpStatus.OK);
         return objResponse;
     }
 
     @PostMapping("")
     @PreAuthorize("hasRole('Crear_Empresas')")
-    public ResponseEntity<?> saveCompany(@Valid @RequestBody UserCompanyDTORequest companyRequest, BindingResult result){
+    public ResponseEntity<?> saveCompany(@Valid @RequestBody UserCompanyDTORequest companyRequest,
+            BindingResult result) {
         UserCompany company = this.mapper.mapRequestToModel(companyRequest);
         Map<String, Object> response = new HashMap<>();
         UserCompanyDTOResponse objCompany;
 
-        if(result.hasErrors()){
-			List<String> listaErrores= new ArrayList<>();
+        if (result.hasErrors()) {
+            List<String> listaErrores = new ArrayList<>();
 
-			for (FieldError error : result.getFieldErrors()) {
-				listaErrores.add("The field '" + error.getField() +"‘ "+ error.getDefaultMessage());
-			}
+            for (FieldError error : result.getFieldErrors()) {
+                listaErrores.add("The field '" + error.getField() + "‘ " + error.getDefaultMessage());
+            }
 
-			response.put("errors", listaErrores);
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
-		}
-
-        try{
-            objCompany = this.mapper.mapModelToResponse(this.userCompanyCU.saveUserCompany(company));
-            
-        }catch(DataAccessException e){
-            response.put("mensaje", "Error when inserting into database");
-			response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            response.put("errors", listaErrores);
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<UserCompanyDTOResponse>(objCompany,HttpStatus.OK);
+        try {
+            objCompany = this.mapper.mapModelToResponse(this.userCompanyCU.saveUserCompany(company));
+
+        } catch (DataAccessException e) {
+            response.put("mensaje", "Error when inserting into database");
+            response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<UserCompanyDTOResponse>(objCompany, HttpStatus.CREATED);
     }
 
     @PutMapping("")
     @PreAuthorize("hasRole('Actualizar_Empresas')")
-    public ResponseEntity<?> updateCompany(@Valid @RequestBody UserCompanyDTORequest companyRequest, BindingResult result){
+    public ResponseEntity<?> updateCompany(@Valid @RequestBody UserCompanyDTORequest companyRequest,
+            BindingResult result) {
         UserCompany company = this.mapper.mapRequestToModel(companyRequest);
         Map<String, Object> response = new HashMap<>();
         UserCompanyDTOResponse objCompany;
 
-        if(result.hasErrors()){
-			List<String> listaErrores= new ArrayList<>();
+        if (result.hasErrors()) {
+            List<String> listaErrores = new ArrayList<>();
 
-			for (FieldError error : result.getFieldErrors()) {
-				listaErrores.add("The field '" + error.getField() +"‘ "+ error.getDefaultMessage());
-			}
+            for (FieldError error : result.getFieldErrors()) {
+                listaErrores.add("The field '" + error.getField() + "‘ " + error.getDefaultMessage());
+            }
 
-			response.put("errors", listaErrores);
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
-		}
-
-        try{
-            objCompany = this.mapper.mapModelToResponse(this.userCompanyCU.updateUserCompany(company));
-            
-        }catch(DataAccessException e){
-            response.put("mensaje", "Error when updating into database");
-			response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            response.put("errors", listaErrores);
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<UserCompanyDTOResponse>(objCompany,HttpStatus.OK);
+        try {
+            objCompany = this.mapper.mapModelToResponse(this.userCompanyCU.updateUserCompany(company));
+
+        } catch (DataAccessException e) {
+            response.put("mensaje", "Error when updating into database");
+            response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<UserCompanyDTOResponse>(objCompany, HttpStatus.OK);
     }
 
     @GetMapping("/nit/{nitCompany}")
     @PreAuthorize("hasRole('Consultar_Empresa_NIT')")
     @Transactional(readOnly = true)
-    public ResponseEntity<UserCompanyDTOResponse> getCompanyByNit(@PathVariable long nitCompany){
+    public ResponseEntity<UserCompanyDTOResponse> getCompanyByNit(@PathVariable long nitCompany) {
         UserCompany company = this.userCompanyCU.getUserCompanyByNit(nitCompany);
         ResponseEntity<UserCompanyDTOResponse> objResponse = new ResponseEntity<UserCompanyDTOResponse>(
-            mapper.mapModelToResponse(company),HttpStatus.OK
-        );
+                mapper.mapModelToResponse(company), HttpStatus.OK);
         return objResponse;
     }
 
     @GetMapping("/numberDocument/{numberDocument}")
     @PreAuthorize("hasRole('Consultar_Empresa_Documento')")
     @Transactional(readOnly = true)
-    public ResponseEntity<UserCompanyDTOResponse> getCompanyByNumberDocument(@PathVariable long numberDocument){
+    public ResponseEntity<UserCompanyDTOResponse> getCompanyByNumberDocument(@PathVariable long numberDocument) {
         UserCompany company = this.userCompanyCU.getUserCompanyByNumberDocument(numberDocument);
         ResponseEntity<UserCompanyDTOResponse> objResponse = new ResponseEntity<UserCompanyDTOResponse>(
-            mapper.mapModelToResponse(company),HttpStatus.OK
-        );
+                mapper.mapModelToResponse(company), HttpStatus.OK);
         return objResponse;
     }
 
-
 }
-
