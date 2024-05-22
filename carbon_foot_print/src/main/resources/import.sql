@@ -44,6 +44,12 @@ INSERT INTO permissions(idPermission, name, description) VALUES (401, "ROLE_Crea
 INSERT INTO permissions(idPermission, name, description) VALUES (402, "ROLE_Actualizar_Categoria","Permiso para actualizar las categorías en el sistema");
 INSERT INTO permissions(idPermission, name, description) VALUES (403, "ROLE_Consultar_Categoria_ID","Permiso para consultar una categoría por ID");
 
+INSERT INTO permissions(idPermission, name, description) VALUES (404, "ROLE_Consultar_Categorias_IDs","Permiso para consultar varias categorías por ID");
+INSERT INTO permissions(idPermission, name, description) VALUES (405, "ROLE_Consultar_Categoria_Name","Permiso para consultar una categoría por nombre");
+INSERT INTO permissions(idPermission, name, description) VALUES (406, "ROLE_Consultar_Categorias_Habilitadas","Permiso para consultar todas las categorías habilitadas");
+INSERT INTO permissions(idPermission, name, description) VALUES (407, "ROLE_Consultar_Categoria_Habilitadas_IDs","Permiso para consultar las categorías habilitadas de una lista de IDs");
+
+
 #PERMISOS PARA FUENTES
 INSERT INTO permissions(idPermission, name, description) VALUES (500, "ROLE_Listar_Fuentes","Permiso para consultar todos las fuente en el sistema");
 INSERT INTO permissions(idPermission, name, description) VALUES (501, "ROLE_Crear_Fuente","Permiso para crear fuentes en el sistema");
