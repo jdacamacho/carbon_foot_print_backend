@@ -32,8 +32,6 @@ public class ManagePollutionTypeCUImplAdapter implements ManagePollutionTypeCUIn
             errorFormatter.returnResponseErrorEntityExists("Pollution type with the same name already exists");
         if (!pollutionType.isValidSources(gateway.getSources()))
             errorFormatter.returnResponseErrorEntityNotFound("The sources entered are not found in the system");
-        // TODO:Borrar
-        System.out.println(pollutionType);
         return gateway.savePollutionType(pollutionType);
     }
 
