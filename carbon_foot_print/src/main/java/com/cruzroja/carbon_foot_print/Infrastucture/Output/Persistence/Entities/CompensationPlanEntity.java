@@ -35,7 +35,7 @@ public class CompensationPlanEntity {
     private String planDescription;
 
     @Column(nullable = false)
-    private int planDiscount;
+    private double planDiscount;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "plans_actions",

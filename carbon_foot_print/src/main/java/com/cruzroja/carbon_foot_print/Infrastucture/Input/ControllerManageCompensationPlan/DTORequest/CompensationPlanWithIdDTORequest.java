@@ -23,15 +23,12 @@ public class CompensationPlanWithIdDTORequest {
     @NotBlank(message = "plan's name can't be empty")
     private String planName;
 
-    @Min(value = 0, message = "plan's price can't be negative")
-    private double planPrice;
-
     @NotNull(message = "plan's description can't be null")
     @NotBlank(message = "plan's description can't be empty")
     private String planDescription;
 
     @Min(value = 0, message = "action's discount can't be negative")
-    private int planDiscount;
+    private double planDiscount;
 
     @Size(min = 1, message = "Plan's must have at least one action")
     @Valid

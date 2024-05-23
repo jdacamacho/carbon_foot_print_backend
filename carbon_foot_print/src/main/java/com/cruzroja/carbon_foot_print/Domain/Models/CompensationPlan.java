@@ -15,7 +15,7 @@ public class CompensationPlan {
     private String planName;
     private double planPrice;
     private String planDescription;
-    private int planDiscount;
+    private double planDiscount;
     private List<Action> actions;
 
     public CompensationPlan(){
@@ -30,6 +30,7 @@ public class CompensationPlan {
             priceActions = priceActions + this.actions.get(i).getActionUnitaryPrice();
         }
         newPrice = priceActions - (priceActions*(this.planDiscount/100));
+        System.out.println("descuento " + (priceActions*(this.planDiscount/100)));
         this.setPlanPrice(newPrice);
     }
 
@@ -46,7 +47,7 @@ public class CompensationPlan {
     }
 
     public boolean isValidDiscount(){
-        int discount = this.getPlanDiscount(); 
+        double discount = this.getPlanDiscount(); 
         if(discount >= 0 && discount <= 100){
             return true;
         }

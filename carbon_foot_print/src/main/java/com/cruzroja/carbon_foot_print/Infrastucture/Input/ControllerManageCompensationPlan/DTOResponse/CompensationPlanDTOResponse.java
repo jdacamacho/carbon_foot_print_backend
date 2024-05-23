@@ -15,7 +15,7 @@ public class CompensationPlanDTOResponse {
     private String planName;
     private double planPrice;
     private String planDescription;
-    private int planDiscount;
+    private double planDiscount;
     private List<ActionDTOResponse> actions;
 
     public CompensationPlanDTOResponse(){

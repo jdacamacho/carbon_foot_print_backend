@@ -114,7 +114,7 @@ public class CompensationPlanRestController {
         }
 
         try {
-            objPlan = this.mapper.mapModelToResponse(this.compensationPlanCU.saveCompensationPlan(plan));
+            objPlan = this.mapper.mapModelToResponse(this.compensationPlanCU.updateCompensationPlan(plan));
         } catch (DataAccessException e) {
             response.put("mensaje", "Error when updating into database");
             response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
