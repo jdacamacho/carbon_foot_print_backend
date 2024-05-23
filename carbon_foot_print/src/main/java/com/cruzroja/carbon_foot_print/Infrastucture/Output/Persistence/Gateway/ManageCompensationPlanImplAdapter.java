@@ -7,7 +7,9 @@ import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
 import com.cruzroja.carbon_foot_print.Application.Output.ManageCompensationPlanGatewayIntPort;
+import com.cruzroja.carbon_foot_print.Domain.Models.Action;
 import com.cruzroja.carbon_foot_print.Domain.Models.CompensationPlan;
+import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.ActionEntity;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.CompensationPlanEntity;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Repositories.CompensationPlanRepository;
 
@@ -60,6 +62,13 @@ public class ManageCompensationPlanImplAdapter implements ManageCompensationPlan
     @Override
     public boolean existsByName(String planName) {
         return this.serviceBD.existsByPlanName(planName);
+    }
+
+    @Override
+    public List<Action> findAllActions() {
+        List<ActionEntity> dataFromBD = this.serviceBD.findAllActions();
+        List<Action> actions = this.mapper.map(dataFromBD, new TypeToken<List<Action>>(){}.getType());
+        return actions;
     }
     
 }

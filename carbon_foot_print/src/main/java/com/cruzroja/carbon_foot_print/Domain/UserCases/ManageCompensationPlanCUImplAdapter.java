@@ -29,14 +29,51 @@ public class ManageCompensationPlanCUImplAdapter implements ManageCompensationPl
 
     @Override
     public CompensationPlan saveCompensationPlan(CompensationPlan compensationPlan) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveCompensationPlan'");
+        CompensationPlan objPlan = null;
+        if(this.gateway.existsByName(compensationPlan.getPlanName())){
+            this.exceptionFormatter.returnResponseErrorEntityExists("Compensation plan with that name already exists in the System");
+        }else{
+            if(!compensationPlan.isValidDiscount()){
+                this.exceptionFormatter.returnResponseBusinessRuleViolated("Discount is not valid");
+            }
+            if(compensationPlan.hasDuplicateAction()){
+                this.exceptionFormatter.returnResponseBusinessRuleViolated("Compensation plan has actions duplicate");
+            }
+            if(!compensationPlan.isValidActions(this.gateway.findAllActions())){
+                this.exceptionFormatter.returnResponseBusinessRuleViolated("Compensation has actions that are not valid");
+            }
+            compensationPlan.calculatePrice();
+            objPlan = this.gateway.save(compensationPlan);
+        }
+        return objPlan;
     }
 
     @Override
     public CompensationPlan updateCompensationPlan(CompensationPlan compensationPlan) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateCompensationPlan'");
+        CompensationPlan objPlan = null;
+        if(!this.gateway.existsById(compensationPlan.getPlanId())){
+            this.exceptionFormatter.returnResponseErrorEntityNotFound("Compensation plan with that id was not found");
+        }else{
+            CompensationPlan oldPlan = this.gateway.findById(compensationPlan.getPlanId());
+            if(this.gateway.existsByName(compensationPlan.getPlanName())){
+                if(!oldPlan.isPlanNameEqual(compensationPlan)){
+                    this.exceptionFormatter.returnResponseErrorEntityNotFound("Compensation plan with that name already exists in the System");
+                }
+            }else{
+                if(!compensationPlan.isValidDiscount()){
+                    this.exceptionFormatter.returnResponseBusinessRuleViolated("Discount is not valid");
+                }
+                if(compensationPlan.hasDuplicateAction()){
+                    this.exceptionFormatter.returnResponseBusinessRuleViolated("Compensation plan has actions duplicate");
+                }
+                if(!compensationPlan.isValidActions(this.gateway.findAllActions())){
+                    this.exceptionFormatter.returnResponseBusinessRuleViolated("Compensation has actions that are not valid");
+                }
+            }
+            oldPlan.update(compensationPlan);
+            objPlan = this.gateway.save(compensationPlan);
+        }
+        return objPlan;
     }
 
     @Override
