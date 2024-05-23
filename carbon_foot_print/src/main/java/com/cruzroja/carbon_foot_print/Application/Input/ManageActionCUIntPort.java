@@ -15,7 +15,7 @@ public interface ManageActionCUIntPort {
 
     /**
      * Revisa que los datos a guardar cumplan las reglas de negocio.
-     * #Reglas de negocio:
+     * #Reglas de negocio entrada
      * 1. NO haya un dato previo con el mismo nombre del que se busca ingresar.
      * 
      * @param action item a guardar
@@ -27,6 +27,8 @@ public interface ManageActionCUIntPort {
     /**
      * Revisa que los nuevos datos cumplan con las reglas de negocio para que se
      * actualicen.
+     * #Reglas de negocio entrada
+     * 1. NO haya un dato previo con el mismo nombre del que se busca ingresar.
      * 
      * @param action contiene el identificador del item a actualizar y la nueva
      *               información.
@@ -37,6 +39,8 @@ public interface ManageActionCUIntPort {
 
     /**
      * Revisa que la información solicitada haya sido encontrada.
+     * #Reglas de negocio salida
+     * 1. Que la información recuperada no este vacía.
      * 
      * @return {@code Action} en caso de que haya sido encontrada y
      *         {@code Error} en caso contrario.
@@ -45,6 +49,8 @@ public interface ManageActionCUIntPort {
 
     /**
      * Revisa que la información solicitada haya sido encontrada.
+     * #Reglas de negocio salida
+     * 1. Que la información recuperada no este vacía.
      * 
      * @param nameAction patrón de nombre a buscar
      * @return {@code Action} en caso de que haya sido encontrada y {@code Error} en

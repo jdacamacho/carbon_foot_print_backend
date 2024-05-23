@@ -31,9 +31,6 @@ public class ManageActionCUImplAdapter implements ManageActionCUIntPort {
     @Override
     public Action saveAction(Action action) {
         Action objResponse = null;
-        if (this.gateway.existsById(action.getActionId())) {
-            this.exceptionFormatter.returnResponseErrorEntityExists("Action with that id already exists");
-        }
         if (this.gateway.existsByName(action.getActionName())) {
             this.exceptionFormatter.returnResponseErrorEntityExists("Action with that name already exists");
         }
