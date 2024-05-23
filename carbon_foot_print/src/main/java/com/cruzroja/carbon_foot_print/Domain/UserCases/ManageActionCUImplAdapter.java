@@ -7,13 +7,14 @@ import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPo
 import com.cruzroja.carbon_foot_print.Application.Output.ManageActionGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Domain.Models.Action;
 
-public class ManageActionCUImplAdapter implements ManageActionCUIntPort{
-
+public class ManageActionCUImplAdapter implements ManageActionCUIntPort {
+    /** Puesta de enlace desde el dominio a los datos. */
     private final ManageActionGatewayIntPort gateway;
+    /** Utlidad para manejo de excepciones personalizadas. */
     private final ExceptionFormatterIntPort exceptionFormatter;
 
     public ManageActionCUImplAdapter(ManageActionGatewayIntPort gateway,
-                                        ExceptionFormatterIntPort exceptionFormatter){
+            ExceptionFormatterIntPort exceptionFormatter) {
         this.gateway = gateway;
         this.exceptionFormatter = exceptionFormatter;
     }
@@ -21,7 +22,7 @@ public class ManageActionCUImplAdapter implements ManageActionCUIntPort{
     @Override
     public List<Action> findAllActions() {
         List<Action> actions = this.gateway.findAllActions();
-        if(actions.size() == 0){
+        if (actions.size() == 0) {
             this.exceptionFormatter.returNoData("No actions in the System");
         }
         return actions;
@@ -40,12 +41,12 @@ public class ManageActionCUImplAdapter implements ManageActionCUIntPort{
     @Override
     public Action updateAction(Action action) {
         Action objResponse = null;
-        if(!this.gateway.existsById(action.getActionId())){
+        if (!this.gateway.existsById(action.getActionId())) {
             this.exceptionFormatter.returnResponseErrorEntityNotFound("Action was not found");
-        }else{
+        } else {
             Action oldAction = this.findActionById(action.getActionId());
-            if(this.gateway.existsByName(action.getActionName())){
-                if(!oldAction.isEqualName(action)){
+            if (this.gateway.existsByName(action.getActionName())) {
+                if (!oldAction.isEqualName(action)) {
                     this.exceptionFormatter.returnResponseErrorEntityExists("Exists another action with that name");
                 }
             }
@@ -58,7 +59,7 @@ public class ManageActionCUImplAdapter implements ManageActionCUIntPort{
     @Override
     public Action findActionById(long idAction) {
         Action objResponse = null;
-        if(!this.gateway.existsById(idAction)){
+        if (!this.gateway.existsById(idAction)) {
             this.exceptionFormatter.returnResponseErrorEntityNotFound("Action was not found with that id");
         }
         objResponse = this.gateway.findById(idAction);
@@ -68,11 +69,11 @@ public class ManageActionCUImplAdapter implements ManageActionCUIntPort{
     @Override
     public Action findActionByName(String nameAction) {
         Action objResponse = null;
-        if(!this.gateway.existsByName(nameAction)){
+        if (!this.gateway.existsByName(nameAction)) {
             this.exceptionFormatter.returnResponseErrorEntityNotFound("Action was not found with that name");
         }
         objResponse = this.gateway.findByName(nameAction);
         return objResponse;
     }
-    
+
 }
