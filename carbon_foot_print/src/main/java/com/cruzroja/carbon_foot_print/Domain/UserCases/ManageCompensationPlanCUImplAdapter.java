@@ -56,6 +56,7 @@ public class ManageCompensationPlanCUImplAdapter implements ManageCompensationPl
         }else{
             CompensationPlan oldPlan = this.gateway.findById(compensationPlan.getPlanId());
             if(this.gateway.existsByName(compensationPlan.getPlanName())){
+                
                 if(!oldPlan.isPlanNameEqual(compensationPlan)){
                     this.exceptionFormatter.returnResponseErrorEntityNotFound("Compensation plan with that name already exists in the System");
                 }
@@ -71,7 +72,7 @@ public class ManageCompensationPlanCUImplAdapter implements ManageCompensationPl
                 }
             }
             oldPlan.update(compensationPlan);
-            objPlan = this.gateway.save(compensationPlan);
+            objPlan = this.gateway.save(oldPlan);
         }
         return objPlan;
     }

@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ActionWithIdDTORequest {
-    @NotNull(message = "action's id can't be null")
+    @Min(value = 1, message = "action's id must be major than one")
     private long actionId;
     
     @NotNull(message = "action's name can't be null")
