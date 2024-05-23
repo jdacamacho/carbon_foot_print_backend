@@ -40,7 +40,7 @@ public class CalculatorRestController {
     private final MapperCalculatorResponseInfraestructureDomain mapperResponse;
 
     @PostMapping
-    public ResponseEntity<?> calcule(@RequestBody List<DataCalculatorDTORequest> request, BindingResult errors) {
+    public ResponseEntity<?> calcule(@Valid @RequestBody List<DataCalculatorDTORequest> request, BindingResult errors) {
         List<DataCalculator> data = this.mapperData.requestsToModels(request);
         Map<String, Object> errorResponse = new HashMap<>();
         errorResponse = this.catchErrors(errors);
