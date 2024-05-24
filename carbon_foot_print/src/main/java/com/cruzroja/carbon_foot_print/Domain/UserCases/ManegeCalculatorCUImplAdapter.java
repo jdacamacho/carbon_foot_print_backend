@@ -1,5 +1,6 @@
 package com.cruzroja.carbon_foot_print.Domain.UserCases;
 
+import java.util.Calendar;
 import java.util.List;
 
 import com.cruzroja.carbon_foot_print.Application.Input.ManegeCalculatorCUIntPort;
@@ -22,6 +23,7 @@ public class ManegeCalculatorCUImplAdapter implements ManegeCalculatorCUIntPort 
 
     @Override
     public CalculatorResponse calculeFootPrint(List<DataCalculator> data) {
+        int actualYear = Calendar.getInstance().get(Calendar.YEAR);
         if (data.isEmpty())
             this.errorFormatter.returnResponseBadFormat("La lista de datos no puede ser vacía");
         for (DataCalculator item : data) {
@@ -30,9 +32,13 @@ public class ManegeCalculatorCUImplAdapter implements ManegeCalculatorCUIntPort 
                 this.errorFormatter
                         .returnResponseBusinessRuleViolated("No se encontró pollution source con id pollution: "
                                 + item.getPollutionId() + " y source: " + item.getSourceId() + ".");
+            if (item.getYear() > actualYear)
+                this.errorFormatter
+                        .returnResponseBusinessRuleViolated("El año a calcular no puede ser superior al actual.");
             if (!item.isValidCoverge())
                 this.errorFormatter
-                        .returnResponseBusinessRuleViolated("El informedSource debe ser menor o igual al totalSource");
+                        .returnResponseBusinessRuleViolated(
+                                "El informedSource debe ser menor o igual al totalSource");
             item.setPollutionSource(pollutionSource);
             item.calculeData();
         }
