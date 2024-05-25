@@ -15,6 +15,7 @@ import lombok.Data;
 public class RoleDTORequest {
     @NotNull(message = "typeRole can't be null")
     @NotBlank(message = "typeRole can't be empty")
+    @Size(min = 10 , max = 45, message = "Type role must be between 10 and 45 characters")
     private String typeRole;
 
     @NotNull(message = "Role must have a state in the system")

@@ -19,6 +19,7 @@ public class RoleWithIdDTORequest {
 
     @NotNull(message = "typeRole can't be null")
     @NotBlank(message = "typeRole can't be empty")
+    @Size(min = 10 , max = 45, message = "Type role must between 10 and 45 characters")
     private String typeRole;
 
     @NotNull(message = "Role must have a state in the system")
