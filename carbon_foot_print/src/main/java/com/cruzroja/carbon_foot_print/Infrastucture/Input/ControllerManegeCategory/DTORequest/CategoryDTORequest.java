@@ -5,6 +5,7 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManagePollut
 import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ public class CategoryDTORequest {
     @NotBlank(message = "categoryDescription can't be empty")
     private String categoryDescription;
     @NotNull(message = "categoryScope can't be null")
-    @NotBlank(message = "categoryScope can't be empty")
+    @NotEmpty(message = "categoryScope can't be empty")
     private String categoryScope;
     @NotNull(message = "catgoryState can't be null")
     private boolean categoryState;

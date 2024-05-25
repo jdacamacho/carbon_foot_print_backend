@@ -78,7 +78,7 @@ public class CategoryRestController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> saveCategory(@RequestBody CategoryDTORequest request, BindingResult result) {
+    public ResponseEntity<?> saveCategory(@Valid @RequestBody CategoryDTORequest request, BindingResult result) {
         Category category = this.mapper.mapRequestModel(request);
         Map<String, Object> response = new HashMap<>();
         response = this.catchErrors(result);
@@ -96,7 +96,7 @@ public class CategoryRestController {
     }
 
     @PostMapping("/ids")
-    public ResponseEntity<?> getFullCategories(@RequestBody CategoryByIds request, BindingResult result) {
+    public ResponseEntity<?> getFullCategories(@Valid @RequestBody CategoryByIds request, BindingResult result) {
         Map<String, Object> response = new HashMap<>();
         response = this.catchErrors(result);
         if (!response.isEmpty())
@@ -121,7 +121,7 @@ public class CategoryRestController {
     }
 
     @PostMapping("/enabled")
-    public ResponseEntity<?> getFullEnabledCategories(@RequestBody CategoryByIds request, BindingResult result) {
+    public ResponseEntity<?> getFullEnabledCategories(@Valid @RequestBody CategoryByIds request, BindingResult result) {
         Map<String, Object> response = new HashMap<>();
         response = this.catchErrors(result);
         if (!response.isEmpty())
