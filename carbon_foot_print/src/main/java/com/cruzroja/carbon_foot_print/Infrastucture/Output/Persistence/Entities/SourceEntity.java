@@ -34,7 +34,7 @@ public class SourceEntity {
     @Column(unique = true, length = 45, nullable = false)
     private String sourceName;
     /** Descripción de la fuente. */
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String sourceDescription;
 
     /**

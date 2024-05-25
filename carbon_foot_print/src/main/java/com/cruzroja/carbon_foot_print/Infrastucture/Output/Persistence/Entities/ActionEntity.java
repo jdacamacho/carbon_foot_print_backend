@@ -18,7 +18,7 @@ public class ActionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long actionId;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 45)
     private String actionName;
 
     @Column(nullable = false, length = 100)

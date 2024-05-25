@@ -32,16 +32,16 @@ public class PollutionTypeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pollutionTypeId;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 45)
     private String pollutionTypeName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String pollutionTypeDescription;
 
     @Column(nullable = false)
     private double pollutionTypeEmissionFactor;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 45)
     private String pollutionTypeUnits;
 
     @ManyToMany(fetch = FetchType.EAGER)

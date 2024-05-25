@@ -34,7 +34,7 @@ public class UserCompanyEntity extends UserEntity {
     private long companyNit;
 
     /** Nombre de la empresa. */
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 45)
     private String companyName;
 
     /** Teléfono de la empresa. */

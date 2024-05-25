@@ -25,7 +25,7 @@ public class CompensationPlanEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long planId;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 45)
     private String planName;
 
     @Column(nullable = false)

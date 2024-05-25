@@ -29,27 +29,27 @@ public class AddressEntity {
     private UserCompanyEntity objUserCompany;
 
     /** Calle de la dirección. */
-    @Column(nullable = true)
+    @Column(nullable = true, length = 45)
     private String street;
 
     /** Número de la dirección. */
-    @Column(nullable = true)
+    @Column(nullable = true, length = 45)
     private String number;
 
     /** Piso o apartamento de la dirección. */
-    @Column(name = "floor/apartment", nullable = true)
+    @Column(name = "floor/apartment", nullable = true , length = 45)
     private String floorOrApartment;
 
     /** Barrio de la dirección. */
-    @Column(nullable = true)
+    @Column(nullable = true, length = 45)
     private String neighborhood;
 
     /** Ciudad de la dirección. */
-    @Column(nullable = true)
+    @Column(nullable = true, length = 45)
     private String city;
 
     /** País de la dirección. */
-    @Column(nullable = true)
+    @Column(nullable = true, length = 45)
     private String country;
 
     /**
