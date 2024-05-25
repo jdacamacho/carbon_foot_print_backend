@@ -17,7 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity
-@Table(name = "CompensationPlans")
+@Table(name = "Compensation_plans")
 @Data
 @AllArgsConstructor
 public class CompensationPlanEntity {
