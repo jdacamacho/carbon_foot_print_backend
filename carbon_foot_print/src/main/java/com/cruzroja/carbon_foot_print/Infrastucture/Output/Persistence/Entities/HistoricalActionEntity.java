@@ -34,7 +34,6 @@ public class HistoricalActionEntity {
     private Date histaricalActionEffectiveDate;
     @Column(nullable = true)
     private Date histaricalActionCloseDate;
-    @Id
     @ManyToOne
     @JoinColumn(name = "actionId")
     ActionEntity action;
