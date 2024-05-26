@@ -13,6 +13,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +27,7 @@ public class UserCompanyDTORequest extends UserDTORequest{
 
     @NotNull(message = "companyName can't be null")
     @NotBlank(message = "companyName can't be empty")
+    @Size(min = 10, max = 45, message = "companyName must be between 10 and 45 characterrs")
     private String companyName;
 
     @NotNull(message = "companyPhone can't be null")
@@ -36,6 +38,7 @@ public class UserCompanyDTORequest extends UserDTORequest{
     @NotNull(message = "companyEmail can't be null")
     @NotBlank(message = "companyEmail can't be empty")
     @Email(message = "companyEmail must be valid")
+    @Size(min = 10, max = 320, message = "companyEmail must be between 10 and 320 characterrs")
     private String companyEmail;
 
     @Valid

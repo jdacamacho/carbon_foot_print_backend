@@ -32,15 +32,15 @@ public class CategoryEntity {
     private long categoryId;
 
     /** Nombre de la categoría. */
-    @Column(nullable = false)
+    @Column(nullable = false, length = 45)
     private String categoryName;
 
     /** Descripción de la categoría. */
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String categoryDescription;
 
     /** Ámbito de la categoría. */
-    @Column(nullable = false)
+    @Column(nullable = false, length = 45)
     private String categoryScope;
 
     @Column(nullable = false)

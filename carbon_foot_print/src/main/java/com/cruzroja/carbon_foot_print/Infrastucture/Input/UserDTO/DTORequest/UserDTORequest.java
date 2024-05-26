@@ -33,7 +33,7 @@ public class UserDTORequest {
 
     @NotNull(message = "lastNames can't be null")
     @NotBlank(message = "lastNames can't be empty")
-    @Size(min = 2, max = 60, message = "Names can't be shorter than 2 characters and longer than 60 characters")
+    @Size(min = 2, max = 60, message = "latNames can't be shorter than 2 characters and longer than 60 characters")
     private String lastNames;
 
     @Pattern(regexp = "[3][0-9]{9}", message = "Personal phone must begin with 3 and have ten digits") 
@@ -42,14 +42,17 @@ public class UserDTORequest {
     @NotNull(message = "email can't be null")
     @NotBlank(message = "email can't be empty")
     @Email(message = "email must be valid")
+    @Size(min = 10, max = 320, message = "personalEmail can't be shorter than 10 characters and longer than 320 characters")
     private String personalEmail;
 
     @NotNull(message = "username can't be null")
     @NotBlank(message = "username can't be empty")
+    @Size(min = 2, max = 40, message = "username can't be shorter than 2 characters and longer than 40 characters")
     private String username;
 
     @NotNull(message = "password can't be null")
     @NotBlank(message = "password can't be empty")
+    @Size(min = 10, max = 200, message = "password can't be shorter than 10 characters and longer than 200 characters")
     private String password;
 
     @Size(min = 1, message = "User must have at least one role")

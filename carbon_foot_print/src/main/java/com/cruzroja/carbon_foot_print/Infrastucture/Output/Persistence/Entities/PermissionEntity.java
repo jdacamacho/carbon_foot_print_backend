@@ -31,7 +31,7 @@ public class PermissionEntity {
     private String name;
     
     /** Descripción del permiso. */
-    @Column(nullable = false, unique = false, length = 80)
+    @Column(nullable = false, unique = false, length = 100)
     private String description;
 
     /**
