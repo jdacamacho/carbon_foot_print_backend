@@ -142,3 +142,31 @@ INSERT INTO ROLE_PERMISSIONS(idPermission,idRole) VALUES (904,3);
 
 # Asigno El rol a un usuario
 INSERT INTO USER_ROLES(id_role,user_document_number) VALUES(3,1000000000);
+
+## Triggers para tablas historicas
+delimiter //
+CREATE TRIGGER tgrUpdateHistoricarAction after update on actions
+for each row
+begin
+update 
+	historicalaction 
+    set 
+		histaricalActionCloseDate = CURDATE() 
+	where 
+    actionId = OLD.actionId and 
+    histaricalActionCloseDate IS NULL;
+insert into historicalaction(histaricalActionCloseDate,histaricalActionEffectiveDate,historicalActionDescription,historicalActionName,historicalActionUnitaryPrice,actionId)
+values (null,curdate(),NEW.actionDescription, new.actionName, new.actionUnitaryPrice, new.actionId);
+end//
+
+delimiter ;
+
+delimiter //
+CREATE TRIGGER tgrInsertHistoricarAction after insert on actions
+for each row
+begin
+insert into historicalaction(histaricalActionCloseDate,histaricalActionEffectiveDate,historicalActionDescription,historicalActionName,historicalActionUnitaryPrice,actionId)
+values (null,curdate(),NEW.actionDescription, new.actionName, new.actionUnitaryPrice, new.actionId);
+end//
+
+delimiter ;
