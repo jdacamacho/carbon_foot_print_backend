@@ -37,13 +37,6 @@ public class CompensationPlanEntity {
     @Column(nullable = false)
     private double planDiscount;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "plans_actions",
-        joinColumns = @JoinColumn(name = "planId"),
-        inverseJoinColumns = @JoinColumn(name = "actionId"))
-    private List<ActionEntity> actions;
-
-    public CompensationPlanEntity(){
-        this.actions = new ArrayList<>();
+    public CompensationPlanEntity() {
     }
 }
