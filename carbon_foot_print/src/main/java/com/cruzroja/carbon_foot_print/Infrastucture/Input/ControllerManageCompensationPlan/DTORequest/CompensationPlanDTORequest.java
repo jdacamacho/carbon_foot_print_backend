@@ -1,9 +1,7 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationPlan.DTORequest;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageAction.DTORequest.ActionWithIdDTORequest;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
@@ -34,9 +32,9 @@ public class CompensationPlanDTORequest {
 
     @Size(min = 1, message = "Plan's must have at least one action")
     @Valid
-    private List<ActionWithIdDTORequest> actions;
+    private Set<ActionWithAmountDTORequest> actions;
 
-    public CompensationPlanDTORequest(){
-        this.actions = new ArrayList<>();
+    public CompensationPlanDTORequest() {
+        this.actions = new HashSet<>();
     }
 }
