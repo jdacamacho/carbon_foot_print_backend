@@ -43,34 +43,35 @@ public class CompensationPlanRestController {
 
     @GetMapping("")
     @Transactional(readOnly = true)
-    public ResponseEntity<List<CompensationPlanDTOResponse>> listCompensationPlan(){
+    public ResponseEntity<List<CompensationPlanDTOResponse>> listCompensationPlan() {
         List<CompensationPlan> plans = this.compensationPlanCU.finAllCompensationPlan();
         ResponseEntity<List<CompensationPlanDTOResponse>> objResponse = new ResponseEntity<List<CompensationPlanDTOResponse>>(
-            mapper.mapModelsToResponse(plans),HttpStatus.OK);
+                mapper.mapModelToInfraestructure(plans), HttpStatus.OK);
         return objResponse;
     }
 
     @GetMapping("/id/{planId}")
     @Transactional(readOnly = true)
-    public ResponseEntity<CompensationPlanDTOResponse> getCompensationPlanById(@PathVariable long planId){
+    public ResponseEntity<CompensationPlanDTOResponse> getCompensationPlanById(@PathVariable long planId) {
         CompensationPlan plan = this.compensationPlanCU.findByCompensationPlanId(planId);
         ResponseEntity<CompensationPlanDTOResponse> objResponse = new ResponseEntity<CompensationPlanDTOResponse>(
-            mapper.mapModelToResponse(plan) ,HttpStatus.OK);
+                mapper.mapModelToInfraestructure(plan), HttpStatus.OK);
         return objResponse;
     }
 
     @GetMapping("/name")
     @Transactional(readOnly = true)
-    public ResponseEntity<CompensationPlanDTOResponse> getCompensationPlanByName(@RequestParam String planName){
+    public ResponseEntity<CompensationPlanDTOResponse> getCompensationPlanByName(@RequestParam String planName) {
         CompensationPlan plan = this.compensationPlanCU.findByCompesationPlanName(planName);
         ResponseEntity<CompensationPlanDTOResponse> objResponse = new ResponseEntity<CompensationPlanDTOResponse>(
-            mapper.mapModelToResponse(plan) ,HttpStatus.OK);
+                mapper.mapModelToInfraestructure(plan), HttpStatus.OK);
         return objResponse;
     }
 
     @PostMapping("")
-    public ResponseEntity<?> saveCompensationPlan(@Valid @RequestBody CompensationPlanDTORequest request , BindingResult result){
-        CompensationPlan plan = this.mapper.mapRequestToModel(request);
+    public ResponseEntity<?> saveCompensationPlan(@Valid @RequestBody CompensationPlanDTORequest request,
+            BindingResult result) {
+        CompensationPlan plan = this.mapper.mapInfraestructureToModel(request);
         Map<String, Object> response = new HashMap<>();
         CompensationPlanDTOResponse objPlan;
 
@@ -86,7 +87,7 @@ public class CompensationPlanRestController {
         }
 
         try {
-            objPlan = this.mapper.mapModelToResponse(this.compensationPlanCU.saveCompensationPlan(plan));
+            objPlan = this.mapper.mapModelToInfraestructure(this.compensationPlanCU.saveCompensationPlan(plan));
         } catch (DataAccessException e) {
             response.put("mensaje", "Error when inserting into database");
             response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
@@ -97,8 +98,9 @@ public class CompensationPlanRestController {
     }
 
     @PutMapping("")
-    public ResponseEntity<?> updateCompensationPlan(@Valid @RequestBody CompensationPlanWithIdDTORequest request , BindingResult result){
-        CompensationPlan plan = this.mapper.mapRequestToModel(request);
+    public ResponseEntity<?> updateCompensationPlan(@Valid @RequestBody CompensationPlanWithIdDTORequest request,
+            BindingResult result) {
+        CompensationPlan plan = this.mapper.mapInfraestructureToModel(request);
         Map<String, Object> response = new HashMap<>();
         CompensationPlanDTOResponse objPlan;
 
@@ -114,7 +116,7 @@ public class CompensationPlanRestController {
         }
 
         try {
-            objPlan = this.mapper.mapModelToResponse(this.compensationPlanCU.updateCompensationPlan(plan));
+            objPlan = this.mapper.mapModelToInfraestructure(this.compensationPlanCU.updateCompensationPlan(plan));
         } catch (DataAccessException e) {
             response.put("mensaje", "Error when updating into database");
             response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());

@@ -12,8 +12,10 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageAction
 @Mapper(componentModel = "spring")
 public interface MapperActionInfrastuctureDomain {
     Action mapRequestToModel(ActionDTORequest request);
+
     Action mapRequestToModel(ActionWithIdDTORequest request);
+
     ActionDTOResponse mapModelToResponse(Action model);
+
     List<ActionDTOResponse> mapModelsToResponse(List<Action> models);
 }
-

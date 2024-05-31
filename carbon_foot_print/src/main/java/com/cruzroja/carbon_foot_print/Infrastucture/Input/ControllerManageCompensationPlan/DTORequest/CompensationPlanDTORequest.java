@@ -1,7 +1,7 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationPlan.DTORequest;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
@@ -30,11 +30,6 @@ public class CompensationPlanDTORequest {
     @Max(value = 100, message = "action's discount can't be major than 100")
     private double planDiscount;
 
-    @Size(min = 1, message = "Plan's must have at least one action")
-    @Valid
-    private Set<ActionWithAmountDTORequest> actions;
-
     public CompensationPlanDTORequest() {
-        this.actions = new HashSet<>();
     }
 }

@@ -16,9 +16,7 @@ public class CompensationPlanDTOResponse {
     private double planPrice;
     private String planDescription;
     private double planDiscount;
-    private List<ActionDTOResponse> actions;
 
-    public CompensationPlanDTOResponse(){
-        this.actions = new ArrayList<>();
+    public CompensationPlanDTOResponse() {
     }
 }
