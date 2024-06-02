@@ -47,12 +47,23 @@ public class CompensationPlan {
         this.setPlanDiscount(compensationPlan.getPlanDiscount());
     }
 
+    public void updateWithPrice(CompensationPlan compensationPlan) {
+        this.setPlanName(compensationPlan.getPlanName());
+        this.setPlanDescription(compensationPlan.getPlanDescription());
+        this.setPlanDiscount(compensationPlan.getPlanDiscount());
+        this.planPrice = compensationPlan.getPlanPrice();
+    }
+
     public boolean isValidDiscount() {
         double discount = this.getPlanDiscount();
         if (discount >= 0 && discount <= 100) {
             return true;
         }
         return false;
+    }
+
+    public void calculePrice(double price) {
+        this.planPrice = (1 - (this.planDiscount / 100)) * price;
     }
 
 }

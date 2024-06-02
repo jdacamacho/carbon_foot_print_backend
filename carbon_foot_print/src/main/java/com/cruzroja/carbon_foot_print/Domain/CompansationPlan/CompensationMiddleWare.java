@@ -51,11 +51,24 @@ public class CompensationMiddleWare {
      * 
      * @return {@code double} pecio total del plan.
      */
-    public double calculeFullPrice() {
+    public void calculeFullPrice() {
         double price = 0;
         for (ActionWithAmount item : actions) {
             price += item.calculePrice();
         }
-        return price;
+        this.plan.calculePrice(price);
+    }
+
+    public List<Long> removedActions(List<Action> oldActions) {
+        List<Long> removed = new ArrayList<>();
+        List<Action> actual = actions.stream().map(ActionWithAmount::getAction).collect(Collectors.toList());
+        for (Action item : actual)
+            if (!oldActions.contains(item))
+                removed.add(item.getActionId());
+        return removed;
+    }
+
+    public List<Action> getActions() {
+        return actions.stream().map(ActionWithAmount::getAction).collect(Collectors.toList());
     }
 }

@@ -2,6 +2,8 @@ package com.cruzroja.carbon_foot_print.Domain.CompansationPlan.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.cruzroja.carbon_foot_print.Domain.CompansationPlan.ActionWithAmount;
 import com.cruzroja.carbon_foot_print.Domain.CompansationPlan.CompensationMiddleWare;
@@ -17,11 +19,24 @@ public class CompensationMapperDomainMiddleWare {
         return domain;
     }
 
-    public CompensationMiddleWare mapDomainToMiddleWare(List<CompensationAction> domain) {
+    public CompensationMiddleWare mapGroupedDomainToMiddleWare(List<CompensationAction> domain) {
         CompensationPlan plan = domain.get(0).getPlan();
         List<ActionWithAmount> action = new ArrayList<>();
         domain.forEach(compensation -> action.add(new ActionWithAmount(compensation.getAction(),
                 compensation.getCompensationActionAmount(), compensation.getCompensationActionPrice())));
         return new CompensationMiddleWare(plan, action);
+    }
+
+    public List<CompensationMiddleWare> mapDomainToMiddleWare(List<CompensationAction> domain) {
+        Map<Long, List<CompensationAction>> groups = this.groupByPlan(domain);
+        List<CompensationMiddleWare> response = new ArrayList<>();
+        groups.forEach((k, v) -> {
+            response.add(this.mapGroupedDomainToMiddleWare(v));
+        });
+        return response;
+    }
+
+    private Map<Long, List<CompensationAction>> groupByPlan(List<CompensationAction> domain) {
+        return domain.stream().collect(Collectors.groupingBy(ca -> ca.getPlan().getPlanId()));
     }
 }

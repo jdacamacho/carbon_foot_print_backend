@@ -74,4 +74,19 @@ public class ManageCompensationPlanCUImplAdapter implements ManageCompensationPl
         return response;
     }
 
+    @Override
+    public CompensationPlan updateWithPrice(CompensationPlan compensationPlan) {
+        if (!this.gateway.existsById(compensationPlan.getPlanId()))
+            this.exceptionFormatter.returnResponseErrorEntityNotFound("Compensation plan with that id was not found");
+        CompensationPlan oldPlan = this.gateway.findById(compensationPlan.getPlanId());
+        if (!oldPlan.isPlanNameEqual(compensationPlan))
+            if (this.gateway.existsByName(compensationPlan.getPlanName()))
+                this.exceptionFormatter.returnResponseErrorEntityNotFound(
+                        "Compensation plan with that name already exists in the System");
+        if (!compensationPlan.isValidDiscount())
+            this.exceptionFormatter.returnResponseBusinessRuleViolated("Discount is not valid");
+        oldPlan.updateWithPrice(compensationPlan);
+        return this.gateway.save(oldPlan);
+    }
+
 }
