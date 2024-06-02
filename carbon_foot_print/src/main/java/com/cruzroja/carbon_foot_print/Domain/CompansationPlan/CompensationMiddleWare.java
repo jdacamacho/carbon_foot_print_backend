@@ -68,7 +68,7 @@ public class CompensationMiddleWare {
         return removed;
     }
 
-    public List<Action> getActions() {
+    public List<Action> getOnlyActions() {
         return actions.stream().map(ActionWithAmount::getAction).collect(Collectors.toList());
     }
 }

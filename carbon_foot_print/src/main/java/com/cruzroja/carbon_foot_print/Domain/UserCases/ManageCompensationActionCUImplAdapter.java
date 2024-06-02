@@ -72,7 +72,7 @@ public class ManageCompensationActionCUImplAdapter implements ManageCompensation
                 .mapGroupedDomainToMiddleWare(this.gateway.findById(compensationMiddleWare.getPlan().getPlanId()));
         compensationMiddleWare.calculeFullPrice();
         this.cuPlan.updateWithPrice(compensationMiddleWare.getPlan());
-        List<Long> removed = compensationMiddleWare.removedActions(old.getActions());
+        List<Long> removed = compensationMiddleWare.removedActions(old.getOnlyActions());
         if (!removed.isEmpty())
             this.gateway.delete(compensationMiddleWare.getPlan().getPlanId(), removed);
         return this.mapper.mapGroupedDomainToMiddleWare(
