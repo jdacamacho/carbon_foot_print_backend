@@ -16,10 +16,6 @@ public interface ManageCompensationActionGatewayIntPort {
 
     public List<CompensationAction> save(List<CompensationAction> compensationActions);
 
-    public CompensationAction update(CompensationAction compensationActions);
-
-    public List<CompensationAction> update(List<CompensationAction> compensationActions);
-
     public void delete(long planId, long actionId);
 
     public void delete(long planId, List<Long> actionsId);
