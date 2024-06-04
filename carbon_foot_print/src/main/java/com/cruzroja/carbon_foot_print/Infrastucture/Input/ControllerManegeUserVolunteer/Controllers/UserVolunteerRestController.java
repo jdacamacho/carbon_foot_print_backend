@@ -1,3 +1,7 @@
+/**
+ * @file UserVolunteerRestController.java
+ * @brief Clase controlador REST para la gestión de voluntarios.
+ */
 package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeUserVolunteer.Controllers;
 
 import java.util.ArrayList;
@@ -35,15 +39,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeUserVolunteer.DTORequest.UserVolunteerDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManegeUserVolunteer.DTOResponse.UserVolunteerDTOResponse;
 
+/**
+ * @class UserVolunteerRestController
+ * @brief Controlador REST para la gestión de voluntarios.
+ * 
+ * Esta clase implementa un controlador REST para la gestión de voluntarios.
+ */
+
 @CrossOrigin(origins = { "http://localhost:5050" })
 @RestController
 @RequestMapping("/api/user/volunteers")
 @Validated
 @RequiredArgsConstructor
 public class UserVolunteerRestController {
+
+    /** @brief Casos de uso para la gestión de voluntarios. */
     private final ManegeUserVolunteerCUIntPort volunteerCU;
+
+    /** @brief Mapeador para la conversión de objetos entre la capa de infraestructura y la de dominio. */
     private final MapperUserVolunteerInfraestructureDomain mapper;
 
+    /**
+     * @brief Lista todos los voluntarios.
+     * 
+     * Este método devuelve una lista de todos los voluntarios registrados en el sistema.
+     * 
+     * @return Una lista de objetos de tipo UserVolunteerDTOResponse.
+     */
     @GetMapping("")
     @PreAuthorize("hasRole('Listar_Voluntarios')")
     @Transactional(readOnly = true)
@@ -54,6 +76,14 @@ public class UserVolunteerRestController {
         return objResponse;
     }
 
+    /**
+     * @brief Recupera un voluntario por su número de documento.
+     * 
+     * Este método devuelve un voluntario registrado en el sistema por su número de documento.
+     * 
+     * @param documentNumber Número de documento del voluntario.
+     * @return Un objeto de tipo UserVolunteerDTOResponse.
+     */
     @GetMapping("/{documentNumber}")
     @PreAuthorize("hasRole('Consultar_Voluntario')")
     @Transactional(readOnly = true)
@@ -64,6 +94,14 @@ public class UserVolunteerRestController {
         return objResponse;
     }
 
+    /**
+     * @brief Recupera un voluntario por su posición.
+     * 
+     * Este método devuelve una lista de voluntarios registrados en el sistema por su posición.
+     * 
+     * @param position Posición del voluntario.
+     * @return Una lista de objetos de tipo UserVolunteerDTOResponse.
+     */
     @GetMapping("/position")
     @PreAuthorize("hasRole('Consultar_Voluntario_Posicion')")
     @Transactional(readOnly = true)
@@ -75,6 +113,14 @@ public class UserVolunteerRestController {
         return objResponse;
     }
 
+    /**
+     * @brief Guarda un nuevo voluntario.
+     * 
+     * Este método guarda un nuevo voluntario en el sistema.
+     * 
+     * @param request Objeto de tipo UserVolunteerDTORequest con la información del voluntario.
+     * @return Objeto de tipo UserVolunteerDTOResponse con la información del voluntario guardado.
+     */
     @PostMapping("")
     @PreAuthorize("hasRole('Crear_Voluntarios')")
     public ResponseEntity<?> saveVolunteer(@Valid @RequestBody UserVolunteerDTORequest request, BindingResult result) {
@@ -94,6 +140,15 @@ public class UserVolunteerRestController {
         return new ResponseEntity<UserVolunteerDTOResponse>(objVolunteer, HttpStatus.CREATED);
     }
 
+    /**
+     * @brief Actualiza un voluntario.
+     * 
+     * Este método actualiza un voluntario en el sistema.
+     * 
+     * @param request Objeto de tipo UserVolunteerDTORequest con la información del voluntario.
+     * @return Objeto de tipo UserVolunteerDTOResponse con la información del voluntario actualizado.
+     */
+    
     @PutMapping("")
     @PreAuthorize("hasRole('Actualizar_Voluntarios')")
     public ResponseEntity<?> updateUserVolunteer(@Valid @RequestBody UserVolunteerDTORequest request,
@@ -116,6 +171,15 @@ public class UserVolunteerRestController {
 
     }
 
+    /**
+     * @brief Maneja los errores de validación.
+     * 
+     * Este método maneja los errores de validación generados por el objeto BindingResult.
+     * 
+     * @param result Objeto de tipo BindingResult con los errores de validación.
+     * @return Un objeto de tipo Map<String, Object> con los errores de validación.
+     */
+    
     private Map<String, Object> catchErrors(BindingResult result) {
         Map<String, Object> response = new HashMap<>();
         if (result.hasErrors()) {
