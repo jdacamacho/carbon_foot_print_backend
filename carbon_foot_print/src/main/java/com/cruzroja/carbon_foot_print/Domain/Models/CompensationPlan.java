@@ -1,19 +1,48 @@
+/**
+ * @file CompensationPlan.java
+ * @brief Clase que representa un plan de compensación en el dominio del modelo.
+ */
+
 package com.cruzroja.carbon_foot_print.Domain.Models;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * @class CompensationPlan
+ * @brief Clase que representa un plan de compensación.
+ *
+ *        Esta clase incluye los atributos y métodos necesarios para gestionar
+ *        un plan de compensación.
+ */
 @Data
 @AllArgsConstructor
 public class CompensationPlan {
+    /** @brief Identificador único del plan. */
     private long planId;
+
+    /** @brief Nombre del plan. */
     private String planName;
+
+    /** @brief Precio del plan. */
     private double planPrice;
+
+    /** @brief Descripción del plan. */
     private String planDescription;
+
+    /** @brief Descuento aplicado al plan. */
     private double planDiscount;
 
+    /**
+     * @brief Constructor por defecto.
+     *
+     *        Inicializa el precio en 0.
+     */
     public CompensationPlan() {
         this.planPrice = 0;
     }
@@ -30,6 +59,13 @@ public class CompensationPlan {
         this.setPlanPrice(newPrice);
     }
 
+    /**
+     * @brief Compara el nombre del plan actual con el nombre de otro plan.
+     *
+     * @param compensationPlan El plan de compensación a comparar.
+     * @return true si los nombres de los planes son iguales, false en caso
+     *         contrario.
+     */
     public boolean isPlanNameEqual(CompensationPlan compensationPlan) {
         return this.planName.equals(compensationPlan.getPlanName());
     }
@@ -41,6 +77,12 @@ public class CompensationPlan {
         this.calculatePrice(prices);
     }
 
+    /**
+     * @brief Actualiza los atributos del plan actual con los atributos de otro
+     *        plan.
+     *
+     * @param compensationPlan El plan de compensación con los nuevos valores.
+     */
     public void update(CompensationPlan compensationPlan) {
         this.setPlanName(compensationPlan.getPlanName());
         this.setPlanDescription(compensationPlan.getPlanDescription());
@@ -54,6 +96,13 @@ public class CompensationPlan {
         this.planPrice = compensationPlan.getPlanPrice();
     }
 
+    /**
+     * @brief Verifica si el descuento del plan es válido.
+     *
+     *        Un descuento es válido si está entre 0 y 100 inclusive.
+     * 
+     * @return true si el descuento es válido, false en caso contrario.
+     */
     public boolean isValidDiscount() {
         double discount = this.getPlanDiscount();
         if (discount >= 0 && discount <= 100) {

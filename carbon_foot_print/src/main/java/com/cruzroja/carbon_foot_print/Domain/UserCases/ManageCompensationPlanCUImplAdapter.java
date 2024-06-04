@@ -1,6 +1,10 @@
-package com.cruzroja.carbon_foot_print.Domain.UserCases;
 
-import java.util.List;
+/**
+ * @file ManageCompensationPlanCUImplAdapter.java
+ * @brief Implementación de la interfaz ManageCompensationPlanCUIntPort.
+ */
+
+package com.cruzroja.carbon_foot_print.Domain.UserCases;
 
 import com.cruzroja.carbon_foot_print.Application.Input.ManageCompensationPlanCUIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;

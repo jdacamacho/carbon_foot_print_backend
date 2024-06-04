@@ -1,3 +1,9 @@
+
+/**
+ * @file CompensationPlanRestController.java
+ * @brief Controlador REST para gestionar los planes de compensación.
+ */
+
 package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationPlan.Controller;
 
 import java.util.ArrayList;
@@ -32,15 +38,32 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompen
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * @class CompensationPlanRestController
+ * @brief Controlador REST para gestionar los planes de compensación.
+ * 
+ *        Este controlador proporciona endpoints para crear, actualizar,
+ *        recuperar y listar los planes de compensación.
+ */
 @CrossOrigin(origins = { "http://localhost:5050" })
 @RestController
 @RequestMapping("/api/plans")
 @Validated
 @RequiredArgsConstructor
 public class CompensationPlanRestController {
+
+    /** @brief Caso de uso para gestionar los planes de compensación. */
     private final ManageCompensationPlanCUIntPort compensationPlanCU;
+
+    /** @brief Mapper para convertir entre DTOs y modelos de dominio. */
     private final MapperCompensationPlanInfrasctuctureDomain mapper;
 
+    /**
+     * @brief Lista todos los planes de compensación.
+     * 
+     * @return Una lista de objetos CompensationPlanDTOResponse con los planes de
+     *         compensación.
+     */
     @GetMapping("")
     @Transactional(readOnly = true)
     public ResponseEntity<List<CompensationPlanDTOResponse>> listCompensationPlan() {
@@ -50,6 +73,13 @@ public class CompensationPlanRestController {
         return objResponse;
     }
 
+    /**
+     * @brief Obtiene un plan de compensación por su ID.
+     * 
+     * @param planId El identificador del plan de compensación.
+     * @return El objeto CompensationPlanDTOResponse correspondiente al ID
+     *         proporcionado.
+     */
     @GetMapping("/id/{planId}")
     @Transactional(readOnly = true)
     public ResponseEntity<CompensationPlanDTOResponse> getCompensationPlanById(@PathVariable long planId) {
@@ -59,6 +89,13 @@ public class CompensationPlanRestController {
         return objResponse;
     }
 
+    /**
+     * @brief Obtiene un plan de compensación por su nombre.
+     * 
+     * @param planName El nombre del plan de compensación.
+     * @return El objeto CompensationPlanDTOResponse correspondiente al nombre
+     *         proporcionado.
+     */
     @GetMapping("/name")
     @Transactional(readOnly = true)
     public ResponseEntity<CompensationPlanDTOResponse> getCompensationPlanByName(@RequestParam String planName) {
@@ -68,6 +105,15 @@ public class CompensationPlanRestController {
         return objResponse;
     }
 
+    /**
+     * @brief Guarda un nuevo plan de compensación.
+     * 
+     * @param request El objeto CompensationPlanDTORequest con los datos del plan de
+     *                compensación a guardar.
+     * @param result  El resultado de la validación del objeto de solicitud.
+     * @return El objeto CompensationPlanDTOResponse guardado, o un error si ocurre
+     *         algún problema.
+     */
     @PostMapping("")
     public ResponseEntity<?> saveCompensationPlan(@Valid @RequestBody CompensationPlanDTORequest request,
             BindingResult result) {
@@ -79,7 +125,7 @@ public class CompensationPlanRestController {
             List<String> listaErrores = new ArrayList<>();
 
             for (FieldError error : result.getFieldErrors()) {
-                listaErrores.add("The field '" + error.getField() + "‘ " + error.getDefaultMessage());
+                listaErrores.add("The field '" + error.getField() + "' " + error.getDefaultMessage());
             }
 
             response.put("errors", listaErrores);
@@ -97,6 +143,15 @@ public class CompensationPlanRestController {
         return new ResponseEntity<CompensationPlanDTOResponse>(objPlan, HttpStatus.CREATED);
     }
 
+    /**
+     * @brief Actualiza un plan de compensación existente.
+     * 
+     * @param request El objeto CompensationPlanWithIdDTORequest con los datos del
+     *                plan de compensación a actualizar.
+     * @param result  El resultado de la validación del objeto de solicitud.
+     * @return El objeto CompensationPlanDTOResponse actualizado, o un error si
+     *         ocurre algún problema.
+     */
     @PutMapping("")
     public ResponseEntity<?> updateCompensationPlan(@Valid @RequestBody CompensationPlanWithIdDTORequest request,
             BindingResult result) {
@@ -108,7 +163,7 @@ public class CompensationPlanRestController {
             List<String> listaErrores = new ArrayList<>();
 
             for (FieldError error : result.getFieldErrors()) {
-                listaErrores.add("The field '" + error.getField() + "‘ " + error.getDefaultMessage());
+                listaErrores.add("The field '" + error.getField() + "' " + error.getDefaultMessage());
             }
 
             response.put("errors", listaErrores);
