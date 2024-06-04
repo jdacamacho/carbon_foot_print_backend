@@ -16,6 +16,7 @@ public class CompensationPlanDTOResponse {
     private double planPrice;
     private String planDescription;
     private double planDiscount;
+    private double planUfp;
 
     public CompensationPlanDTOResponse() {
     }

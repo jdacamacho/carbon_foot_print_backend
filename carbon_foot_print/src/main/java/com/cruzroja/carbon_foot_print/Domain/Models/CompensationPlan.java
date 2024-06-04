@@ -5,10 +5,7 @@
 
 package com.cruzroja.carbon_foot_print.Domain.Models;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,6 +34,8 @@ public class CompensationPlan {
 
     /** @brief Descuento aplicado al plan. */
     private double planDiscount;
+    /* @brief Unidades de huella de carbono que compensa el plan */
+    private double planUfp;
 
     /**
      * @brief Constructor por defecto.
@@ -45,6 +44,7 @@ public class CompensationPlan {
      */
     public CompensationPlan() {
         this.planPrice = 0;
+        this.planUfp = 0;
     }
 
     public void calculatePrice(List<Double> prices) {
@@ -55,7 +55,6 @@ public class CompensationPlan {
             priceActions += prices.get(i);
         }
         newPrice = priceActions - (priceActions * (this.planDiscount / 100));
-        System.out.println("descuento " + (priceActions * (this.planDiscount / 100)));
         this.setPlanPrice(newPrice);
     }
 
@@ -93,6 +92,7 @@ public class CompensationPlan {
         this.setPlanName(compensationPlan.getPlanName());
         this.setPlanDescription(compensationPlan.getPlanDescription());
         this.setPlanDiscount(compensationPlan.getPlanDiscount());
+        this.planUfp = compensationPlan.getPlanUfp();
         this.planPrice = compensationPlan.getPlanPrice();
     }
 

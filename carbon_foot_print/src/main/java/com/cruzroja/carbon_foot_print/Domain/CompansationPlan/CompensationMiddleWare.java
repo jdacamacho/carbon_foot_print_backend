@@ -46,10 +46,8 @@ public class CompensationMiddleWare {
     }
 
     /**
-     * Calcula el precio total (sin descuento) para el plan de acción sumando los
-     * precios parciales de cada acción asignada.
-     * 
-     * @return {@code double} pecio total del plan.
+     * Calcula el precio para el plan de acción sumando los
+     * precios parciales de cada acción asignada y usando el descuento.
      */
     public void calculeFullPrice() {
         double price = 0;
@@ -57,6 +55,14 @@ public class CompensationMiddleWare {
             price += item.calculePrice();
         }
         this.plan.calculePrice(price);
+    }
+
+    public void calculeUfp() {
+        double ufp = 0;
+        for (ActionWithAmount item : actions) {
+            ufp += item.calculeUfp();
+        }
+        this.plan.setPlanUfp(ufp);
     }
 
     public List<Long> removedActions(List<Action> oldActions) {

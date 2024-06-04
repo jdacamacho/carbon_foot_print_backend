@@ -11,6 +11,7 @@ public class ActionWithAmountDTOResponse {
     private ActionDTOResponse action;
     private int amount;
     private double price;
+    private double ufp;
 
     public ActionWithAmountDTOResponse() {
     }

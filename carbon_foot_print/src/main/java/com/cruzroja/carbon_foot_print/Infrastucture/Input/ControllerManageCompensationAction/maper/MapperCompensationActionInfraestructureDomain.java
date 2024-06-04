@@ -9,6 +9,7 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompen
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationAction.DTORequest.CompensationActionWithIdDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationAction.DTOResponse.CompensationActionDTOResponse;
 
+//Todo: eliminar comentario
 @Mapper(componentModel = "spring")
 public interface MapperCompensationActionInfraestructureDomain {
 

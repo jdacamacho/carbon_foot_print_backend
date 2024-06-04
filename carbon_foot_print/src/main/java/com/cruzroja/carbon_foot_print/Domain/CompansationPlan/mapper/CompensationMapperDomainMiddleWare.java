@@ -28,7 +28,8 @@ public class CompensationMapperDomainMiddleWare {
         CompensationPlan plan = domain.get(0).getPlan();
         List<ActionWithAmount> action = new ArrayList<>();
         domain.forEach(compensation -> action.add(new ActionWithAmount(compensation.getAction(),
-                compensation.getCompensationActionAmount(), compensation.getCompensationActionPrice())));
+                compensation.getCompensationActionAmount(), compensation.getCompensationActionPrice(),
+                compensation.getCompensationActionUfp())));
         return new CompensationMiddleWare(plan, action);
     }
 

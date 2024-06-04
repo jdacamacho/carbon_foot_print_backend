@@ -10,6 +10,7 @@ public class CompensationAction {
     private CompensationPlan plan;
     private int compensationActionAmount;
     private double compensationActionPrice;
+    private double compensationActionUfp;
 
     public CompensationAction() {
     }
@@ -19,9 +20,14 @@ public class CompensationAction {
         this.plan = plan;
         this.compensationActionAmount = compensationActionAmount;
         this.calculePrice();
+        this.calculeUfp();
     }
 
     public void calculePrice() {
         this.compensationActionPrice = this.compensationActionAmount * action.getActionUnitaryPrice();
+    }
+
+    public void calculeUfp() {
+        this.compensationActionUfp = this.compensationActionAmount * action.getActionUfp();
     }
 }

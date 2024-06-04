@@ -58,6 +58,7 @@ public class ManageCompensationActionCUImplAdapter implements ManageCompensation
         if (!compensationMiddleWare.isValidActions(this.gateway.findValidActions()))
             this.exceptionFormatter.returnResponseBusinessRuleViolated("The selected actions are not in the system.");
         compensationMiddleWare.calculeFullPrice();
+        compensationMiddleWare.calculeUfp();
         CompensationPlan plan = this.cuPlan.saveCompensationPlan(compensationMiddleWare.getPlan());
         compensationMiddleWare.setPlan(plan);
         return this.mapper.mapGroupedDomainToMiddleWare(
@@ -71,6 +72,7 @@ public class ManageCompensationActionCUImplAdapter implements ManageCompensation
         CompensationMiddleWare old = this.mapper
                 .mapGroupedDomainToMiddleWare(this.gateway.findById(compensationMiddleWare.getPlan().getPlanId()));
         compensationMiddleWare.calculeFullPrice();
+        compensationMiddleWare.calculeUfp();
         this.cuPlan.updateWithPrice(compensationMiddleWare.getPlan());
         List<Long> removed = compensationMiddleWare.removedActions(old.getOnlyActions());
         if (!removed.isEmpty())

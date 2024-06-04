@@ -33,6 +33,9 @@ public class CompensationActionEntity {
     @Column(nullable = false)
     private int compensationActionPrice;
 
+    @Column(nullable = false)
+    private double compensationActionUfp;
+
     public CompensationActionEntity() {
     }
 }

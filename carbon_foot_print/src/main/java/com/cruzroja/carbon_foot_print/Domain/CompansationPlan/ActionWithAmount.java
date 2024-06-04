@@ -11,6 +11,7 @@ public class ActionWithAmount {
     private Action action;
     private int amount;
     private double price;
+    private double ufp;
 
     /**
      * Constructor publico para realizar los mapeos.
@@ -29,10 +30,16 @@ public class ActionWithAmount {
         this.action = action;
         this.amount = amount;
         this.price = action.getActionUnitaryPrice() * amount;
+        this.ufp = action.getActionUfp() * amount;
     }
 
     public double calculePrice() {
         this.price = this.action.getActionUnitaryPrice() * this.amount;
+        return this.price;
+    }
+
+    public double calculeUfp() {
+        this.ufp = this.action.getActionUfp() * this.amount;
         return this.price;
     }
 }
