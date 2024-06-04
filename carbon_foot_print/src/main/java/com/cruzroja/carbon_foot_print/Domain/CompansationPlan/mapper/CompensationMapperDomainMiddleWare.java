@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import com.cruzroja.carbon_foot_print.Domain.CompansationPlan.ActionWithAmount;
 import com.cruzroja.carbon_foot_print.Domain.CompansationPlan.CompensationMiddleWare;
 import com.cruzroja.carbon_foot_print.Domain.Models.CompensationAction;
 import com.cruzroja.carbon_foot_print.Domain.Models.CompensationPlan;
 
+@Component
 public class CompensationMapperDomainMiddleWare {
     public List<CompensationAction> mapMiddleWareTODomain(CompensationMiddleWare middleWare) {
         CompensationPlan plan = middleWare.getPlan();
@@ -20,6 +23,8 @@ public class CompensationMapperDomainMiddleWare {
     }
 
     public CompensationMiddleWare mapGroupedDomainToMiddleWare(List<CompensationAction> domain) {
+        if (domain == null)
+            return null;
         CompensationPlan plan = domain.get(0).getPlan();
         List<ActionWithAmount> action = new ArrayList<>();
         domain.forEach(compensation -> action.add(new ActionWithAmount(compensation.getAction(),
@@ -28,6 +33,8 @@ public class CompensationMapperDomainMiddleWare {
     }
 
     public List<CompensationMiddleWare> mapDomainToMiddleWare(List<CompensationAction> domain) {
+        if (domain == null)
+            return null;
         Map<Long, List<CompensationAction>> groups = this.groupByPlan(domain);
         List<CompensationMiddleWare> response = new ArrayList<>();
         groups.forEach((k, v) -> {
@@ -37,6 +44,8 @@ public class CompensationMapperDomainMiddleWare {
     }
 
     private Map<Long, List<CompensationAction>> groupByPlan(List<CompensationAction> domain) {
+        if (domain == null)
+            return null;
         return domain.stream().collect(Collectors.groupingBy(ca -> ca.getPlan().getPlanId()));
     }
 }

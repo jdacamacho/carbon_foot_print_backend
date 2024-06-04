@@ -60,6 +60,9 @@ public class CompensationActionRestController {
 
     @PostMapping("")
     public ResponseEntity<?> save(@Valid @RequestBody CompensationActionDTORequest request, BindingResult errors) {
+        System.out.println("***************************************************");
+        System.out.println(request);
+        System.out.println("***************************************************");
         CompensationMiddleWare data = mapper.mapInfraestructureToModel(request);
         Map<String, Object> errorResponse = new HashMap<>();
         errorResponse = this.catchErrors(errors);

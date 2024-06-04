@@ -11,7 +11,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ActionWithAmountDTORequest {
-    @NotNull(message = "action can't be null.")
     @Valid
     private ActionWithIdDTORequest action;
     @Positive(message = "amount must be greater than 0.")
