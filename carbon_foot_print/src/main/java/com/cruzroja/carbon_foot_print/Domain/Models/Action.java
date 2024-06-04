@@ -9,19 +9,21 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Action {
-    /** Identificador único de la acción.*/
+    /** Identificador único de la acción. */
     private long actionId;
 
-    /** Nombre de la acción.*/
+    /** Nombre de la acción. */
     private String actionName;
 
-    /**Descripción de la acción.*/
+    /** Descripción de la acción. */
     private String actionDescription;
 
-    /*Precio unitario de la acción.*/
+    /* Precio unitario de la acción. */
     private double actionUnitaryPrice;
+    /* Unidades de huella de carbono compensadas. */
+    private double actionUfp;
 
-    /*Constructor por defecto.*/
+    /* Constructor por defecto. */
     public Action() {
         // Constructor vacío
     }
@@ -30,7 +32,8 @@ public class Action {
      * Compara el nombre de esta acción con el nombre de otra acción.
      * 
      * @param action La acción con la que comparar.
-     * @return true si los nombres de las acciones son iguales, false en caso contrario.
+     * @return true si los nombres de las acciones son iguales, false en caso
+     *         contrario.
      */
     public boolean isEqualName(Action action) {
         return this.actionName.equals(action.getActionName());
