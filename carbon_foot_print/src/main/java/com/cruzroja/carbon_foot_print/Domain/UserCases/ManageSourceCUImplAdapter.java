@@ -125,7 +125,7 @@ public class ManageSourceCUImplAdapter implements ManageSourceCUIntPort {
         if (!this.gateway.existsByName(sourceName)) {
             this.exceptionFormatter.returNoData("Fuente con ese ID no encontrada en el sistema");
         }
-        objResponse = this.gateway.findByname(sourceName);
+        objResponse = this.gateway.findByName(sourceName);
         return objResponse;
     }
 }
