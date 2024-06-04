@@ -6,6 +6,8 @@
 
 package com.cruzroja.carbon_foot_print.Domain.UserCases;
 
+import java.util.List;
+
 import com.cruzroja.carbon_foot_print.Application.Input.ManageCompensationPlanCUIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageCompensationPlanGatewayIntPort;
