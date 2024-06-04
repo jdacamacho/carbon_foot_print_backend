@@ -5,9 +5,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.cruzroja.carbon_foot_print.Application.Input.ManageCompensationPlanCUIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageActionGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageAuthGatewayIntPort;
+import com.cruzroja.carbon_foot_print.Application.Output.ManageCompensationActionGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageCompensationPlanGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManagePollutionSourceGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManagePollutionTypeGatewayIntPort;
@@ -16,8 +18,10 @@ import com.cruzroja.carbon_foot_print.Application.Output.ManageSourceGatewayIntP
 import com.cruzroja.carbon_foot_print.Application.Output.ManageUserCompanyGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManegeCategoryGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManegeUserVolunteerGatewayIntPort;
+import com.cruzroja.carbon_foot_print.Domain.CompansationPlan.mapper.CompensationMapperDomainMiddleWare;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageActionCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageAuthCUImplAdapter;
+import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageCompensationActionCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageCompensationPlanCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManagePollutionSourceCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManagePollutionTypeCUImplAdapter;
@@ -99,14 +103,23 @@ public class BeanConfigurations {
 
     @Bean
     public ManageActionCUImplAdapter createActionCU(ManageActionGatewayIntPort gateway,
-        ExceptionFormatterIntPort exceptionFormatter){
+            ExceptionFormatterIntPort exceptionFormatter) {
         return new ManageActionCUImplAdapter(gateway, exceptionFormatter);
     }
 
     @Bean
     public ManageCompensationPlanCUImplAdapter createCompensationPlanCU(ManageCompensationPlanGatewayIntPort gareway,
-        ExceptionFormatterIntPort exceptionFormatter){
+            ExceptionFormatterIntPort exceptionFormatter) {
         return new ManageCompensationPlanCUImplAdapter(gareway, exceptionFormatter);
+    }
+
+    @Bean
+    public ManageCompensationActionCUImplAdapter createCompensationActionCU(
+            ManageCompensationActionGatewayIntPort gateway,
+            ManageCompensationPlanCUIntPort cuPlan,
+            ExceptionFormatterIntPort exceptionFormatter,
+            CompensationMapperDomainMiddleWare mapper) {
+        return new ManageCompensationActionCUImplAdapter(gateway, cuPlan, exceptionFormatter, mapper);
     }
 
 }

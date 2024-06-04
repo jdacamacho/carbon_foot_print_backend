@@ -3,6 +3,7 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageActio
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,8 +23,10 @@ public class ActionDTORequest {
 
     @Min(value = 0, message = "action's unitary price can't be negative")
     private double actionUnitaryPrice;
+    @PositiveOrZero(message = "action's ufp must be positive or zero")
+    private double actionUfp;
 
-    public ActionDTORequest(){
+    public ActionDTORequest() {
 
     }
 }

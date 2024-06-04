@@ -27,7 +27,10 @@ public class ActionEntity {
     @Column(nullable = false)
     private double actionUnitaryPrice;
 
-    public ActionEntity(){
+    @Column(nullable = false)
+    private double actionUfp;
+
+    public ActionEntity() {
 
     }
 

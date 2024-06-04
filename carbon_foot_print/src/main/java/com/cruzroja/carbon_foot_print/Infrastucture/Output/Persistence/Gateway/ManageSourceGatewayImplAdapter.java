@@ -16,8 +16,8 @@ public class ManageSourceGatewayImplAdapter implements ManageSourceGatewayIntPor
     private final SourceRepository serviceBD;
     private final ModelMapper mapper;
 
-    public ManageSourceGatewayImplAdapter(SourceRepository serviceBD, 
-                                            ModelMapper mapper){
+    public ManageSourceGatewayImplAdapter(SourceRepository serviceBD,
+            ModelMapper mapper) {
         this.serviceBD = serviceBD;
         this.mapper = mapper;
     }
@@ -25,7 +25,8 @@ public class ManageSourceGatewayImplAdapter implements ManageSourceGatewayIntPor
     @Override
     public List<Source> findAll() {
         Iterable<SourceEntity> dataFromBD = this.serviceBD.findAll();
-        List<Source> response = this.mapper.map(dataFromBD, new TypeToken<List<Source>>(){}.getType());
+        List<Source> response = this.mapper.map(dataFromBD, new TypeToken<List<Source>>() {
+        }.getType());
         return response;
     }
 
@@ -50,7 +51,7 @@ public class ManageSourceGatewayImplAdapter implements ManageSourceGatewayIntPor
     }
 
     @Override
-    public Source findByname(String sourceName) {
+    public Source findByName(String sourceName) {
         SourceEntity dataFromBD = this.serviceBD.findBySourceName(sourceName);
         Source response = this.mapper.map(dataFromBD, Source.class);
         return response;
@@ -60,5 +61,5 @@ public class ManageSourceGatewayImplAdapter implements ManageSourceGatewayIntPor
     public boolean existsByName(String name) {
         return this.serviceBD.existsBySourceName(name);
     }
-    
+
 }
