@@ -55,7 +55,7 @@ public class ManageCompensationActionCUImplAdapter implements ManageCompensation
 
     @Override
     public CompensationMiddleWare save(CompensationMiddleWare compensationMiddleWare) {
-        if (compensationMiddleWare.isValidActions(this.gateway.findValidActions()))
+        if (!compensationMiddleWare.isValidActions(this.gateway.findValidActions()))
             this.exceptionFormatter.returnResponseBusinessRuleViolated("The selected actions are not in the system.");
         compensationMiddleWare.calculeFullPrice();
         CompensationPlan plan = this.cuPlan.saveCompensationPlan(compensationMiddleWare.getPlan());
@@ -66,7 +66,7 @@ public class ManageCompensationActionCUImplAdapter implements ManageCompensation
 
     @Override
     public CompensationMiddleWare update(CompensationMiddleWare compensationMiddleWare) {
-        if (compensationMiddleWare.isValidActions(this.gateway.findValidActions()))
+        if (!compensationMiddleWare.isValidActions(this.gateway.findValidActions()))
             this.exceptionFormatter.returnResponseBusinessRuleViolated("The selected actions are not in the system.");
         CompensationMiddleWare old = this.mapper
                 .mapGroupedDomainToMiddleWare(this.gateway.findById(compensationMiddleWare.getPlan().getPlanId()));

@@ -41,6 +41,7 @@ public class ManageCompensationPlanCUImplAdapter implements ManageCompensationPl
                     .returnResponseErrorEntityExists("Compensation plan with that name already exists in the System");
         if (!compensationPlan.isValidDiscount())
             this.exceptionFormatter.returnResponseBusinessRuleViolated("Discount is not valid");
+        objPlan = this.gateway.save(compensationPlan);
         return objPlan;
     }
 
