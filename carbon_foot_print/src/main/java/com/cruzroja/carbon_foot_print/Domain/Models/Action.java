@@ -48,5 +48,6 @@ public class Action {
         this.setActionName(action.getActionName());
         this.setActionDescription(action.getActionDescription());
         this.setActionUnitaryPrice(action.getActionUnitaryPrice());
+        this.actionUfp = action.getActionUfp();
     }
 }
