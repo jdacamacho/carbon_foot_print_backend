@@ -37,6 +37,9 @@ public class ActionEntity {
     @Column(nullable = false)
     private double actionUnitaryPrice;
 
+    @Column(nullable = false)
+    private double actionUfp;
+
     /**Constructor sin parámetros.*/
     public ActionEntity() {
     }

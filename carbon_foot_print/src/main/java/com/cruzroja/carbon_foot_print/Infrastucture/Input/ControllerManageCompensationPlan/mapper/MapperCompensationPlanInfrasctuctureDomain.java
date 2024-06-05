@@ -1,18 +1,22 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationPlan.mapper;
 
-import java.util.List;
-
 import org.mapstruct.Mapper;
+
+import java.util.List;
 
 import com.cruzroja.carbon_foot_print.Domain.Models.CompensationPlan;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationPlan.DTORequest.CompensationPlanDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationPlan.DTORequest.CompensationPlanWithIdDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationPlan.DTOResponse.CompensationPlanDTOResponse;
 
+//todo: eliminar comentario
 @Mapper(componentModel = "spring")
 public interface MapperCompensationPlanInfrasctuctureDomain {
-    CompensationPlan mapRequestToModel(CompensationPlanWithIdDTORequest request);
-    CompensationPlan mapRequestToModel(CompensationPlanDTORequest request);
-    CompensationPlanDTOResponse mapModelToResponse(CompensationPlan model);
-    List<CompensationPlanDTOResponse> mapModelsToResponse(List<CompensationPlan> models);
+    CompensationPlan mapInfraestructureToModel(CompensationPlanDTORequest request);
+
+    CompensationPlan mapInfraestructureToModel(CompensationPlanWithIdDTORequest request);
+
+    CompensationPlanDTOResponse mapModelToInfraestructure(CompensationPlan model);
+
+    List<CompensationPlanDTOResponse> mapModelToInfraestructure(List<CompensationPlan> models);
 }

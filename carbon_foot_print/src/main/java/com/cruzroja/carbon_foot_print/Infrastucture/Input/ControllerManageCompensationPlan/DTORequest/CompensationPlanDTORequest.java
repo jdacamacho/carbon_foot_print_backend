@@ -3,8 +3,6 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompe
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageAction.DTORequest.ActionWithIdDTORequest;
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -32,11 +30,6 @@ public class CompensationPlanDTORequest {
     @Max(value = 100, message = "action's discount can't be major than 100")
     private double planDiscount;
 
-    @Size(min = 1, message = "Plan's must have at least one action")
-    @Valid
-    private List<ActionWithIdDTORequest> actions;
-
-    public CompensationPlanDTORequest(){
-        this.actions = new ArrayList<>();
+    public CompensationPlanDTORequest() {
     }
 }

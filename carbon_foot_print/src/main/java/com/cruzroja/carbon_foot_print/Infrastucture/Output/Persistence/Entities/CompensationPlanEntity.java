@@ -37,6 +37,9 @@ public class CompensationPlanEntity {
     @Column(nullable = false)
     private double planDiscount;
 
+    @Column(nullable = false)
+    private double planUfp;
+
     public CompensationPlanEntity() {
     }
 }

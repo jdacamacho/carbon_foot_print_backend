@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +14,7 @@ import lombok.Data;
 public class ActionWithIdDTORequest {
     @Min(value = 1, message = "action's id must be major than one")
     private long actionId;
-    
+
     @NotNull(message = "action's name can't be null")
     @NotBlank(message = "action's name can't be empty")
     @Size(min = 2, max = 45, message = "action's name must be between 2 and 45 characters")
@@ -28,8 +29,10 @@ public class ActionWithIdDTORequest {
     @Min(value = 0, message = "action's unitary price can't be negative")
     @Digits(integer = 10, fraction = 2, message = "action's unitary price format is invalid")
     private double actionUnitaryPrice;
+    @PositiveOrZero(message = "action's ufp must be positive or zero")
+    private double actionUfp;
 
-    public ActionWithIdDTORequest(){
+    public ActionWithIdDTORequest() {
 
     }
 }

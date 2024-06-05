@@ -10,8 +10,9 @@ public class ActionDTOResponse {
     private String actionName;
     private String actionDescription;
     private double actionUnitaryPrice;
+    private double actionUfp;
 
-    public ActionDTOResponse(){
-        
+    public ActionDTOResponse() {
+
     }
 }

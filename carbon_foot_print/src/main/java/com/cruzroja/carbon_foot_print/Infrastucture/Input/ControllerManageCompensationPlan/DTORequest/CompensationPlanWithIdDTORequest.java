@@ -32,11 +32,6 @@ public class CompensationPlanWithIdDTORequest {
     @Min(value = 0, message = "action's discount can't be negative")
     private double planDiscount;
 
-    @Size(min = 1, message = "Plan's must have at least one action")
-    @Valid
-    private List<ActionWithIdDTORequest> actions;
-
-    public CompensationPlanWithIdDTORequest(){
-        this.actions = new ArrayList<>();
+    public CompensationPlanWithIdDTORequest() {
     }
 }
