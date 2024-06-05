@@ -17,23 +17,12 @@ public class ManagePollutionSourceCUImplAdapter implements ManagePollutionSource
     /** Utilidad para manejo de excepciones personalizadas. */
     private final ExceptionFormatterIntPort exceptionFormatter;
 
-    /**
-     * Constructor de la clase ManagePollutionSourceCUImplAdapter.
-     *
-     * @param gateway             Puesta de enlace desde el dominio a los datos.
-     * @param exceptionFormatter Utilidad para manejo de excepciones personalizadas.
-     */
     public ManagePollutionSourceCUImplAdapter(ManagePollutionSourceGatewayIntPort gateway,
                                                 ExceptionFormatterIntPort exceptionFormatter){
         this.gateway = gateway;
         this.exceptionFormatter = exceptionFormatter;
     }
 
-    /**
-     * Lista todas las fuentes de contaminación disponibles.
-     *
-     * @return Lista de objetos PollutionSource si se encuentran fuentes, o lanza una excepción si no se encuentra ninguna.
-     */
     @Override
     public List<PollutionSource> listPollutionSources() {
         List<PollutionSource> objResponse = this.gateway.findAll();
@@ -43,13 +32,6 @@ public class ManagePollutionSourceCUImplAdapter implements ManagePollutionSource
         return objResponse;
     }
 
-    /**
-     * Encuentra una fuente de contaminación por su identificador.
-     *
-     * @param idPollution El identificador de la contaminación asociada.
-     * @param idSource    El identificador de la fuente de contaminación a buscar.
-     * @return El objeto PollutionSource encontrado, o lanza una excepción si no se encuentra ninguna.
-     */
     @Override
     public PollutionSource findById(long idPollution, long idSource) {
         PollutionSource response = this.gateway.findById(idPollution, idSource);
@@ -59,12 +41,6 @@ public class ManagePollutionSourceCUImplAdapter implements ManagePollutionSource
         return response;
     }
 
-    /**
-     * Encuentra todas las fuentes de contaminación por una lista de identificadores.
-     *
-     * @param idPollutionsSources Lista de identificadores de fuentes de contaminación.
-     * @return Lista de objetos PollutionSource encontrados, o lanza una excepción si no se encuentra ninguna.
-     */
     @Override
     public List<PollutionSource> findAllById(List<PollutionSourceId> idPollutionsSources) {
         List<PollutionSource> objResponse = this.gateway.findAllByIds(idPollutionsSources);

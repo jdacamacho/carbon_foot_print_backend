@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**Entidad que representa una fuente de contaminación.*/
 @Entity
 @Table(name = "pollution_source")
 @Data
@@ -18,16 +19,26 @@ import lombok.Data;
 @IdClass(PollutionSourceId.class)
 public class PollutionSourceEntity {
 
+    /**
+     * La fuente asociada a la contaminación.
+     * Representada por una entidad de tipo SourceEntity.
+     */
     @Id
     @ManyToOne
     @JoinColumn(name = "source_id", nullable = false)
     private SourceEntity source;
+
+    /**
+     * El tipo de contaminación asociado a la fuente.
+     * Representado por una entidad de tipo PollutionTypeEntity.
+     */
     @Id
     @ManyToOne
     @JoinColumn(name = "pollution_id", nullable = false)
     private PollutionTypeEntity pollution;
 
+    /*Constructor sin parámetros.*/
     public PollutionSourceEntity() {
-
     }
 }
+
