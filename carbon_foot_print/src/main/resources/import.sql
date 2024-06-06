@@ -83,6 +83,14 @@ INSERT INTO permissions(idPermission, name, description) VALUES (902, "ROLE_Actu
 INSERT INTO permissions(idPermission, name, description) VALUES (903, "ROLE_Consultar_Plan_ID","Permiso para consultar un plan por ID.");
 INSERT INTO permissions(idPermission, name, description) VALUES (904, "ROLE_Consultar_Plan_Name","Permiso para consultar un plan por nombre.");
 
+#PERMISOS PARA COMPENSATION ACTIONS
+INSERT INTO permissions(idPermission, name, description) VALUES (1000, "ROLE_crear_plan_generico","Permiso para crear planes genéricos.");
+INSERT INTO permissions(idPermission, name, description) VALUES (1001, "ROLE_crear_plan_personalizado","Permiso para crear planes personalizados.");
+INSERT INTO permissions(idPermission, name, description) VALUES (1002, "ROLE_listar_planes_personalizados","Permiso para listar planes personalizados.");
+INSERT INTO permissions(idPermission, name, description) VALUES (1003, "ROLE_listar_planes_genericos","Permiso para listar planes genéricos.");
+INSERT INTO permissions(idPermission, name, description) VALUES (1004, "ROLE_actualizar_plan_generico","Permiso para actualizar planes genéricos.");
+INSERT INTO permissions(idPermission, name, description) VALUES (1005, "ROLE_actualizar_plan_personalizado","Permiso para actualizar planes personalizados.");
+
 
 #PROBAR USUARIO PARA roles
 INSERT INTO USERS(documentNumber, documentType, names, lastNames, personalPhone, state, personalEmail, username, password) 
@@ -139,6 +147,12 @@ INSERT INTO ROLE_PERMISSIONS(idPermission,idRole) VALUES (901,3);
 INSERT INTO ROLE_PERMISSIONS(idPermission,idRole) VALUES (902,3);
 INSERT INTO ROLE_PERMISSIONS(idPermission,idRole) VALUES (903,3);
 INSERT INTO ROLE_PERMISSIONS(idPermission,idRole) VALUES (904,3);
+INSERT INTO ROLE_PERMISSIONS(idPermission,idRole) VALUES (1000,3);
+INSERT INTO ROLE_PERMISSIONS(idPermission,idRole) VALUES (1001,3);
+INSERT INTO ROLE_PERMISSIONS(idPermission,idRole) VALUES (1002,3);
+INSERT INTO ROLE_PERMISSIONS(idPermission,idRole) VALUES (1003,3);
+INSERT INTO ROLE_PERMISSIONS(idPermission,idRole) VALUES (1004,3);
+INSERT INTO ROLE_PERMISSIONS(idPermission,idRole) VALUES (1005,3);
 
 # Asigno El rol a un usuario
 INSERT INTO USER_ROLES(id_role,user_document_number) VALUES(3,1000000000);
