@@ -60,6 +60,25 @@ public class CompensationActionRestController {
         return response;
     }
 
+    @GetMapping("/default")
+    @Transactional(readOnly = true)
+    public ResponseEntity<List<CompensationActionDTOResponse>> listDefault() {
+        List<CompensationMiddleWare> plans = this.compensationActionCU.findDefault();
+        ResponseEntity<List<CompensationActionDTOResponse>> response = new ResponseEntity<List<CompensationActionDTOResponse>>(
+                mapper.mapModelToinfraestructure(plans), HttpStatus.OK);
+        return response;
+    }
+
+    @GetMapping("/custom")
+    @Transactional(readOnly = true)
+    public ResponseEntity<List<CompensationActionDTOResponse>> listCustomEntity(
+            @Valid @Positive(message = "volunteerId must be positive.") @RequestParam long volunteerId) {
+        List<CompensationMiddleWare> plans = this.compensationActionCU.findByVolunteer(volunteerId);
+        ResponseEntity<List<CompensationActionDTOResponse>> response = new ResponseEntity<List<CompensationActionDTOResponse>>(
+                mapper.mapModelToinfraestructure(plans), HttpStatus.OK);
+        return response;
+    }
+
     @PostMapping("/custommer")
     public ResponseEntity<?> saveCustommer(
             @Valid @Positive(message = "volunteerId must be positive.") @RequestParam long volunteerId,
