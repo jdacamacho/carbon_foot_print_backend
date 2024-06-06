@@ -12,11 +12,7 @@ import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPo
 import com.cruzroja.carbon_foot_print.Application.Output.ManageSourceGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Domain.Models.Source;
 
-/**
- * @clase ManageSourceCUImplAdapter
- * @brief Implementación de la interfaz ManageSourceCUIntPort para gestionar
- *        fuentes relacionadas con cálculos de huella de carbono.
- */
+
 public class ManageSourceCUImplAdapter implements ManageSourceCUIntPort {
 
     /** El gateway para gestionar el acceso a datos de las fuentes. */
@@ -25,24 +21,13 @@ public class ManageSourceCUImplAdapter implements ManageSourceCUIntPort {
     /** El formateador para manejar excepciones. */
     private final ExceptionFormatterIntPort exceptionFormatter;
 
-    /**
-     * Constructor para ManageSourceCUImplAdapter.
-     * 
-     * @param gateway            El gateway para gestionar el acceso a datos de las
-     *                           fuentes.
-     * @param exceptionFormatter El formateador para manejar excepciones.
-     */
+    
     public ManageSourceCUImplAdapter(ManageSourceGatewayIntPort gateway,
             ExceptionFormatterIntPort exceptionFormatter) {
         this.gateway = gateway;
         this.exceptionFormatter = exceptionFormatter;
     }
 
-    /**
-     * Obtiene una lista de todas las fuentes.
-     * 
-     * @return Lista de objetos Source.
-     */
     @Override
     public List<Source> listSources() {
         List<Source> sources = this.gateway.findAll();
@@ -52,12 +37,7 @@ public class ManageSourceCUImplAdapter implements ManageSourceCUIntPort {
         return sources;
     }
 
-    /**
-     * Guarda una nueva fuente.
-     * 
-     * @param source El objeto Source a guardar.
-     * @return El objeto Source guardado.
-     */
+    
     @Override
     public Source saveSource(Source source) {
         Source objResponse = null;
@@ -70,12 +50,6 @@ public class ManageSourceCUImplAdapter implements ManageSourceCUIntPort {
 
     }
 
-    /**
-     * Actualiza una fuente existente.
-     * 
-     * @param source El objeto Source a actualizar.
-     * @return El objeto Source actualizado.
-     */
     @Override
     public Source updateSource(Source source) {
         Source objResponse = null;
@@ -97,12 +71,6 @@ public class ManageSourceCUImplAdapter implements ManageSourceCUIntPort {
         return objResponse;
     }
 
-    /**
-     * Encuentra una fuente por su ID.
-     * 
-     * @param idSource El ID de la fuente a encontrar.
-     * @return El objeto Source encontrado.
-     */
     @Override
     public Source findByIdSource(long idSource) {
         Source objResponse = null;
@@ -113,12 +81,6 @@ public class ManageSourceCUImplAdapter implements ManageSourceCUIntPort {
         return objResponse;
     }
 
-    /**
-     * Encuentra una fuente por su nombre.
-     * 
-     * @param sourceName El nombre de la fuente a encontrar.
-     * @return El objeto Source encontrado.
-     */
     @Override
     public Source findBySourceName(String sourceName) {
         Source objResponse = null;
