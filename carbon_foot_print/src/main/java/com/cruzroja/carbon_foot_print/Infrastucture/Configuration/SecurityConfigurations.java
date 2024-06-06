@@ -103,9 +103,9 @@ public class SecurityConfigurations {
                                                 .hasRole("Consultar_Fuentes_Contaminantes_IDs")
                                                 // Compensation Actions
                                                 .requestMatchers(HttpMethod.GET, "/api/plans/actions")
-                                                .hasRole("Listar_planes")
+                                                .hasRole("Listar_todos_planes")
                                                 .requestMatchers(HttpMethod.GET, "/api/plans/actions/{planId}")
-                                                .hasRole("Consultar_plan_id")
+                                                .hasRole("Consultar_plan_id_completo")
                                                 .requestMatchers(HttpMethod.GET, "/api/plans/actions/default")
                                                 .hasRole("Listar_planes_genericos")
                                                 .requestMatchers(HttpMethod.GET,

@@ -89,8 +89,8 @@ INSERT INTO permissions(idPermission, name, description) VALUES (1001, "ROLE_Cre
 INSERT INTO permissions(idPermission, name, description) VALUES (1002, "ROLE_Listar_planes_personalizados","Permiso para listar planes personalizados.");
 INSERT INTO permissions(idPermission, name, description) VALUES (1003, "ROLE_Listar_planes_genericos","Permiso para listar planes genéricos.");
 INSERT INTO permissions(idPermission, name, description) VALUES (1004, "ROLE_Actualizar_plan","Permiso para actualizar planes.");
-INSERT INTO permissions(idPermission, name, description) VALUES (1005, "ROLE_Listar_planes","Permiso para listar todos los planes.");
-INSERT INTO permissions(idPermission, name, description) VALUES (1006, "ROLE_Consultar_plan_id","Permiso consultar un plan por su Id.");
+INSERT INTO permissions(idPermission, name, description) VALUES (1005, "ROLE_Listar_todos_planes","Permiso para listar todos los planes.");
+INSERT INTO permissions(idPermission, name, description) VALUES (1006, "ROLE_Consultar_plan_id_completo","Permiso consultar un plan por su Id.");
 
 
 #PROBAR USUARIO PARA roles
