@@ -69,10 +69,10 @@ public class CompensationActionRestController {
         return response;
     }
 
-    @GetMapping("/custom")
+    @GetMapping("/custom/{volunteerId}")
     @Transactional(readOnly = true)
     public ResponseEntity<List<CompensationActionDTOResponse>> listCustomEntity(
-            @Valid @Positive(message = "volunteerId must be positive.") @RequestParam long volunteerId) {
+            @Valid @Positive(message = "volunteerId must be positive.") @PathVariable long volunteerId) {
         List<CompensationMiddleWare> plans = this.compensationActionCU.findByVolunteer(volunteerId);
         ResponseEntity<List<CompensationActionDTOResponse>> response = new ResponseEntity<List<CompensationActionDTOResponse>>(
                 mapper.mapModelToinfraestructure(plans), HttpStatus.OK);
