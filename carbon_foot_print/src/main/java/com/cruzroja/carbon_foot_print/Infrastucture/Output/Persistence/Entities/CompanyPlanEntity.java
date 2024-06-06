@@ -2,8 +2,11 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities
 
 import java.util.Date;
 
+import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Serealizables.CompanyPlanId;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -16,8 +19,8 @@ import lombok.Data;
 @Table(name = "company_plan")
 @Data
 @AllArgsConstructor
-
-public class CompanyPlan {
+@IdClass(CompanyPlanId.class)
+public class CompanyPlanEntity {
     @Id
     @ManyToOne
     @JoinColumn(name = "companyId")
@@ -34,4 +37,7 @@ public class CompanyPlan {
     @Temporal(TemporalType.DATE)
     private Date sold;
 
+    public CompanyPlanEntity() {
+        this.sold = new Date();
+    }
 }

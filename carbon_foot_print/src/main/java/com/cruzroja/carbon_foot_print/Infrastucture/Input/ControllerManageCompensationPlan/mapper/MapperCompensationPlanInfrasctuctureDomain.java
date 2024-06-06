@@ -10,7 +10,6 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompen
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationPlan.DTORequest.CompensationPlanWithIdDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationPlan.DTOResponse.CompensationPlanDTOResponse;
 
-//todo: eliminar comentario
 @Mapper(componentModel = "spring")
 public interface MapperCompensationPlanInfrasctuctureDomain {
     CompensationPlan mapInfraestructureToModel(CompensationPlanDTORequest request);

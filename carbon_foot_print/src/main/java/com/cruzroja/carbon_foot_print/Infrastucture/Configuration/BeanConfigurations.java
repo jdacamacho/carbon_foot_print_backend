@@ -9,6 +9,7 @@ import com.cruzroja.carbon_foot_print.Application.Input.ManageCompensationPlanCU
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageActionGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageAuthGatewayIntPort;
+import com.cruzroja.carbon_foot_print.Application.Output.ManageCompanyPlanGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageCompensationActionGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageCompensationPlanGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManagePollutionSourceGatewayIntPort;
@@ -21,6 +22,7 @@ import com.cruzroja.carbon_foot_print.Application.Output.ManegeUserVolunteerGate
 import com.cruzroja.carbon_foot_print.Domain.CompansationPlan.mapper.CompensationMapperDomainMiddleWare;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageActionCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageAuthCUImplAdapter;
+import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageCompanyPlanCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageCompensationActionCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManageCompensationPlanCUImplAdapter;
 import com.cruzroja.carbon_foot_print.Domain.UserCases.ManagePollutionSourceCUImplAdapter;
@@ -120,6 +122,12 @@ public class BeanConfigurations {
             ExceptionFormatterIntPort exceptionFormatter,
             CompensationMapperDomainMiddleWare mapper) {
         return new ManageCompensationActionCUImplAdapter(gateway, cuPlan, exceptionFormatter, mapper);
+    }
+
+    @Bean
+    public ManageCompanyPlanCUImplAdapter createCompanyPlanCU(ManageCompanyPlanGatewayIntPort gateway,
+            ExceptionFormatterIntPort exceptionFormatter) {
+        return new ManageCompanyPlanCUImplAdapter(gateway, exceptionFormatter);
     }
 
 }
