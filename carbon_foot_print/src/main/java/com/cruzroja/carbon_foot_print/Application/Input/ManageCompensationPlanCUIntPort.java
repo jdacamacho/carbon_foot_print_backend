@@ -9,6 +9,7 @@ import java.util.List;
 import com.cruzroja.carbon_foot_print.Domain.Models.CompensationPlan;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.BadFormatException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.BusinessRuleException;
+import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.EntityNotFoundException;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.ExceptionHandler.OwnException.NoDataException;
 
 /**
@@ -47,7 +48,8 @@ public interface ManageCompensationPlanCUIntPort {
      *                               incorrecto.
      * @throws BusinessRuleException Si se viola alguna regla de negocio.
      */
-    public CompensationPlan saveCompensationPlan(CompensationPlan compensationPlan);
+    public CompensationPlan saveCompensationPlan(CompensationPlan compensationPlan, boolean isDefault,
+            long volunteerId);
 
     /**
      * @brief Actualiza un plan de compensación existente.
@@ -63,9 +65,9 @@ public interface ManageCompensationPlanCUIntPort {
      *                                 incorrecto.
      * @throws BusinessRuleException   Si se viola alguna regla de negocio.
      */
-    public CompensationPlan updateCompensationPlan(CompensationPlan compensationPlan);
+    public CompensationPlan updateCompensationPlan(CompensationPlan compensationPlan, long volunteerId);
 
-    public CompensationPlan updateWithPrice(CompensationPlan compensationPlan);
+    public CompensationPlan updateWithPrice(CompensationPlan compensationPlan, long volunteerId);
 
     /**
      * @brief Encuentra un plan de compensación por su identificador único.

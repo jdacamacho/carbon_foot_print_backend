@@ -12,6 +12,7 @@ import com.cruzroja.carbon_foot_print.Application.Input.ManageCompensationPlanCU
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageCompensationPlanGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Domain.Models.CompensationPlan;
+import com.cruzroja.carbon_foot_print.Domain.Models.UserVolunteer;
 
 public class ManageCompensationPlanCUImplAdapter implements ManageCompensationPlanCUIntPort {
 
@@ -34,19 +35,25 @@ public class ManageCompensationPlanCUImplAdapter implements ManageCompensationPl
     }
 
     @Override
-    public CompensationPlan saveCompensationPlan(CompensationPlan compensationPlan) {
+    public CompensationPlan saveCompensationPlan(CompensationPlan compensationPlan, boolean isDefault,
+            long volunteerId) {
         CompensationPlan objPlan = null;
         if (this.gateway.existsByName(compensationPlan.getPlanName()))
             this.exceptionFormatter
                     .returnResponseErrorEntityExists("Compensation plan with that name already exists in the System");
         if (!compensationPlan.isValidDiscount())
             this.exceptionFormatter.returnResponseBusinessRuleViolated("Discount is not valid");
+        UserVolunteer custommer = this.gateway.findVolunteerById(volunteerId);
+        if (custommer == null)
+            this.exceptionFormatter.returnResponseBusinessRuleViolated("The selected volunteer is not in the system.");
+        compensationPlan.setVolunteer(custommer);
+        compensationPlan.setPlanDefault(isDefault);
         objPlan = this.gateway.save(compensationPlan);
         return objPlan;
     }
 
     @Override
-    public CompensationPlan updateCompensationPlan(CompensationPlan compensationPlan) {
+    public CompensationPlan updateCompensationPlan(CompensationPlan compensationPlan, long volunteerId) {
 
         if (!this.gateway.existsById(compensationPlan.getPlanId()))
             this.exceptionFormatter.returnResponseErrorEntityNotFound("Compensation plan with that id was not found");
@@ -57,6 +64,10 @@ public class ManageCompensationPlanCUImplAdapter implements ManageCompensationPl
                         "Compensation plan with that name already exists in the System");
         if (!compensationPlan.isValidDiscount())
             this.exceptionFormatter.returnResponseBusinessRuleViolated("Discount is not valid");
+        UserVolunteer custommer = this.gateway.findVolunteerById(volunteerId);
+        if (custommer == null)
+            this.exceptionFormatter.returnResponseBusinessRuleViolated("The selected volunteer is not in the system.");
+        compensationPlan.setVolunteer(custommer);
         oldPlan.update(compensationPlan);
         return this.gateway.save(oldPlan);
     }
@@ -82,7 +93,7 @@ public class ManageCompensationPlanCUImplAdapter implements ManageCompensationPl
     }
 
     @Override
-    public CompensationPlan updateWithPrice(CompensationPlan compensationPlan) {
+    public CompensationPlan updateWithPrice(CompensationPlan compensationPlan, long volunteerId) {
         if (!this.gateway.existsById(compensationPlan.getPlanId()))
             this.exceptionFormatter.returnResponseErrorEntityNotFound("Compensation plan with that id was not found");
         CompensationPlan oldPlan = this.gateway.findById(compensationPlan.getPlanId());

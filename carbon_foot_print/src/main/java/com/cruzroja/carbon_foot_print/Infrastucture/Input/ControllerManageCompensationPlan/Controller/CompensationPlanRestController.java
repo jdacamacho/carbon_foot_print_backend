@@ -36,6 +36,7 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompen
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationPlan.mapper.MapperCompensationPlanInfrasctuctureDomain;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -106,44 +107,6 @@ public class CompensationPlanRestController {
     }
 
     /**
-     * @brief Guarda un nuevo plan de compensación.
-     * 
-     * @param request El objeto CompensationPlanDTORequest con los datos del plan de
-     *                compensación a guardar.
-     * @param result  El resultado de la validación del objeto de solicitud.
-     * @return El objeto CompensationPlanDTOResponse guardado, o un error si ocurre
-     *         algún problema.
-     */
-    @PostMapping("")
-    public ResponseEntity<?> saveCompensationPlan(@Valid @RequestBody CompensationPlanDTORequest request,
-            BindingResult result) {
-        CompensationPlan plan = this.mapper.mapInfraestructureToModel(request);
-        Map<String, Object> response = new HashMap<>();
-        CompensationPlanDTOResponse objPlan;
-
-        if (result.hasErrors()) {
-            List<String> listaErrores = new ArrayList<>();
-
-            for (FieldError error : result.getFieldErrors()) {
-                listaErrores.add("The field '" + error.getField() + "' " + error.getDefaultMessage());
-            }
-
-            response.put("errors", listaErrores);
-            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
-        }
-
-        try {
-            objPlan = this.mapper.mapModelToInfraestructure(this.compensationPlanCU.saveCompensationPlan(plan));
-        } catch (DataAccessException e) {
-            response.put("mensaje", "Error when inserting into database");
-            response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
-            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-        return new ResponseEntity<CompensationPlanDTOResponse>(objPlan, HttpStatus.CREATED);
-    }
-
-    /**
      * @brief Actualiza un plan de compensación existente.
      * 
      * @param request El objeto CompensationPlanWithIdDTORequest con los datos del
@@ -153,7 +116,9 @@ public class CompensationPlanRestController {
      *         ocurre algún problema.
      */
     @PutMapping("")
-    public ResponseEntity<?> updateCompensationPlan(@Valid @RequestBody CompensationPlanWithIdDTORequest request,
+    public ResponseEntity<?> updateCompensationPlan(
+            @Valid @Positive(message = "volunteerId must be positive.") @RequestParam long volunteerId,
+            @Valid @RequestBody CompensationPlanWithIdDTORequest request,
             BindingResult result) {
         CompensationPlan plan = this.mapper.mapInfraestructureToModel(request);
         Map<String, Object> response = new HashMap<>();
@@ -171,7 +136,8 @@ public class CompensationPlanRestController {
         }
 
         try {
-            objPlan = this.mapper.mapModelToInfraestructure(this.compensationPlanCU.updateCompensationPlan(plan));
+            objPlan = this.mapper
+                    .mapModelToInfraestructure(this.compensationPlanCU.updateCompensationPlan(plan, volunteerId));
         } catch (DataAccessException e) {
             response.put("mensaje", "Error when updating into database");
             response.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cruzroja.carbon_foot_print.Application.Input.ManageCompensationActionCUIntPort;
@@ -29,6 +30,7 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompen
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationAction.maper.MapperCompensationActionInfraestructureDomain;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 
 @CrossOrigin(origins = { "http://localhost:5050" })
@@ -58,11 +60,11 @@ public class CompensationActionRestController {
         return response;
     }
 
-    @PostMapping("")
-    public ResponseEntity<?> save(@Valid @RequestBody CompensationActionDTORequest request, BindingResult errors) {
-        System.out.println("***************************************************");
-        System.out.println(request);
-        System.out.println("***************************************************");
+    @PostMapping("/custommer")
+    public ResponseEntity<?> saveCustommer(
+            @Valid @Positive(message = "volunteerId must be positive.") @RequestParam long volunteerId,
+            @Valid @RequestBody CompensationActionDTORequest request,
+            BindingResult errors) {
         CompensationMiddleWare data = mapper.mapInfraestructureToModel(request);
         Map<String, Object> errorResponse = new HashMap<>();
         errorResponse = this.catchErrors(errors);
@@ -70,7 +72,28 @@ public class CompensationActionRestController {
             return new ResponseEntity<Map<String, Object>>(errorResponse, HttpStatus.BAD_REQUEST);
         try {
             CompensationActionDTOResponse response = mapper
-                    .mapModelToinfraestructure(this.compensationActionCU.save(data));
+                    .mapModelToinfraestructure(this.compensationActionCU.save(data, false, volunteerId));
+            return new ResponseEntity<CompensationActionDTOResponse>(response, HttpStatus.CREATED);
+        } catch (DataAccessException e) {
+            errorResponse.put("mensaje", "Error when inserting into database");
+            errorResponse.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
+            return new ResponseEntity<Map<String, Object>>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/default")
+    public ResponseEntity<?> saveDefault(
+            @Valid @Positive(message = "volunteerId must be positive.") @RequestParam long volunteerId,
+            @Valid @RequestBody CompensationActionDTORequest request,
+            BindingResult errors) {
+        CompensationMiddleWare data = mapper.mapInfraestructureToModel(request);
+        Map<String, Object> errorResponse = new HashMap<>();
+        errorResponse = this.catchErrors(errors);
+        if (!errorResponse.isEmpty())
+            return new ResponseEntity<Map<String, Object>>(errorResponse, HttpStatus.BAD_REQUEST);
+        try {
+            CompensationActionDTOResponse response = mapper
+                    .mapModelToinfraestructure(this.compensationActionCU.save(data, true, volunteerId));
             return new ResponseEntity<CompensationActionDTOResponse>(response, HttpStatus.CREATED);
         } catch (DataAccessException e) {
             errorResponse.put("mensaje", "Error when inserting into database");
@@ -80,7 +103,9 @@ public class CompensationActionRestController {
     }
 
     @PutMapping("")
-    public ResponseEntity<?> update(@Valid @RequestBody CompensationActionWithIdDTORequest request,
+    public ResponseEntity<?> update(
+            @Valid @Positive(message = "volunteerId must be positive.") @RequestParam long volunteerId,
+            @Valid @RequestBody CompensationActionWithIdDTORequest request,
             BindingResult errors) {
         CompensationMiddleWare data = mapper.mapInfraestructureToModel(request);
         Map<String, Object> errorResponse = new HashMap<>();
@@ -89,7 +114,7 @@ public class CompensationActionRestController {
             return new ResponseEntity<Map<String, Object>>(errorResponse, HttpStatus.BAD_REQUEST);
         try {
             CompensationActionDTOResponse response = mapper
-                    .mapModelToinfraestructure(this.compensationActionCU.update(data));
+                    .mapModelToinfraestructure(this.compensationActionCU.update(data, volunteerId));
             return new ResponseEntity<CompensationActionDTOResponse>(response, HttpStatus.OK);
         } catch (DataAccessException e) {
             errorResponse.put("mensaje", "Error when inserting into database");

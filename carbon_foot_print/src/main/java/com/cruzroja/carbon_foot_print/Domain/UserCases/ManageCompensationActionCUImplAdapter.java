@@ -9,6 +9,7 @@ import com.cruzroja.carbon_foot_print.Application.Output.ManageCompensationActio
 import com.cruzroja.carbon_foot_print.Domain.CompansationPlan.CompensationMiddleWare;
 import com.cruzroja.carbon_foot_print.Domain.CompansationPlan.mapper.CompensationMapperDomainMiddleWare;
 import com.cruzroja.carbon_foot_print.Domain.Models.CompensationPlan;
+import com.cruzroja.carbon_foot_print.Domain.Models.UserVolunteer;
 
 public class ManageCompensationActionCUImplAdapter implements ManageCompensationActionCUIntPort {
 
@@ -54,31 +55,54 @@ public class ManageCompensationActionCUImplAdapter implements ManageCompensation
     }
 
     @Override
-    public CompensationMiddleWare save(CompensationMiddleWare compensationMiddleWare) {
+    public CompensationMiddleWare save(CompensationMiddleWare compensationMiddleWare, boolean isDefault,
+            long volunteerId) {
         if (!compensationMiddleWare.isValidActions(this.gateway.findValidActions()))
             this.exceptionFormatter.returnResponseBusinessRuleViolated("The selected actions are not in the system.");
         compensationMiddleWare.calculeFullPrice();
         compensationMiddleWare.calculeUfp();
-        CompensationPlan plan = this.cuPlan.saveCompensationPlan(compensationMiddleWare.getPlan());
+        CompensationPlan plan = this.cuPlan.saveCompensationPlan(compensationMiddleWare.getPlan(), isDefault,
+                volunteerId);
         compensationMiddleWare.setPlan(plan);
         return this.mapper.mapGroupedDomainToMiddleWare(
                 this.gateway.save(this.mapper.mapMiddleWareTODomain(compensationMiddleWare)));
     }
 
     @Override
-    public CompensationMiddleWare update(CompensationMiddleWare compensationMiddleWare) {
+    public CompensationMiddleWare update(CompensationMiddleWare compensationMiddleWare, long volunteerId) {
         if (!compensationMiddleWare.isValidActions(this.gateway.findValidActions()))
             this.exceptionFormatter.returnResponseBusinessRuleViolated("The selected actions are not in the system.");
         CompensationMiddleWare old = this.mapper
                 .mapGroupedDomainToMiddleWare(this.gateway.findById(compensationMiddleWare.getPlan().getPlanId()));
         compensationMiddleWare.calculeFullPrice();
         compensationMiddleWare.calculeUfp();
-        this.cuPlan.updateWithPrice(compensationMiddleWare.getPlan());
+        this.cuPlan.updateWithPrice(compensationMiddleWare.getPlan(), volunteerId);
         List<Long> removed = compensationMiddleWare.removedActions(old.getOnlyActions());
         if (!removed.isEmpty())
             this.gateway.delete(compensationMiddleWare.getPlan().getPlanId(), removed);
         return this.mapper.mapGroupedDomainToMiddleWare(
                 this.gateway.save(this.mapper.mapMiddleWareTODomain(compensationMiddleWare)));
+    }
+
+    @Override
+    public List<CompensationMiddleWare> findDefault() {
+        List<CompensationMiddleWare> data = this.mapper.mapDomainToMiddleWare(this.gateway.findDefault());
+        if (data == null)
+            this.exceptionFormatter.returNoData("Not exist default plan actions");
+        return data;
+    }
+
+    @Override
+    public List<CompensationMiddleWare> findByVolunteer(long volunteer) {
+        UserVolunteer custommer = this.gateway.findVolunteerById(volunteer);
+        if (custommer == null)
+            this.exceptionFormatter.returnResponseBusinessRuleViolated("The selected volunteer is not in the system.");
+        List<CompensationMiddleWare> data = this.mapper
+                .mapDomainToMiddleWare(this.gateway.findByVolunteerId(volunteer));
+        if (data == null)
+            this.exceptionFormatter
+                    .returNoData("Not exist customeer plan actions to volunteer with id: " + volunteer + ".");
+        return data;
     }
 
 }

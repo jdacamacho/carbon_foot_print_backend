@@ -1,6 +1,7 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationPlan.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public interface MapperCompensationPlanInfrasctuctureDomain {
 
     CompensationPlan mapInfraestructureToModel(CompensationPlanWithIdDTORequest request);
 
+    @Mapping(source = "model.volunteer.documentNumber", target = "volunteerId")
     CompensationPlanDTOResponse mapModelToInfraestructure(CompensationPlan model);
 
     List<CompensationPlanDTOResponse> mapModelToInfraestructure(List<CompensationPlan> models);

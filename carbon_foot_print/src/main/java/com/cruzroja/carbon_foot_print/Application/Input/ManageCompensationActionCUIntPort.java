@@ -45,6 +45,37 @@ public interface ManageCompensationActionCUIntPort {
     public CompensationMiddleWare findByPlanName(String name);
 
     /**
+     * Revisa que la información solicitada haya sido encontrada.
+     * Información: planes por defecto.
+     * #Reglas de negocio salida
+     * 1. Que la información recuperada no este vacía {@code 404}.
+     * 
+     * @return {@code List<CompensationMiddleWare>} items encontrados o
+     *         {@code Error} en
+     *         caso contrario.
+     * @throws EntityNotFoundException Si no hay planes registrados con el
+     *                                 identificador proporcionado.
+     */
+    public List<CompensationMiddleWare> findDefault();
+
+    /**
+     * Verifica que la información haya sido encontrada y que el criterio de
+     * búsqueda cumpla las reglas de negocio.
+     * #Reglas de negocio entrada
+     * 1. Que el id del voluntario exista. {@code 406}
+     * #Reglas de negocio salida
+     * 1. Que la información recuperada no este vacía {@code 404}.
+     * 
+     * @param volunteer
+     * @return {@code List<CompensationMiddleWare>} items encontrados o
+     *         {@code Error} en
+     *         caso contrario.
+     * @throws EntityNotFoundException Si no hay planes registrados con el
+     *                                 identificador proporcionado.
+     */
+    public List<CompensationMiddleWare> findByVolunteer(long volunteer);
+
+    /**
      * Verifica que los datos a guardar cumplan con las reglas de negocio.
      * #Reglas de negocio entrada
      * 1. Las acciones seleccionadas se encuentran registradas en el sistema
@@ -53,13 +84,17 @@ public interface ManageCompensationActionCUIntPort {
      * {@code ManageCompensationPlanCUIntPort.saveCompensationPlan()}
      * 
      * @param compensationMiddleWare item a guardar.
+     * @param isDefault              determina si es un plan personalizado o por
+     *                               defecto.
+     * @param volunteerId            id del voluntario que crea el plan.
      * @return {@code CompensationMiddleWare} item guardado o {@code Error} en caso
      *         de que se incumpla alguna regla de negocio.
      * @throws BusinessRuleException Si se incumple alguna regla de negocio.
      * @throws BadFormatException    Si el formato del plan de compensación es
      *                               incorrecto.
      */
-    public CompensationMiddleWare save(CompensationMiddleWare compensationMiddleWare);
+    public CompensationMiddleWare save(CompensationMiddleWare compensationMiddleWare, boolean isDefault,
+            long volunteerId);
 
     /**
      * Verifica que los datos a actualizar cumplan con las reglas de negocio.
@@ -71,11 +106,12 @@ public interface ManageCompensationActionCUIntPort {
      * 
      * @param compensationMiddleWare item con el id del item a actualizar y la
      *                               información a guardar.
+     * @param volunteerId            id del voluntario que actualiza el plan.
      * @return {@code CompensationMiddleWare} item guardado o {@code Error} en caso
      *         de que se incumpla alguna regla de negocio.
      * @throws BusinessRuleException Si se incumple alguna regla de negocio.
      * @throws BadFormatException    Si el formato del plan de compensación es
      *                               incorrecto.
      */
-    public CompensationMiddleWare update(CompensationMiddleWare compensationMiddleWare);
+    public CompensationMiddleWare update(CompensationMiddleWare compensationMiddleWare, long volunteerId);
 }

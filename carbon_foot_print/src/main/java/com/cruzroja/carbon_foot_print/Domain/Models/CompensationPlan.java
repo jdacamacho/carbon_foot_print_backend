@@ -34,8 +34,15 @@ public class CompensationPlan {
 
     /** @brief Descuento aplicado al plan. */
     private double planDiscount;
+
     /* @brief Unidades de huella de carbono que compensa el plan */
     private double planUfp;
+
+    /* @brief Plan por defecto o personalizado */
+    private boolean planDefault;
+
+    /* @brief Usuario voluntario que crea el plan */
+    private UserVolunteer volunteer;
 
     /**
      * @brief Constructor por defecto.
@@ -94,6 +101,7 @@ public class CompensationPlan {
         this.setPlanDiscount(compensationPlan.getPlanDiscount());
         this.planUfp = compensationPlan.getPlanUfp();
         this.planPrice = compensationPlan.getPlanPrice();
+        this.volunteer = compensationPlan.getVolunteer();
     }
 
     /**

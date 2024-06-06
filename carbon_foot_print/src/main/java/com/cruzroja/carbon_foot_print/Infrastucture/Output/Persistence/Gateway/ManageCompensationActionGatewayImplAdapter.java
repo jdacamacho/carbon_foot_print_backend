@@ -2,6 +2,7 @@ package com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Gateway;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -10,8 +11,10 @@ import org.springframework.stereotype.Service;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageCompensationActionGatewayIntPort;
 import com.cruzroja.carbon_foot_print.Domain.Models.Action;
 import com.cruzroja.carbon_foot_print.Domain.Models.CompensationAction;
+import com.cruzroja.carbon_foot_print.Domain.Models.UserVolunteer;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.ActionEntity;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.CompensationActionEntity;
+import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.UserVolunteerEntity;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Repositories.CompensationActionRepository;
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Serealizables.CompensationActionId;
 
@@ -48,6 +51,30 @@ public class ManageCompensationActionGatewayImplAdapter implements ManageCompens
         List<CompensationAction> response = this.mapper.map(dataDB, new TypeToken<List<CompensationAction>>() {
         }.getType());
         return response;
+    }
+
+    @Override
+    public List<CompensationAction> findByVolunteerId(long volunterId) {
+        List<CompensationActionEntity> dataDB = this.serviceBD.findByPlanVolunteerDocumentNumber(volunterId);
+        List<CompensationAction> response = this.mapper.map(dataDB, new TypeToken<List<CompensationAction>>() {
+        }.getType());
+        return response;
+    }
+
+    @Override
+    public List<CompensationAction> findDefault() {
+        List<CompensationActionEntity> dataDB = this.serviceBD.findByPlanPlanDefaultIsTrue();
+        List<CompensationAction> response = this.mapper.map(dataDB, new TypeToken<List<CompensationAction>>() {
+        }.getType());
+        return response;
+    }
+
+    @Override
+    public UserVolunteer findVolunteerById(long volunteerId) {
+        Optional<UserVolunteerEntity> dataFromDB = this.serviceBD.findVolunteerById(volunteerId);
+        if (!dataFromDB.isPresent())
+            return null;
+        return this.mapper.map(dataFromDB.get(), UserVolunteer.class);
     }
 
     @Override

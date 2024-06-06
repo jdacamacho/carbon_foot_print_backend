@@ -6,9 +6,11 @@ import java.util.List;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageAction.DTORequest.ActionWithIdDTORequest;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +32,7 @@ public class CompensationPlanWithIdDTORequest {
     private String planDescription;
 
     @Min(value = 0, message = "action's discount can't be negative")
+    @Max(value = 100, message = "action's discount can't be greater than 100")
     private double planDiscount;
 
     public CompensationPlanWithIdDTORequest() {

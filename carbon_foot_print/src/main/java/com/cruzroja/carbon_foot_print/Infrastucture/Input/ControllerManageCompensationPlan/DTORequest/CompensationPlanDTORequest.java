@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,7 +28,7 @@ public class CompensationPlanDTORequest {
     private String planDescription;
 
     @Min(value = 0, message = "action's discount can't be negative")
-    @Max(value = 100, message = "action's discount can't be major than 100")
+    @Max(value = 100, message = "action's discount can't be greater than 100")
     private double planDiscount;
 
     public CompensationPlanDTORequest() {
