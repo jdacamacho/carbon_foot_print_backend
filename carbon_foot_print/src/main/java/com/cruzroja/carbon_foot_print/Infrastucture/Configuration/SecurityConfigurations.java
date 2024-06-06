@@ -101,6 +101,25 @@ public class SecurityConfigurations {
                                                 .hasRole("Consultar_Fuente_Contaminante_ID")
                                                 .requestMatchers(HttpMethod.GET, "/api/pollution/sources/ids")
                                                 .hasRole("Consultar_Fuentes_Contaminantes_IDs")
+                                                // Compensation Actions
+                                                .requestMatchers(HttpMethod.GET, "/api/plans/actions")
+                                                .hasRole("Listar_planes")
+                                                .requestMatchers(HttpMethod.GET, "/api/plans/actions/{planId}")
+                                                .hasRole("Consultar_plan_id")
+                                                .requestMatchers(HttpMethod.GET, "/api/plans/actions/default")
+                                                .hasRole("Listar_planes_genericos")
+                                                .requestMatchers(HttpMethod.GET,
+                                                                "/api/plans/actions/custom/{volunteerId}")
+                                                .hasRole("Listar_planes_personalizados")
+                                                .requestMatchers(HttpMethod.POST,
+                                                                "/api/plans/actions/custommer")
+                                                .hasRole("Crear_plan_personalizado")
+                                                .requestMatchers(HttpMethod.POST,
+                                                                "/api/plans/actions/default")
+                                                .hasRole("Crear_plan_generico")
+                                                .requestMatchers(HttpMethod.PUT,
+                                                                "/api/plans/actions")
+                                                .hasRole("Actualizar_plan")
                                                 .anyRequest().permitAll()
                                 // Para que puedan usar los demas endopints cambiar authenticated() por
                                 // permiteAll()
