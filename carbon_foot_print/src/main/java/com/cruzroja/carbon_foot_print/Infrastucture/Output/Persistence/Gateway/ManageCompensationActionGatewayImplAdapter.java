@@ -34,6 +34,8 @@ public class ManageCompensationActionGatewayImplAdapter implements ManageCompens
         Iterable<CompensationActionEntity> dataDB = this.serviceBD.findAll();
         List<CompensationAction> response = this.mapper.map(dataDB, new TypeToken<List<CompensationAction>>() {
         }.getType());
+        if (response.isEmpty())
+            return null;
         return response;
     }
 
@@ -42,6 +44,8 @@ public class ManageCompensationActionGatewayImplAdapter implements ManageCompens
         List<CompensationActionEntity> dataDB = this.serviceBD.findByPlanPlanId(planId);
         List<CompensationAction> response = this.mapper.map(dataDB, new TypeToken<List<CompensationAction>>() {
         }.getType());
+        if (response.isEmpty())
+            return null;
         return response;
     }
 
@@ -50,6 +54,8 @@ public class ManageCompensationActionGatewayImplAdapter implements ManageCompens
         List<CompensationActionEntity> dataDB = this.serviceBD.findByPlanPlanName(name);
         List<CompensationAction> response = this.mapper.map(dataDB, new TypeToken<List<CompensationAction>>() {
         }.getType());
+        if (response.isEmpty())
+            return null;
         return response;
     }
 
@@ -58,6 +64,8 @@ public class ManageCompensationActionGatewayImplAdapter implements ManageCompens
         List<CompensationActionEntity> dataDB = this.serviceBD.findByPlanVolunteerDocumentNumber(volunterId);
         List<CompensationAction> response = this.mapper.map(dataDB, new TypeToken<List<CompensationAction>>() {
         }.getType());
+        if (response.isEmpty())
+            return null;
         return response;
     }
 
@@ -66,6 +74,8 @@ public class ManageCompensationActionGatewayImplAdapter implements ManageCompens
         List<CompensationActionEntity> dataDB = this.serviceBD.findByPlanPlanDefaultIsTrue();
         List<CompensationAction> response = this.mapper.map(dataDB, new TypeToken<List<CompensationAction>>() {
         }.getType());
+        if (response.isEmpty())
+            return null;
         return response;
     }
 
