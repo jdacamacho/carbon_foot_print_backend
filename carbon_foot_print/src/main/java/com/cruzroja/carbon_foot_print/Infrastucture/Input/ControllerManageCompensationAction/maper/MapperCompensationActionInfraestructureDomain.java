@@ -1,6 +1,7 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationAction.maper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -9,7 +10,6 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompen
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationAction.DTORequest.CompensationActionWithIdDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationAction.DTOResponse.CompensationActionDTOResponse;
 
-//Todo: eliminar comentario
 @Mapper(componentModel = "spring")
 public interface MapperCompensationActionInfraestructureDomain {
 
@@ -17,6 +17,7 @@ public interface MapperCompensationActionInfraestructureDomain {
 
     CompensationMiddleWare mapInfraestructureToModel(CompensationActionWithIdDTORequest request);
 
+    @Mapping(source = "model.plan.volunteer.documentNumber", target = "plan.volunteerId")
     CompensationActionDTOResponse mapModelToinfraestructure(CompensationMiddleWare model);
 
     List<CompensationActionDTOResponse> mapModelToinfraestructure(List<CompensationMiddleWare> model);
