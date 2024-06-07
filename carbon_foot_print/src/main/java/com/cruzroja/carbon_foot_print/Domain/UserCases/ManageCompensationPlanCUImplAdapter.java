@@ -103,6 +103,10 @@ public class ManageCompensationPlanCUImplAdapter implements ManageCompensationPl
                         "Compensation plan with that name already exists in the System");
         if (!compensationPlan.isValidDiscount())
             this.exceptionFormatter.returnResponseBusinessRuleViolated("Discount is not valid");
+        UserVolunteer custommer = this.gateway.findVolunteerById(volunteerId);
+        if (custommer == null)
+            this.exceptionFormatter.returnResponseBusinessRuleViolated("The selected volunteer is not in the system.");
+        compensationPlan.setVolunteer(custommer);
         oldPlan.updateWithPrice(compensationPlan);
         return this.gateway.save(oldPlan);
     }

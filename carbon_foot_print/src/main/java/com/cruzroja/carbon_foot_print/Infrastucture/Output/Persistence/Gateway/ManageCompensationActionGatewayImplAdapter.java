@@ -61,7 +61,8 @@ public class ManageCompensationActionGatewayImplAdapter implements ManageCompens
 
     @Override
     public List<CompensationAction> findByVolunteerId(long volunterId) {
-        List<CompensationActionEntity> dataDB = this.serviceBD.findByPlanVolunteerDocumentNumber(volunterId);
+        List<CompensationActionEntity> dataDB = this.serviceBD
+                .findByPlanVolunteerDocumentNumberAndPlanPlanDefaultIsFalse(volunterId);
         List<CompensationAction> response = this.mapper.map(dataDB, new TypeToken<List<CompensationAction>>() {
         }.getType());
         if (response.isEmpty())

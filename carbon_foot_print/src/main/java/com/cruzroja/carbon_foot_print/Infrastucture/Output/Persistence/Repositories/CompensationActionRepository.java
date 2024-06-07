@@ -18,7 +18,7 @@ public interface CompensationActionRepository extends CrudRepository<Compensatio
 
     public List<CompensationActionEntity> findByPlanPlanName(String planName);
 
-    public List<CompensationActionEntity> findByPlanVolunteerDocumentNumber(long volunteerId);
+    public List<CompensationActionEntity> findByPlanVolunteerDocumentNumberAndPlanPlanDefaultIsFalse(long volunteerId);
 
     @Query("SELECT v FROM UserVolunteerEntity v WHERE v.documentNumber = :volunteerId")
     public Optional<UserVolunteerEntity> findVolunteerById(long volunteerId);
