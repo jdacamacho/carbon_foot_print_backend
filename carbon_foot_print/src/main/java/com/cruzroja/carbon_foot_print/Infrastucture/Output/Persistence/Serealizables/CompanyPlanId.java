@@ -15,6 +15,9 @@ public class CompanyPlanId implements Serializable {
     private Long plan;
     private Date sold;
 
+    public CompanyPlanId() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
