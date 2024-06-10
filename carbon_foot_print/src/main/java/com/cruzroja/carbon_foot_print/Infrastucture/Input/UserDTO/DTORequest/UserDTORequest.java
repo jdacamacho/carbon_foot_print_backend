@@ -36,7 +36,7 @@ public class UserDTORequest {
     @Size(min = 2, max = 60, message = "latNames can't be shorter than 2 characters and longer than 60 characters")
     private String lastNames;
 
-    @Pattern(regexp = "[3][0-9]{9}", message = "Personal phone must begin with 3 and have ten digits") 
+    @Pattern(regexp = "[3][0-9]{9}", message = "Personal phone must begin with 3 and have ten digits")
     private String personalPhone;
 
     @NotNull(message = "email can't be null")
@@ -62,7 +62,7 @@ public class UserDTORequest {
     @NotNull(message = "User must have a state in the system")
     private boolean state;
 
-    public UserDTORequest(){
+    public UserDTORequest() {
         this.roles = new ArrayList<>();
     }
 }

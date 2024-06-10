@@ -12,17 +12,22 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cruzroja.carbon_foot_print.Application.Input.ManageCompanyPlanCUIntPort;
+import com.cruzroja.carbon_foot_print.Domain.Models.CompensationPlan;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompanyPlan.DTORequest.CompanyPlanDTORequest;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompanyPlan.DTOResponse.CompanyPlanDTOResponse;
 import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompanyPlan.mapper.MapperCompanyPlanInfraestructureDomain;
+import com.cruzroja.carbon_foot_print.Infrastucture.Input.ControllerManageCompensationPlan.DTOResponse.CompensationPlanDTOResponse;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 
 @CrossOrigin(origins = { "http://localhost:5050" })
@@ -49,6 +54,14 @@ public class CompanyPlanRestController {
             errorResponse.put("error", e.getMessage() + "" + e.getMostSpecificCause().getMessage());
             return new ResponseEntity<Map<String, Object>>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CompensationPlanDTOResponse>> getPlansCompany(
+            @Valid @Positive(message = "Nit must be posive") @RequestParam long nit) {
+        List<CompensationPlanDTOResponse> plans = this.mapper
+                .mapDomainToInfraestructure(this.companyPlanCU.findCompaniesPlans(nit));
+        return new ResponseEntity<>(plans, HttpStatus.OK);
     }
 
     private Map<String, Object> catchErrors(BindingResult result) {

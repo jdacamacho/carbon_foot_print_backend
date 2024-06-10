@@ -1,5 +1,7 @@
 package com.cruzroja.carbon_foot_print.Domain.UserCases;
 
+import java.util.List;
+
 import com.cruzroja.carbon_foot_print.Application.Input.ManageCompanyPlanCUIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ExceptionFormatterIntPort;
 import com.cruzroja.carbon_foot_print.Application.Output.ManageCompanyPlanGatewayIntPort;
@@ -30,6 +32,14 @@ public class ManageCompanyPlanCUImplAdapter implements ManageCompanyPlanCUIntPor
         if (volunteerDB == null)
             this.exceptionFormatter.returnResponseBusinessRuleViolated("the volunteer entered is not in the system.");
         return this.gateway.save(new CompanyPlan(companyDB, volunteerDB, planDB));
+    }
+
+    @Override
+    public List<CompensationPlan> findCompaniesPlans(long nit) {
+        List<CompensationPlan> planDB = this.gateway.findCompaniesPlans(nit);
+        if (planDB == null)
+            this.exceptionFormatter.returnResponseErrorEntityNotFound("the company has not plans.");
+        return planDB;
     }
 
 }

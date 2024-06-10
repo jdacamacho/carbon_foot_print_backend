@@ -1,6 +1,7 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Repositories;
 
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -12,6 +13,8 @@ import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Entities.
 import com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Serealizables.CompanyPlanId;
 
 public interface CompanyPlanRepository extends CrudRepository<CompanyPlanEntity, CompanyPlanId> {
+    public List<CompanyPlanEntity> findByCompanyCompanyNit(long nit);
+
     @Query("SELECT v FROM UserVolunteerEntity v WHERE v.documentNumber = :volunteerId")
     public Optional<UserVolunteerEntity> findVolunteerById(long volunteerId);
 

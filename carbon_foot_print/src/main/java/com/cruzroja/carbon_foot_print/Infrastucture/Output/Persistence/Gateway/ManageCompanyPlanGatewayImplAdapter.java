@@ -1,8 +1,11 @@
 package com.cruzroja.carbon_foot_print.Infrastucture.Output.Persistence.Gateway;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
 import com.cruzroja.carbon_foot_print.Application.Output.ManageCompanyPlanGatewayIntPort;
@@ -55,6 +58,17 @@ public class ManageCompanyPlanGatewayImplAdapter implements ManageCompanyPlanGat
         if (!dataDB.isPresent())
             return null;
         return this.mapper.map(dataDB.get(), CompensationPlan.class);
+    }
+
+    @Override
+    public List<CompensationPlan> findCompaniesPlans(long nit) {
+        List<CompanyPlanEntity> dataDB = this.serviceDB.findByCompanyCompanyNit(nit);
+        List<CompensationPlanEntity> plans = dataDB.stream().map(CompanyPlanEntity::getPlan)
+                .collect(Collectors.toList());
+        if (dataDB.isEmpty())
+            return null;
+        return this.mapper.map(plans, new TypeToken<List<CompensationPlan>>() {
+        }.getType());
     }
 
 }
